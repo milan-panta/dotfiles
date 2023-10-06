@@ -2,7 +2,7 @@
 local mason = require("mason")
 local masonLspConfig = require("mason-lspconfig")
 local on_attach = require("plugins.lsp").on_attach
-local capabilities = require("plugins.lsp").capabilities
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
 mason.setup({

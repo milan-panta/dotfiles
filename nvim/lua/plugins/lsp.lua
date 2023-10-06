@@ -1,7 +1,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
+		event = {"BufReadPre", "BufNewFile"},
 		dependencies = {
 			{ "jay-babu/mason-null-ls.nvim" },
 			{
@@ -20,6 +20,7 @@ return {
 				},
 			},
 			{ "williamboman/mason-lspconfig.nvim" },
+			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "mfussenegger/nvim-dap" },
 			{ "jay-babu/mason-nvim-dap.nvim" },
 			{

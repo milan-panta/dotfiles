@@ -63,11 +63,11 @@ end
 -- code running
 vim.keymap.set("n", "<leader>rv", function()
 	RunFile("vsplit")
-end, { desc = "Save and run vertically" })
+end, { desc = "Save and run vertically", silent = true })
 
 vim.keymap.set("n", "<leader>rh", function()
 	RunFile("split")
-end, { desc = "Save and run horizontally" })
+end, { desc = "Save and run horizontally", silent = true })
 
 -- formatting
-vim.keymap.set("n", "<leader>lf", Format, { desc = "Save and format" })
+vim.keymap.set("n", "<leader>lf", Format, { desc = "Save and format", silent = true })

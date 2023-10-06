@@ -20,7 +20,7 @@ return {
 				},
 			},
 			{ "williamboman/mason-lspconfig.nvim" },
-            { "mfussenegger/nvim-dap" },
+			{ "mfussenegger/nvim-dap" },
 			{ "jay-babu/mason-nvim-dap.nvim" },
 			{
 				"nvimtools/none-ls.nvim",

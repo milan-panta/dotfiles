@@ -1,31 +1,35 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = {"BufReadPre", "BufNewFile"},
+		event = "VeryLazy",
 		dependencies = {
-			{ "jay-babu/mason-null-ls.nvim" },
 			{
 				"williamboman/mason.nvim",
-				build = function()
-					pcall(vim.cmd, "MasonUpdate")
-				end,
-				keys = {
-					{
-						"spacem",
-						function()
-							require("mason.ui").open()
-						end,
-						desc = "Mason",
-					},
-				},
+				event = "VeryLazy",
 			},
-			{ "williamboman/mason-lspconfig.nvim" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "mfussenegger/nvim-dap" },
-			{ "jay-babu/mason-nvim-dap.nvim" },
+			{
+				"jay-babu/mason-null-ls.nvim",
+				event = { "BufReadPre", "BufNewFile" },
+			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+				event = { "BufReadPre", "BufNewFile" },
+			},
+			{
+				"hrsh7th/cmp-nvim-lsp",
+				event = { "BufReadPre", "BufNewFile" },
+			},
+			{
+				"mfussenegger/nvim-dap",
+				event = { "BufReadPre", "BufNewFile" },
+			},
+			{
+				"jay-babu/mason-nvim-dap.nvim",
+				event = { "BufReadPre", "BufNewFile" },
+			},
 			{
 				"nvimtools/none-ls.nvim",
-				event = { "BufReadPre", "BufNewFile" },
+				event = "VeryLazy",
 			},
 		},
 		config = function()

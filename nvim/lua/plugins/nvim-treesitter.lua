@@ -25,6 +25,7 @@ return {
 					"css",
 					"python",
 					"vimdoc",
+                    "bash",
 					"cpp",
 					"lua",
 					"c",

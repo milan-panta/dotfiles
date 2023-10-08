@@ -1,4 +1,4 @@
-### Required dependencies
+# Required dependencies
 - node.js
 - npm
 - python3

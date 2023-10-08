@@ -24,6 +24,7 @@ return {
 				"html",
 				"css",
 				"python",
+                "markdown",
 				"vimdoc",
 				"bash",
 				"cpp",

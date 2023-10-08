@@ -24,25 +24,8 @@ vim.keymap.set("n", "<Leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", "<Leader>vpp", "<cmd>e ~/.config/nvim/lua/<CR>", { desc = "Open nvim config" })
 
--- format
-function Format()
-	-- save
-	vim.cmd("silent :w")
-
-	-- default lsp format
-	vim.lsp.buf.format()
-
-	-- specify formatter
-	local filetype = vim.bo.filetype
-	if filetype == "python" then
-		vim.cmd("silent !ruff format %")
-	end
-	vim.cmd("silent :w")
-end
-
 -- format + run
 function RunFile(dir)
-	Format()
 	local filetype = vim.bo.filetype
 	if filetype == "c" then
 		vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall % -o %< && ./%< ")
@@ -68,6 +51,3 @@ end, { desc = "Save and run vertically", silent = true })
 vim.keymap.set("n", "<leader>rh", function()
 	RunFile("split")
 end, { desc = "Save and run horizontally", silent = true })
-
--- formatting
-vim.keymap.set("n", "<leader>lf", Format, { desc = "Save and format", silent = true })

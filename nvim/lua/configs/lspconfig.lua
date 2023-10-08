@@ -4,135 +4,146 @@ local masonLspConfig = require("mason-lspconfig")
 local keymap = vim.keymap
 
 local on_attach = function(_, bufnr)
-	local opts = { noremap = true, silent = true }
-	opts.buffer = bufnr
-	keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-	keymap.set("n", "<Leader>k", vim.lsp.buf.hover, opts)
-	keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	keymap.set("n", "<Leader>lh", vim.lsp.buf.signature_help, opts)
-	keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-	keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-	keymap.set("n", "<Leader>D", vim.lsp.buf.type_definition, opts)
-	keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
-	keymap.set({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, opts)
-	keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    local opts = { noremap = true, silent = true }
+    opts.buffer = bufnr
+    keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+    keymap.set("n", "gD", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+    keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
+    keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+    keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+    keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+    keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+    keymap.set("n", "<leader>lk", vim.lsp.buf.hover, opts)
+    keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
+    keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+    keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, opts)
+    keymap.set("n", "<leader>li", vim.cmd.LspInfo, opts)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
 mason.setup({
-	ui = {
-		border = "rounded",
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
-	},
+    ui = {
+        border = "rounded",
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+        },
+    },
 })
 
 -- lsps
 masonLspConfig.setup({
-	ensure_installed = {
-		-- lua
-		"lua_ls",
+    ensure_installed = {
+        -- lua
+        "lua_ls",
 
-		-- web dev
-		"emmet_ls",
-		"cssls",
-		"html",
+        -- web dev
+        "emmet_ls",
+        "cssls",
+        "html",
 
-		-- c/cpp
-		"clangd",
+        -- c/cpp
+        "clangd",
 
-		-- python
-		"pyright",
+        -- python
+        "pyright",
 
-		-- rust
-		"rust_analyzer",
-	},
+        -- rust
+        "rust_analyzer",
+    },
 })
 
 -- default configs for these language servers
 local servers = {
-	"html",
-	"emmet_ls",
-	"cssls",
-	"rust_analyzer",
-	"pyright",
+    "html",
+    "emmet_ls",
+    "cssls",
+    "rust_analyzer",
+    "pyright",
 }
 
 -- configure with default lsp settings
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-	})
+    lspconfig[lsp].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
 end
+
 
 -- manually configure
 lspconfig.lua_ls.setup({
-	on_atach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim", "bufnr" },
-			},
-		},
-	},
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim", "bufnr" },
+            },
+        },
+    },
+    on_attach = on_attach,
 })
 
 lspconfig.clangd.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = {
-		"clangd",
-		"--offset-encoding=utf-16",
-	},
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {
+        "clangd",
+        "--offset-encoding=utf-16",
+    },
 })
 
--- debuggers
+
+-- debugging
 require("mason-nvim-dap").setup({
-	ensure_installed = { "debugpy" },
+    ensure_installed = { "debugpy" },
 })
 
--- null_ls linters + formatters
-require("mason-null-ls").setup({
-	ensure_installed = {
-		"stylua",
-		"ruff",
-		"prettier",
-		"clangd",
-		"clang-format",
-	},
+
+-- formatting with conform
+local conform = require("conform")
+conform.setup({
+    formatters_by_ft = {
+        lua = { "stylua" },
+        python = { "ruff_fix", "ruff_format" },
+        markdown = { "prettierd" },
+        javascript = { "dprint" },
+        javascriptreact = { "dprint" },
+        typescript = { "dprint" },
+        typescriptreact = { "dprint" },
+    },
+    formatters = {
+        dprint = {
+            condition = function(ctx)
+                return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
+            end,
+        },
+    },
 })
 
-local null_ls = require("null-ls")
+vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
+    conform.format({
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 1000,
+    })
+    vim.cmd("silent :w")
+end, { desc = "Format file or range (in visual mode)" })
 
-local b = null_ls.builtins
 
-local sources = {
+-- linting with nvim-lint
+local lint = require("lint")
 
-	-- lua
-	b.formatting.stylua,
-
-	-- web dev
-	b.formatting.prettier.with({ filetypes = { "html", "css", "markdown" } }), -- only use prettier for these
-
-	-- python
-	-- uses ${config_dir}/ruff/pyproject.toml settings unless specified in project
-	-- for me that is ~/Library/Application\ Support/ruff
-	b.diagnostics.ruff,
-	b.formatting.ruff,
-
-	-- cpp
-	b.formatting.clang_format,
+lint.linters_by_ft = {
+    python = { "ruff" },
 }
 
-null_ls.setup({
-	debug = true,
-	sources = sources,
+vim.api.nvim_create_autocmd({ "TextChanged", "BufWinEnter" }, {
+    callback = function()
+        require("lint").try_lint()
+    end,
 })

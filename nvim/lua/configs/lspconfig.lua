@@ -1,7 +1,24 @@
 -- declare variable
 local mason = require("mason")
 local masonLspConfig = require("mason-lspconfig")
-local on_attach = require("plugins.lsp").on_attach
+local keymap = vim.keymap
+
+local on_attach = function(_, bufnr)
+	local opts = { noremap = true, silent = true }
+	opts.buffer = bufnr
+	keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	keymap.set("n", "<Leader>k", vim.lsp.buf.hover, opts)
+	keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	keymap.set("n", "<Leader>lh", vim.lsp.buf.signature_help, opts)
+	keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+	keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+	keymap.set("n", "<Leader>D", vim.lsp.buf.type_definition, opts)
+	keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
+	keymap.set({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, opts)
+	keymap.set("n", "gr", vim.lsp.buf.references, opts)
+end
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
@@ -32,6 +49,9 @@ masonLspConfig.setup({
 
 		-- python
 		"pyright",
+
+		-- rust
+		"rust_analyzer",
 	},
 })
 
@@ -40,22 +60,20 @@ local servers = {
 	"html",
 	"emmet_ls",
 	"cssls",
-	"lua_ls",
 	"rust_analyzer",
 	"pyright",
-	"clangd",
 }
 
 -- configure with default lsp settings
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
-		on_attach = on_attach,
 		capabilities = capabilities,
+		on_attach = on_attach,
 	})
 end
 
 -- manually configure
-lspconfig["lua_ls"].setup({
+lspconfig.lua_ls.setup({
 	on_atach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -67,20 +85,14 @@ lspconfig["lua_ls"].setup({
 	},
 })
 
--- lspconfig["pyright"].setup({
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	settings = {
--- 		python = {
--- 			autoSearchPaths = true,
--- 			useLibraryCodeForTypes = true,
--- 			diagnosticMode = "openFilesOnly",
--- 		},
--- 	},
--- 	handlers = {
--- 		["textDocument/publishDiagnostics"] = function() end,
--- 	},
--- })
+lspconfig.clangd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = {
+		"clangd",
+		"--offset-encoding=utf-16",
+	},
+})
 
 -- debuggers
 require("mason-nvim-dap").setup({

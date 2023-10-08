@@ -17,12 +17,6 @@ return {
 
 		local lspkind = require("lspkind")
 
-		local has_words_before = function()
-			local linenr, colnr = unpack(vim.api.nvim_win_get_cursor(0))
-			local line = vim.api.nvim_buf_get_lines(0, linenr - 1, linenr, true)[1]
-			return colnr ~= 0 and line:sub(colnr, colnr):match("%s") == nil
-		end
-
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -39,23 +33,21 @@ return {
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-e>"] = cmp.mapping.abort(), -- close completion window
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
+				["<C-k>"] = cmp.mapping.confirm({ select = true }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
-					elseif has_words_before() then
-						cmp.complete()
 					else
 						fallback()
 					end
-				end, { "i", "s" }),
+				end, { "i", "s", silent = true }),
 				["<S-Tab>"] = cmp.mapping(function(fallback)
 					if luasnip.jumpable(-1) then
 						luasnip.jump(-1)
 					else
 						fallback()
 					end
-				end, { "i", "s" }),
+				end, { "i", "s", silent = true }),
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({

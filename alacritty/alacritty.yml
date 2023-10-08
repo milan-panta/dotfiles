@@ -7,14 +7,11 @@ window:
     instance: Alacritty
     general: Alacritty
   opacity: 1
+  option_as_alt: Both # So good
 
 scrolling:
   history: 10000
   multiplier: 3
-
-# cursor:
-#   style:
-#     blinking: Never
 
 font:
   normal:

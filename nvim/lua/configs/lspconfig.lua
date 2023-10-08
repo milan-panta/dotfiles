@@ -14,7 +14,6 @@ local on_attach = function(_, bufnr)
     keymap.set("n", "gl", vim.diagnostic.open_float, opts)
     keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
     keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-    keymap.set("n", "<leader>ld", "<cmd>Telescope diagnostics<cr>", opts)
     keymap.set("n", "<leader>lk", vim.lsp.buf.hover, opts)
     keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
     keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
@@ -110,7 +109,7 @@ local conform = require("conform")
 conform.setup({
     formatters_by_ft = {
         lua = { "stylua" },
-        python = { "ruff_format", "ruff_fix" },
+        python = { "ruff_fix", "ruff_format" },
         markdown = { "prettierd" },
         javascript = { "dprint" },
         javascriptreact = { "dprint" },
@@ -143,7 +142,7 @@ lint.linters_by_ft = {
     python = { "ruff" },
 }
 
-vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost", "BufNewFile", "TextChanged" }, {
+vim.api.nvim_create_autocmd({ "TextChanged", "BufWinEnter" }, {
     callback = function()
         require("lint").try_lint()
     end,

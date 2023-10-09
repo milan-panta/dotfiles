@@ -11,6 +11,10 @@ return {
 			event = { "BufReadPre", "BufNewFile" },
 		},
 		{
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			event = "VeryLazy",
+		},
+		{
 			"hrsh7th/cmp-nvim-lsp",
 			event = { "BufReadPre", "BufNewFile" },
 		},

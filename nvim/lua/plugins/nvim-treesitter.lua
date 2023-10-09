@@ -4,7 +4,7 @@ return {
 	build = ":TSUpdate",
 	dependencies = {
 		"windwp/nvim-ts-autotag",
-        "nvim-treesitter/nvim-treesitter-textobjects"
+		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	config = function()
 		-- import nvim-treesitter plugin
@@ -14,6 +14,7 @@ return {
 		treesitter.setup({ -- enable syntax highlighting
 			highlight = {
 				enable = true,
+				additional_vim_regex_highlighting = false,
 			},
 			-- enable indentation
 			indent = { enable = true },
@@ -24,11 +25,15 @@ return {
 				"html",
 				"css",
 				"python",
-                "markdown",
-                "markdown_inline",
+				"markdown",
+                "javascript",
+                "json",
+                "vim",
+				"markdown_inline",
 				"vimdoc",
 				"bash",
 				"cpp",
+				"rust",
 				"lua",
 				"c",
 				"gitignore",
@@ -38,7 +43,6 @@ return {
 				keymaps = {
 					init_selection = "<M-space>",
 					node_incremental = "<M-space>",
-					scope_incremental = false,
 					node_decremental = "<bs>",
 				},
 			},

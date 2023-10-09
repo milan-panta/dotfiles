@@ -1,5 +1,3 @@
-local vim = vim
-
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -24,8 +22,9 @@ vim.keymap.set("n", "<Leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", "<Leader>vpp", "<cmd>e ~/.config/nvim/lua/<CR>", { desc = "Open nvim config" })
 
--- format + run
+-- run file
 function RunFile(dir)
+    vim.cmd("silent :w")
 	local filetype = vim.bo.filetype
 	if filetype == "c" then
 		vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall % -o %< && ./%< ")

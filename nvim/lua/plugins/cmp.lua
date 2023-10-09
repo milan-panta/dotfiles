@@ -22,7 +22,7 @@ return {
 
 		cmp.setup({
 			completion = {
-				completeopt = "menu,menuone,preview",
+				completeopt = "menu,preview,noselect",
 			},
 			snippet = { -- configure how nvim-cmp interacts with snippet engine
 				expand = function(args)
@@ -32,22 +32,23 @@ return {
 			mapping = cmp.mapping.preset.insert({
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
-				["<C-e>"] = cmp.mapping.abort(), -- close completion window
-				["<C-k>"] = cmp.mapping.confirm({ select = true }),
+                ["<C-k>"] = cmp.mapping.complete(),
+                ["<C-e>"] = cmp.mapping.abort(),
+				["<C-j>"] = cmp.mapping.confirm({ select = true }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
 					else
 						fallback()
 					end
-				end, { "i", "s", silent = true }),
+				end, { "i", "s" }),
 				["<S-Tab>"] = cmp.mapping(function(fallback)
 					if luasnip.jumpable(-1) then
 						luasnip.jump(-1)
 					else
 						fallback()
 					end
-				end, { "i", "s", silent = true }),
+				end, { "i", "s" }),
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({

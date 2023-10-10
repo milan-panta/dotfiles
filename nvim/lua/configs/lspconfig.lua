@@ -46,6 +46,7 @@ masonLspConfig.setup({
 		"cssls",
 		"html",
 		"denols",
+		"tailwindcss",
 
 		-- c/cpp
 		"clangd",
@@ -60,11 +61,11 @@ masonLspConfig.setup({
 
 -- default configs for these language servers
 local servers = {
-	"html",
 	"emmet_ls",
 	"cssls",
 	"rust_analyzer",
 	"pyright",
+	"tailwindcss",
 }
 
 -- configure with default lsp settings
@@ -85,6 +86,12 @@ lspconfig.lua_ls.setup({
 			},
 		},
 	},
+	on_attach = on_attach,
+})
+
+lspconfig.html.setup({
+	filetypes = { "html", "htmldjango" },
+	capabilities = capabilities,
 	on_attach = on_attach,
 })
 

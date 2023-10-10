@@ -30,7 +30,7 @@ font:
 draw_bold_text_with_bright_colors: true
 
 import:
-  - ~/.config/alacritty/catppuccin-macchiato.yml
+  - ~/.config/alacritty/tokyonight-night.yml
 
 selection:
   save_to_clipboard: false

@@ -22,7 +22,6 @@ return {
 			autotag = { enable = true },
 			-- ensure these language parsers are installed
 			ensure_installed = {
-				"html",
 				"css",
 				"python",
 				"markdown",

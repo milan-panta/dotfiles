@@ -1,23 +1,31 @@
 return {
     "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
     dependencies = {
         {
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "make",
             config = function()
                 require("telescope").load_extension("fzf")
-            end,
+            end
         },
         {
             "debugloop/telescope-undo.nvim",
+            enent = { "BufReadPre", "BufNewFile" },
             keys = { { "<leader>U", "<cmd>Telescope undo<cr>" } },
             config = function()
                 require("telescope").load_extension("undo")
             end,
+
         },
     },
     opts = {
         defaults = {
+            mappings = {
+                i = {
+                    ["<Esc>"] = require("telescope.actions").close,
+                },
+            },
             layout_strategy = "horizontal",
             layout_config = {
                 horizontal = {

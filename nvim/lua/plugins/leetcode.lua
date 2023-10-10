@@ -11,7 +11,7 @@ return {
         "nvim-tree/nvim-web-devicons",
 
         -- recommended
-        -- "rcarriga/nvim-notify",
+        "rcarriga/nvim-notify",
     },
     opts = {
         -- configuration goes here

@@ -4,7 +4,7 @@ vim.opt.number = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
--- vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "number"
 
 vim.opt.wrap = false
 vim.opt.ignorecase = true

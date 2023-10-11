@@ -1,6 +1,7 @@
 return {
     'akinsho/toggleterm.nvim',
     event = "VeryLazy",
+    -- To unbind Ctrl backslash before it's readded by toggleterm
     dependencies = {
         "christoomey/vim-tmux-navigator",
         event = "VeryLazy",
@@ -9,7 +10,6 @@ return {
             vim.keymap.del("n", "<C-\\>")
         end
     },
-    event = "VeryLazy",
     opts = {
         open_mapping = [[<c-\>]],
     }

@@ -8,6 +8,4 @@
 - [ ripgrep ](https://github.com/BurntSushi/ripgrep)
 
 ## Note
-
-Load times on my computer are under 20ms.\
-I'd recommend alacritty with p10k for an optimal experience.
+Enable option as alt on MacOS since some of the keymaps depend on it.

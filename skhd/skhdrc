@@ -1,5 +1,6 @@
-# open alacritty
+# shortcuts for opening apps
 cmd + shift - o : open -na /Applications/Alacritty.app
+cmd + shift - u  : open -na /Applications/Safari.app
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service

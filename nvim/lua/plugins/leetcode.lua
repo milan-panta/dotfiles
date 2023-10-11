@@ -1,9 +1,13 @@
 return {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html",
+    event = "VeryLazy",
     dependencies = {
         "nvim-treesitter/nvim-treesitter",
-        "nvim-telescope/telescope.nvim",
+        {
+            "nvim-telescope/telescope.nvim",
+            event = "VeryLazy",
+        },
         "nvim-lua/plenary.nvim", -- required by telescope
         "MunifTanjim/nui.nvim",
 

@@ -16,27 +16,33 @@ return {
 				enable = true,
 				additional_vim_regex_highlighting = false,
 			},
+			modules = {},
 			-- enable indentation
 			indent = { enable = true },
 			-- enable autotagging (w/ nvim-ts-autotag plugin)
 			autotag = { enable = true },
+			-- ignore installed
+			ignore_install = {},
 			-- ensure these language parsers are installed
 			ensure_installed = {
 				"css",
 				"python",
 				"markdown",
-                "javascript",
-                "json",
-                "vim",
+				"javascript",
+				"json",
+				"vim",
+				"typescript",
 				"markdown_inline",
 				"vimdoc",
 				"bash",
 				"cpp",
 				"rust",
+				"regex",
 				"lua",
 				"c",
 				"gitignore",
 			},
+			sync_install = false,
 			incremental_selection = {
 				enable = true,
 				keymaps = {

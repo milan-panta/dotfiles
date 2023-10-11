@@ -7,7 +7,8 @@ vim.keymap.set("n", "<C-u>", "5<C-u>")
 
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")
-vim.keymap.set("v", "Y", '"*ygv<Esc>')
+
+vim.keymap.set({"n", "v"}, "Y", '"+y')
 
 -- Remove text highlight after search
 vim.keymap.set("n", "<Esc>", "<cmd>:noh<CR>", { desc = "Clear Highlights" })
@@ -24,7 +25,7 @@ vim.keymap.set("n", "<Leader>vpp", "<cmd>e ~/.config/nvim/lua/<CR>", { desc = "O
 
 -- run file
 function RunFile(dir)
-    vim.cmd("silent :w")
+	vim.cmd("silent :w")
 	local filetype = vim.bo.filetype
 	if filetype == "c" then
 		vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall % -o %< && ./%< ")

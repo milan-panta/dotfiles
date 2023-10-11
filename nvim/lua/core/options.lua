@@ -5,6 +5,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.signcolumn = "number"
+vim.opt.cursorline = true
 
 vim.opt.wrap = false
 vim.opt.ignorecase = true

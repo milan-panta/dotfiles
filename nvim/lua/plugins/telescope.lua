@@ -11,14 +11,13 @@ return {
         },
         {
             "debugloop/telescope-undo.nvim",
-            enent = { "BufReadPre", "BufNewFile" },
-            keys = { { "<leader>U", "<cmd>Telescope undo<cr>" } },
+            event = { "BufReadPre", "BufNewFile" },
             config = function()
                 require("telescope").load_extension("undo")
-            end,
-
+            end
         },
     },
+
     opts = {
         defaults = {
             mappings = {
@@ -39,7 +38,16 @@ return {
             sorting_strategy = "ascending",
             winblend = 0,
         },
+        undo = {
+            side_by_side = true,
+            layout_strategy = "vertical",
+            layout_config = {
+                preview_height = 0.8,
+                winblend = 100
+            },
+        },
     },
+
     keys = {
         {
             "<Leader>ff",
@@ -90,5 +98,13 @@ return {
             end,
             desc = "Telescope quickfix",
         },
+        {
+            "<Leader>U",
+            function()
+                require("telescope").load_extension("undo")
+                vim.cmd("Telescope undo")
+            end,
+            desc = "Telescope Undo"
+        }
     },
 }

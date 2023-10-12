@@ -1,8 +1,8 @@
 return {
-    "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
-    event = "VeryLazy",
-    config = true,
+  "folke/todo-comments.nvim",
+  cmd = { "TodoTrouble", "TodoTelescope" },
+  event = "VeryLazy",
+  config = true,
     -- stylua: ignore
     -- TODO: fix the todo
     keys = {

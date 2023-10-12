@@ -1,5 +1,5 @@
 return {
-	"kylechui/nvim-surround",
-	event = "InsertEnter",
-	config = true,
+  "kylechui/nvim-surround",
+  event = "InsertEnter",
+  config = true,
 }

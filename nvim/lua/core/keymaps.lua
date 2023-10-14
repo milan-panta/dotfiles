@@ -1,5 +1,5 @@
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "5<C-d>")
@@ -8,7 +8,7 @@ vim.keymap.set("n", "<C-u>", "5<C-u>")
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")
 
-vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "Y", '"+y')
 
 -- Remove text highlight after search
 vim.keymap.set("n", "<Esc>", "<cmd>:noh<CR>", { desc = "Clear Highlights" })
@@ -18,8 +18,6 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set({ "n", "i" }, "<C-q>", ":q<CR>")
-
-vim.keymap.set("n", "<Leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word" })
 
 vim.keymap.set("n", "<Leader>vpp", "<cmd>e ~/.config/nvim/lua/<CR>", { desc = "Open nvim config" })
 

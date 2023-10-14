@@ -2,7 +2,7 @@ return {
   "folke/twilight.nvim",
   keys = {
     {
-      "<Leader>tl",
+      "<Leader>zt",
       function()
         vim.cmd("Twilight")
       end,

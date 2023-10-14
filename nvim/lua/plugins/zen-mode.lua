@@ -3,7 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   keys = {
     {
-      "<Leader>zm",
+      "<Leader>zz",
       function()
         vim.cmd("ZenMode")
       end,

@@ -11,7 +11,6 @@ return {
       event = { "BufReadPre", "BufNewFile" },
     },
   },
-
   config = function()
     local telescope = require("telescope")
     telescope.load_extension("fzf")
@@ -37,20 +36,8 @@ return {
         sorting_strategy = "ascending",
         winblend = 0,
       },
-      extensions = {
-        undo = {
-          mappings = {
-            i = {
-              ["<Cr>"] = require("telescope-undo.actions").yank_additions,
-              ["<S-Cr>"] = require("telescope-undo.actions").yank_deletions,
-              ["<C-Cr>"] = require("telescope-undo.actions").restore,
-            },
-          },
-        },
-      },
     })
   end,
-
   keys = {
     {
       "<Leader>ff",
@@ -104,8 +91,7 @@ return {
     {
       "<Leader>U",
       function()
-        require("telescope").load_extension("undo")
-        vim.cmd("Telescope undo")
+        require("telescope").extensions.undo.undo()
       end,
       desc = "Telescope Undo",
     },

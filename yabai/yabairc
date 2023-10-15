@@ -41,5 +41,7 @@ yabai -m config                                 \
     mouse_drop_action            swap           \
 
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Digital Color Meter$" manage=off
+yabai -m rule --add app="^Raycast Settings$" manage=off
 
 echo "yabai configuration loaded.."

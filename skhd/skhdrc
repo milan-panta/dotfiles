@@ -1,5 +1,8 @@
-# open alacritty
+# shortcuts for opening apps
 cmd + shift - o : open -na /Applications/Alacritty.app
+cmd + shift - u : open -na /Applications/Safari.app
+cmd + shift - g : open -na /Applications/GoogleCalendar.app
+
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service
@@ -21,6 +24,9 @@ alt - x : yabai -m space --mirror x-axis
 
 # toggle window float
 alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# toggle sticky
+alt - s : yabai -m window --toggle sticky
 
 # maximize window
 alt - m : yabai -m window --toggle zoom-fullscreen

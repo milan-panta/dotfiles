@@ -32,5 +32,9 @@ draw_bold_text_with_bright_colors: true
 import:
   - ~/.config/alacritty/tokyonight-night.yml
 
+key_bindings:
+  - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
+  - { key: Return,   mods: Control, chars: "\x1b[13;5u" }
+
 selection:
   save_to_clipboard: false

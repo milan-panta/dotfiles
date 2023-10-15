@@ -9,5 +9,5 @@
 
 ## Note
 
-Load times on my computer are under 20ms.\
-I'd recommend alacritty with p10k for an optimal experience.
+Enable option as alt on MacOS since some of the keymaps depend on it.
+Ensure nvim version is >= 0.9.4 as [ noice ](https://github.com/folke/noice.nvim) breaks on 0.9.2.

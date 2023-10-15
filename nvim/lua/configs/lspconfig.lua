@@ -52,6 +52,7 @@ masonLspConfig.setup({
     -- web dev
     "emmet_ls",
     "eslint",
+    "tsserver",
     "graphql",
     "cssls",
     "html",
@@ -70,6 +71,7 @@ masonLspConfig.setup({
 local servers = {
   "emmet_ls",
   "graphql",
+  "tsserver",
   "jsonls",
   "eslint",
   "cssls",

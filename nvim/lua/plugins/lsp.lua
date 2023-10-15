@@ -1,17 +1,17 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  event = "VeryLazy",
   dependencies = {
-    {
-      "williamboman/mason.nvim",
-      event = "VeryLazy",
-    },
     {
       "williamboman/mason-lspconfig.nvim",
       event = { "BufReadPre", "BufNewFile" },
     },
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      event = "VeryLazy",
+    },
+    {
+      "williamboman/mason.nvim",
       event = "VeryLazy",
     },
     {
@@ -24,7 +24,7 @@ return {
     },
     {
       "jay-babu/mason-nvim-dap.nvim",
-      event = { "BufReadPre", "BufNewFile" },
+      event = "VeryLazy",
     },
     {
       "rcarriga/nvim-dap-ui",

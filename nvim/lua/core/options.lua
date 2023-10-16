@@ -21,3 +21,4 @@ vim.opt.splitbelow = true
 
 vim.opt.scrolloff = 8
 vim.opt.termguicolors = true
+vim.opt.laststatus = 3 -- global statusline

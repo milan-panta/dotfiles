@@ -34,6 +34,9 @@ return {
     plugins = {
       tmux = true, -- disables the tmux statusline
       twilight = false,
+      options = {
+        laststatus = 0,
+      },
     },
   },
 }

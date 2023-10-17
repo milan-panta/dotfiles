@@ -38,6 +38,7 @@ return {
         "cpp",
         "rust",
         "regex",
+        "toml",
         "lua",
         "c",
         "gitignore",

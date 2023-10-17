@@ -67,7 +67,7 @@ const CONFIG = {
       id: "3",
       name: "Todoist",
       icon: "glasses",
-      link: "https://reddit.com",
+      link: "https://q.utoronto.ca",
     },
     {
       id: "4",

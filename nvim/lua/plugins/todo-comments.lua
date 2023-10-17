@@ -4,7 +4,6 @@ return {
   event = "VeryLazy",
   config = true,
     -- stylua: ignore
-    -- TODO: fix the todo
     keys = {
         { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
         { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },

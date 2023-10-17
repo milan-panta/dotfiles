@@ -1,4 +1,5 @@
 return {
-  "eandrju/cellular-automaton.nvim",
+  "echasnovski/mini.pairs",
   event = { "BufReadPre", "BufNewFile" },
+  config = true,
 }

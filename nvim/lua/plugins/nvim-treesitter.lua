@@ -32,6 +32,7 @@ return {
         "javascript",
         "json",
         "vim",
+        "latex",
         "typescript",
         "vimdoc",
         "bash",

@@ -82,6 +82,20 @@ return {
       desc = "Telescope find oldfiles",
     },
     {
+      "<Leader>fk",
+      function()
+        require("telescope.builtin").keymaps()
+      end,
+      desc = "Telescope find keymaps",
+    },
+    {
+      "<Leader>/",
+      function()
+        require("telescope.builtin").current_buffer_fuzzy_find()
+      end,
+      desc = "Telescope fuzzy search current buffer",
+    },
+    {
       "<Leader>fq",
       function()
         require("telescope.builtin").quickfix()

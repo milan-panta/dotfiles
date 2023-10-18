@@ -1,6 +1,6 @@
 return {
   "folke/noice.nvim",
-  event = "VeryLazy",
+  priority = 200,
   opts = {
     -- add any options here
     lsp = {

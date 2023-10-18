@@ -1,5 +1,5 @@
 window:
-  decorations: buttonless
+  decorations: none
   # padding:
   #   x: 0
   #   y: 0

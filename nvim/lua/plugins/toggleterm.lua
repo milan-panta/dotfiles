@@ -1,7 +1,7 @@
 return {
   "akinsho/toggleterm.nvim",
-  event = "VeryLazy",
-  -- To unbind Ctrl backslash before it's readded by toggleterm
+  cmd = "ToggleTerm",
+  -- Unbind Ctrl backslash from vim-tmux-navigator before it's readded by toggleterm
   dependencies = {
     "christoomey/vim-tmux-navigator",
     event = "VeryLazy",
@@ -37,7 +37,20 @@ return {
     function _LAZYGIT_TOGGLE()
       lazygit:toggle()
     end
-
-    vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { noremap = true, silent = true })
   end,
+  keys = {
+    {
+      "<Leader>g",
+      "<cmd>lua _LAZYGIT_TOGGLE()<CR>",
+      desc = "Open Lazygit",
+      noremap = true,
+      silent = true,
+    },
+    {
+      "<C-_>",
+      "<cmd>ToggleTerm<CR>",
+      desc = "Toggle Terminal",
+      noremap = true,
+    },
+  },
 }

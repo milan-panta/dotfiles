@@ -1,6 +1,5 @@
 return {
   "folke/zen-mode.nvim",
-  event = { "BufReadPre", "BufNewFile" },
   keys = {
     {
       "<Leader>zz",

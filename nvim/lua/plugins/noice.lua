@@ -1,6 +1,6 @@
 return {
   "folke/noice.nvim",
-  priority = 200,
+  priority = 200, -- so cursor doesn't glitch on load
   opts = {
     -- add any options here
     lsp = {

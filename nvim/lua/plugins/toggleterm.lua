@@ -46,11 +46,5 @@ return {
       noremap = true,
       silent = true,
     },
-    {
-      "<C-_>",
-      "<cmd>ToggleTerm<CR>",
-      desc = "Toggle Terminal",
-      noremap = true,
-    },
   },
 }

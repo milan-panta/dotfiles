@@ -1,6 +1,5 @@
 return {
   "nvim-telescope/telescope.nvim",
-  event = "VeryLazy",
   dependencies = {
     {
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -38,6 +37,9 @@ return {
       },
     })
   end,
+  cmd = {
+    "Telescope",
+  },
   keys = {
     {
       "<Leader>ff",
@@ -106,6 +108,13 @@ return {
       "<Leader>U",
       function()
         require("telescope").extensions.undo.undo()
+      end,
+      desc = "Telescope Undo",
+    },
+    {
+      "<Leader>fb",
+      function()
+        require("telescope").buffers()
       end,
       desc = "Telescope Undo",
     },

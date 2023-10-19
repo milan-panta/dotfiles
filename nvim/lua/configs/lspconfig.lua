@@ -129,6 +129,7 @@ require("mason-tool-installer").setup({
     "eslint_d",
     "clang-format",
     "prettierd",
+    "latexindent",
     "ruff",
   },
   auto_update = true,
@@ -141,18 +142,12 @@ conform.setup({
     c = { "clang_format" },
     lua = { "stylua" },
     python = { "ruff_fix", "ruff_format" },
+    tex = { "latexindent" },
     markdown = { "prettierd" },
     javascript = { "prettierd" },
     javascriptreact = { "prettierd" },
     typescript = { "prettierd" },
     typescriptreact = { "prettierd" },
-  },
-  formatters = {
-    dprint = {
-      condition = function(ctx)
-        return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
-      end,
-    },
   },
 })
 

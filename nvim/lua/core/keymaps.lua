@@ -1,6 +1,6 @@
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
-vim.keymap.set("n", "<Leader>w", "w<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>w", ":silent w<CR>", { silent = true })
 
 vim.keymap.set("n", "J", "mzJ`z")
 -- vim.keymap.set("n", "<C-u>", "5<C-u>")

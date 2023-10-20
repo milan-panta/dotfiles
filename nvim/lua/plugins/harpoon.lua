@@ -8,10 +8,10 @@ return {
     vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Attach Harpoon" })
     vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
-    vim.keymap.set("n", "<S-g>", function()
+    vim.keymap.set("n", "<S-h>", function()
       ui.nav_file(1)
     end)
-    vim.keymap.set("n", "<S-h>", function()
+    vim.keymap.set("n", "<S-m>", function()
       ui.nav_file(2)
     end)
     vim.keymap.set("n", "<S-k>", function()

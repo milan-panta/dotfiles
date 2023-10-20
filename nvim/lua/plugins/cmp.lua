@@ -11,14 +11,14 @@ return {
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
   config = function()
+    require("luasnip.loaders.from_vscode").lazy_load()
     local cmp = require("cmp")
 
     local luasnip = require("luasnip")
     luasnip.setup({
       history = true,
-      update_events = "TextChanged",
-      "TextChangedI",
-      require("luasnip.loaders.from_vscode").lazy_load(),
+      updateevents = "TextChanged,TextChangedI",
+      enable_autosnippets = true,
     })
 
     local lspkind = require("lspkind")

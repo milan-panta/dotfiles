@@ -8,6 +8,8 @@ vim.opt.number = true
 vim.opt.statuscolumn = "%=%{&nu?(&rnu && v:relnum?v:relnum:v:lnum):''} %C"
 
 vim.opt.guicursor = ""
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2

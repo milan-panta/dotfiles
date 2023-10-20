@@ -26,11 +26,12 @@ vim.keymap.set("n", "<Leader>rz", "<Cmd>!zathura %<.pdf & disown<CR>", { silent 
 
 -- window management
 vim.keymap.set({ "n", "i" }, "<C-q>", "<cmd>q<CR>", { silent = true, desc = "Quit buffer" })
-vim.api.nvim_set_keymap("n", "<C-d>", "<C-w>>", { noremap = true, desc = "Increase width" })
-vim.api.nvim_set_keymap("n", "<C-s>", "<C-w><", { noremap = true, desc = "Decrease width" })
-vim.api.nvim_set_keymap("n", "<C-f>", "<C-w>+", { noremap = true, desc = "Increase height" })
-vim.api.nvim_set_keymap("n", "<C-a>", "<C-w>-", { noremap = true, desc = "Decrease height" })
-vim.api.nvim_set_keymap("n", "<C-w>h", "<C-W>s", { noremap = true, desc = "Create Horizontal Split" })
+vim.api.nvim_set_keymap("n", "<C-a>", "<C-w>>", { noremap = true, desc = "Increase width" })
+vim.api.nvim_set_keymap("n", "<C-f>", "<C-w><", { noremap = true, desc = "Decrease width" })
+vim.api.nvim_set_keymap("n", "<C-d>", "<C-w>+", { noremap = true, desc = "Increase height" })
+vim.api.nvim_set_keymap("n", "<C-s>", "<C-w>-", { noremap = true, desc = "Decrease height" })
+vim.api.nvim_set_keymap("n", "<C-w>-", "<C-W>s", { noremap = true, desc = "Create vertical split" })
+vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-W>v", { noremap = true, desc = "Create vertical split" })
 
 -- run file
 function RunFile(dir)

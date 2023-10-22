@@ -2,6 +2,7 @@ return {
   "nvim-neorg/neorg",
   build = ":Neorg sync-parsers",
   dependencies = { "nvim-lua/plenary.nvim" },
+  cmd = "Neorg",
   ft = "norg",
   config = function()
     require("neorg").setup({
@@ -11,7 +12,9 @@ return {
         ["core.dirman"] = { -- Manages Neorg workspaces
           config = {
             workspaces = {
-              notes = "~/notes",
+              uoft = "~/notes/uoft",
+              life = "~/notes/life",
+              play = "~/notes/play",
             },
           },
         },

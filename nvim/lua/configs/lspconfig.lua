@@ -26,8 +26,10 @@ local on_attach = function(_, bufnr)
   keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
   opts.desc = "Get signature"
   keymap.set("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
-  opts.desc = "Get LSP info"
-  keymap.set("n", "<leader>li", vim.cmd.LspInfo, opts)
+  opts.desc = "Get Inlay Hints"
+  keymap.set("n", "<Leader>li", function()
+    vim.lsp.inlay_hint(0, nil)
+  end, opts)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -140,6 +142,7 @@ local conform = require("conform")
 conform.setup({
   formatters_by_ft = {
     c = { "clang_format" },
+    cpp = { "clang_format" },
     lua = { "stylua" },
     python = { "ruff_fix", "ruff_format" },
     tex = { "latexindent" },

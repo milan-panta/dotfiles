@@ -5,19 +5,22 @@ return {
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-path", -- source for file system paths
     "hrsh7th/cmp-cmdline",
-    { "rafamadriz/friendly-snippets" }, -- useful snippets
+    {
+      "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
+    }, -- useful snippets
     { "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
   config = function()
-    require("luasnip.loaders.from_vscode").lazy_load()
     local cmp = require("cmp")
 
     local luasnip = require("luasnip")
     luasnip.setup({
-      history = true,
-      updateevents = "TextChanged,TextChangedI",
+      updateevents = "TextChanged",
       enable_autosnippets = true,
     })
 

@@ -11,10 +11,39 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     }, -- useful snippets
-    { "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
+    {
+      "L3MON4D3/LuaSnip",
+      build = "make install_jsregexp",
+      keys = {
+        {
+          "<tab>",
+          function()
+            return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+          end,
+          expr = true,
+          silent = true,
+          mode = "i",
+        },
+        {
+          "<tab>",
+          function()
+            require("luasnip").jump(1)
+          end,
+          mode = "s",
+        },
+        {
+          "<s-tab>",
+          function()
+            require("luasnip").jump(-1)
+          end,
+          mode = { "i", "s" },
+        },
+      },
+    }, -- snippet engine
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
+
   config = function()
     local cmp = require("cmp")
 
@@ -43,20 +72,6 @@ return {
         ["<C-e>"] = cmp.mapping.abort(),
         ["<C-j>"] = cmp.mapping.confirm({ select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({

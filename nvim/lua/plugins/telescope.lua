@@ -44,7 +44,7 @@ return {
     {
       "<Leader>ff",
       function()
-        require("telescope.builtin").find_files({ hidden = true })
+        require("telescope.builtin").fd({ hidden = true })
       end,
       desc = "Telescope find files",
     },
@@ -77,11 +77,11 @@ return {
       desc = "Telescope diagnostics",
     },
     {
-      "<Leader>fo",
+      "<Leader>fr",
       function()
         require("telescope.builtin").oldfiles()
       end,
-      desc = "Telescope find oldfiles",
+      desc = "Telescope find recent files",
     },
     {
       "<Leader>fk",

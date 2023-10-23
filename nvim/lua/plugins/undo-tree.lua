@@ -1,6 +1,6 @@
 return {
   "mbbill/undotree",
-  event = "VeryLazy",
+  event = { "BufReadPre", "BufNewFile" },
   keys = {
     {
       "<Leader>u",

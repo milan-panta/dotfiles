@@ -3,8 +3,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set("n", "<Leader>w", ":silent w<CR>", { silent = true })
 
 vim.keymap.set("n", "J", "mzJ`z")
--- vim.keymap.set("n", "<C-u>", "5<C-u>")
--- vim.keymap.set("n", "<C-d>", "5<C-d>")
 
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")

@@ -1,4 +1,5 @@
 vim.opt.termguicolors = true
+
 vim.opt.cursorline = true
 vim.opt.laststatus = 3 -- global statusline
 

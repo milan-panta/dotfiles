@@ -14,8 +14,8 @@ return {
             -- You can use the capture groups defined in textobjects.scm
             ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
             ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
-            ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
-            ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+            ["b="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+            ["f="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
 
             ["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
             ["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
@@ -65,7 +65,7 @@ return {
             ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
             ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
 
-            ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+            ["]d"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
             ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
           },
           goto_next_end = {

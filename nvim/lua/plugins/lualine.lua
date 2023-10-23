@@ -1,9 +1,10 @@
 return {
   "nvim-lualine/lualine.nvim",
+  event = "VimEnter",
   opts = {
     options = {
       disabled_filetypes = {
-        "alpha",
+        "dashboard",
       },
       theme = "nord",
     },

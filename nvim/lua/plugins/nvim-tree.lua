@@ -1,7 +1,6 @@
 return {
   "nvim-tree/nvim-tree.lua",
   version = "*",
-  event = "VeryLazy",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
@@ -25,8 +24,14 @@ return {
         dotfiles = true,
       },
     })
-
-    local keymap = vim.keymap
-    keymap.set("n", "<Leader>e", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
   end,
+  keys = {
+    {
+      "<Leader>e",
+      function()
+        vim.cmd("NvimTreeFindFileToggle")
+      end,
+      desc = "Toggle file explorer on current file",
+    },
+  },
 }

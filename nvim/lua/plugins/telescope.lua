@@ -121,5 +121,12 @@ return {
       end,
       desc = "Telescope Undo",
     },
+    {
+      "<Leader>fc",
+      function()
+        vim.cmd([[Telescope fd cwd=~/.config/nvim/lua/ prompt_title=Config]])
+      end,
+      desc = "Telescope Config",
+    },
   },
 }

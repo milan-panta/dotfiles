@@ -31,6 +31,7 @@ function nvims() {
 }
 
 alias lg="lazygit"
+alias l="lf"
 alias gc="git checkout"
 
 setopt HIST_FIND_NO_DUPS

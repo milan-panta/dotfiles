@@ -29,6 +29,7 @@ return {
         "css",
         "markdown",
         "markdown_inline",
+        "regex",
         "comment",
         "javascript",
         "json",

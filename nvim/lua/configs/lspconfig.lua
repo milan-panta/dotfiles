@@ -59,7 +59,6 @@ masonLspConfig.setup({
     "cssls",
     "html",
     "jsonls",
-    "tailwindcss",
     -- c/cpp
     "clangd",
     -- python
@@ -79,7 +78,6 @@ local servers = {
   "cssls",
   "rust_analyzer",
   "pyright",
-  "tailwindcss",
 }
 
 -- configure with default lsp settings

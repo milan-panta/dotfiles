@@ -35,9 +35,9 @@
 
 .darktheme {
   /* Dark Colors  */
-  --accent: #7aa2f7; /* Hover color */
-  --background: #1A1B26; /* Background color */
-  --cards: #201e21; /* Cards color */
+  --accent: #8FBCBB; /* Hover color */
+  --background: #2E3440; /* Background color */
+  --cards: #434C5E; /* Cards color */
 
   /* Fonts Color */
   --fg: #d8dee9; /* Foreground color */
@@ -56,7 +56,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'JetBrains Mono', sans-serif;
   transition: 0.2s ease-in-out;
 }
 

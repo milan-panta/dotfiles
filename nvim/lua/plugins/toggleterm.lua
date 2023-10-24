@@ -1,7 +1,14 @@
 return {
   "akinsho/toggleterm.nvim",
-  event = "VeryLazy",
   -- Unbind Ctrl backslash from vim-tmux-navigator before it's readded by toggleterm
+  cmd = "ToggleTerm",
+  keys = {
+    {
+      "\x1c",
+      "<cmd>ToggleTerm<CR>",
+      desc = "Open Toggle Term",
+    },
+  },
   dependencies = {
     "christoomey/vim-tmux-navigator",
     event = "VeryLazy",

@@ -30,7 +30,7 @@ return {
             icon = " ",
             desc = "Files",
             group = "Function",
-            action = "Telescope fd find_command=rg,--ignore,--hidden,--files",
+            action = "Telescope fd",
             key = "f",
           },
           {

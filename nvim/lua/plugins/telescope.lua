@@ -1,13 +1,10 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
+    { "nvim-lua/plenary.nvim" },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
-      enabled = vim.fn.executable("make") == 1,
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
     },
     {
       "debugloop/telescope-undo.nvim",
@@ -17,6 +14,7 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
+    telescope.load_extension("fzf")
     telescope.setup({
       defaults = {
         mappings = {

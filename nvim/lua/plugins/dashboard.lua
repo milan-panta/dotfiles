@@ -1,6 +1,9 @@
 return {
   "nvimdev/dashboard-nvim",
   event = "VimEnter",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
   config = function()
     local db = require("dashboard")
     db.setup({
@@ -10,16 +13,18 @@ return {
           enable = true,
         },
         project = {
-          enable = true,
+          enable = false,
         },
+        mru = {},
+        footer = {},
         disable_move = true,
         shortcut = {
           {
-            desc = "Update",
-            icon = " ",
+            desc = "Lazy",
+            icon = "󰒲 ",
             group = "Include",
-            action = "Lazy update",
-            key = "u",
+            action = "Lazy",
+            key = "l",
           },
           {
             icon = " ",
@@ -28,13 +33,6 @@ return {
             action = "Telescope fd find_command=rg,--ignore,--hidden,--files",
             key = "f",
           },
-          -- {
-          --   icon = " ",
-          --   desc = "Apps",
-          --   group = "String",
-          --   action = "Telescope fd cwd=/Applications prompt_title=Applications",
-          --   key = "a",
-          -- },
           {
             icon = " ",
             desc = "Config",
@@ -45,7 +43,7 @@ return {
           {
             icon = " ",
             desc = "Grep",
-            group = "String",
+            group = "Function",
             action = "Telescope live_grep",
             key = "g",
           },

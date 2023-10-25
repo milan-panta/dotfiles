@@ -16,10 +16,10 @@ eval "$(zoxide init zsh)"
 # neovim config switcher
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-alias nvim-latex="NVIM_APPNAME=LatexVim nvim"
+alias nvim-glep="NVIM_APPNAME=NvimGlep nvim"
 
 function nvims() {
-  items=("default" "LazyVim" "NvChad" "LatexVim")
+  items=("default" "LazyVim" "NvChad")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"

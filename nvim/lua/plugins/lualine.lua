@@ -1,13 +1,13 @@
 return {
   "nvim-lualine/lualine.nvim",
-  event = "UIEnter",
-  dependencies = "nvim-tree/nvim-web-devicons",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     options = {
-      disabled_filetypes = {
-        "dashboard",
-      },
       theme = "nord",
+    },
+    extensions = {
+      "nvim-tree",
     },
   },
 }

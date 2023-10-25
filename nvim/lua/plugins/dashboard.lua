@@ -1,64 +1,61 @@
 return {
   "nvimdev/dashboard-nvim",
   event = "VimEnter",
-  opts = function()
-    local logo = [[
-                                          __               
-                                         /  |              
- _______    ______    ______   __     __ $$/  _____  ____  
-/       \  /      \  /      \ /  \   /  |/  |/     \/    \ 
-$$$$$$$  |/$$$$$$  |/$$$$$$  |$$  \ /$$/ $$ |$$$$$$ $$$$  |
-$$ |  $$ |$$    $$ |$$ |  $$ | $$  /$$/  $$ |$$ | $$ | $$ |
-$$ |  $$ |$$$$$$$$/ $$ \__$$ |  $$ $$/   $$ |$$ | $$ | $$ |
-$$ |  $$ |$$       |$$    $$/    $$$/    $$ |$$ | $$ | $$ |
-$$/   $$/  $$$$$$$/  $$$$$$/      $/     $$/ $$/  $$/  $$/ 
-    ]]
-
-    logo = string.rep("\n", 8) .. logo .. "\n\n"
-
-    local opts = {
-      theme = "doom",
-      hide = {
-        -- this is taken care of by lualine
-        -- enabling this messes up the actual laststatus setting after loading a file
-        statusline = false,
-      },
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    local db = require("dashboard")
+    db.setup({
+      theme = "hyper",
       config = {
-        header = vim.split(logo, "\n"),
-        -- stylua: ignore
-        center = {
-          { action = "Telescope fd",                                             desc = " Find file",       icon = " ", key = "f" },
-          { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
-          { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
-          { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "g" },
-          { action = "e ~/.config/nvim/lua/",                                    desc = " Config",          icon = " ", key = "c" },
-          { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
-          { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
+        week_header = {
+          enable = true,
         },
-        footer = function()
-          local stats = require("lazy").stats()
-          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-          return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
-        end,
+        project = {
+          enable = false,
+        },
+        mru = {},
+        footer = {},
+        disable_move = true,
+        shortcut = {
+          {
+            desc = "Lazy",
+            icon = "󰒲 ",
+            group = "Include",
+            action = "Lazy",
+            key = "l",
+          },
+          {
+            icon = " ",
+            desc = "Files",
+            group = "Function",
+            action = "Telescope fd",
+            key = "f",
+          },
+          {
+            icon = " ",
+            desc = "Config",
+            group = "Constant",
+            action = "Telescope fd cwd=~/.config/nvim/lua prompt_title=Config",
+            key = "c",
+          },
+          {
+            icon = " ",
+            desc = "Grep",
+            group = "Function",
+            action = "Telescope live_grep",
+            key = "g",
+          },
+          {
+            icon = " ",
+            desc = "Quit",
+            group = "String",
+            action = "qa",
+            key = "q",
+          },
+        },
       },
-    }
-
-    for _, button in ipairs(opts.config.center) do
-      button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-      button.key_format = "  %s"
-    end
-
-    -- close Lazy and re-open when the dashboard is ready
-    if vim.o.filetype == "lazy" then
-      vim.cmd.close()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "DashboardLoaded",
-        callback = function()
-          require("lazy").show()
-        end,
-      })
-    end
-
-    return opts
+    })
   end,
 }

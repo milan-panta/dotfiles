@@ -1,24 +1,42 @@
 return {
   "ThePrimeagen/harpoon",
-  event = "VeryLazy",
-  config = function()
-    local mark = require("harpoon.mark")
-    local ui = require("harpoon.ui")
-
-    vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Attach Harpoon" })
-    vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-
-    vim.keymap.set("n", "<S-h>", function()
-      ui.nav_file(1)
-    end)
-    vim.keymap.set("n", "<S-k>", function()
-      ui.nav_file(2)
-    end)
-    vim.keymap.set("n", "<S-m>", function()
-      ui.nav_file(3)
-    end)
-    vim.keymap.set("n", "<S-l>", function()
-      ui.nav_file(4)
-    end)
-  end,
+  config = true,
+  keys = {
+    {
+      "<Leader>a",
+      function()
+        require("harpoon.mark").add_file()
+      end,
+    },
+    {
+      "<C-e>",
+      function()
+        require("harpoon.ui").toggle_quick_menu()
+      end,
+    },
+    {
+      "<S-h>",
+      function()
+        require("harpoon.ui").nav_file(1)
+      end,
+    },
+    {
+      "<S-k>",
+      function()
+        require("harpoon.ui").nav_file(2)
+      end,
+    },
+    {
+      "<S-m>",
+      function()
+        require("harpoon.ui").nav_file(3)
+      end,
+    },
+    {
+      "<S-l>",
+      function()
+        require("harpoon.ui").nav_file(4)
+      end,
+    },
+  },
 }

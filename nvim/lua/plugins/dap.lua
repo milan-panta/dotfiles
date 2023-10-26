@@ -6,7 +6,21 @@ return {
       function()
         vim.cmd("DapToggleBreakpoint")
       end,
-      desc = "Toggle Breakpoint",
+      desc = "Toggle breakpoint",
+    },
+    {
+      "<Leader>dB",
+      function()
+        require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+      end,
+      desc = "Toggle conditional breakpoint",
+    },
+    {
+      "<Leader>dl",
+      function()
+        require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+      end,
+      desc = "Toggle breakpoint with log",
     },
   },
   dependencies = {
@@ -23,13 +37,19 @@ return {
       config = function()
         local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
         require("dap-python").setup(path)
-        vim.keymap.set("n", "<Leader>dp", function()
-          require("dap-python").test_method()
-        end, { desc = "Start Python Debugging" })
       end,
     },
     {
       "jay-babu/mason-nvim-dap.nvim",
+    },
+    {
+      "theHamsta/nvim-dap-virtual-text",
+      config = function()
+        require("nvim-dap-virtual-text").setup({
+          -- virt_text_pos = vim.fn.has("nvim-0.10") == 1 and "inline" or "eol",
+          virt_text_pos = "eol",
+        })
+      end,
     },
   },
   config = function()
@@ -38,6 +58,24 @@ return {
       ensure_installed = { "python" },
       automatic_installation = true,
     })
+    vim.keymap.set("n", "<F5>", function()
+      require("dap").continue()
+    end, { desc = "Continue debugging" })
+    vim.keymap.set("n", "<F3>", function()
+      require("dap").step_over()
+    end, { desc = "Step over" })
+    vim.keymap.set("n", "<F2>", function()
+      require("dap").step_into()
+    end, { desc = "Step into" })
+    vim.keymap.set("n", "<F12>", function()
+      require("dap").step_out()
+    end, { desc = "Step out" })
+    vim.keymap.set("n", "<Leader>dr", function()
+      require("dap").repl.open()
+    end, { desc = "Open new debuging repl" })
+    vim.keymap.set("n", "<Leader>dp", function()
+      require("dap-python").test_method()
+    end, { desc = "Start Python Debugging" })
 
     local dap = require("dap")
     local dapui = require("dapui")

@@ -32,6 +32,7 @@ function nvims() {
 }
 
 alias n="nvim"
+alias nlc="nvim leetcode.nvim"
 alias lg="lazygit"
 alias l="lf"
 alias gc="git checkout"

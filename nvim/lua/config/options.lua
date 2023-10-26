@@ -1,11 +1,10 @@
 vim.opt.cursorline = true
 vim.opt.laststatus = 3 -- global statusline
 
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 vim.opt.number = true
 
 vim.opt.signcolumn = "yes"
--- vim.opt.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} %s"
 
 vim.opt.guicursor = ""
 vim.opt.splitright = true

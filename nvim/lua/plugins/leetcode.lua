@@ -4,12 +4,11 @@ return {
   lazy = "leetcode.nvim" ~= vim.fn.argv()[1],
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
-    "nvim-telescope/telescope.nvim",
     "nvim-lua/plenary.nvim", -- required by telescope
+    "nvim-telescope/telescope.nvim",
     "MunifTanjim/nui.nvim",
 
     -- optional
-    -- "rcarriga/nvim-notify",
     "nvim-tree/nvim-web-devicons",
   },
   opts = {

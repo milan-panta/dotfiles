@@ -16,8 +16,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { silent = true, desc = "Clear High
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.keymap.set("n", "<Leader>vpp", "<cmd>e ~/.config/nvim/lua/<CR>", { silent = true, desc = "Open nvim config" })
-
 -- For Latex
 vim.keymap.set("n", "<Leader>th", "<Cmd>TSBufToggle highlight<CR>", { silent = true, desc = "Toggle TS Highlight" })
 vim.keymap.set("n", "<Leader>rz", "<Cmd>!zathura %<.pdf & disown<CR>", { silent = true, desc = "Open pdf in zathura" })
@@ -47,6 +45,8 @@ function RunFile(dir)
     vim.cmd("term g++ % -o %< && ./%< ")
   elseif filetype == "rust" then
     vim.cmd("term cargo run")
+  elseif filetype == "javascript" then
+    vim.cmd("term node %")
   else
     vim.api.nvim_out_write("Filetype " .. filetype .. " is not supported\n")
   end

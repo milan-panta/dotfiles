@@ -19,19 +19,6 @@ return {
       event = { "BufReadPre", "BufNewFile" },
     },
     {
-      "mfussenegger/nvim-dap",
-      event = { "BufReadPre", "BufNewFile" },
-    },
-    {
-      "jay-babu/mason-nvim-dap.nvim",
-      event = { "BufReadPre", "BufNewFile" },
-    },
-    {
-      "rcarriga/nvim-dap-ui",
-      event = { "BufReadPre", "BufNewFile" },
-      dependencies = "mfussenegger/nvim-dap",
-    },
-    {
       "stevearc/conform.nvim",
       event = { "BufReadPre", "BufNewFile" },
     },

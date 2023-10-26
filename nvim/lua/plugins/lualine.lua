@@ -1,11 +1,14 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  event = { "BufReadPre", "BufNewFile" },
-  opts = {
-    options = {
-      theme = "nord",
-    },
-    extensions = {"neo-tree"},
-  },
+  event = "VeryLazy",
+  opts = function()
+    return {
+      options = {
+        disabled_filetypes = {
+          statusline = { "dashboard" },
+        },
+      },
+      extensions = { "neo-tree" },
+    }
+  end,
 }

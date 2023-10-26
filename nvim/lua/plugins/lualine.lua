@@ -6,8 +6,6 @@ return {
     options = {
       theme = "nord",
     },
-    extensions = {
-      "nvim-tree",
-    },
+    extensions = {"neo-tree"},
   },
 }

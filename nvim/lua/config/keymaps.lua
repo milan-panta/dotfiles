@@ -16,8 +16,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { silent = true, desc = "Clear High
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.keymap.set("n", "<Leader>vpp", "<cmd>e ~/.config/nvim/lua/<CR>", { silent = true, desc = "Open nvim config" })
-
 -- For Latex
 vim.keymap.set("n", "<Leader>th", "<Cmd>TSBufToggle highlight<CR>", { silent = true, desc = "Toggle TS Highlight" })
 vim.keymap.set("n", "<Leader>rz", "<Cmd>!zathura %<.pdf & disown<CR>", { silent = true, desc = "Open pdf in zathura" })
@@ -28,8 +26,9 @@ vim.api.nvim_set_keymap("n", "<C-a>", "<C-w>>", { noremap = true, desc = "Increa
 vim.api.nvim_set_keymap("n", "<C-f>", "<C-w><", { noremap = true, desc = "Decrease width" })
 vim.api.nvim_set_keymap("n", "<C-d>", "<C-w>+", { noremap = true, desc = "Increase height" })
 vim.api.nvim_set_keymap("n", "<C-s>", "<C-w>-", { noremap = true, desc = "Decrease height" })
-vim.api.nvim_set_keymap("n", "<C-w>-", "<C-W>s", { noremap = true, desc = "Create vertical split" })
-vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-W>v", { noremap = true, desc = "Create vertical split" })
+vim.api.nvim_set_keymap("n", "<C-w>-", "<C-w>s", { noremap = true, desc = "Create vertical split" })
+vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-w>v", { noremap = true, desc = "Create vertical split" })
+vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = "Max out split" })
 
 -- run file
 function RunFile(dir)
@@ -46,6 +45,8 @@ function RunFile(dir)
     vim.cmd("term g++ % -o %< && ./%< ")
   elseif filetype == "rust" then
     vim.cmd("term cargo run")
+  elseif filetype == "javascript" then
+    vim.cmd("term node %")
   else
     vim.api.nvim_out_write("Filetype " .. filetype .. " is not supported\n")
   end

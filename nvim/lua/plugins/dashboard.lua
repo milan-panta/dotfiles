@@ -15,7 +15,6 @@ return {
         project = {
           enable = false,
         },
-        mru = {},
         footer = {},
         disable_move = true,
         shortcut = {

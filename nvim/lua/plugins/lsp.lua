@@ -98,7 +98,6 @@ return {
         "emmet_ls",
         "eslint",
         "tsserver",
-        "graphql",
         "cssls",
         "html",
         "jsonls",
@@ -114,7 +113,6 @@ return {
     -- default configs for these language servers
     local servers = {
       "emmet_ls",
-      "graphql",
       "tsserver",
       "jsonls",
       "eslint",

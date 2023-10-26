@@ -31,6 +31,7 @@ function nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
+alias n="nvim"
 alias lg="lazygit"
 alias l="lf"
 alias gc="git checkout"

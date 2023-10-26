@@ -28,8 +28,9 @@ vim.api.nvim_set_keymap("n", "<C-a>", "<C-w>>", { noremap = true, desc = "Increa
 vim.api.nvim_set_keymap("n", "<C-f>", "<C-w><", { noremap = true, desc = "Decrease width" })
 vim.api.nvim_set_keymap("n", "<C-d>", "<C-w>+", { noremap = true, desc = "Increase height" })
 vim.api.nvim_set_keymap("n", "<C-s>", "<C-w>-", { noremap = true, desc = "Decrease height" })
-vim.api.nvim_set_keymap("n", "<C-w>-", "<C-W>s", { noremap = true, desc = "Create vertical split" })
-vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-W>v", { noremap = true, desc = "Create vertical split" })
+vim.api.nvim_set_keymap("n", "<C-w>-", "<C-w>s", { noremap = true, desc = "Create vertical split" })
+vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-w>v", { noremap = true, desc = "Create vertical split" })
+vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = "Max out split" })
 
 -- run file
 function RunFile(dir)

@@ -53,11 +53,11 @@ return {
       opts.desc = "Code actions"
       keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, opts)
       opts.desc = "Rename"
-      keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+      keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
       opts.desc = "Get signature"
       keymap.set("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
-      opts.desc = "Get Inlay Hints"
-      keymap.set("n", "<Leader>li", function()
+      opts.desc = "Toggle Inlay Hints"
+      keymap.set("n", "<Leader>ti", function()
         vim.lsp.inlay_hint(0, nil)
       end, opts)
     end
@@ -198,7 +198,7 @@ return {
       typescript = { "eslint_d" },
     }
 
-    vim.api.nvim_create_autocmd({ "TextChanged", "BufWinEnter" }, {
+    vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged", "TextChangedI" }, {
       callback = function()
         require("lint").try_lint()
       end,

@@ -55,22 +55,23 @@ return {
   config = function()
     -- debugging
     require("mason-nvim-dap").setup({
-      ensure_installed = { "python" },
+      handlers = {},
+      ensure_installed = { "python", "codelldb" },
       automatic_installation = true,
     })
     vim.keymap.set("n", "<F5>", function()
       require("dap").continue()
     end, { desc = "Continue debugging" })
     vim.keymap.set("n", "<F3>", function()
-      require("dap").step_over()
-    end, { desc = "Step over" })
-    vim.keymap.set("n", "<F2>", function()
       require("dap").step_into()
     end, { desc = "Step into" })
+    vim.keymap.set("n", "<F4>", function()
+      require("dap").step_over()
+    end, { desc = "Step over" })
     vim.keymap.set("n", "<F12>", function()
       require("dap").step_out()
     end, { desc = "Step out" })
-    vim.keymap.set("n", "<Leader>dr", function()
+    vim.keymap.set("n", "<F6>", function()
       require("dap").repl.open()
     end, { desc = "Open new debuging repl" })
     vim.keymap.set("n", "<Leader>dp", function()

@@ -8,6 +8,7 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="/opt/homebrew/bin:$PATH"
+export DYLD_LIBRARY_PATH=/opt/homebrew/lib/
 export PATH=/Users/milan/.cargo/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -33,6 +34,7 @@ function nvims() {
 
 alias n="nvim"
 alias nlc="nvim leetcode.nvim"
+alias ep="tr ':' '\n' <<< "$PATH""
 alias lg="lazygit"
 alias l="lf"
 alias gc="git checkout"

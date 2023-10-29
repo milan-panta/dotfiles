@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.splitjoin",
-  event = { "BufReadPre", "BufNewFile" },
+  keys = { "<Leader>m", "<Leader>s", "<Leader>j" },
   opts = {
     mappings = {
       toggle = "<Leader>m",

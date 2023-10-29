@@ -3,8 +3,8 @@ vim.opt.laststatus = 3 -- global statusline
 
 -- vim.opt.relativenumber = true
 vim.opt.number = true
-
 vim.opt.signcolumn = "yes"
+vim.opt.conceallevel = 3
 
 vim.opt.guicursor = ""
 vim.opt.splitright = true

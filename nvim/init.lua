@@ -17,6 +17,7 @@ require("lazy").setup({
     lazy = false,
     version = false, -- always use the latest git commit
   },
+  install = { colorscheme = { "tokyonight", "habamax" } },
   performance = {
     rtp = {
       -- disable some rtp plugins

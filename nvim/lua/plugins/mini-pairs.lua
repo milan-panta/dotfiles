@@ -1,5 +1,5 @@
 return {
   "echasnovski/mini.pairs",
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   config = true,
 }

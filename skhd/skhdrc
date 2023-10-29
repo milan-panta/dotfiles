@@ -1,5 +1,5 @@
 # shortcuts for opening apps
-cmd + shift - o : open -na /Applications/kitty.app
+cmd + shift - o : open -na /Applications/Alacritty.app
 cmd + shift - u : open -na /Applications/Firefox.app
 cmd + shift - c : open -na /Applications/GoogleCalendar.app
 

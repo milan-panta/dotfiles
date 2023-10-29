@@ -32,7 +32,7 @@ return {
         vim.cmd("Leet submit")
       end,
       desc = "Leetcode submit",
-      silent = true
+      silent = true,
     },
     {
       "<Leader>cc",

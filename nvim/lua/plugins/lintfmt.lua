@@ -10,7 +10,6 @@ return {
     require("mason-tool-installer").setup({
       ensure_installed = {
         "stylua",
-        "eslint_d",
         "clang-format",
         "prettierd",
         "latexindent",
@@ -50,8 +49,6 @@ return {
 
     lint.linters_by_ft = {
       python = { "ruff" },
-      javascript = { "eslint_d" },
-      typescript = { "eslint_d" },
     }
 
     vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged", "TextChangedI" }, {

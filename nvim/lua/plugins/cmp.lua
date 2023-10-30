@@ -49,7 +49,7 @@ return {
 
     local luasnip = require("luasnip")
     luasnip.setup({
-      updateevents = "TextChanged",
+      updateevents = "TextChangedI",
       enable_autosnippets = true,
     })
 

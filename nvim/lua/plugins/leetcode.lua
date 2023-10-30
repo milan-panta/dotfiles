@@ -19,8 +19,7 @@ return {
     {
       "<Leader>cr",
       function()
-        vim.cmd("<Leader>cc")
-        vim.cmd("Leet run")
+        vim.cmd("Leet console | Leet run")
       end,
       desc = "Leetcode run",
       silent = true,
@@ -28,8 +27,7 @@ return {
     {
       "<Leader>cs",
       function()
-        vim.cmd("<Leader>cc")
-        vim.cmd("Leet submit")
+        vim.cmd("Leet console | Leet submit")
       end,
       desc = "Leetcode submit",
       silent = true,

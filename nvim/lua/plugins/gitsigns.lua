@@ -62,7 +62,7 @@ return {
         vim.keymap.set("n", "<leader>hD", function()
           gs.diffthis("~")
         end, { desc = "Git diff file" })
-        vim.keymap.set("n", "<leader>htd", gs.toggle_deleted, { desc = "Toggle deleted git" })
+        vim.keymap.set("n", "<leader>td", gs.toggle_deleted, { desc = "Toggle deleted git" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

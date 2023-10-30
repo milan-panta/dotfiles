@@ -5,6 +5,7 @@ vim.opt.termguicolors = true
 
 -- vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.confirm = true
 vim.opt.signcolumn = "yes"
 vim.opt.conceallevel = 3
 

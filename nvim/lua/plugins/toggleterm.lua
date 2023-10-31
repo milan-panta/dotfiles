@@ -1,15 +1,6 @@
 return {
-  "akinsho/toggleterm.nvim",
-  -- Unbind Ctrl backslash from vim-tmux-navigator before it's readded by toggleterm
-  cmd = "ToggleTerm",
-  keys = {
-    {
-      "\x1c",
-      "<cmd>ToggleTerm<CR>",
-      desc = "Open Toggle Term",
-    },
-  },
-  dependencies = {
+  -- Ensure tmux keybind is removed before toggleterm loads
+  {
     "christoomey/vim-tmux-navigator",
     event = "VeryLazy",
 
@@ -17,10 +8,21 @@ return {
       vim.keymap.del("n", "<C-\\>")
     end,
   },
-  config = function()
-    require("toggleterm").setup({
-      open_mapping = [[<c-\>]],
-      start_in_insert = true,
-    })
-  end,
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
+    keys = {
+      {
+        "\x1c",
+        "<cmd>ToggleTerm<CR>",
+        desc = "Open Toggle Term",
+      },
+    },
+    config = function()
+      require("toggleterm").setup({
+        open_mapping = [[<c-\>]],
+        start_in_insert = true,
+      })
+    end,
+  },
 }

@@ -15,7 +15,7 @@ return {
         "latexindent",
         "ruff",
       },
-      auto_update = true,
+      run_on_start = true,
     })
 
     -- formatting with conform
@@ -49,7 +49,6 @@ return {
         vim.cmd("w", { silent = true })
       end
     end, { desc = "Format file or range (in visual mode)" })
-
 
     -- linting with nvim-lint
     local lint = require("lint")

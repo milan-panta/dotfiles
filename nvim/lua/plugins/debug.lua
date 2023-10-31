@@ -9,7 +9,7 @@ return {
       desc = "Toggle breakpoint",
     },
     {
-      "<Leader>dB",
+      "<Leader>dc",
       function()
         require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
       end,

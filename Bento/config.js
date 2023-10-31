@@ -16,11 +16,11 @@ const CONFIG = {
   openInNewTab: false,
   twelveHourFormat: false,
 
-  // Greetings
-  greetingMorning: "Good Morning!",
-  greetingAfternoon: "Good Afternoon!",
-  greetingEvening: "Good Evening!",
-  greetingNight: "Go to Sleep!",
+  // // Greetings
+  // greetingMorning: "Good Morning!",
+  // greetingAfternoon: "Good Afternoon!",
+  // greetingEvening: "Good Evening!",
+  // greetingNight: "Go to Sleep!",
 
   // Layout
   bentoLayout: "bento", // 'bento', 'lists', 'buttons'

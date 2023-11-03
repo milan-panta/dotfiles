@@ -69,7 +69,7 @@ return {
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<C-j>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-k>"] = cmp.mapping.confirm({ noremap = true, select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       -- sources for autocompletion

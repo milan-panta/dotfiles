@@ -52,16 +52,16 @@ scrolling:
 
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Regular
   bold:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Bold
   italic:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Italic
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Bold Italic
   size: 17
 draw_bold_text_with_bright_colors: true
@@ -78,7 +78,6 @@ key_bindings:
   - { key: R, mods: Command, chars: "\x1b[114;9u" }
   - { key: S, mods: Command, chars: "\x1b[115;9u" }
   - { key: T, mods: Command, chars: "\x1b[116;9u" }
-  - { key: W, mods: Command, chars: "\x1b[119;9u]" }
   - { key: Backslash, mods: Control, chars: "\x1c" }
   - { key: Key0, mods: Command, chars: "\x1b[48;9u" }
   - { key: Key1, mods: Command, chars: "\x1b[49;9u" }

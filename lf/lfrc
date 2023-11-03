@@ -2,7 +2,8 @@
 
 set icons true
 set ignorecase true
-set previewer ~/.config/lf/pistol
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
 
 cmd mkdir ${{
   printf "Directory Name: "

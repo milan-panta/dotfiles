@@ -8,13 +8,11 @@ return {
     },
     {
       "debugloop/telescope-undo.nvim",
-      event = { "BufReadPost", "BufNewFile" },
     },
   },
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
-    telescope.load_extension("fzf")
     telescope.setup({
       defaults = {
         mappings = {
@@ -36,6 +34,7 @@ return {
         winblend = 0,
       },
     })
+    telescope.load_extension("fzf")
     telescope.load_extension("undo")
   end,
   cmd = {

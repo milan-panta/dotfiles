@@ -16,11 +16,11 @@ const CONFIG = {
   openInNewTab: false,
   twelveHourFormat: false,
 
-  // Greetings
-  greetingMorning: "Good Morning!",
-  greetingAfternoon: "Good Afternoon!",
-  greetingEvening: "Good Evening!",
-  greetingNight: "Go to Sleep!",
+  // // Greetings
+  // greetingMorning: "Good Morning!",
+  // greetingAfternoon: "Good Afternoon!",
+  // greetingEvening: "Good Evening!",
+  // greetingNight: "Go to Sleep!",
 
   // Layout
   bentoLayout: "bento", // 'bento', 'lists', 'buttons'
@@ -135,24 +135,24 @@ const CONFIG = {
   // First Links Container
   firstlistsContainer: [
     {
-      icon: "music",
+      icon: "laptop",
       id: "1",
       links: [
         {
-          name: "Inspirational",
-          link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          name: "Usaco",
+          link: "https://usaco.guide/general/intro-cp?lang=cpp",
         },
         {
-          name: "Classic",
-          link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          name: "Neetcode",
+          link: "https://neetcode.io/roadmap",
         },
         {
-          name: "Oldies",
-          link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          name: "Quercus",
+          link: "https://q.utoronto.ca/",
         },
         {
-          name: "Rock",
-          link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          name: "Clash",
+          link: "https://www.codingame.com/home",
         },
       ],
     },
@@ -161,20 +161,20 @@ const CONFIG = {
       id: "2",
       links: [
         {
-          name: "Linkedin",
-          link: "https://www.linkedin.com",
+          name: "PCRS",
+          link: "https://pcrs.teach.cs.toronto.edu/csc209-2023-09/content/quests",
         },
         {
-          name: "Dribbble",
-          link: "https://www.dribbble.com",
+          name: "246",
+          link: "https://ebookcentral-proquest-com.myaccess.library.utoronto.ca/lib/utoronto/reader.action?docID=5602529",
         },
         {
-          name: "Trello",
-          link: "https://www.trello.com",
+          name: "Internships",
+          link: "https://github.com/SimplifyJobs/Summer2024-Internships",
         },
         {
-          name: "Slack",
-          link: "https://www.slack.com",
+          name: "Canadian",
+          link: "https://github.com/jenndryden/Canadian-Tech-Internships-Summer-2024",
         },
       ],
     },

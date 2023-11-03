@@ -7,7 +7,6 @@ return {
   config = function()
     local db = require("dashboard")
     db.setup({
-      theme = "hyper",
       config = {
         week_header = {
           enable = true,
@@ -15,6 +14,7 @@ return {
         project = {
           enable = false,
         },
+        mru = { limit = 3 },
         footer = {},
         disable_move = true,
         shortcut = {

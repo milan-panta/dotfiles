@@ -1,14 +1,18 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  opts = function()
-    return {
-      options = {
-        disabled_filetypes = {
-          statusline = { "dashboard" },
-        },
+  opts = {
+    options = {
+      component_separators = "|",
+      section_separators = "",
+      globalstatus = true,
+      disabled_filetypes = {
+        statusline = { "dashboard" },
       },
-      extensions = { "neo-tree" },
-    }
-  end,
+    },
+    sections = {
+      lualine_x = { "filetype" },
+    },
+    extensions = { "neo-tree" },
+  },
 }

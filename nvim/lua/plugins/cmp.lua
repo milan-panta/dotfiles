@@ -4,42 +4,17 @@ return {
   dependencies = {
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-path", -- source for file system paths
-    "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-cmdline", -- commandline autocompletion
+    {
+      "L3MON4D3/LuaSnip",
+      build = "make install_jsregexp",
+    }, -- luasnip
     {
       "rafamadriz/friendly-snippets",
       config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
-    }, -- useful snippets
-    {
-      "L3MON4D3/LuaSnip",
-      build = "make install_jsregexp",
-      keys = {
-        {
-          "<tab>",
-          function()
-            return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-          end,
-          expr = true,
-          silent = true,
-          mode = "i",
-        },
-        {
-          "<tab>",
-          function()
-            require("luasnip").jump(1)
-          end,
-          mode = "s",
-        },
-        {
-          "<s-tab>",
-          function()
-            require("luasnip").jump(-1)
-          end,
-          mode = { "i", "s" },
-        },
-      },
-    }, -- snippet engine
+    }, -- community made snippets
     "saadparwaiz1/cmp_luasnip", -- for autocompletion
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
@@ -52,6 +27,13 @@ return {
       updateevents = "TextChangedI",
       enable_autosnippets = true,
     })
+
+    vim.cmd([[
+      imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+      inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+      snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+      snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+    ]])
 
     local lspkind = require("lspkind")
 
@@ -66,11 +48,9 @@ return {
       },
 
       mapping = cmp.mapping.preset.insert({
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<C-e>"] = cmp.mapping.abort(),
         ["<C-k>"] = cmp.mapping.confirm({ noremap = true, select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<tab>"] = cmp.config.disable,
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({

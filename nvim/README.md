@@ -9,4 +9,3 @@
 
 ## Note
 Enable option as alt on MacOS since some of the keymaps depend on it.
-Ensure nvim version is >= 0.9.4 as [ noice ](https://github.com/folke/noice.nvim) breaks on 0.9.2.

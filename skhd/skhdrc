@@ -1,8 +1,8 @@
 # shortcuts for opening apps
-cmd + shift - o : open -na /Applications/Alacritty.app
-cmd + shift - u : open -na /Applications/Firefox.app
-cmd + shift - c : open -na /Applications/GoogleCalendar.app
-
+shift + cmd - k : open -na /Applications/Alacritty.app
+shift + cmd - o : open -na /Applications/kitty.app
+shift + cmd - u : open -na /Applications/Firefox.app
+shift + cmd - c : open -na /Applications/GoogleCalendar.app
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service
@@ -14,8 +14,8 @@ alt - l : yabai -m window --focus east
 alt - j : yabai -m window --focus south
 
 # window oapcity
-alt + shift - t : yabai -m window --opacity 0.8
-alt + shift - o : yabai -m window --opacity 1.0
+alt + ctrl - t : yabai -m window --opacity 0.8
+alt + ctrl - o : yabai -m window --opacity 1.0
 
 # rotate layout clockwise
 alt - r : yabai -m space --rotate 270
@@ -29,8 +29,8 @@ alt - x : yabai -m space --mirror x-axis
 # toggle window float
 alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
-# toggle sticky
-alt - s : yabai -m window --toggle sticky
+# toggle sticky (pip)
+shift + alt - p : yabai -m window --toggle sticky
 
 # maximize window
 alt - m : yabai -m window --toggle zoom-fullscreen

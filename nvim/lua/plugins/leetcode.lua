@@ -11,33 +11,20 @@ return {
     -- optional
     "nvim-tree/nvim-web-devicons",
   },
-  opts = {
-    arg = "leetcode.nvim",
-    lang = "python",
-  },
-  keys = {
-    {
-      "<Leader>cr",
-      function()
-        vim.cmd("Leet console | Leet run")
-      end,
-      desc = "Leetcode run",
-      silent = true,
-    },
-    {
-      "<Leader>cs",
-      function()
-        vim.cmd("Leet console | Leet submit")
-      end,
-      desc = "Leetcode submit",
-      silent = true,
-    },
-    {
-      "<Leader>cc",
-      function()
-        vim.cmd("Leet console")
-      end,
-      desc = "Leetcode console",
-    },
-  },
+  config = function()
+    require("leetcode").setup({
+      arg = "leetcode.nvim",
+      lang = "python",
+    })
+    vim.diagnostic.disable()
+    vim.keymap.set("n", "<Leader>cr", function()
+      vim.cmd("Leet run")
+    end, { desc = "Leetcode run" })
+    vim.keymap.set("n", "<Leader>cs", function()
+      vim.cmd("Leet submit")
+    end, { desc = "Leetcode submit" })
+    vim.keymap.set("n", "<Leader>cc", function()
+      vim.cmd("Leet console")
+    end, { desc = "Leetcode console" })
+  end,
 }

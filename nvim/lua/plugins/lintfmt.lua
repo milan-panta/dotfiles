@@ -37,7 +37,7 @@ return {
 
     vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
       local filetype = vim.bo.filetype
-      vim.cmd("w", { silent = true })
+      vim.cmd("silent w")
       if filetype == "tex" then
         vim.cmd("!latexindent -w %", { silent = true })
       else

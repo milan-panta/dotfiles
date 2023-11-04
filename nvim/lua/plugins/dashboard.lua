@@ -14,6 +14,7 @@ return {
         project = {
           enable = false,
         },
+        packages = { enable = false },
         mru = { limit = 3 },
         footer = {},
         disable_move = true,
@@ -28,14 +29,21 @@ return {
           {
             icon = " ",
             desc = "Files",
-            group = "Function",
+            group = "String",
             action = "Telescope fd",
             key = "f",
           },
           {
+            icon = " ",
+            desc = "Create",
+            group = "Function",
+            action = "ene | startinsert",
+            key = "e",
+          },
+          {
             icon = " ",
             desc = "Config",
-            group = "Constant",
+            group = "WarningMsg",
             action = "Telescope fd cwd=~/.config/nvim/lua prompt_title=Config",
             key = "c",
           },
@@ -49,7 +57,7 @@ return {
           {
             icon = " ",
             desc = "Quit",
-            group = "String",
+            group = "Constant",
             action = "qa",
             key = "q",
           },

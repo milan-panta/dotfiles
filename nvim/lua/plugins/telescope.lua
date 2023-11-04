@@ -114,9 +114,9 @@ return {
     {
       "<Leader>fb",
       function()
-        require("telescope").buffers()
+        require("telescope.builtin").buffers()
       end,
-      desc = "Telescope Undo",
+      desc = "Telescope buffers",
     },
     {
       "<Leader>fc",

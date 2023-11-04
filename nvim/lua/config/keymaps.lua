@@ -1,7 +1,7 @@
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
-vim.keymap.set({ "n", "i" }, "<M-a>", "ggVG", { silent = true })
+vim.keymap.set({ "n" }, "<M-a>", "ggVG", { silent = true })
 vim.keymap.set({ "n", "i" }, "<M-s>", "<cmd>w<CR>", { silent = true })
 
 vim.keymap.set("n", "J", "mzJ`z")
@@ -22,11 +22,9 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<Leader>th", "<Cmd>TSBufToggle highlight<CR>", { silent = true, desc = "Toggle TS Highlight" })
 
 -- window management
-vim.keymap.set({ "n", "i" }, "<C-q>", "<cmd>q<CR>", { silent = true, desc = "Quit buffer" })
 vim.api.nvim_set_keymap("n", "<C-a>", "<C-w>>", { noremap = true, desc = "Increase width" })
 vim.api.nvim_set_keymap("n", "<C-f>", "<C-w><", { noremap = true, desc = "Decrease width" })
-vim.api.nvim_set_keymap("n", "<C-d>", "<C-w>+", { noremap = true, desc = "Increase height" })
-vim.api.nvim_set_keymap("n", "<C-s>", "<C-w>-", { noremap = true, desc = "Decrease height" })
+vim.api.nvim_set_keymap("n", "<C-s>", "<C-w>+", { noremap = true, desc = "Decrease height" })
 vim.api.nvim_set_keymap("n", "<C-w>-", "<C-w>s", { noremap = true, desc = "Create vertical split" })
 vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-w>v", { noremap = true, desc = "Create vertical split" })
 vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = "Max out split" })

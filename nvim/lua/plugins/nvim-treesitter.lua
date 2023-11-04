@@ -29,7 +29,6 @@ return {
         "css",
         "markdown",
         "markdown_inline",
-        "comment",
         "javascript",
         "json",
         "vim",

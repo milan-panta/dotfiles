@@ -1,4 +1,3 @@
-vim.opt.cursorline = true
 vim.opt.laststatus = 3 -- global statusline
 
 vim.opt.termguicolors = true
@@ -8,6 +7,7 @@ vim.opt.number = true
 vim.opt.confirm = true
 vim.opt.signcolumn = "yes"
 vim.opt.conceallevel = 3
+vim.opt.cursorline = true
 
 vim.opt.guicursor = ""
 vim.opt.splitright = true
@@ -22,6 +22,7 @@ vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.mouse=''
 
 vim.opt.undofile = true
 vim.opt.undolevels = 1000

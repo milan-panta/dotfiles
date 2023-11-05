@@ -8,6 +8,31 @@ return {
     {
       "L3MON4D3/LuaSnip",
       build = "make install_jsregexp",
+      keys = {
+        {
+          "<tab>",
+          function()
+            return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+          end,
+          expr = true,
+          silent = true,
+          mode = "i",
+        },
+        {
+          "<tab>",
+          function()
+            require("luasnip").jump(1)
+          end,
+          mode = "s",
+        },
+        {
+          "<s-tab>",
+          function()
+            require("luasnip").jump(-1)
+          end,
+          mode = { "i", "s" },
+        },
+      },
     }, -- luasnip
     {
       "rafamadriz/friendly-snippets",
@@ -28,13 +53,6 @@ return {
       enable_autosnippets = true,
     })
 
-    vim.cmd([[
-      imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
-      inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
-      snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
-      snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
-    ]])
-
     local lspkind = require("lspkind")
 
     cmp.setup({
@@ -50,7 +68,8 @@ return {
       mapping = cmp.mapping.preset.insert({
         ["<C-k>"] = cmp.mapping.confirm({ noremap = true, select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<tab>"] = cmp.config.disable,
+        ["<Tab>"] = nil,
+        ["<S-Tab>"] = nil,
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({

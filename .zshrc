@@ -18,19 +18,8 @@ eval "$(zoxide init zsh)"
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-h="NVIM_APPNAME=HNvim nvim"
 alias nvim-v="NVIM_APPNAME=NvimVscode nvim"
-alias nvimlite="NVIM_APPNAME=nvimlite nvim"
-
-function nvims() {
-  items=("default" "LazyVim" "HNvim" "nvimlite" "NvimVscode")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
+alias nvim-maria="NVIM_APPNAME=NvimMaria nvim"
+alias nvim-prime="NVIM_APPNAME=NvimPrime nvim"
 
 alias n="nvim"
 alias nlc="nvim leetcode.nvim"

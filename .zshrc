@@ -20,6 +20,7 @@ alias nvim-h="NVIM_APPNAME=HNvim nvim"
 alias nvim-v="NVIM_APPNAME=NvimVscode nvim"
 alias nvim-maria="NVIM_APPNAME=NvimMaria nvim"
 alias nvim-prime="NVIM_APPNAME=NvimPrime nvim"
+alias nvim-chad="NVIM_APPNAME=NvimChad nvim"
 
 alias n="nvim"
 alias nlc="nvim leetcode.nvim"

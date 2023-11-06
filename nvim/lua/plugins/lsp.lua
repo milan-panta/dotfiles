@@ -48,6 +48,10 @@ return {
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lspconfig = require("lspconfig")
 
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      border = "rounded",
+    })
+
     mason.setup({
       ui = {
         border = "rounded",

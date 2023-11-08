@@ -1,10 +1,24 @@
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
-vim.keymap.set({ "n" }, "<M-a>", "ggVG", { silent = true })
-vim.keymap.set({ "n", "i" }, "<M-s>", "<cmd>w<CR>", { silent = true })
+-- better insert mode navigation
+vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
+vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
+vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<C-Left>", { desc = "Move left" })
+vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<C-Right>", { desc = "Move right" })
 
+-- kitty maps Cmmd to M inside tmux sessions
+vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
+vim.keymap.set({ "n" }, "<M-s>", "<cmd>silent w<CR>")
+vim.keymap.set({ "i" }, "<M-s>", "<ESC><cmd>silent w<CR>a")
+
+-- maintain cursor position after joining
 vim.keymap.set("n", "J", "mzJ`z")
+
+vim.keymap.set("o", "ir", "i[")
+vim.keymap.set("o", "ar", "a[")
+vim.keymap.set("o", "ia", "i<")
+vim.keymap.set("o", "aa", "a<")
 
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")

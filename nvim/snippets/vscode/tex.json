@@ -1,0 +1,533 @@
+{
+  "begin": {
+    "prefix": [
+      "begin",
+      "\\begin"
+    ],
+    "body": [
+      "\\begin{$1}",
+      "\t$0",
+      "\\end{$1}"
+    ]
+  },
+  "document": {
+    "prefix": [
+      "document",
+      "\\document"
+    ],
+    "body": [
+      "\\documentclass[12pt]{article}\n",
+      "\\usepackage[margin=1in]{geometry}",
+      "\\usepackage{amssymb, amsmath, amsthm, amsfonts, mathtools, mathrsfs}",
+      "\\usepackage{listings}",
+      "\\usepackage{xcolor}",
+      "\\usepackage{graphicx}",
+      "\\usepackage{float}",
+      "\\usepackage{hyperref}",
+      "\\usepackage{pgfplots}",
+      "\\usepackage[shortlabels]{enumitem}",
+      "\\usepackage{bm}",
+      "\\usepackage{titling}",
+      "\\newtheorem{theorem}{Theorem}",
+      "\\newtheorem{definition}{Definition}",
+      "\\newtheorem{lemma}{Lemma}",
+      "\\newtheorem{sublemma}{Lemma}[lemma]",
+      "\\renewcommand\\thesubsection{\\alph{subsection})}",
+      "\\newcommand{\\subtitle}[1]{\\posttitle{\\par\\end{center}\\begin{center}\\large#1\\end{center}\\vskip0.5em}}",
+      "\\definecolor{codegreen}{rgb}{0,0.6,0}",
+      "\\definecolor{codegray}{rgb}{0.4,0.4,0.4}",
+      "\\definecolor{codepurple}{rgb}{0.58,0,0.82}",
+      "\\definecolor{backcolour}{rgb}{0.91,0.91,0.91}",
+      "\\lstdefinestyle{mystyle}{backgroundcolor=\\color{backcolour}, commentstyle=\\color{codegreen}, keywordstyle=\\color{magenta}, numberstyle=\\footnotesize\\color{codegray}, stringstyle=\\color{codepurple}, basicstyle=\\ttfamily\\fontsize{12}{12}, breakatwhitespace=false, breaklines=true, captionpos=b, keepspaces=true, numbers=left, numbersep=5pt, showspaces=false, showstringspaces=false, showtabs=false, tabsize=2}",
+      "\\lstset{style=mystyle}",
+      "\\setlength\\parindent{0pt}\n",
+      "\\pgfplotsset{compat=1.18}",
+      "\\newcommand{\\code}[1]{\\colorbox{backcolour}{\\texttt{#1}}}",
+      "\n\\begin{document}\n",
+      "\\title{$1}",
+      "\\author{Milan Panta}",
+      "\\date{\\today}",
+      "\\maketitle",
+      "\\newpage\n",
+      "$0\n",
+      "\\end{document}"
+    ]
+  },
+  "pset": {
+    "prefix": [
+      "pset"
+    ],
+    "body": [
+      "\\documentclass[12pt]{article}\n",
+      "\\usepackage[margin=0.5in]{geometry}",
+      "\\usepackage{amssymb}",
+      "\\usepackage{pgfplots}",
+      "\\usepackage{enumitem}",
+      "\\usepackage{amsmath}",
+      "\\usepackage{amsthm}",
+      "\\usepackage{charter}",
+      "\\usepackage{bm}",
+      "\\usepackage{physics}",
+      "\\usepackage{parskip}",
+      "\\usepackage[charter,cal=cmcal]{mathdesign}",
+      "\\newtheorem{theorem}{Theorem}",
+      "\\newtheorem{definition}{Definition}",
+      "\\newcommand{\\inn}[1]{\\langle #1 \\rangle}",
+      "\\newcommand{\\floor}[1]{\\lfloor #1 \\rfloor}",
+      "\\setlength\\parindent{0pt}\n",
+      "\\newcommand{\\claim}{\\textit{Claim. }}",
+      "\n\\begin{document}\n\n$0\n",
+      "\\end{document}"
+    ]
+  },
+  "lecture": {
+    "prefix": [
+      "lecture"
+    ],
+    "body": [
+      "\\documentclass[12pt]{article}\n",
+      "\\usepackage[margin=0.5in]{geometry}",
+      "\\usepackage{amssymb}",
+      "\\usepackage{pgfplots}",
+      "\\usepackage{enumitem}",
+      "\\usepackage{amsmath}",
+      "\\usepackage{amsthm}",
+      "\\usepackage{charter}",
+      "\\usepackage[charter,cal=cmcal]{mathdesign}",
+      "\\newtheorem{theorem}{Theorem}",
+      "\\newtheorem{definition}{Definition}",
+      "\\newcommand{\\inn}[1]{\\langle #1 \\rangle}",
+      "\\newcommand{\\floor}[1]{\\lfloor #1 \\rfloor}",
+      "\\setlength\\parindent{0pt}\n",
+      "\\newcommand{\\claim}{\\textit{Claim. }}",
+      "\n\\begin{document}\n",
+      "\\title{$1}",
+      "\\author{Milan Panta}",
+      "\\date{\\today}",
+      "\\maketitle\n\n$0\n",
+      "\\end{document}"
+    ]
+  },
+  "title": {
+    "prefix": [
+      "title"
+    ],
+    "body": [
+      "\\title{$1}",
+      "\\author{Milan Panta}",
+      "\\date{\\today}",
+      "\\maketitle"
+    ]
+  },
+  "displaymath": {
+    "prefix": [
+      "dm"
+    ],
+    "body": [
+      "\\[",
+      "\t$0",
+      "\\]"
+    ]
+  },
+  "inlinemath": {
+    "prefix": [
+      "im"
+    ],
+    "body": [
+      "\\($0\\)"
+    ]
+  },
+  "fraction": {
+    "prefix": [
+      "frac",
+      "fr"
+    ],
+    "body": [
+      "\\frac{$1}{$0}"
+    ]
+  },
+  "multilinecode": {
+    "prefix": [
+      "dc"
+    ],
+    "body": [
+      "\\begin{lstlisting}[language=$1]",
+      "$0",
+      "\\end{lstlisting}"
+    ]
+  },
+  "python-multilinecode": {
+    "prefix": [
+      "dcpy",
+      "py"
+    ],
+    "body": [
+      "\\begin{lstlisting}[language=Python]",
+      "$0",
+      "\\end{lstlisting}"
+    ]
+  },
+  "inlinecode": {
+    "prefix": [
+      "mc"
+    ],
+    "body": [
+      "\\code{$0}"
+    ]
+  },
+  "math_newline": {
+    "prefix": [
+      "\\\\"
+    ],
+    "body": [
+      "\\\\\\ \n"
+    ]
+  },
+  "text": {
+    "prefix": [
+      "text",
+      "txt"
+    ],
+    "body": [
+      "\\text{$0}"
+    ]
+  },
+  "inkscape": {
+    "prefix": [
+      "inkscape"
+    ],
+    "body": [
+      "\\begin{figure}[H]",
+      "\t\\centering",
+      "\t\\fontsize{16pt}{20pt}\\selectfont",
+      "\t\\def\\svgwidth{2in}",
+      "\t\\input{$1.pdf_tex}",
+      "\t\\caption{$2}",
+      "\\end{figure}"
+    ]
+  },
+  "emumerate": {
+    "prefix": "enumerate",
+    "body": [
+      "\\begin{enumerate}[a)]",
+      "    \\item $0",
+      "\\end{enumerate}"
+    ],
+    "description": "emumerate"
+  },
+  "implies_arrow": {
+    "prefix": [
+      "implies"
+    ],
+    "body": [
+      "\\Rightarrow "
+    ]
+  },
+  "set_brackets": {
+    "prefix": [
+      "set"
+    ],
+    "body": [
+      "\\{$0\\\\}"
+    ]
+  },
+  "pgfplots_axis": {
+    "prefix": [
+      "axis"
+    ],
+    "body": [
+      "\\begin{tikzpicture}",
+      "\\begin{axis}",
+      "\t[",
+      "\t$1",
+      "\t]",
+      "\t$0",
+      "\\end{axis}",
+      "\\end{tikzpicture}"
+    ]
+  },
+  "pgfplots_plot": {
+    "prefix": [
+      "plot"
+    ],
+    "body": [
+      "\\addplot",
+      "\t[",
+      "\t$1",
+      "\t]",
+      "\t{$0};"
+    ]
+  },
+  "cdot": {
+    "prefix": [
+      "*",
+      "dot"
+    ],
+    "body": [
+      "\\cdot "
+    ]
+  },
+  "table-2col": {
+    "prefix": [
+      "table2",
+      "table"
+    ],
+    "body": [
+      "\\begin{center}",
+      "\t\\begin{tabular}{ c c }",
+      "\t$0 & \\\\\\",
+      "\t\\end{tabular}",
+      "\\end{center}"
+    ]
+  },
+  "new-snippet": {
+    "prefix": [
+      "snippet"
+    ],
+    "body": [
+      "\"$1\": {",
+      "\t\"prefix\": [\"$2\"],",
+      "\t\"body\": [",
+      "\t\t\"$3\",",
+      "\t],",
+      "},"
+    ]
+  },
+  "newparagraph": {
+    "prefix": [
+      "par"
+    ],
+    "body": [
+      "\\paragraph*{}\n"
+    ]
+  },
+  "sin": {
+    "prefix": [
+      "sin"
+    ],
+    "body": [
+      "\\sin{$1}$0"
+    ]
+  },
+  "cos": {
+    "prefix": [
+      "cos"
+    ],
+    "body": [
+      "\\cos{$1}$0"
+    ]
+  },
+  "real": {
+    "prefix": [
+      "\\R"
+    ],
+    "body": [
+      "\\mathbb{R}"
+    ]
+  },
+  "field": {
+    "prefix": [
+      "\\F"
+    ],
+    "body": [
+      "\\mathbb{F}"
+    ]
+  },
+  "integers": {
+    "prefix": [
+      "\\Z"
+    ],
+    "body": [
+      "\\mathbb{Z}"
+    ]
+  },
+  "nats": {
+    "prefix": [
+      "\\N"
+    ],
+    "body": [
+      "\\mathbb{N}"
+    ]
+  },
+  "complex": {
+    "prefix": [
+      "\\C"
+    ],
+    "body": [
+      "\\mathbb{C}"
+    ]
+  },
+  "rationals": {
+    "prefix": [
+      "\\Q"
+    ],
+    "body": [
+      "\\mathbb{Q}"
+    ]
+  },
+  "bb": {
+    "prefix": [
+      "bb"
+    ],
+    "body": [
+      "\\mathbb "
+    ]
+  },
+  "cal": {
+    "prefix": [
+      "cal"
+    ],
+    "body": [
+      "\\mathcal{$1}$0"
+    ]
+  },
+  "tag": {
+    "prefix": [
+      "tag"
+    ],
+    "body": [
+      "\\tag*{$1}$0"
+    ]
+  },
+  "rm": {
+    "prefix": [
+      "rm"
+    ],
+    "body": [
+      "\\textrm{$1}$0"
+    ]
+  },
+  "innerproduct": {
+    "prefix": [
+      "inn"
+    ],
+    "body": [
+      "\\inn{$1}$0"
+    ]
+  },
+  "overline": {
+    "prefix": [
+      "ol"
+    ],
+    "body": [
+      "\\overline{$1}$0"
+    ]
+  },
+  "left right brackets": {
+    "prefix": [
+      "bk"
+    ],
+    "body": [
+      "\\left( $0 \\right)"
+    ]
+  },
+  "left right square brackets": {
+    "prefix": [
+      "sqbk"
+    ],
+    "body": [
+      "\\left[ $0 \\right]"
+    ]
+  },
+  "bold math": {
+    "prefix": [
+      "bm"
+    ],
+    "body": [
+      "\\bm{$0}"
+    ]
+  },
+  "image": {
+    "prefix": [
+      "img"
+    ],
+    "body": [
+      "\\begin{figure}[h!]",
+      "\t\\begin{center}",
+      "\t\\includegraphics[width=25em]{$1}",
+      "\t\\end{center}",
+      "\\end{figure}",
+      "$2"
+    ]
+  },
+  "absolutevalue": {
+    "prefix": [
+      "abs"
+    ],
+    "body": [
+      "\\left|$0\\right|"
+    ]
+  },
+  "where with spaces": {
+    "prefix": [
+      "where"
+    ],
+    "body": [
+      "\\text{ } | \\text{ } $0"
+    ]
+  },
+  "space in text": {
+    "prefix": [
+      "space"
+    ],
+    "body": [
+      "\\text{ } $0"
+    ]
+  },
+  "and symbol": {
+    "prefix": [
+      "andd"
+    ],
+    "body": [
+      "\\land "
+    ]
+  },
+  "or symbol": {
+    "prefix": [
+      "orr"
+    ],
+    "body": [
+      "\\lor "
+    ]
+  },
+  "union": {
+    "prefix": [
+      "union"
+    ],
+    "body": [
+      "\\cup "
+    ]
+  },
+  "intersection": {
+    "prefix": [
+      "intersect"
+    ],
+    "body": [
+      "\\cap "
+    ]
+  },
+  "biconditional": {
+    "prefix": [
+      "iff"
+    ],
+    "body": [
+      "\\Leftrightarrow "
+    ]
+  },
+  "negation": {
+    "prefix": [
+      "nott"
+    ],
+    "body": [
+      "\\neg "
+    ]
+  },
+  "divides": {
+    "prefix": [
+      "div"
+    ],
+    "body": [
+      "\\vert "
+    ]
+  }
+}

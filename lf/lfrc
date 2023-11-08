@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set icons true
+set hidden true
 set ignorecase true
 set previewer ~/.config/lf/lf_kitty_preview
 set cleaner ~/.config/lf/lf_kitty_clean

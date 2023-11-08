@@ -10,6 +10,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/opt/homebrew/bin:$PATH"
 export DYLD_LIBRARY_PATH=/opt/homebrew/lib/
 export PATH=/Users/milan/.cargo/bin:$PATH
+export DBUS_SESSION_BUS_ADDRESS='unix:path='$DBUS_LAUNCHD_SESSION_BUS_SOCKET
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh)"
@@ -18,19 +19,9 @@ eval "$(zoxide init zsh)"
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-h="NVIM_APPNAME=HNvim nvim"
 alias nvim-v="NVIM_APPNAME=NvimVscode nvim"
-alias nvimlite="NVIM_APPNAME=nvimlite nvim"
-
-function nvims() {
-  items=("default" "LazyVim" "HNvim" "nvimlite" "NvimVscode")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
+alias nvim-maria="NVIM_APPNAME=NvimMaria nvim"
+alias nvim-prime="NVIM_APPNAME=NvimPrime nvim"
+alias nvim-chad="NVIM_APPNAME=NvimChad nvim"
 
 alias n="nvim"
 alias nlc="nvim leetcode.nvim"
@@ -40,5 +31,7 @@ alias l="lf"
 alias gc="git checkout"
 
 setopt HIST_FIND_NO_DUPS
-export HISTFILESIZE=10000
+setopt HIST_IGNORE_ALL_DUPS
+
 export HISTSIZE=10000
+export SAVEHIST=10000

@@ -27,14 +27,12 @@ return {
       keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
       opts.desc = "Go to references"
       keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-      opts.desc = "Diagnostics open float"
-      keymap.set("n", "gl", vim.diagnostic.open_float, opts)
       opts.desc = "Go to next diagnostic"
       keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
       opts.desc = "Go to previous diagnostic"
       keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
       opts.desc = "Lsp hover"
-      keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
+      keymap.set("n", "<S-k>", vim.lsp.buf.hover, opts)
       opts.desc = "Code actions"
       keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, opts)
       opts.desc = "Rename"
@@ -49,6 +47,10 @@ return {
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lspconfig = require("lspconfig")
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      border = "rounded",
+    })
 
     mason.setup({
       ui = {
@@ -77,9 +79,6 @@ return {
         "clangd",
         -- python
         "pyright",
-        -- rust
-        "rust_analyzer",
-        "texlab",
       },
     })
 
@@ -89,9 +88,7 @@ return {
       "tsserver",
       "jsonls",
       "eslint",
-      "texlab",
       "cssls",
-      "rust_analyzer",
       "pyright",
     }
 

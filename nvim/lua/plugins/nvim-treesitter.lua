@@ -37,7 +37,6 @@ return {
         "vimdoc",
         "bash",
         "cpp",
-        "rust",
         "regex",
         "toml",
         "lua",

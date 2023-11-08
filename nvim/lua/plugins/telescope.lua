@@ -6,13 +6,13 @@ return {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
     },
-    {
-      "debugloop/telescope-undo.nvim",
-    },
+    "debugloop/telescope-undo.nvim",
   },
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
+    telescope.load_extension("fzf")
+    telescope.load_extension("undo")
     telescope.setup({
       defaults = {
         mappings = {
@@ -34,8 +34,6 @@ return {
         winblend = 0,
       },
     })
-    telescope.load_extension("fzf")
-    telescope.load_extension("undo")
   end,
   cmd = {
     "Telescope",

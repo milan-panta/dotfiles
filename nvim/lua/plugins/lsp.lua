@@ -81,7 +81,6 @@ return {
         "pyright",
         -- rust
         "rust_analyzer",
-        "texlab",
       },
     })
 
@@ -91,7 +90,6 @@ return {
       "tsserver",
       "jsonls",
       "eslint",
-      "texlab",
       "cssls",
       "rust_analyzer",
       "pyright",

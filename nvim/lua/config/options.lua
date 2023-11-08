@@ -5,7 +5,6 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.confirm = true
 vim.opt.signcolumn = "yes"
-vim.opt.conceallevel = 3
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.number = true

@@ -13,17 +13,6 @@ return {
     },
   },
 
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   event = { "BufReadPost", "BufNewFile" },
-  --   opts = {
-  --     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-  --     linters_by_ft = {
-  --       python = { "ruff" },
-  --     },
-  --   },
-  -- },
-
   {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
@@ -40,20 +29,6 @@ return {
     end,
   },
 
-  --   config = function()
-  --     local lint = require("lint")
-  --     lint.events = { "BufWritePost", "BufReadPost", "InsertLeave" }
-  --     lint.linters_by_ft = {
-  --       python = { "ruff" },
-  --     }
-  --
-  --     -- vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged", "TextChangedI" }, {
-  --     --   callback = function()
-  --     --     require("lint").try_lint()
-  --     --   end,
-  --     -- })
-  --   end,
-
   {
     "stevearc/conform.nvim",
     event = { "BufReadPost", "BufNewFile" },
@@ -65,7 +40,7 @@ return {
           c = { "clang_format" },
           cpp = { "clang_format" },
           lua = { "stylua" },
-          python = { "ruff_fix", "ruff_format" },
+          python = { "ruff_format", "ruff_fix" },
           tex = { "latexindent" },
           markdown = { "prettierd" },
           javascript = { "prettierd" },
@@ -75,19 +50,28 @@ return {
         },
       })
       vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
-        local filetype = vim.bo.filetype
-        if filetype == "tex" then
-          vim.cmd("silent w")
-          vim.cmd("!latexindent -w %")
-        else
-          conform.format({
-            lsp_fallback = true,
-            async = false,
-            timeout_ms = 1000,
-          })
-          vim.cmd("w")
-        end
-      end, { silent = true, desc = "Format file or range (in visual mode)" })
+        conform.format({
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 1000,
+        })
+        vim.cmd("w")
+        -- end
+      end, { desc = "Format file or range (in visual mode)" })
     end,
   },
 }
+-- vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
+--   local filetype = vim.bo.filetype
+--   -- if filetype == "tex" then
+--   --   vim.cmd("silent w")
+--   --   vim.cmd("!latexindent -w %")
+--   -- else
+--   conform.format({
+--     lsp_fallback = true,
+--     async = false,
+--     timeout_ms = 1000,
+--   })
+--   vim.cmd("w")
+--   -- end
+-- end, { silent = true, desc = "Format file or range (in visual mode)" })

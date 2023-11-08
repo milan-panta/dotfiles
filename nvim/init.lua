@@ -10,7 +10,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("lazy").setup({
-  ui = { border = "rounded" },
   spec = {
     { import = "plugins" },
   },

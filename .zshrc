@@ -10,6 +10,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/opt/homebrew/bin:$PATH"
 export DYLD_LIBRARY_PATH=/opt/homebrew/lib/
 export PATH=/Users/milan/.cargo/bin:$PATH
+export DBUS_SESSION_BUS_ADDRESS='unix:path='$DBUS_LAUNCHD_SESSION_BUS_SOCKET
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh)"
@@ -30,5 +31,7 @@ alias l="lf"
 alias gc="git checkout"
 
 setopt HIST_FIND_NO_DUPS
-export HISTFILESIZE=10000
+setopt HIST_IGNORE_ALL_DUPS
+
 export HISTSIZE=10000
+export SAVEHIST=10000

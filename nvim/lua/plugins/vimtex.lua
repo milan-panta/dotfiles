@@ -12,5 +12,14 @@ return {
       'Package siunitx Warning: Detected the "physics" package:',
       "Package hyperref Warning: Token not allowed in a PDF string",
     }
+    vim.g.vimtex_compiler_latexmk = {
+      options = {
+        '-verbose',
+        '-file-line-error',
+        '-synctex=1',
+        '-interaction=nonstopmode',
+        '--shell-escape'
+      }
+    }
   end,
 }

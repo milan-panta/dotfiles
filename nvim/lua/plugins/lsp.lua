@@ -79,8 +79,6 @@ return {
         "clangd",
         -- python
         "pyright",
-        -- rust
-        "rust_analyzer",
       },
     })
 
@@ -91,7 +89,6 @@ return {
       "jsonls",
       "eslint",
       "cssls",
-      "rust_analyzer",
       "pyright",
     }
 

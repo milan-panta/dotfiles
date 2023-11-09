@@ -75,6 +75,13 @@ return {
       desc = "Telescope diagnostics",
     },
     {
+      "<Leader>fl",
+      function()
+        require("telescope.builtin").lsp_document_symbols()
+      end,
+      desc = "Telescope document symbols",
+    },
+    {
       "<Leader>fr",
       function()
         require("telescope.builtin").oldfiles()

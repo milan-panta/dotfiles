@@ -30,10 +30,6 @@ return {
     },
     {
       "mfussenegger/nvim-dap-python",
-      dependencies = {
-        "mfussenegger/nvim-dap",
-        "rcarriga/nvim-dap-ui",
-      },
       config = function()
         local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
         require("dap-python").setup(path)
@@ -41,6 +37,10 @@ return {
     },
     {
       "jay-babu/mason-nvim-dap.nvim",
+    },
+    {
+      "LiadOz/nvim-dap-repl-highlights",
+      opts = {},
     },
     {
       "theHamsta/nvim-dap-virtual-text",
@@ -56,7 +56,9 @@ return {
     -- debugging
     require("mason-nvim-dap").setup({
       handlers = {},
-      ensure_installed = { "python", "codelldb" },
+      ensure_installed = { --[[ "python", ]]
+        "codelldb",
+      },
       automatic_installation = true,
     })
     vim.keymap.set("n", "<F5>", function()

@@ -112,7 +112,7 @@ return {
     {
       "<Leader>U",
       function()
-        require("telescope").extensions.undo.undo()
+        vim.cmd("Telescope undo")
       end,
       desc = "Telescope Undo",
     },

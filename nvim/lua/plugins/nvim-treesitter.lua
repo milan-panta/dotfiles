@@ -4,6 +4,7 @@ return {
   build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
+    "LiadOz/nvim-dap-repl-highlights",
   },
   config = function()
     -- import nvim-treesitter plugin
@@ -34,6 +35,7 @@ return {
         "vim",
         "latex",
         "typescript",
+        "dap_repl",
         "vimdoc",
         "bash",
         "cpp",

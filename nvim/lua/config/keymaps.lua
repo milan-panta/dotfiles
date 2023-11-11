@@ -30,6 +30,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { silent = true, desc = "Clear high
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+-- Fix navigation for line wraps
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 -- For Latex
 vim.keymap.set("n", "<Leader>th", "<Cmd>TSBufToggle highlight<CR>", { silent = true, desc = "Toggle TS Highlight" })
 

@@ -13,6 +13,7 @@ return {
       },
     },
   },
+
   config = function()
     -- declare variable
     local mason = require("mason")

@@ -14,7 +14,7 @@ return {
   config = function()
     require("leetcode").setup({
       arg = "leetcode.nvim",
-      lang = "python",
+      lang = "python3",
     })
     vim.diagnostic.disable()
     vim.keymap.set("n", "<Leader>cr", function()

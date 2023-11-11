@@ -2,23 +2,25 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    { "folke/neodev.nvim", opts = {} },
+    "hrsh7th/cmp-nvim-lsp",
     {
-      "williamboman/mason.nvim",
-    },
-    {
-      "williamboman/mason-lspconfig.nvim",
-    },
-    {
-      "hrsh7th/cmp-nvim-lsp",
+      "ray-x/lsp_signature.nvim",
+      opts = {
+        hint_enable = false,
+      },
     },
   },
+
   config = function()
     -- declare variable
     local mason = require("mason")
     local masonLspConfig = require("mason-lspconfig")
     local keymap = vim.keymap
 
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       local opts = { noremap = true, silent = true }
       opts.buffer = bufnr
       opts.desc = "Go to declaration"
@@ -41,14 +43,16 @@ return {
       keymap.set("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
       opts.desc = "Toggle Inlay Hints"
       keymap.set("n", "<Leader>ti", function()
-        vim.lsp.inlay_hint(0, nil)
+        vim.lsp.inlay_hint(bufnr, nil)
       end, opts)
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lspconfig = require("lspconfig")
+    local winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None"
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      winhighlight = winhighlight,
       border = "rounded",
     })
 
@@ -79,6 +83,8 @@ return {
         "clangd",
         -- python
         "pyright",
+        -- rust
+        "rust_analyzer",
       },
     })
 
@@ -90,6 +96,7 @@ return {
       "eslint",
       "cssls",
       "pyright",
+      "rust_analyzer",
     }
 
     -- configure with default lsp settings
@@ -105,9 +112,13 @@ return {
       capabilities = capabilities,
       settings = {
         Lua = {
+          completion = {
+            callSnippet = "Replace",
+          },
           diagnostics = {
             globals = { "vim", "bufnr" },
           },
+          hint = { enable = true },
         },
       },
       on_attach = on_attach,

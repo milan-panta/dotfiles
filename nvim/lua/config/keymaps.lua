@@ -4,8 +4,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 -- better insert mode navigation
 vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
 vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
-vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<C-Left>", { desc = "Move left" })
-vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<C-Right>", { desc = "Move right" })
+vim.keymap.set({ "i", "s", "c" }, "<C-h>", "Left>", { desc = "Move left" })
+vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
 
 -- kitty maps Cmmd to M inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
@@ -17,8 +17,6 @@ vim.keymap.set("n", "J", "mzJ`z")
 
 vim.keymap.set("o", "ir", "i[")
 vim.keymap.set("o", "ar", "a[")
-vim.keymap.set("o", "ia", "i<")
-vim.keymap.set("o", "aa", "a<")
 
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")
@@ -31,6 +29,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { silent = true, desc = "Clear high
 -- Back to back indents
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+
+-- Fix navigation for line wraps
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- For Latex
 vim.keymap.set("n", "<Leader>th", "<Cmd>TSBufToggle highlight<CR>", { silent = true, desc = "Toggle TS Highlight" })

@@ -4,11 +4,8 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       ensure_installed = {
-        "stylua",
-        "clang-format",
         "prettierd",
-        "latexindent",
-        "ruff",
+        "clang-format",
       },
     },
   },
@@ -61,17 +58,3 @@ return {
     end,
   },
 }
--- vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
---   local filetype = vim.bo.filetype
---   -- if filetype == "tex" then
---   --   vim.cmd("silent w")
---   --   vim.cmd("!latexindent -w %")
---   -- else
---   conform.format({
---     lsp_fallback = true,
---     async = false,
---     timeout_ms = 1000,
---   })
---   vim.cmd("w")
---   -- end
--- end, { silent = true, desc = "Format file or range (in visual mode)" })

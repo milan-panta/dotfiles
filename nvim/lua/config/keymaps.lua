@@ -4,7 +4,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 -- better insert mode navigation
 vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
 vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
-vim.keymap.set({ "i", "s", "c" }, "<C-h>", "Left>", { desc = "Move left" })
+vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
 vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
 
 -- kitty maps Cmmd to M inside tmux sessions
@@ -50,21 +50,24 @@ function RunFile(dir)
   vim.cmd("silent :w")
   local filetype = vim.bo.filetype
   if filetype == "c" then
-    vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall % -o %< && ./%< ")
+    vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall % -o %< && ./%<\ni")
+    return
+  elseif filetype == "cpp" then
+    vim.fn.feedkeys(":" .. dir .. " | term g++ -Wall % -o %< && ./%<\ni")
     return
   end
   vim.cmd(dir)
+  vim.fn.feedkeys(":term ")
   if filetype == "python" then
-    vim.cmd("term python3 -u % ")
-  elseif filetype == "cpp" then
-    vim.cmd("term g++ % -o %< && ./%< ")
+    vim.fn.feedkeys("python3 -u %")
   elseif filetype == "rust" then
-    vim.cmd("term cargo run")
+    vim.fn.feedkeys("cargo run")
   elseif filetype == "javascript" then
-    vim.cmd("term node %")
+    vim.fn.feedkeys("node %")
   else
     vim.api.nvim_out_write("Filetype " .. filetype .. " is not supported\n")
   end
+  vim.fn.feedkeys(" \ni")
 end
 
 -- code running

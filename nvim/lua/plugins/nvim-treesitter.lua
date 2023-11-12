@@ -27,6 +27,7 @@ return {
       -- ensure these language parsers are installed
       ensure_installed = {
         "python",
+        "rust",
         "css",
         "markdown",
         "markdown_inline",

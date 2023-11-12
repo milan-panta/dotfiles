@@ -6,8 +6,6 @@ return {
     },
     build = "make install_jsregexp",
     config = function()
-      require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets/vscode" })
-
       local luasnip = require("luasnip")
       luasnip.setup({
         updateevents = "TextChangedI",
@@ -57,8 +55,9 @@ return {
     },
 
     config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets/vscode" })
       local cmp = require("cmp")
-
       local lspkind = require("lspkind")
       local winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None"
 

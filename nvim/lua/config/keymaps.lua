@@ -17,6 +17,8 @@ vim.keymap.set("n", "J", "mzJ`z")
 
 vim.keymap.set("o", "ir", "i[")
 vim.keymap.set("o", "ar", "a[")
+vim.keymap.set("o", "iq", 'i"')
+vim.keymap.set("o", "aq", 'a"')
 
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")
@@ -30,12 +32,8 @@ vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { silent = true, desc = "Clear high
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Fix navigation for line wraps
-vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-
--- For Latex
-vim.keymap.set("n", "<Leader>th", "<Cmd>TSBufToggle highlight<CR>", { silent = true, desc = "Toggle TS Highlight" })
+-- Neorg shortcuts
+vim.keymap.set("n", "<Leader>vpp", "<CMD>Neorg index<CR>", { desc = "Open default neorg index" })
 
 -- window management
 vim.api.nvim_set_keymap("n", "<C-a>", "<C-w>>", { noremap = true, desc = "Increase width" })
@@ -73,8 +71,7 @@ end
 -- code running
 vim.keymap.set("n", "<leader>rv", function()
   RunFile("vsplit")
-end, { desc = "Save and run vertically", silent = true })
+end, { desc = "Run vertically", silent = true })
 vim.keymap.set("n", "<leader>rh", function()
   RunFile("split")
-end, { desc = "Save and run horizontally", silent = true })
-vim.keymap.set("n", "<Leader>rz", "<Cmd>!zathura %<.pdf & disown<CR>", { silent = true, desc = "Open pdf in zathura" })
+end, { desc = "Run horizontally", silent = true })

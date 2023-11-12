@@ -6,12 +6,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     { "folke/neodev.nvim", opts = {} },
     "hrsh7th/cmp-nvim-lsp",
-    {
-      "ray-x/lsp_signature.nvim",
-      opts = {
-        hint_enable = false,
-      },
-    },
   },
 
   config = function()
@@ -20,7 +14,7 @@ return {
     local masonLspConfig = require("mason-lspconfig")
     local keymap = vim.keymap
 
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
       local opts = { noremap = true, silent = true }
       opts.buffer = bufnr
       opts.desc = "Go to declaration"
@@ -79,12 +73,8 @@ return {
         "cssls",
         "html",
         "jsonls",
-        -- c/cpp
-        "clangd",
         -- python
         "pyright",
-        -- rust
-        "rust_analyzer",
       },
     })
 

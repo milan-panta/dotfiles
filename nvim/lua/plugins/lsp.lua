@@ -6,12 +6,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     { "folke/neodev.nvim", opts = {} },
     "hrsh7th/cmp-nvim-lsp",
-    {
-      "ray-x/lsp_signature.nvim",
-      opts = {
-        hint_enable = false,
-      },
-    },
   },
 
   config = function()
@@ -20,7 +14,7 @@ return {
     local masonLspConfig = require("mason-lspconfig")
     local keymap = vim.keymap
 
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
       local opts = { noremap = true, silent = true }
       opts.buffer = bufnr
       opts.desc = "Go to declaration"
@@ -49,12 +43,12 @@ return {
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lspconfig = require("lspconfig")
-    local winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None"
+    -- local winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None"
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      winhighlight = winhighlight,
-      border = "rounded",
-    })
+    -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    --   winhighlight = winhighlight,
+    --   border = "rounded",
+    -- })
 
     mason.setup({
       ui = {
@@ -79,12 +73,8 @@ return {
         "cssls",
         "html",
         "jsonls",
-        -- c/cpp
-        "clangd",
         -- python
         "pyright",
-        -- rust
-        "rust_analyzer",
       },
     })
 

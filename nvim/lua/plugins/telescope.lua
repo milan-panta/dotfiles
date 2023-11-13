@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    { "nvim-lua/plenary.nvim" },
+    "nvim-lua/plenary.nvim",
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
@@ -49,9 +49,9 @@ return {
     {
       "<Leader>fF",
       function()
-        require("telescope.builtin").git_files()
+        vim.cmd("Telescope find_files cwd=" .. vim.fn.expand('%:h'))
       end,
-      desc = "Telescope find Git files",
+      desc = "Telescope find files in cwd",
     },
     {
       "<Leader>fg",
@@ -112,7 +112,7 @@ return {
     {
       "<Leader>U",
       function()
-        require("telescope").extensions.undo.undo()
+        vim.cmd("Telescope undo")
       end,
       desc = "Telescope Undo",
     },

@@ -23,7 +23,7 @@ const CONFIG = {
   // greetingNight: "Go to Sleep!",
 
   // Layout
-  bentoLayout: "bento", // 'bento', 'lists', 'buttons'
+  bentoLayout: "lists", // 'bento', 'lists', 'buttons'
 
   // Weather
   weatherKey: "1b678a4113498d4b69e2b4934e786890", // Write here your API Key
@@ -157,7 +157,7 @@ const CONFIG = {
       ],
     },
     {
-      icon: "coffee",
+      icon: "github",
       id: "2",
       links: [
         {
@@ -187,42 +187,42 @@ const CONFIG = {
       id: "1",
       links: [
         {
-          name: "Spotify",
-          link: "https://www.spotify.com",
+          name: "Usaco",
+          link: "https://usaco.guide/general/intro-cp?lang=cpp",
         },
         {
-          name: "Reddit",
-          link: "https://www.reddit.com",
+          name: "Neetcode",
+          link: "https://neetcode.io/roadmap",
         },
         {
-          name: "Hashnode",
-          link: "https://www.hashnode.com",
+          name: "Quercus",
+          link: "https://q.utoronto.ca/",
         },
         {
-          name: "Pocket",
-          link: "https://www.pocket.com",
+          name: "Clash",
+          link: "https://www.codingame.com/home",
         },
       ],
     },
     {
-      icon: "github",
+      icon: "coffee",
       id: "2",
       links: [
         {
-          name: "Front",
-          link: "https://www.reddit.com/r/Frontend/",
+          name: "PCRS",
+          link: "https://pcrs.teach.cs.toronto.edu/csc209-2023-09/content/quests",
         },
         {
-          name: "Rust",
-          link: "https://www.reddit.com/r/rust/",
+          name: "246",
+          link: "https://ebookcentral-proquest-com.myaccess.library.utoronto.ca/lib/utoronto/reader.action?docID=5602529",
         },
         {
-          name: "Go",
-          link: "https://www.reddit.com/r/golang/",
+          name: "Internships",
+          link: "https://github.com/SimplifyJobs/Summer2024-Internships",
         },
         {
-          name: "Repos",
-          link: "https://github.com/migueravila",
+          name: "Canadian",
+          link: "https://github.com/jenndryden/Canadian-Tech-Internships-Summer-2024",
         },
       ],
     },

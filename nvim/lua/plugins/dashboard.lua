@@ -71,12 +71,12 @@ return {
         },
       },
     })
-    vim.cmd([[highlight!HGD1 guifg=#33658a]])
-    vim.cmd([[highlight!HGD2 guifg=#43aa8b]])
-    vim.cmd([[highlight!HGD3 guifg=#90be6d]])
-    vim.cmd([[highlight!HGD4 guifg=#f9c74f]])
-    vim.cmd([[highlight!HGD5 guifg=#f8961e]])
-    vim.cmd([[highlight!HGD6 guifg=#f3722c]])
-    vim.cmd([[highlight!HGD7 guifg=#fb5607]])
+    vim.cmd([[highlight!HGD2 guifg=#33658a]])
+    vim.cmd([[highlight!HGD4 guifg=#43aa8b]])
+    vim.cmd([[highlight!HGD6 guifg=#90be6d]])
+    vim.cmd([[highlight!HGD7 guifg=#f9c74f]])
+    vim.cmd([[highlight!HGD3 guifg=#f8961e]])
+    vim.cmd([[highlight!HGD5 guifg=#f3722c]])
+    vim.cmd([[highlight!HGD1 guifg=#fb5607]])
   end,
 }

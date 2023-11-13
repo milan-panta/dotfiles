@@ -4,6 +4,7 @@ return {
   build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
+    "LiadOz/nvim-dap-repl-highlights",
   },
   config = function()
     -- import nvim-treesitter plugin
@@ -26,6 +27,7 @@ return {
       -- ensure these language parsers are installed
       ensure_installed = {
         "python",
+        "rust",
         "css",
         "markdown",
         "markdown_inline",
@@ -34,6 +36,7 @@ return {
         "vim",
         "latex",
         "typescript",
+        "dap_repl",
         "vimdoc",
         "bash",
         "cpp",

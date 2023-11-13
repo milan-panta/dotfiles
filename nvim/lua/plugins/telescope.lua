@@ -49,9 +49,9 @@ return {
     {
       "<Leader>fF",
       function()
-        require("telescope.builtin").git_files()
+        vim.cmd("Telescope find_files cwd=" .. vim.fn.expand('%:h'))
       end,
-      desc = "Telescope find Git files",
+      desc = "Telescope find files in cwd",
     },
     {
       "<Leader>fg",

@@ -1,7 +1,8 @@
 return {
   "3rd/image.nvim",
+  -- lazy = true,
   -- ft = { "markdown", "norg" },
-  lazy = true,
+  lazy = "leetcode.nvim" ~= vim.fn.argv()[1],
   config = function()
     -- Example for configuring Neovim to load user-installed installed Lua rocks:
     package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"

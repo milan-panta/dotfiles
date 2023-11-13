@@ -33,7 +33,9 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- Neorg shortcuts
-vim.keymap.set("n", "<Leader>vpp", "<CMD>Neorg index<CR>", { desc = "Open default neorg index" })
+vim.keymap.set("n", "<Leader>vpp", "<CMD>Neorg index<CR>", { desc = "Open neorg default (life) index" })
+vim.keymap.set("n", "<Leader>vpl", "<CMD>Neorg workspace play<CR>", { desc = "Open neorg play workspace" })
+vim.keymap.set("n", "<Leader>vpt", "<CMD>Neorg journal today<CR>", { desc = "Open todays neorg journal" })
 
 -- window management
 vim.api.nvim_set_keymap("n", "<C-a>", "<C-w>>", { noremap = true, desc = "Increase width" })
@@ -54,8 +56,7 @@ function RunFile(dir)
     vim.fn.feedkeys(":" .. dir .. " | term g++ -Wall % -o %< && ./%<\ni")
     return
   end
-  vim.cmd(dir)
-  vim.fn.feedkeys(":term ")
+  vim.fn.feedkeys(":" .. dir .. " | term ")
   if filetype == "python" then
     vim.fn.feedkeys("python3 -u %")
   elseif filetype == "rust" then

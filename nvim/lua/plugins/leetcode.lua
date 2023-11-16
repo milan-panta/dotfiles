@@ -1,5 +1,5 @@
 return {
-  "milan-panta/leetcode.nvim",
+  "kawre/leetcode.nvim",
   build = ":TSUpdate html",
   lazy = "leetcode.nvim" ~= vim.fn.argv()[1],
   dependencies = {
@@ -7,6 +7,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
     "MunifTanjim/nui.nvim",
+    "folke/noice.nvim",
     "nvim-tree/nvim-web-devicons",
   },
   config = function()

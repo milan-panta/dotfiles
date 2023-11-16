@@ -139,12 +139,12 @@ const CONFIG = {
       id: "1",
       links: [
         {
-          name: "Usaco",
-          link: "https://usaco.guide/general/intro-cp?lang=cpp",
+          name: "Rustlings",
+          link: "https://lazyren.github.io/studylog/rustlings-move-semantics.html",
         },
         {
-          name: "Neetcode",
-          link: "https://neetcode.io/roadmap",
+          name: "TheBook",
+          link: "file:///Users/milan/.rustup/toolchains/stable-aarch64-apple-darwin/share/doc/rust/html/book/ch00-00-introduction.html",
         },
         {
           name: "Quercus",

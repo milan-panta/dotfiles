@@ -29,5 +29,6 @@ return {
       -- all the sub-options of filetypes apply to buftypes
       buftypes = {},
     })
+    vim.keymap.set("n", "tc", "<CMD>ColorizerToggle<CR>", { desc = "Toggle Colorizer" })
   end,
 }

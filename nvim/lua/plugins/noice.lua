@@ -1,41 +1,28 @@
 return {
   "folke/noice.nvim",
-  event = "VeryLazy",
+  event = { "BufReadPost", "BufNewFile" },
   opts = {
-    lsp = {
-      override = {
-        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        ["vim.lsp.util.stylize_markdown"] = true,
-        ["cmp.entry.get_documentation"] = true,
-      },
-    },
-    routes = {
-      {
-        filter = {
-          event = "msg_show",
-          any = {
-            { find = "%d+L, %d+B" },
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
-          },
+    views = {
+      hover = {
+        border = {
+          style = "rounded",
         },
-        view = "mini",
+        win_options = {
+          winhighlight = { Normal = "Normal", FloatBorder = "Normal" },
+        },
+        position = { row = 2, col = 2 },
       },
     },
-    presets = {
-      bottom_search = true,
-      command_palette = true,
-      long_message_to_split = true,
-      inc_rename = true,
+    cmdline = {
+      enabled = false,
+    },
+    messages = {
+      enabled = false,
     },
   },
   -- stylua: ignore
   keys = {
-    { "<leader>nnl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-    { "<leader>nnh", function() require("noice").cmd("history") end, desc = "Noice History" },
-    { "<leader>nna", function() require("noice").cmd("all") end, desc = "Noice All" },
-    { "<leader>nnd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-    { "<c-d>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
-    { "<c-u>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
+    { "<C-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
+    { "<C-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
   },
 }

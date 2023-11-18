@@ -2,6 +2,7 @@ return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
+    vim.opt.ruler = true
     require("gitsigns").setup({
       signs = {
         add = { text = "▎" },

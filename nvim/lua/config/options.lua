@@ -11,6 +11,7 @@ vim.opt.number = true
 vim.opt.numberwidth = 2
 
 vim.opt.guicursor = ""
+
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -24,7 +25,6 @@ vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- vim.opt.mouse = ""
 
 vim.opt.undofile = true
 vim.opt.undolevels = 1000

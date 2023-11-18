@@ -70,7 +70,7 @@ end
 -- code running
 vim.keymap.set("n", "<leader>rv", function()
   RunFile("vsplit")
-end, { desc = "Run vertically", silent = true })
+end, { desc = "Run vertically", expr = true, silent = true })
 vim.keymap.set("n", "<leader>rh", function()
   RunFile("split")
-end, { desc = "Run horizontally", silent = true })
+end, { desc = "Run horizontally", expr = true, silent = true })

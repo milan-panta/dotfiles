@@ -12,11 +12,9 @@ return {
         week_header = {
           enable = true,
         },
-        project = {
-          limit = 3,
-        },
+        project = {limit = 3,},
         packages = { enable = false },
-        mru = { limit = 3 },
+        mru = {limit = 3},
         footer = {},
         disable_move = true,
         shortcut = {

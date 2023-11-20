@@ -43,12 +43,6 @@ return {
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lspconfig = require("lspconfig")
-    -- local winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None"
-
-    -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    --   winhighlight = winhighlight,
-    --   border = "rounded",
-    -- })
 
     mason.setup({
       ui = {
@@ -126,6 +120,7 @@ return {
       cmd = {
         "clangd",
         "--offset-encoding=utf-16",
+        "-header-insertion=never",
       },
     })
   end,

@@ -6,16 +6,15 @@ return {
   },
   config = function()
     local db = require("dashboard")
+    vim.opt.ruler = false
     db.setup({
       config = {
         week_header = {
           enable = true,
         },
-        project = {
-          enable = false,
-        },
+        project = {limit = 3,},
         packages = { enable = false },
-        mru = { limit = 3 },
+        mru = {limit = 3},
         footer = {},
         disable_move = true,
         shortcut = {

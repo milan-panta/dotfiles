@@ -85,8 +85,8 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.confirm({ noremap = true, select = true }),
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
-          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-d>"] = cmp.mapping.scroll_docs(4),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<Tab>"] = nil,
           ["<S-Tab>"] = nil,
         }),

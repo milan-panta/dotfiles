@@ -1,19 +1,25 @@
 {
-    "name": "snippets",
-    "contributes": {
-        "snippets": [
-            {
-                "language": [
-                    "tex"
-                ],
-                "path": "tex.json"
-            },
-            {
-                "language": [
-                    "python"
-                ],
-                "path": "python.json"
-            }
-        ]
-    }
+  "name": "snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "tex"
+        ],
+        "path": "tex.json"
+      },
+      {
+        "language": [
+          "cpp"
+        ],
+        "path": "cpp.json"
+      },
+      {
+        "language": [
+          "python"
+        ],
+        "path": "python.json"
+      }
+    ]
+  }
 }

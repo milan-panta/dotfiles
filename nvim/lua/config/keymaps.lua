@@ -2,7 +2,6 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 -- better insert mode navigation
-vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
 vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
 vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
 vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
@@ -71,7 +70,7 @@ end
 -- code running
 vim.keymap.set("n", "<leader>rv", function()
   RunFile("vsplit")
-end, { desc = "Run vertically", silent = true })
+end, { desc = "Run vertically", expr = true, silent = true })
 vim.keymap.set("n", "<leader>rh", function()
   RunFile("split")
-end, { desc = "Run horizontally", silent = true })
+end, { desc = "Run horizontally", expr = true, silent = true })

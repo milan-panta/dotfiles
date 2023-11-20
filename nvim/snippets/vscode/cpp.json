@@ -1,0 +1,22 @@
+{
+  "cpptemp": {
+    "prefix": "cpptemp",
+    "body": [
+      "#include <stdcpp.h>",
+      "using namespace std;",
+      "",
+      "int main() {",
+      "  $0",
+      "  return 0;",
+      "}"
+    ]
+  },
+  "header": {
+    "prefix": "header",
+    "body": [
+      "#include <stdcpp.h>",
+      "using namespace std;",
+      "\n"
+    ]
+  }
+}

@@ -3,11 +3,11 @@ return {
   build = ":TSUpdate html",
   lazy = "leetcode.nvim" ~= vim.fn.argv()[1],
   dependencies = {
-        "nvim-telescope/telescope.nvim",
-        "nvim-lua/plenary.nvim", -- required by telescope
-        "MunifTanjim/nui.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "nvim-tree/nvim-web-devicons",
+    "nvim-telescope/telescope.nvim",
+    "nvim-lua/plenary.nvim", -- required by telescope
+    "MunifTanjim/nui.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-tree/nvim-web-devicons",
   },
   config = function()
     require("leetcode").setup({

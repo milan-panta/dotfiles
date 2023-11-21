@@ -37,8 +37,12 @@ vim.keymap.set("n", "<Leader>vpl", "<CMD>Neorg workspace play<CR>", { desc = "Op
 vim.keymap.set("n", "<Leader>vpt", "<CMD>Neorg journal today<CR>", { desc = "Open todays neorg journal" })
 
 -- window management
-vim.api.nvim_set_keymap("n", "<C-f>", "<C-w>>", { noremap = true, desc = "Increase width" })
-vim.api.nvim_set_keymap("n", "<C-s>", "<C-w>+", { noremap = true, desc = "Decrease height" })
+vim.keymap.set("n", "<M-Up>", ":resize -2<CR>", { silent = true, noremap = true, desc = "Increase height" })
+vim.keymap.set("n", "<M-Down>", ":resize +2<CR>", { silent = true, noremap = true, desc = "Decrease height" })
+vim.keymap.set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, noremap = true, desc = "Increase width" })
+vim.keymap.set("n", "<M-Left>", ":vertical resize -2<CR>", { silent = true, noremap = true, desc = "Decrease width" })
+
+-- Consistent with tmux
 vim.api.nvim_set_keymap("n", "<C-w>-", "<C-w>s", { noremap = true, desc = "Create horizontal split" })
 vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-w>v", { noremap = true, desc = "Create vertical split" })
 vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = "Max out split" })

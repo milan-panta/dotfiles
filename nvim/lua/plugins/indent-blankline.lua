@@ -16,6 +16,7 @@ return {
           "trouble",
           "lazy",
           "mason",
+          "leetcode.nvim",
           "toggleterm",
         },
       },
@@ -46,6 +47,7 @@ return {
           "trouble",
           "lazy",
           "mason",
+          "leetcode.nvim",
           "toggleterm",
         },
         callback = function()

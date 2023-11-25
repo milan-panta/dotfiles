@@ -49,32 +49,34 @@ vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = 
 
 -- run file
 function RunFile(dir)
-  vim.cmd("silent :w")
+  vim.cmd("w")
+  vim.cmd(dir)
   local filetype = vim.bo.filetype
   if filetype == "c" then
-    vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall % -o %< && ./%<\ni")
+    vim.cmd("term gcc -Wall % -o %< && ./%<")
+    vim.fn.feedkeys("i")
     return
   elseif filetype == "cpp" then
-    vim.fn.feedkeys(":" .. dir .. " | term g++ -Wall % -o %< && ./%<\ni")
+    vim.cmd("term g++ -std=c++20 -Wall % -o %< && ./%<")
+    vim.fn.feedkeys("i")
     return
   end
-  vim.fn.feedkeys(":" .. dir .. " | term ")
   if filetype == "python" then
-    vim.fn.feedkeys("python3 -u %")
+    vim.cmd("term python3 -u %")
   elseif filetype == "rust" then
-    vim.fn.feedkeys("cargo run")
+    vim.cmd("term cargo run")
   elseif filetype == "javascript" then
-    vim.fn.feedkeys("node %")
+    vim.cmd("term node %")
   else
     vim.api.nvim_out_write("Filetype " .. filetype .. " is not supported\n")
   end
-  vim.fn.feedkeys(" \ni")
+  vim.fn.feedkeys("i")
 end
 
 -- code running
 vim.keymap.set("n", "<leader>rv", function()
   RunFile("vsplit")
-end, { desc = "Run vertically", expr = true, silent = true })
+end, { silent = true, desc = "Run vertically" })
 vim.keymap.set("n", "<leader>rh", function()
   RunFile("split")
-end, { desc = "Run horizontally", expr = true, silent = true })
+end, { silent = true, desc = "Run horizontally" })

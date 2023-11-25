@@ -12,8 +12,11 @@ return {
   config = function()
     require("leetcode").setup({
       arg = "leetcode.nvim",
-      lang = "python3",
+      description = {
+        show_stats = false,
+      },
     })
+    require("cmp").setup({ enabled = false })
     vim.diagnostic.disable()
     vim.keymap.set("n", "<Leader>cr", function()
       vim.cmd("Leet run")

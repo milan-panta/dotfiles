@@ -147,8 +147,8 @@ const CONFIG = {
           link: "file:///Users/milan/.rustup/toolchains/stable-aarch64-apple-darwin/share/doc/rust/html/book/ch00-00-introduction.html",
         },
         {
-          name: "Quercus",
-          link: "https://q.utoronto.ca/",
+          name: "Striver",
+          link: "https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/",
         },
         {
           name: "Clash",

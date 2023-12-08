@@ -2,7 +2,7 @@
     "cpptemp": {
         "prefix": "cpptemp",
         "body": [
-            "#include <stdcpp.h>",
+            "#include \"stdcpp.h\"",
             "using namespace std;",
             "",
             "int main() {",
@@ -14,7 +14,7 @@
     "header": {
         "prefix": "header",
         "body": [
-            "#include <stdcpp.h>",
+            "#include \"stdcpp.h\"",
             "using namespace std;",
             "\n"
         ]

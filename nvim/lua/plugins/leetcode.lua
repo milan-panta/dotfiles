@@ -17,7 +17,6 @@ return {
       },
     })
     require("cmp").setup({ enabled = false })
-    vim.diagnostic.disable()
     vim.keymap.set("n", "<Leader>cr", function()
       vim.cmd("Leet run")
     end, { desc = "Leetcode run" })

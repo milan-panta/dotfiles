@@ -13,6 +13,7 @@ return {
     local mason = require("mason")
     local masonLspConfig = require("mason-lspconfig")
     local keymap = vim.keymap
+    vim.diagnostic.disable()
 
     local on_attach = function(_, bufnr)
       local opts = { noremap = true, silent = true }

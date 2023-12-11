@@ -1,5 +1,4 @@
 # shortcuts for opening apps
-shift + cmd - k : open -na /Applications/Alacritty.app
 shift + cmd - o : open -na /Applications/kitty.app
 shift + cmd - u : open -na /Applications/Arc.app
 shift + cmd - i : open -na /Applications/Google\ Chrome.app

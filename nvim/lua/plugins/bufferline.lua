@@ -4,6 +4,8 @@ return {
     require("bufferline").setup({
       options = {
         diagnostics = false,
+        show_buffer_close_icons = false,
+        modified_icon = '',
         offsets = {
           {
             filetype = "neo-tree",

@@ -11,6 +11,13 @@ vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
 vim.keymap.set({ "n" }, "<M-s>", "<cmd>silent w<CR>")
 vim.keymap.set({ "i" }, "<M-s>", "<ESC><cmd>silent w<CR>a")
 
+-- paste without replacing clipboard
+vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
+-- select occurrances of word
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
 -- maintain cursor position after joining
 vim.keymap.set("n", "J", "mzJ`z")
 

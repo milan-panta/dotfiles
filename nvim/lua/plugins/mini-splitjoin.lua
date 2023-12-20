@@ -4,7 +4,7 @@ return {
   opts = {
     mappings = {
       toggle = "<Leader>m",
-      split = "<Leader>s",
+      split = "<Leader>x",
       join = "<Leader>j",
     },
   },

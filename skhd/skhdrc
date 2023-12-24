@@ -1,7 +1,7 @@
 # shortcuts for opening apps
-shift + cmd - k : open -na /Applications/Alacritty.app
 shift + cmd - o : open -na /Applications/kitty.app
-shift + cmd - u : open -na /Applications/Google\ Chrome.app
+shift + cmd - u : open -na /Applications/Firefox.app
+shift + cmd - i : open -na /Applications/Google\ Chrome.app
 shift + cmd - c : open -na /Applications/GoogleCalendar.app
 
 # restart yabai hotkey

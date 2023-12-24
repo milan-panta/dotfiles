@@ -13,6 +13,7 @@ return {
     local mason = require("mason")
     local masonLspConfig = require("mason-lspconfig")
     local keymap = vim.keymap
+    vim.diagnostic.disable()
 
     local on_attach = function(_, bufnr)
       local opts = { noremap = true, silent = true }
@@ -58,24 +59,23 @@ return {
     -- lsps
     masonLspConfig.setup({
       ensure_installed = {
-        -- lua
         "lua_ls",
-        -- web dev
-        "emmet_ls",
+        "tailwindcss",
+        "svelte",
         "eslint",
         "tsserver",
         "cssls",
         "html",
         "jsonls",
-        -- python
         "pyright",
       },
     })
 
     -- default configs for these language servers
     local servers = {
-      "emmet_ls",
+      "svelte",
       "tsserver",
+      "tailwindcss",
       "jsonls",
       "eslint",
       "cssls",

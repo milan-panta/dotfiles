@@ -30,6 +30,7 @@ return {
         "rust",
         "css",
         "markdown",
+        "query",
         "markdown_inline",
         "javascript",
         "json",

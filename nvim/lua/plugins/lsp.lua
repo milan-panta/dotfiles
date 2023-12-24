@@ -67,6 +67,7 @@ return {
         "cssls",
         "html",
         "jsonls",
+        "emmet_ls",
         "pyright",
       },
     })
@@ -80,6 +81,7 @@ return {
       "eslint",
       "cssls",
       "pyright",
+      "emmet_ls",
       "rust_analyzer",
     }
 

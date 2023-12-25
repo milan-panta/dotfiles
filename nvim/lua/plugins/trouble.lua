@@ -8,10 +8,5 @@ return {
       "<CMD>TroubleToggle<CR>",
       desc = "Trouble toggle",
     },
-    {
-      "<Leader>tl",
-      "<CMD>TodoTrouble<CR>",
-      desc = "Trouble todos",
-    },
   },
 }

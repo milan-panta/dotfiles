@@ -7,6 +7,7 @@ return {
         "prettierd",
         "clang-format",
       },
+      auto_update = true,
     },
   },
 

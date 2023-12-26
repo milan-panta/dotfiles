@@ -64,10 +64,10 @@ return {
         "svelte",
         "eslint",
         "tsserver",
+        "emmet_language_server",
         "cssls",
         "html",
         "jsonls",
-        "emmet_ls",
         "pyright",
       },
     })
@@ -76,12 +76,13 @@ return {
     local servers = {
       "svelte",
       "tsserver",
+      "emmet_language_server",
       "tailwindcss",
+      "html",
       "jsonls",
       "eslint",
       "cssls",
       "pyright",
-      "emmet_ls",
       "rust_analyzer",
     }
 
@@ -110,10 +111,22 @@ return {
       on_attach = on_attach,
     })
 
-    lspconfig.html.setup({
-      filetypes = { "html", "htmldjango" },
-      capabilities = capabilities,
-      on_attach = on_attach,
+    lspconfig.emmet_language_server.setup({
+      filetypes = {
+        "css",
+        "eruby",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "less",
+        "sass",
+        "scss",
+        "pug",
+        "typescriptreact",
+      },
+      init_options = {
+        showSuggestionsAsSnippets = true,
+      },
     })
 
     lspconfig.clangd.setup({

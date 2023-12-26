@@ -16,9 +16,12 @@
       },
       {
         "language": [
-          "python"
+          "javascript",
+          "typescript",
+          "javascriptreact",
+          "typescriptreact"
         ],
-        "path": "python.json"
+        "path": "js.json"
       }
     ]
   }

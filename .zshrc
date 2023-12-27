@@ -22,7 +22,7 @@ alias nlc="nvim leetcode.nvim"
 alias n="nvim"
 alias epath="tr ':' '\n' <<< "$PATH""
 alias lg="lazygit"
-alias l="lf"
+alias l="yazi"
 alias gc="git checkout"
 
 setopt HIST_FIND_NO_DUPS

@@ -3,13 +3,14 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 -- better insert mode navigation
 vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
-vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
+vim.keymap.set("i", "<C-y>", "<Home>", { desc = "Beginning of line" })
+vim.keymap.set({ "i", "s", "c" }, "<C-k>", "<Up>", { desc = "Move up" })
 vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
+vim.keymap.set({ "i", "s", "c" }, "<C-j>", "<Down>", { desc = "Move down" })
+vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
 
--- kitty maps Cmmd to M inside tmux sessions
+-- kitty maps M to Cmmd inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
-vim.keymap.set({ "n" }, "<M-s>", "<cmd>silent w<CR>")
-vim.keymap.set({ "i" }, "<M-s>", "<ESC><cmd>silent w<CR>a")
 
 -- paste without replacing clipboard
 vim.keymap.set("x", "<leader>p", [["_dP]])

@@ -59,31 +59,33 @@ return {
     -- lsps
     masonLspConfig.setup({
       ensure_installed = {
-        "lua_ls",
-        "tailwindcss",
-        "svelte",
-        "eslint",
-        "tsserver",
-        "emmet_language_server",
         "cssls",
+        "emmet_language_server",
+        "eslint",
         "html",
         "jsonls",
+        "lua_ls",
         "pyright",
+        "svelte",
+        "tailwindcss",
+        "texlab",
+        "tsserver",
       },
     })
 
     -- default configs for these language servers
     local servers = {
-      "svelte",
-      "tsserver",
+      "cssls",
       "emmet_language_server",
-      "tailwindcss",
+      "eslint",
       "html",
       "jsonls",
-      "eslint",
-      "cssls",
       "pyright",
       "rust_analyzer",
+      "svelte",
+      "tailwindcss",
+      "texlab",
+      "tsserver",
     }
 
     -- configure with default lsp settings
@@ -119,9 +121,9 @@ return {
         "javascript",
         "javascriptreact",
         "less",
+        "pug",
         "sass",
         "scss",
-        "pug",
         "typescriptreact",
       },
       init_options = {

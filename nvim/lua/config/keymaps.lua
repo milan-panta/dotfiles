@@ -88,3 +88,6 @@ end, { silent = true, desc = "Run vertically" })
 vim.keymap.set("n", "<leader>rh", function()
   RunFile("split")
 end, { silent = true, desc = "Run horizontally" })
+
+-- markdown preview runner
+vim.keymap.set("n", "<Leader>rm", "<Cmd>MarkdownPreviewToggle<CR>")

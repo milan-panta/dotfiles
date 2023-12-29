@@ -152,7 +152,7 @@ const CONFIG = {
         },
         {
           name: "Notion",
-          link: "https://www.notion.so",
+          link: "https://www.notion.so/Personal-Home-d841dca5419e4d1aac989d2ef3fc4c56",
         },
       ],
     },

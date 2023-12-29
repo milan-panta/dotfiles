@@ -139,20 +139,20 @@ const CONFIG = {
       id: "1",
       links: [
         {
-          name: "Rustlings",
-          link: "https://lazyren.github.io/studylog/rustlings-move-semantics.html",
+          name: "FSO",
+          link: "https://fullstackopen.com/en/",
         },
         {
           name: "TheBook",
           link: "file:///Users/milan/.rustup/toolchains/stable-aarch64-apple-darwin/share/doc/rust/html/book/ch00-00-introduction.html",
         },
         {
-          name: "Striver",
-          link: "https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/",
+          name: "UPython",
+          link: "https://www.udemy.com/course/100-days-of-code/",
         },
         {
-          name: "Clash",
-          link: "https://www.codingame.com/home",
+          name: "Notion",
+          link: "https://www.notion.so",
         },
       ],
     },
@@ -161,12 +161,12 @@ const CONFIG = {
       id: "2",
       links: [
         {
-          name: "PCRS",
-          link: "https://pcrs.teach.cs.toronto.edu/csc209-2023-09/content/quests",
+          name: "Quercus",
+          link: "https://q.utoronto.ca/",
         },
         {
-          name: "246",
-          link: "https://ebookcentral-proquest-com.myaccess.library.utoronto.ca/lib/utoronto/reader.action?docID=5602529",
+          name: "Ideas",
+          link: "https://www.notion.so/Ideas-2c8afb97fbc545fc88ec55617be196f0",
         },
         {
           name: "Internships",
@@ -187,20 +187,20 @@ const CONFIG = {
       id: "1",
       links: [
         {
-          name: "Usaco",
-          link: "https://usaco.guide/general/intro-cp?lang=cpp",
+          name: "Array",
+          link: "https://www.youtube.com/playlist?list=PLgUwDviBIf0rENwdL0nEH0uGom9no0nyB",
         },
         {
-          name: "Neetcode",
-          link: "https://neetcode.io/roadmap",
+          name: "BinSearch",
+          link: "https://www.youtube.com/playlist?list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF",
         },
         {
-          name: "Quercus",
-          link: "https://q.utoronto.ca/",
+          name: "Graph",
+          link: "https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn",
         },
         {
-          name: "Clash",
-          link: "https://www.codingame.com/home",
+          name: "Leetcode",
+          link: "https://www.leetcode.com",
         },
       ],
     },
@@ -209,12 +209,12 @@ const CONFIG = {
       id: "2",
       links: [
         {
-          name: "PCRS",
-          link: "https://pcrs.teach.cs.toronto.edu/csc209-2023-09/content/quests",
+          name: "Mango",
+          link: "https://mangafire.to/",
         },
         {
-          name: "246",
-          link: "https://ebookcentral-proquest-com.myaccess.library.utoronto.ca/lib/utoronto/reader.action?docID=5602529",
+          name: "G1",
+          link: "https://g1prep.ca/content",
         },
         {
           name: "Internships",

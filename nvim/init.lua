@@ -17,14 +17,13 @@ require("lazy").setup({
     lazy = false,
     version = false, -- always use the latest git commit
   },
-  install = { colorscheme = { "catppuccin", "habamax" } },
   performance = {
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
         "matchit",
-        -- "matchparen",
+        "matchparen",
         -- "netrwPlugin",
         "tarPlugin",
         "tohtml",

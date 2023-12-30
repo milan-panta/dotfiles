@@ -61,17 +61,6 @@ return {
         completion = {
           completeopt = "menu,preview,noselect",
         },
-        window = {
-          completion = {
-            winhighlight = winhighlight,
-            border = "rounded",
-            scrollbar = false,
-          },
-          documentation = {
-            winhighlight = winhighlight,
-            border = "rounded",
-          },
-        },
         snippet = { -- configure how nvim-cmp interacts with snippet engine
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
@@ -101,11 +90,6 @@ return {
           sources = {
             { name = "buffer" },
           },
-          window = {
-            completion = {
-              border = "none",
-            },
-          },
         }),
 
         -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -116,11 +100,6 @@ return {
           }, {
             { name = "cmdline" },
           }),
-          window = {
-            completion = {
-              border = "none",
-            },
-          },
         }),
 
         -- configure lspkind for vs-code like pictograms in completion menu

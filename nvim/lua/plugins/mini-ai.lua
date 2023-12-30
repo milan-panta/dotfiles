@@ -1,6 +1,10 @@
 return {
   "echasnovski/mini.ai",
-  version = "*",
   event = { "BufReadPost", "BufNewFile" },
-  config = true,
+  config = function()
+    local ai = require("mini.ai")
+    require("mini.ai").setup({
+      n_lines = 500,
+    })
+  end,
 }

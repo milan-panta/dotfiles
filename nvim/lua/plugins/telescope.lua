@@ -2,19 +2,15 @@ return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-    },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "debugloop/telescope-undo.nvim",
   },
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
-    telescope.load_extension("fzf")
-    telescope.load_extension("undo")
     telescope.setup({
       defaults = {
+        file_ignore_patterns = { "node_modules" },
         mappings = {
           i = {
             ["<Esc>"] = actions.close,
@@ -34,6 +30,8 @@ return {
         winblend = 0,
       },
     })
+    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("undo")
   end,
   cmd = {
     "Telescope",
@@ -49,7 +47,7 @@ return {
     {
       "<Leader>fF",
       function()
-        vim.cmd("Telescope find_files cwd=" .. vim.fn.expand('%:h'))
+        vim.cmd("Telescope find_files cwd=" .. vim.fn.expand("%:h"))
       end,
       desc = "Telescope find files in cwd",
     },

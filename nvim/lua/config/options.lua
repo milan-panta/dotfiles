@@ -10,8 +10,6 @@ vim.opt.cursorlineopt = "number"
 vim.opt.number = true
 vim.opt.numberwidth = 2
 
-vim.opt.guicursor = ""
-
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 

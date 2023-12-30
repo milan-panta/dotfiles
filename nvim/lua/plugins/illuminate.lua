@@ -6,6 +6,7 @@ return {
     large_file_overrides = {
       providers = { "lsp", "treesitter" },
     },
+    delay = 0
   },
   config = function(_, opts)
     require("illuminate").configure(opts)

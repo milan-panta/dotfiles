@@ -15,7 +15,6 @@ return {
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
-        disable = { "tex", "latex" },
       },
       modules = {},
       -- enable indentation
@@ -32,6 +31,7 @@ return {
         "css",
         "dap_repl",
         "gitignore",
+        "html",
         "javascript",
         "json",
         "latex",

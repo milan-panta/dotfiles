@@ -11,6 +11,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 export DYLD_LIBRARY_PATH=/opt/homebrew/lib/
 export PATH=/Users/milan/.cargo/bin:$PATH
 export DBUS_SESSION_BUS_ADDRESS='unix:path='$DBUS_LAUNCHD_SESSION_BUS_SOCKET
+export EDITOR=nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh)"

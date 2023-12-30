@@ -9,9 +9,8 @@ vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
 vim.keymap.set({ "i", "s", "c" }, "<C-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
 
--- H and L to go to beginning and end of line
-vim.keymap.set({"n", "v", "o"}, "H", "^")
-vim.keymap.set({"n", "v", "o"}, "L", "$")
+-- netrw keymaps
+vim.keymap.set("n", "<Leader>pv", vim.cmd.Ex)
 
 -- kitty maps M to Cmmd inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")

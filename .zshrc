@@ -18,6 +18,7 @@ eval "$(zoxide init zsh)"
 
 # neovim config switcher
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nh="NVIM_APPNAME=nh nvim"
 alias nlc="nvim leetcode.nvim"
 
 alias n="nvim"

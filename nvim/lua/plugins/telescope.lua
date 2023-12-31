@@ -27,23 +27,9 @@ return {
           preview_cutoff = 120,
         },
         sorting_strategy = "ascending",
-        winblend = 0,
         path_display = { "truncate" },
         dynamic_preview_title = true,
         winblend = 0,
-        border = {},
-        borderchars = {
-          -- { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-          prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
-          results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
-          preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-          -- fzf-preview style
-          -- prompt = { "─", "│", " ", "│", "┌", "┬", "│", "│" },
-          -- results = { "─", "│", "─", "│", "├", "┤", "┴", "└" },
-          -- preview = { "─", "│", "─", " ", "─", "┐", "┘", "─" },
-        },
-        color_devicons = true,
-        use_less = true,
       },
     })
     require("telescope").load_extension("fzf")

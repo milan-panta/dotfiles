@@ -4,6 +4,7 @@ return {
   config = function()
     require("colorizer").setup({
       user_default_options = {
+        css = true,
         tailwind = true,
         always_update = true,
       },

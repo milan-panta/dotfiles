@@ -31,7 +31,6 @@ return {
         "css",
         "dap_repl",
         "gitignore",
-        "html",
         "javascript",
         "json",
         "latex",

@@ -31,12 +31,7 @@ return {
         function()
           require("luasnip").jump(-1)
         end,
-        mode = { "i", "s" },
-      },
-      {
-        "<Leader><Leader>s",
-        '<Cmd>w<CR><Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})<CR>',
-        desc = "Load snippets",
+        mode = "s",
       },
     },
   },
@@ -55,7 +50,6 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets/vscode" })
       local cmp = require("cmp")
       local lspkind = require("lspkind")
-      local winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None"
 
       cmp.setup({
         completion = {
@@ -69,7 +63,7 @@ return {
 
         mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.confirm({ noremap = true, select = true }),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+          ["<CR>"] = nil,
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<Tab>"] = nil,

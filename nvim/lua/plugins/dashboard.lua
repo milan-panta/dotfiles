@@ -1,5 +1,6 @@
 return {
   "nvimdev/dashboard-nvim",
+  event = "VimEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
@@ -14,7 +15,7 @@ return {
         project = {limit = 3,},
         packages = { enable = false },
         mru = {limit = 3},
-        footer = {},
+        footer = {"babtree"},
         disable_move = true,
         shortcut = {
           {

@@ -50,7 +50,6 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets/vscode" })
       local cmp = require("cmp")
       local lspkind = require("lspkind")
-      local winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None"
 
       cmp.setup({
         completion = {

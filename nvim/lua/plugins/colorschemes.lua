@@ -10,9 +10,9 @@ return {
   },
   -- gruvbox
   {
+    "ellisonleao/gruvbox.nvim",
     lazy = true,
     -- priority = 1000,
-    "ellisonleao/gruvbox.nvim",
     config = function()
       vim.cmd.colorscheme("gruvbox")
     end,
@@ -28,10 +28,10 @@ return {
           theme = {
             all = {
               ui = {
-                bg_gutter = "none"
-              }
-            }
-          }
+                bg_gutter = "none",
+              },
+            },
+          },
         },
         overrides = function(colors)
           local theme = colors.theme

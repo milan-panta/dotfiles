@@ -1,0 +1,10 @@
+{
+  "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
+  "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
+  "mini.splitjoin": { "branch": "main", "commit": "0fddd7a9147f6d1a411b21a7813b3f991544881c" },
+  "nvim-dap-repl-highlights": { "branch": "master", "commit": "902d533b2682c26d6be4f8a4d1dfd895cbba4840" },
+  "nvim-surround": { "branch": "main", "commit": "633a0ab03159569a66b65671b0ffb1a6aed6cf18" },
+  "nvim-treesitter": { "branch": "master", "commit": "cd4de5f7b14b878ac8f5c459c9d579cc58ba1ac5" },
+  "nvim-treesitter-textobjects": { "branch": "master", "commit": "4795812635c7b90cec41637314862b0a229d2b24" },
+  "nvim-ts-autotag": { "branch": "main", "commit": "8515e48a277a2f4947d91004d9aa92c29fdc5e18" }
+}

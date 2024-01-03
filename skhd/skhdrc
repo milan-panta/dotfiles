@@ -2,6 +2,7 @@
 shift + cmd - o : open -na /Applications/kitty.app
 shift + cmd - u : open -na /Applications/Firefox.app
 shift + cmd - i : open -na /Applications/Google\ Chrome.app
+rcmd - n : open -na /Applications/Notion.app/
 shift + cmd - c : open -na /Applications/GoogleCalendar.app
 
 # restart yabai hotkey

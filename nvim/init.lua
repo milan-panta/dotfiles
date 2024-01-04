@@ -20,6 +20,9 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
   },
   performance = {
+    cache = {
+      enabled = true,
+    },
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
@@ -28,6 +31,7 @@ require("lazy").setup({
         "matchparen",
         -- "netrwPlugin",
         "tarPlugin",
+        "rplugin",
         "tohtml",
         "tutor",
         "zipPlugin",

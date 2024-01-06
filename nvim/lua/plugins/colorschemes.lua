@@ -2,8 +2,8 @@ return {
   -- catppuccin
   {
     "catppuccin/nvim",
-    lazy = true,
-    -- priority = 1000,
+    -- lazy = true,
+    priority = 1000,
     config = function()
       vim.cmd.colorscheme("catppuccin")
     end,
@@ -19,8 +19,8 @@ return {
   },
   -- kanagawa
   {
-    -- lazy = true,
-    priority = 1000,
+    lazy = true,
+    -- priority = 1000,
     "rebelot/kanagawa.nvim",
     config = function()
       require("kanagawa").setup({

@@ -4,7 +4,6 @@ return {
   config = function()
     vim.g.vimtex_view_method = "sioyek"
     vim.g.vimtex_quickfix_open_on_warning = 0
-    vim.g.vimtex_view_forward_search_on_start = false
     vim.g.vimtex_quickfix_ignore_filters = {
       "Underfull \\hbox",
       "Overfull \\hbox",

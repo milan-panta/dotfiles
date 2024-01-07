@@ -1,6 +1,6 @@
 return {
   "NvChad/nvim-colorizer.lua",
-  event = { "BufReadPost", "BufNewFile" },
+  ft = { "css", "html", "typescriptreact", "javascriptreact" },
   config = function()
     require("colorizer").setup({
       user_default_options = {

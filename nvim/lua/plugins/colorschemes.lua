@@ -19,9 +19,9 @@ return {
   },
   -- kanagawa
   {
+    "rebelot/kanagawa.nvim",
     -- lazy = true,
     priority = 1000,
-    "rebelot/kanagawa.nvim",
     config = function()
       require("kanagawa").setup({
         colors = {

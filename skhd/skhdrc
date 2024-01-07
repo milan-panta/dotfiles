@@ -2,7 +2,7 @@
 shift + cmd - o : open -na kitty.app
 shift + cmd - u : open -na Firefox.app
 shift + cmd - i : open -na Google\ Chrome.app
-rcmd - f : open a Firefox.app; yabai -m space --focus 2
+rcmd - f : open -a Firefox.app; yabai -m space --focus 2
 rcmd - k : open -a kitty.app; yabai -m space --focus 1
 rcmd - b : open -a Messages; yabai -m space --focus 8
 rcmd - c : open -a Calendar; yabai -m space --focus 6

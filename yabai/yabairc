@@ -7,16 +7,17 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m space 1 --label code
 yabai -m space 2 --label web
 yabai -m space 3 --label flex
-yabai -m space 4 --label flex2
-yabai -m space 5 --label notes
-yabai -m space 6 --label mail
-yabai -m space 7 --label calendar
+yabai -m space 4 --label notes
+yabai -m space 5 --label mail
+yabai -m space 6 --label calendar
+yabai -m space 7 --label ticktick
 yabai -m space 8 --label social
 yabai -m space 9 --label media
 
 # window rules
 yabai -m rule --add app="^(Notion|Notes)$" space=notes
-yabai -m rule --add app="^(GoogleCalendar|Calendar)$" space=calendar
+yabai -m rule --add app="^(Calendar)$" space=calendar
+yabai -m rule --add app="^(Mail|Outlook)$" space=mail
 yabai -m rule --add app="^(Discord|Messages)$" space=social
 yabai -m rule --add app="^Spotify$" space=media
 yabai -m rule --add app="^(Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter)$" manage=off

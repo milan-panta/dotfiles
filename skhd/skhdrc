@@ -1,9 +1,16 @@
 # shortcuts for opening apps
-shift + cmd - o : open -na /Applications/kitty.app
-shift + cmd - u : open -na /Applications/Firefox.app
-shift + cmd - i : open -na /Applications/Google\ Chrome.app
-shift + cmd - c : open -a Calendar
-rcmd - n : open -na /Applications/Notion.app/
+shift + cmd - o : open -na kitty.app
+shift + cmd - u : open -na Firefox.app
+shift + cmd - i : open -na Google\ Chrome.app
+rcmd - f : open a Firefox.app; yabai -m space --focus 2
+rcmd - k : open -a kitty.app; yabai -m space --focus 1
+rcmd - b : open -a Messages; yabai -m space --focus 8
+rcmd - c : open -a Calendar; yabai -m space --focus 6
+rcmd - d : open -a Discord.app; yabai -m space --focus 8
+rcmd - m : open -a Mail; yabai -m space --focus 5
+rcmd - o : open -a Microsoft\ Outlook.app; yabai -m space --focus 5
+rcmd - n : open -a Notion.app; yabai -m space --focus 4
+rcmd - t : open -a TickTick.app; yabai -m space --focus 7
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service

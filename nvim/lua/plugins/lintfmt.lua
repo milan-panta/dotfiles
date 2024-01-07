@@ -40,6 +40,7 @@ return {
           lua = { "stylua" },
           python = { "ruff_format", "ruff_fix" },
           tex = { "latexindent" },
+          html = { "prettierd" },
           markdown = { "prettierd" },
           javascript = { "prettierd" },
           javascriptreact = { "prettierd" },

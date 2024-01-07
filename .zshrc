@@ -1,5 +1,3 @@
-eval "$(starship init zsh)"
-
 # Bind Ctrl+Y to t. t is a script defined in /usr/local/bin/t.
 bindkey -s "^Y" 't\n'
 

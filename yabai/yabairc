@@ -15,11 +15,6 @@ yabai -m space 8 --label social
 yabai -m space 9 --label media
 
 # window rules
-yabai -m rule --add app="^(Notion|Notes)$" space=notes
-yabai -m rule --add app="^(Calendar)$" space=calendar
-yabai -m rule --add app="^(Mail|Outlook)$" space=mail
-yabai -m rule --add app="^(Discord|Messages)$" space=social
-yabai -m rule --add app="^Spotify$" space=media
 yabai -m rule --add app="^(Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter)$" manage=off
 
 # global settings
@@ -41,10 +36,10 @@ yabai -m config                                 \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
-    top_padding                  7              \
-    bottom_padding               7              \
-    left_padding                 7              \
-    right_padding                7              \
+    top_padding                  0              \
+    bottom_padding               0              \
+    left_padding                 0              \
+    right_padding                0              \
     window_gap                   7              \
     layout                       bsp            \
     mouse_modifier               fn             \

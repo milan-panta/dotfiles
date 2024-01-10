@@ -2,21 +2,16 @@
     "cpptemp": {
         "prefix": "cpptemp",
         "body": [
-            "#include \"stdcpp.h\"",
+            "#include <bits/stdc++.h>",
             "using namespace std;",
             "",
             "int main() {",
+            "    ios::sync_with_stdio(0);",
+            "    cin.tie(0);",
+            "",
             "    $0",
             "    return 0;",
             "}"
-        ]
-    },
-    "header": {
-        "prefix": "header",
-        "body": [
-            "#include \"stdcpp.h\"",
-            "using namespace std;",
-            "\n"
         ]
     }
 }

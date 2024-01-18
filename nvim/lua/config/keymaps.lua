@@ -66,6 +66,10 @@ function RunFile(dir)
     vim.cmd("term clang++ -std=c++17 -Wall % -o %< && ./%<")
     vim.fn.feedkeys("i")
     return
+  elseif filetype == "go" then
+    vim.cmd("term go build && ./%<")
+    vim.fn.feedkeys("i")
+    return
   end
   if filetype == "python" then
     vim.cmd("term python3 -u %")

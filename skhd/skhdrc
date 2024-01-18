@@ -2,15 +2,15 @@
 shift + cmd - o : open -na kitty.app
 shift + cmd - u : open -na Firefox.app
 shift + cmd - i : open -na Google\ Chrome.app
-rcmd - f : open -a Firefox.app; yabai -m space --focus 2
-rcmd - k : open -a kitty.app; yabai -m space --focus 1
-rcmd - b : open -a Messages; yabai -m space --focus 8
-rcmd - c : open -a Calendar; yabai -m space --focus 6
-rcmd - d : open -a Discord.app; yabai -m space --focus 8
-rcmd - m : open -a Mail; yabai -m space --focus 5
-rcmd - o : open -a Microsoft\ Outlook.app; yabai -m space --focus 5
-rcmd - n : open -a Notion.app; yabai -m space --focus 4
-rcmd - t : open -a TickTick.app; yabai -m space --focus 7
+rcmd - f : open -a Firefox.app
+rcmd - k : open -a kitty.app
+rcmd - b : open -a Messages
+rcmd - c : open -a Calendar
+rcmd - s : open -a sioyek.app
+rcmd - d : open -a Discord.app
+rcmd - m : open -a Mail
+rcmd - n : open -a Notion.app
+rcmd - t : open -a TickTick.app
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service
@@ -22,7 +22,7 @@ alt - l : yabai -m window --focus east
 alt - j : yabai -m window --focus south
 
 # window oapcity
-alt + ctrl - t : yabai -m window --opacity 0.9
+alt + ctrl - t : yabai -m window --opacity 0.8
 alt + ctrl - o : yabai -m window --opacity 1.0
 
 # rotate layout clockwise

@@ -17,7 +17,7 @@ vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
 
 -- paste without replacing clipboard
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- select occurrances of word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -42,11 +42,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { silent = true, desc = "Clear high
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Neorg shortcuts
-vim.keymap.set("n", "<Leader>vpp", "<CMD>Neorg index<CR>", { desc = "Open neorg default (life) index" })
-vim.keymap.set("n", "<Leader>vpl", "<CMD>Neorg workspace play<CR>", { desc = "Open neorg play workspace" })
-vim.keymap.set("n", "<Leader>vpt", "<CMD>Neorg journal today<CR>", { desc = "Open todays neorg journal" })
-
 -- window management
 vim.keymap.set("n", "<M-Up>", ":resize -2<CR>", { silent = true, noremap = true, desc = "Increase height" })
 vim.keymap.set("n", "<M-Down>", ":resize +2<CR>", { silent = true, noremap = true, desc = "Decrease height" })
@@ -64,11 +59,15 @@ function RunFile(dir)
   vim.cmd(dir)
   local filetype = vim.bo.filetype
   if filetype == "c" then
-    vim.cmd("term gcc -Wall % -o %< && ./%<")
+    vim.cmd("term gcc -Wall -g -std=gnu99 % -o %< && ./%<")
     vim.fn.feedkeys("i")
     return
   elseif filetype == "cpp" then
     vim.cmd("term clang++ -std=c++17 -Wall % -o %< && ./%<")
+    vim.fn.feedkeys("i")
+    return
+  elseif filetype == "go" then
+    vim.cmd("term go build && ./%<")
     vim.fn.feedkeys("i")
     return
   end

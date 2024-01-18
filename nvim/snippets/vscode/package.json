@@ -16,6 +16,12 @@
       },
       {
         "language": [
+          "c"
+        ],
+        "path": "c.json"
+      },
+      {
+        "language": [
           "javascript",
           "typescript",
           "javascriptreact",

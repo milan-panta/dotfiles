@@ -6,6 +6,9 @@ return {
       ensure_installed = {
         "prettierd",
         "clang-format",
+        "goimports-reviser",
+        "gofumpt",
+        "golangci-lint",
       },
       auto_update = true,
     },
@@ -18,6 +21,7 @@ return {
       local lint = require("lint")
       lint.linters_by_ft = {
         python = { "ruff" },
+        go = { "golangcilint" },
       }
       vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged" }, {
         callback = function()
@@ -38,6 +42,7 @@ return {
           c = { "clang_format" },
           cpp = { "clang_format" },
           lua = { "stylua" },
+          go = { "gofumpt", "goimports-reviser" },
           python = { "ruff_format", "ruff_fix" },
           tex = { "latexindent" },
           html = { "prettierd" },

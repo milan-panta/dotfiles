@@ -56,13 +56,13 @@ vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = 
 -- run file
 function RunFile(dir)
   vim.cmd("w")
-  vim.cmd(dir)
   local filetype = vim.bo.filetype
   if filetype == "c" then
-    vim.cmd("term gcc -Wall -g -std=gnu99 % -o %< && ./%<")
-    vim.fn.feedkeys("i")
+    vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall -g -std=gnu99 % -o %< && ./%< ")
     return
-  elseif filetype == "cpp" then
+  end
+  vim.cmd(dir)
+  if filetype == "cpp" then
     vim.cmd("term clang++ -std=c++17 -Wall % -o %< && ./%<")
     vim.fn.feedkeys("i")
     return

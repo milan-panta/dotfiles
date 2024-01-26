@@ -12,10 +12,10 @@ return {
         week_header = {
           enable = true,
         },
-        project = {limit = 3,},
+        project = { limit = 3 },
         packages = { enable = false },
-        mru = {limit = 3},
-        footer = {"babtree"},
+        mru = { limit = 3 },
+        footer = { "babtree" },
         disable_move = true,
         shortcut = {
           {
@@ -38,13 +38,6 @@ return {
             group = "HGD3",
             action = "ene | startinsert",
             key = "e",
-          },
-          {
-            icon = "󱧃 ",
-            desc = "Neorg",
-            group = "HGD4",
-            action = "Neorg index",
-            key = "n",
           },
           {
             icon = " ",

@@ -58,18 +58,19 @@ return {
       -- lsps
       masonLspConfig.setup({
         ensure_installed = {
+          "clangd",
           "cssls",
           "emmet_language_server",
           "eslint",
-          "marksman",
           "gopls",
           "html",
           "jsonls",
+          "ltex",
           "lua_ls",
+          "marksman",
           "pyright",
           "svelte",
           "tailwindcss",
-          "ltex",
           "tsserver",
         },
       })
@@ -79,14 +80,14 @@ return {
         "cssls",
         "emmet_language_server",
         "eslint",
-        "html",
         "gopls",
-        "marksman",
+        "html",
         "jsonls",
+        "ltex",
+        "marksman",
         "pyright",
         "svelte",
         "tailwindcss",
-        "ltex",
         "tsserver",
       }
 
@@ -98,7 +99,15 @@ return {
         })
       end
 
-      -- manually configure
+      lspconfig.clangd.setup({
+        capabilities = capabilities,
+        cmd = {
+          "clangd",
+          "--header-insertion=never",
+        },
+        on_attach = on_attach,
+      })
+
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
         settings = {
@@ -130,16 +139,6 @@ return {
         },
         init_options = {
           showSuggestionsAsSnippets = true,
-        },
-      })
-
-      lspconfig.clangd.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = {
-          "clangd",
-          "--offset-encoding=utf-16",
-          "-header-insertion=never",
         },
       })
     end,

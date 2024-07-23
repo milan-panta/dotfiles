@@ -5,7 +5,6 @@ return {
     opts = {
       ensure_installed = {
         "prettierd",
-        "clang-format",
         "goimports-reviser",
         "gofumpt",
         "golangci-lint",

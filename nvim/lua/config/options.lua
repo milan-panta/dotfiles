@@ -6,7 +6,7 @@ vim.opt.number = true
 vim.opt.confirm = true
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
-vim.opt.cursorlineopt = "number"
+-- vim.opt.cursorlineopt = "number"
 vim.opt.number = true
 vim.opt.numberwidth = 2
 

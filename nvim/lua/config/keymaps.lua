@@ -1,5 +1,10 @@
+-- move highlighted text up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
+
+-- better naviation with line wrap on
+vim.keymap.set("n", "j", "gj", { silent = true })
+vim.keymap.set("n", "k", "gk", { silent = true })
 
 -- better insert mode navigation
 vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
@@ -56,14 +61,14 @@ vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = 
 -- run file
 function RunFile(dir)
   vim.cmd("w")
-  vim.cmd(dir)
   local filetype = vim.bo.filetype
   if filetype == "c" then
-    vim.cmd("term gcc -Wall -g -std=gnu99 % -o %< && ./%<")
-    vim.fn.feedkeys("i")
+    vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall -g -std=gnu99 % -o %< && ./%< ")
     return
-  elseif filetype == "cpp" then
-    vim.cmd("term clang++ -std=c++17 -Wall % -o %< && ./%<")
+  end
+  vim.cmd(dir)
+  if filetype == "cpp" then
+    vim.cmd("term g++ -std=c++20 -Wall % -o %< && ./%<")
     vim.fn.feedkeys("i")
     return
   elseif filetype == "go" then

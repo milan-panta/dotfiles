@@ -4,7 +4,7 @@ sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 # window rules
-yabai -m rule --add app="^(Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter)$" manage=off
+yabai -m rule --add app="^(Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter|Movie Recording|RiotClient|League of Legends)$" manage=off
 
 # global settings
 yabai -m config                                 \
@@ -29,7 +29,7 @@ yabai -m config                                 \
     bottom_padding               0              \
     left_padding                 0              \
     right_padding                0              \
-    window_gap                   7              \
+    window_gap                   3              \
     layout                       bsp            \
     mouse_modifier               fn             \
     mouse_action1                move           \

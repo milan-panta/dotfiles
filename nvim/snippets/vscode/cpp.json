@@ -1,20 +1,47 @@
 {
-    "mainn": {
-        "prefix": "mainn",
+    "codeforces": {
+        "prefix": "codeforces",
         "body": [
-            "#include <bits/stdc++.h>",
+            "#include <algorithm>",
+            "#include <iostream>",
+            "#include <vector>",
             "using namespace std;",
             "",
             "int main() {",
             "    ios::sync_with_stdio(0);",
             "    cin.tie(0);",
             "",
-            "   int t;",
-            "   cin >> t;",
-            "   while (t--) {",
-            "       $0",
-            "   }",
-            "   return 0;",
+            "    int t;",
+            "    cin >> t;",
+            "    while (t--) {",
+            "        $0",
+            "    }",
+            "    return 0;",
+            "}"
+        ]
+    },
+    "usaco": {
+        "prefix": "usaco",
+        "body": [
+            "#include <algorithm>",
+            "#include <iostream>",
+            "#include <vector>",
+            "using namespace std;",
+            "",
+            "void setIO(string name = \"\") {",
+            "    ios_base::sync_with_stdio(0);",
+            "    cin.tie(0);",
+            "    if (name.size()) {",
+            "        freopen((name + \".out\").c_str(), \"w\", stdout);",
+            "        freopen((name + \".in\").c_str(), \"r\", stdin);",
+            "    }",
+            "}",
+            "",
+            "int main() {",
+            "    setIO(\"$1\");",
+            "",
+            "    $0",
+            "return 0;",
             "}"
         ]
     }

@@ -68,7 +68,7 @@ function RunFile(dir)
   end
   vim.cmd(dir)
   if filetype == "cpp" then
-    vim.cmd("term clang++ -std=c++17 -Wall % -o %< && ./%<")
+    vim.cmd("term g++ -std=c++20 -Wall % -o %< && ./%<")
     vim.fn.feedkeys("i")
     return
   elseif filetype == "go" then

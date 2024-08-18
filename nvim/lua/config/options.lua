@@ -27,6 +27,3 @@ vim.opt.smartcase = true
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
-
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3

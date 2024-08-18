@@ -14,9 +14,6 @@ vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
 vim.keymap.set({ "i", "s", "c" }, "<C-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
 
--- netrw keymaps
-vim.keymap.set("n", "<Leader>pv", vim.cmd.Ex)
-
 -- kitty maps M to Cmmd inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
 
@@ -48,10 +45,10 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- window management
-vim.keymap.set("n", "<M-Up>", ":resize -2<CR>", { silent = true, noremap = true, desc = "Increase height" })
-vim.keymap.set("n", "<M-Down>", ":resize +2<CR>", { silent = true, noremap = true, desc = "Decrease height" })
-vim.keymap.set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, noremap = true, desc = "Increase width" })
-vim.keymap.set("n", "<M-Left>", ":vertical resize -2<CR>", { silent = true, noremap = true, desc = "Decrease width" })
+vim.keymap.set("n", "<M-=>", ":resize -2<CR>", { silent = true, noremap = true, desc = "Increase height" })
+vim.keymap.set("n", "<M-->", ":resize +2<CR>", { silent = true, noremap = true, desc = "Decrease height" })
+vim.keymap.set("n", "<M-.>", ":vertical resize +2<CR>", { silent = true, noremap = true, desc = "Increase width" })
+vim.keymap.set("n", "<M-,>", ":vertical resize -2<CR>", { silent = true, noremap = true, desc = "Decrease width" })
 
 -- Consistent with tmux
 vim.api.nvim_set_keymap("n", "<C-w>-", "<C-w>s", { noremap = true, desc = "Create horizontal split" })

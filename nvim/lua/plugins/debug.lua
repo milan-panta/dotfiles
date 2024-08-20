@@ -7,30 +7,14 @@ return {
       "nvim-neotest/nvim-nio",
       "williamboman/mason.nvim",
     },
-    event = {"BufReadPost", "BufNewFile"},
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
-      local dap = require "dap"
-      local ui = require "dapui"
+      local dap = require("dap")
+      local ui = require("dapui")
 
       require("dapui").setup()
 
-      require("nvim-dap-virtual-text").setup {
-        -- This just tries to mitigate the chance that I leak tokens here. Probably won't stop it from happening...
-        display_callback = function(variable)
-          local name = string.lower(variable.name)
-          local value = string.lower(variable.value)
-          if name:match "secret" or name:match "api" or value:match "secret" or value:match "api" then
-            return "*****"
-          end
-
-          if #variable.value > 15 then
-            return " " .. string.sub(variable.value, 1, 15) .. "... "
-          end
-
-          return " " .. variable.value
-        end,
-      }
-
+      require("nvim-dap-virtual-text").setup()
 
       vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
       vim.keymap.set("n", "<space>gb", dap.run_to_cursor)

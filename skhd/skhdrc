@@ -1,15 +1,12 @@
 # shortcuts for opening apps
 shift + cmd - o : open -na kitty.app
-shift + cmd - u : open -na Firefox.app
 shift + cmd - i : open -na Google\ Chrome.app
-rcmd - f : open -a Firefox.app
 rcmd - k : open -a kitty.app
 rcmd - b : open -a Messages
 rcmd - c : open -a Notion\ Calendar.app
 rcmd - s : open -a sioyek.app
 rcmd - d : open -a Discord.app
 rcmd - m : open -a Mail
-rcmd - n : open -a Notion.app
 rcmd - t : open -a TickTick.app
 
 # restart yabai hotkey
@@ -57,7 +54,7 @@ alt - 7 : yabai -m space --focus 7
 alt - 8 : yabai -m space --focus 8
 alt - 9 : yabai -m space --focus 9
 
-# Move focus container to space
+# Move window to space and focus space
 alt + shift - 1 : yabai -m window --space 1 --focus
 alt + shift - 2 : yabai -m window --space 2 --focus
 alt + shift - 3 : yabai -m window --space 3 --focus

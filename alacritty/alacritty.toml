@@ -194,6 +194,9 @@ dynamic_padding = true
 opacity = 1
 option_as_alt = "Both"
 
+[cursor.style]
+blinking = "Never"
+
 [window.class]
 general = "Alacritty"
 instance = "Alacritty"

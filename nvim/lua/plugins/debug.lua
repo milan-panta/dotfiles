@@ -5,6 +5,7 @@ return {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
+      "jay-babu/mason-nvim-dap.nvim",
       "williamboman/mason.nvim",
     },
     event = { "BufReadPost", "BufNewFile" },
@@ -13,6 +14,16 @@ return {
       local ui = require("dapui")
 
       require("dapui").setup()
+
+      -- debugging
+      require("mason-nvim-dap").setup({
+        handlers = {},
+        ensure_installed = {
+          "codelldb",
+          "python"
+        },
+        automatic_installation = true,
+      })
 
       require("nvim-dap-virtual-text").setup()
 
@@ -24,12 +35,12 @@ return {
         require("dapui").eval(nil, { enter = true })
       end)
 
-      vim.keymap.set("n", "<F1>", dap.continue)
-      vim.keymap.set("n", "<F2>", dap.step_into)
-      vim.keymap.set("n", "<F3>", dap.step_over)
-      vim.keymap.set("n", "<F4>", dap.step_out)
-      vim.keymap.set("n", "<F5>", dap.step_back)
-      vim.keymap.set("n", "<F13>", dap.restart)
+      vim.keymap.set("n", "<F3>", dap.continue)
+      vim.keymap.set("n", "<F4>", dap.step_into)
+      vim.keymap.set("n", "<F5>", dap.step_over)
+      vim.keymap.set("n", "<F6>", dap.step_out)
+      vim.keymap.set("n", "<F7>", dap.step_back)
+      vim.keymap.set("n", "<F12>", dap.restart)
 
       dap.listeners.before.attach.dapui_config = function()
         ui.open()

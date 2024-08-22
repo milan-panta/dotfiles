@@ -20,6 +20,86 @@
             "}"
         ]
     },
+    "cses": {
+        "prefix": "cses",
+        "body": [
+            "#include <algorithm>",
+            "#include <iostream>",
+            "#include <vector>",
+            "using namespace std;",
+            "",
+            "int main() {",
+            "    ios::sync_with_stdio(0);",
+            "    cin.tie(0);",
+            "",
+            "    $0",
+            "",
+            "    return 0;",
+            "}"
+        ]
+    },
+    "fin": {
+        "prefix": "fin",
+        "body": [
+            "for (int i = 0; i < n; i++) {",
+            "    $0",
+            "}"
+        ]
+    },
+    "fjm": {
+        "prefix": "fjm",
+        "body": [
+            "for (int j = 0; j < m; j++) {",
+            "    $0",
+            "}"
+        ]
+    },
+    "fcout": {
+        "prefix": "fcout",
+        "body": [
+            "for (auto x : ${1}) {",
+            "    cout << ${2} << \" \"",
+            "}",
+            "cout << endl;",
+            "${3}"
+        ]
+    },
+    "wadj": {
+        "prefix": "wadj",
+        "body": [
+            "struct edge {",
+            "    int b;",
+            "    long long w;",
+            "};",
+            "",
+            "vector<vector<edge>> adj(n, vector<edge>());",
+            "",
+            "for (int i = 0; i < m; i++) {",
+            "    int a;",
+            "    edge e;",
+            "    cin >> a >> e.b >> e.w;",
+            "    --a;--e.b;",
+            "    adj[a].push_back(e);",
+            "}",
+            "",
+            "$0"
+        ]
+    },
+    "adj": {
+        "prefix": "adj",
+        "body": [
+            "vector<vector<int>> adj(n, vector<int>());",
+            "",
+            "for (int i = 0; i < m; i++) {",
+            "    int a, b;",
+            "    cin >> a >> b;",
+            "    --a;--b;",
+            "    adj[a].emplace_back(b);",
+            "}",
+            "",
+            "$0"
+        ]
+    },
     "usaco": {
         "prefix": "usaco",
         "body": [

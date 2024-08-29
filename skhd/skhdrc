@@ -1,15 +1,13 @@
 # shortcuts for opening apps
 shift + cmd - o : open -na kitty.app
-shift + cmd - u : open -na Firefox.app
 shift + cmd - i : open -na Google\ Chrome.app
-rcmd - f : open -a Firefox.app
+shift + cmd - u : open -na Firefox.app
 rcmd - k : open -a kitty.app
 rcmd - b : open -a Messages
 rcmd - c : open -a Notion\ Calendar.app
 rcmd - s : open -a sioyek.app
 rcmd - d : open -a Discord.app
 rcmd - m : open -a Mail
-rcmd - n : open -a Notion.app
 rcmd - t : open -a TickTick.app
 
 # restart yabai hotkey
@@ -57,16 +55,16 @@ alt - 7 : yabai -m space --focus 7
 alt - 8 : yabai -m space --focus 8
 alt - 9 : yabai -m space --focus 9
 
-# move window and focus desktop
-shift + alt - 1 : yabai -m window --space  1; yabai -m space --focus 1
-shift + alt - 2 : yabai -m window --space  2; yabai -m space --focus 2
-shift + alt - 3 : yabai -m window --space  3; yabai -m space --focus 3
-shift + alt - 4 : yabai -m window --space  4; yabai -m space --focus 4
-shift + alt - 5 : yabai -m window --space  5; yabai -m space --focus 5
-shift + alt - 6 : yabai -m window --space  6; yabai -m space --focus 6
-shift + alt - 7 : yabai -m window --space  7; yabai -m space --focus 7
-shift + alt - 8 : yabai -m window --space  8; yabai -m space --focus 8
-shift + alt - 9 : yabai -m window --space  9; yabai -m space --focus 9
+# Move window to space and focus space
+alt + shift - 1 : yabai -m window --space 1 --focus
+alt + shift - 2 : yabai -m window --space 2 --focus
+alt + shift - 3 : yabai -m window --space 3 --focus
+alt + shift - 4 : yabai -m window --space 4 --focus
+alt + shift - 5 : yabai -m window --space 5 --focus
+alt + shift - 6 : yabai -m window --space 6 --focus
+alt + shift - 7 : yabai -m window --space 7 --focus
+alt + shift - 8 : yabai -m window --space 8 --focus
+alt + shift - 9 : yabai -m window --space 9 --focus
 
 # focus monitor
 cmd + shift - h  : yabai -m display --focus next

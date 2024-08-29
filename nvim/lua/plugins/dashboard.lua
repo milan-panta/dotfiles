@@ -1,9 +1,10 @@
 return {
   "nvimdev/dashboard-nvim",
-  event = "VimEnter",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
+  lazy = false,
+  priority = 1000,
   config = function()
     local db = require("dashboard")
     vim.opt.ruler = false

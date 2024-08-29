@@ -1,7 +1,3 @@
--- move highlighted text up and down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
-
 -- better naviation with line wrap on
 vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
@@ -14,8 +10,12 @@ vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
 vim.keymap.set({ "i", "s", "c" }, "<C-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
 
--- netrw keymaps
-vim.keymap.set("n", "<Leader>pv", vim.cmd.Ex)
+-- qflist navigation
+vim.keymap.set("n", "[q", "<cmd>cp<cr>", {desc = "Previous item on qf", silent = true})
+vim.keymap.set("n", "]q", "<cmd>cn<cr>", {desc = "Next item on qf", silent = true})
+vim.keymap.set("n", "[Q", "<cmd>cfirst<cr>", {desc = "First item on qf", silent = true})
+vim.keymap.set("n", "]Q", "<cmd>clast<cr>", {desc = "Last item on qf", silent = true})
+vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", {desc = "Open qf list", silent = true})
 
 -- kitty maps M to Cmmd inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
@@ -38,20 +38,21 @@ vim.keymap.set("o", "aq", 'a"')
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")
 
+-- +y to copy to system clipboard
 vim.keymap.set({ "n", "v" }, "Y", '"+y')
 
 -- Remove text highlight after search
-vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { silent = true, desc = "Clear highlights" })
+vim.keymap.set("n", "<Esc>", "<cmd>noh<cr>", { silent = true, desc = "Clear highlights" })
 
 -- Back to back indents
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- window management
-vim.keymap.set("n", "<M-Up>", ":resize -2<CR>", { silent = true, noremap = true, desc = "Increase height" })
-vim.keymap.set("n", "<M-Down>", ":resize +2<CR>", { silent = true, noremap = true, desc = "Decrease height" })
-vim.keymap.set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, noremap = true, desc = "Increase width" })
-vim.keymap.set("n", "<M-Left>", ":vertical resize -2<CR>", { silent = true, noremap = true, desc = "Decrease width" })
+vim.keymap.set("n", "<M-=>", ":resize -2<cr>", { silent = true, noremap = true, desc = "Increase height" })
+vim.keymap.set("n", "<M-->", ":resize +2<cr>", { silent = true, noremap = true, desc = "Decrease height" })
+vim.keymap.set("n", "<M-.>", ":vertical resize +2<cr>", { silent = true, noremap = true, desc = "Increase width" })
+vim.keymap.set("n", "<M-,>", ":vertical resize -2<cr>", { silent = true, noremap = true, desc = "Decrease width" })
 
 -- Consistent with tmux
 vim.api.nvim_set_keymap("n", "<C-w>-", "<C-w>s", { noremap = true, desc = "Create horizontal split" })
@@ -97,4 +98,4 @@ vim.keymap.set("n", "<leader>rh", function()
 end, { silent = true, desc = "Run horizontally" })
 
 -- markdown preview runner
-vim.keymap.set("n", "<Leader>rm", "<Cmd>MarkdownPreviewToggle<CR>")
+vim.keymap.set("n", "<Leader>rm", "<Cmd>MarkdownPreviewToggle<cr>")

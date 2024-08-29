@@ -9,6 +9,7 @@ vim.opt.cursorline = true
 -- vim.opt.cursorlineopt = "number"
 vim.opt.number = true
 vim.opt.numberwidth = 2
+vim.opt.relativenumber = true
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -27,6 +28,3 @@ vim.opt.smartcase = true
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
-
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3

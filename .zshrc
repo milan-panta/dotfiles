@@ -15,7 +15,7 @@ export EDITOR=nvim
 eval "$(zoxide init zsh)"
 
 # neovim config switcher
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nnvim="NVIM_APPNAME=nnvim nvim"
 alias nh="NVIM_APPNAME=nh nvim"
 alias nlc="nvim leetcode.nvim"
 

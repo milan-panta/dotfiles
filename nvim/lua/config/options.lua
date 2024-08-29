@@ -9,6 +9,7 @@ vim.opt.cursorline = true
 -- vim.opt.cursorlineopt = "number"
 vim.opt.number = true
 vim.opt.numberwidth = 2
+vim.opt.relativenumber = true
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true

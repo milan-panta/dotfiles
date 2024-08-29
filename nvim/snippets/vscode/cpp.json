@@ -58,7 +58,7 @@
         "prefix": "fcout",
         "body": [
             "for (auto x : ${1}) {",
-            "    cout << ${2} << \" \"",
+            "    cout << x${2} << \" \";",
             "}",
             "cout << endl;",
             "${3}"
@@ -98,6 +98,12 @@
             "}",
             "",
             "$0"
+        ]
+    },
+    "minheap": {
+        "prefix": "minheap",
+        "body": [
+                "priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> q;"
         ]
     },
     "usaco": {

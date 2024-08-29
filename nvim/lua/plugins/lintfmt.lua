@@ -48,6 +48,7 @@ return {
           markdown = { "prettierd" },
           javascript = { "prettierd" },
           javascriptreact = { "prettierd" },
+          json = { "prettierd" },
           typescript = { "prettierd" },
           typescriptreact = { "prettierd" },
         },

@@ -1,7 +1,3 @@
--- move highlighted text up and down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
-
 -- better naviation with line wrap on
 vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
@@ -35,6 +31,7 @@ vim.keymap.set("o", "aq", 'a"')
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>")
 
+-- +y to copy to system clipboard
 vim.keymap.set({ "n", "v" }, "Y", '"+y')
 
 -- Remove text highlight after search

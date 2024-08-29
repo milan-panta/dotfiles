@@ -102,6 +102,7 @@ return {
         cmd = {
           "clangd",
           "--header-insertion=never",
+          "--query-driver=/usr/bin/clang",
         },
         on_attach = on_attach,
       })

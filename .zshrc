@@ -6,6 +6,8 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="/opt/homebrew/bin:$PATH"
+export CPATH="/opt/homebrew/include:$CPATH"
+export LIBRARY_PATH="/opt/homebrew/lib:$LIBRARY_PATH"
 export DYLD_LIBRARY_PATH=/opt/homebrew/lib/
 export PATH=/Users/milan/.cargo/bin:$PATH
 export DBUS_SESSION_BUS_ADDRESS='unix:path='$DBUS_LAUNCHD_SESSION_BUS_SOCKET

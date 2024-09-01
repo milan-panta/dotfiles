@@ -2,14 +2,6 @@
 vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
 
--- better insert mode navigation
-vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
-vim.keymap.set("i", "<C-y>", "<Home>", { desc = "Beginning of line" })
-vim.keymap.set({ "i", "s", "c" }, "<C-k>", "<Up>", { desc = "Move up" })
-vim.keymap.set({ "i", "s", "c" }, "<C-l>", "<Right>", { desc = "Move right" })
-vim.keymap.set({ "i", "s", "c" }, "<C-j>", "<Down>", { desc = "Move down" })
-vim.keymap.set({ "i", "s", "c" }, "<C-h>", "<Left>", { desc = "Move left" })
-
 -- qflist navigation
 vim.keymap.set("n", "[q", "<cmd>cp<cr>", {desc = "Previous item on qf", silent = true})
 vim.keymap.set("n", "]q", "<cmd>cn<cr>", {desc = "Next item on qf", silent = true})

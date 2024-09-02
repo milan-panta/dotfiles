@@ -16,7 +16,6 @@ require("lazy").setup({
   },
   defaults = {
     lazy = false,
-    version = false, -- always use the latest git commit
   },
   performance = {
     cache = {

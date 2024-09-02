@@ -21,6 +21,8 @@ alias nh="NVIM_APPNAME=nh nvim"
 alias nlc="nvim leetcode.nvim"
 alias lvim="NVIM_APPNAME=LazyVim nvim"
 alias hvim="NVIM_APPNAME=hvim nvim"
+alias jvim="NVIM_APPNAME=jvim nvim"
+alias kvim="NVIM_APPNAME=kvim nvim"
 
 alias n="nvim"
 alias epath="tr ':' '\n' <<< "$PATH""

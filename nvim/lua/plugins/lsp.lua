@@ -92,13 +92,24 @@ return {
       end
 
       lspconfig.clangd.setup({
-        capabilities = capabilities,
-        cmd = {
-          "clangd",
-          "--header-insertion=never",
-          "--query-driver=/usr/bin/clang",
-        },
         on_attach = on_attach,
+        cmd = {
+          "/opt/homebrew/opt/llvm/bin/clangd",
+          "--background-index",
+          "--pch-storage=memory",
+          "--all-scopes-completion",
+          "--pretty",
+          "--header-insertion=never",
+          "-j=4",
+          "--inlay-hints",
+          "--header-insertion-decorators",
+          "--function-arg-placeholders",
+          "--completion-style=detailed",
+        },
+        filetypes = { "c", "cpp", "objc", "objcpp" },
+        root_dir = require("lspconfig").util.root_pattern("src"),
+        init_option = { fallbackFlags = { "-std=c++2a" } },
+        capabilities = capabilities,
       })
 
       lspconfig.lua_ls.setup({

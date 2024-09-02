@@ -15,27 +15,21 @@ return {
       local keymap = vim.keymap
 
       local on_attach = function(_, bufnr)
-        local opts = { noremap = true, silent = true }
-        opts.buffer = bufnr
-        opts.desc = "Go to declaration"
-        keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        opts.desc = "Go to definition"
-        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-        opts.desc = "Go to references"
-        keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-        opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-        opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-        opts.desc = "Lsp hover"
-        keymap.set("n", "<S-k>", vim.lsp.buf.hover, opts)
-        opts.desc = "Code actions"
-        keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, opts)
-        opts.desc = "Rename"
-        keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
-        opts.desc = "Get signature"
-        keymap.set("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
-        opts.desc = "Toggle Inlay Hints"
+        local opts = { buffer = bufnr, noremap = true, silent = true }
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+        vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+        vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+        vim.keymap.set("n", "<space>wl", function()
+          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+        vim.keymap.set("n", "<space>lr", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
         keymap.set("n", "<Leader>ti", function()
           vim.lsp.inlay_hint(bufnr, nil)
         end, opts)
@@ -98,12 +92,24 @@ return {
       end
 
       lspconfig.clangd.setup({
-        capabilities = capabilities,
-        cmd = {
-          "clangd",
-          "--header-insertion=never",
-        },
         on_attach = on_attach,
+        cmd = {
+          "/opt/homebrew/opt/llvm/bin/clangd",
+          "--background-index",
+          "--pch-storage=memory",
+          "--all-scopes-completion",
+          "--pretty",
+          "--header-insertion=never",
+          "-j=4",
+          "--inlay-hints",
+          "--header-insertion-decorators",
+          "--function-arg-placeholders",
+          "--completion-style=detailed",
+        },
+        filetypes = { "c", "cpp", "objc", "objcpp" },
+        root_dir = require("lspconfig").util.root_pattern("src"),
+        init_option = { fallbackFlags = { "-std=c++2a" } },
+        capabilities = capabilities,
       })
 
       lspconfig.lua_ls.setup({

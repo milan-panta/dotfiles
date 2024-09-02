@@ -1,7 +1,7 @@
 return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       ensure_installed = {
         "prettierd",
@@ -15,7 +15,7 @@ return {
 
   {
     "mfussenegger/nvim-lint",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       local lint = require("lint")
       lint.linters_by_ft = {

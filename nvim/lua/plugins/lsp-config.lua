@@ -12,7 +12,7 @@ return {
     local mason = require("mason")
     local masonLspConfig = require("mason-lspconfig")
 
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       local opts = { buffer = bufnr, noremap = true, silent = true }
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -29,6 +29,11 @@ return {
       vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+      if client.supports_method("textDocument/inlayHint") then
+        vim.keymap.set("n", "<Leader>ti", function()
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr }), { bufnr })
+        end, opts)
+      end
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()

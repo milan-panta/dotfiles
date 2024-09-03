@@ -1,7 +1,7 @@
 # shortcuts for opening apps
 shift + cmd - o : open -na kitty.app
-shift + cmd - i : open -na Google\ Chrome.app
-shift + cmd - u : open -na Firefox.app
+shift + cmd - i : open -a Arc.app
+shift + cmd - u : open -na Google\ Chrome.app
 rcmd - k : open -a kitty.app
 rcmd - b : open -a Messages
 rcmd - c : open -a Notion\ Calendar.app

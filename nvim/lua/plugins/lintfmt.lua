@@ -54,12 +54,6 @@ return {
         },
       })
       vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
-        local filetype = vim.bo.filetype
-        if filetype == "rust" then
-          vim.cmd("RustFmt")
-          vim.cmd("w")
-          return
-        end
         conform.format({
           lsp_fallback = false,
           async = false,

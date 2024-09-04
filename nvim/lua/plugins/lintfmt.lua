@@ -61,7 +61,7 @@ return {
         })
         vim.cmd("w")
         -- end
-      end, { desc = "Format file or range (in visual mode)" })
+      end, { noremap = true, silent = true, desc = "Format file or range (in visual mode)" })
     end,
   },
 }

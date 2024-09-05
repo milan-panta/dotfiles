@@ -1,5 +1,6 @@
 # Bind Ctrl+Y to t. t is a script defined in /usr/local/bin/t.
 bindkey -s "^Y" 't\n'
+bindkey -s "^z" 'fg\n'
 
 source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -35,3 +36,5 @@ setopt HIST_IGNORE_ALL_DUPS
 
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+eval "$(starship init zsh)"

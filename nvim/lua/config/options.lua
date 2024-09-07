@@ -1,13 +1,11 @@
 vim.opt.laststatus = 3 -- global statusline
 
 vim.opt.termguicolors = true
+vim.opt.confirm = true
 
 vim.opt.number = true
-vim.opt.confirm = true
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
--- vim.opt.cursorlineopt = "number"
-vim.opt.number = true
 vim.opt.numberwidth = 2
 vim.opt.relativenumber = true
 

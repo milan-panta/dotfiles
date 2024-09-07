@@ -65,7 +65,7 @@ return {
         "pyright",
         "rust_analyzer",
         "tailwindcss",
-        "tsserver",
+        "ts_ls",
       },
     })
 
@@ -82,7 +82,7 @@ return {
       "pyright",
       "rust_analyzer",
       "tailwindcss",
-      "tsserver",
+      "ts_ls",
     }
 
     -- configure with default lsp settings

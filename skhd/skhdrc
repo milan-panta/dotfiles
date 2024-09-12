@@ -20,7 +20,7 @@ alt - l : yabai -m window --focus east
 alt - j : yabai -m window --focus south
 
 # window oapcity
-alt + ctrl - t : yabai -m window --opacity 0.8
+alt + ctrl - t : yabai -m window --opacity 0.88
 alt + ctrl - o : yabai -m window --opacity 1.0
 
 # rotate layout clockwise

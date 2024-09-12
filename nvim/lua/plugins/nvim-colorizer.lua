@@ -1,6 +1,6 @@
 return {
   "NvChad/nvim-colorizer.lua",
-  ft = { "css", "html", "typescriptreact", "javascriptreact", "cpp" },
+  ft = { "toml", "css", "html", "typescriptreact", "javascriptreact", "cpp" },
   config = function()
     require("colorizer").setup({
       user_default_options = {

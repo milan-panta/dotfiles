@@ -40,7 +40,7 @@ return {
   },
   keys = {
     {
-      "<Leader>ff",
+      "<Leader><Leader>",
       function()
         require("telescope.builtin").fd({ hidden = true })
       end,

@@ -1,7 +1,7 @@
 return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile", "InsertEnter" },
     opts = {
       ensure_installed = {
         "prettierd",

@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile", "InsertEnter" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -94,7 +94,7 @@ return {
     lspconfig.clangd.setup({
       on_attach = on_attach,
       cmd = {
-        "/opt/homebrew/opt/llvm/bin/clangd",
+        "/opt/homebrew/opt/llvm@18/bin/clangd",
         "--background-index",
         "--pch-storage=memory",
         "--all-scopes-completion",

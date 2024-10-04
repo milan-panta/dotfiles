@@ -5,7 +5,6 @@ sudo yabai --load-sa
 
 -- app rules
 yabai -m rule --add app="^(main|Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter|Movie Recording|RiotClient|League of Legends)$" manage=off
-yabai -m rule --add app="kitty" opacity=0.88
 
 # global settings
 yabai -m config                                 \

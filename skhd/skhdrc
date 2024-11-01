@@ -1,7 +1,7 @@
 # shortcuts for opening apps
 shift + cmd - o : open -na Alacritty.app
 shift + cmd - u : open -na Firefox.app
-shift + cmd - i : open -na Google\ Chrome.app
+shift + cmd - i : open -a Arc.app
 rcmd - b : open -a Messages
 rcmd - c : open -a Notion\ Calendar.app
 rcmd - s : open -a sioyek.app

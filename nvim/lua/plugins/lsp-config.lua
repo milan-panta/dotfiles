@@ -94,7 +94,7 @@ return {
     lspconfig.clangd.setup({
       on_attach = on_attach,
       cmd = {
-        "/opt/homebrew/opt/llvm@18/bin/clangd",
+        "/opt/homebrew/opt/llvm@19/bin/clangd",
         "--background-index",
         "--pch-storage=memory",
         "--all-scopes-completion",

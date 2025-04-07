@@ -1,13 +1,14 @@
 # shortcuts for opening apps
-shift + cmd - o : open -na Alacritty.app
-shift + cmd - u : open -na Firefox.app
-shift + cmd - i : open -a Arc.app
+shift + cmd - o : open -na kitty
+shift + cmd - u : open -na "Zen Browser"
+shift + cmd - i : open -a "Zen Browser"
 rcmd - b : open -a Messages
-rcmd - c : open -a Notion\ Calendar.app
-rcmd - s : open -a sioyek.app
-rcmd - d : open -a Discord.app
+rcmd - c : open -a "Notion Calendar"
+rcmd - s : open -a sioyek
+rcmd - d : open -a Discord
 rcmd - m : open -a Mail
-rcmd - t : open -a TickTick.app
+rcmd - h : open -a Siri
+rcmd - t : open -a TickTick
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service

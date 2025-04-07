@@ -26,12 +26,16 @@ return {
       })
 
       -- Key mappings
-      vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
-      vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
-      vim.keymap.set("n", "<space>?", function()
+      vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
+      vim.keymap.set("n", "<leader>B", function()
+        require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+      end)
+
+      vim.keymap.set("n", "<leader>gb", dap.run_to_cursor)
+      vim.keymap.set("n", "<leader>?", function()
         require("dapui").eval()
       end)
-      vim.keymap.set("n", "<space>dt", function()
+      vim.keymap.set("n", "<leader>dt", function()
         require("dapui").toggle()
       end)
       vim.keymap.set("n", "<F1>", dap.continue)

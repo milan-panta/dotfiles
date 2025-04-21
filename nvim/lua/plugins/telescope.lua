@@ -39,9 +39,9 @@ return {
           previewer = false,
         },
       },
-      extensions = { fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true } },
+      extensions = { fzf = {} },
     })
-    require("telescope").load_extension("fzf")
+    pcall(require("telescope").load_extension, "fzf")
     require("telescope").load_extension("undo")
   end,
   cmd = {

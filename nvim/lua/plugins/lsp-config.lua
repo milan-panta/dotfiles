@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile", "InsertEnter" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -54,6 +54,7 @@ return {
     masonLspConfig.setup({
       ensure_installed = {
         "clangd",
+        "tinymist",
         "cssls",
         "emmet_language_server",
         "eslint",
@@ -65,7 +66,6 @@ return {
         "pyright",
         "rust_analyzer",
         "tailwindcss",
-        "ts_ls",
       },
     })
 
@@ -82,7 +82,6 @@ return {
       "pyright",
       "rust_analyzer",
       "tailwindcss",
-      "ts_ls",
     }
 
     -- configure with default lsp settings
@@ -93,10 +92,19 @@ return {
       })
     end
 
+    lspconfig.tinymist.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        formatterMode = "typstyle",
+        exportPdf = "never",
+      },
+    })
+
     lspconfig.clangd.setup({
       on_attach = on_attach,
       cmd = {
-        "/opt/homebrew/opt/llvm/bin/clangd",
+        "/opt/homebrew/opt/llvm@19/bin/clangd",
         "--background-index",
         "--pch-storage=memory",
         "--all-scopes-completion",
@@ -109,7 +117,7 @@ return {
       },
       filetypes = { "c", "cpp", "objc", "objcpp" },
       root_dir = require("lspconfig").util.root_pattern("src"),
-      init_option = { fallbackFlags = { "-std=c++2a" } },
+      init_option = { fallbackFlags = { "-std=c++23" } },
       capabilities = capabilities,
     })
 
@@ -147,4 +155,7 @@ return {
       },
     })
   end,
+  vim.diagnostic.config({
+    virtual_text = true,
+  }),
 }

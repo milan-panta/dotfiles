@@ -55,7 +55,7 @@
         ]
     },
     "fcout": {
-        "prefix": "fcout",
+        "prefix": "coutf",
         "body": [
             "for (auto x : ${1}) {",
             "    cout << x${2} << \" \";",
@@ -65,7 +65,7 @@
         ]
     },
     "wadj": {
-        "prefix": "wadj",
+        "prefix": "adjw",
         "body": [
             "struct edge {",
             "    int b;",

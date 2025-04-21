@@ -7,30 +7,39 @@ return {
   },
   config = function()
     local telescope = require("telescope")
-    local actions = require("telescope.actions")
     telescope.setup({
       defaults = {
-        file_ignore_patterns = { "node_modules" },
         mappings = {
           i = {
-            ["<Esc>"] = actions.close,
+            ["<ESC>"] = require("telescope.actions").close,
           },
         },
-        layout_strategy = "horizontal",
-        layout_config = {
-          horizontal = {
-            prompt_position = "top",
-            preview_width = 0.5,
-          },
-          width = 0.9,
-          height = 0.9,
-          preview_cutoff = 120,
-        },
-        sorting_strategy = "ascending",
-        path_display = { "truncate" },
-        dynamic_preview_title = true,
-        winblend = 0,
+        history = { cycle_wrap = true },
+        prompt_prefix = " \239\128\130  ",
+        selection_caret = "  ",
+        entry_prefix = "  ",
       },
+      pickers = {
+        buffers = { theme = "ivy", previewer = false },
+        oldfiles = { theme = "ivy", previewer = false },
+        find_files = {
+          theme = "ivy",
+          hidden = true,
+          find_command = {
+            "rg",
+            "--files",
+            "--glob",
+            "!.git",
+            "--glob",
+            "!venv",
+            "--glob",
+            "!_build",
+            "--hidden",
+          },
+          previewer = false,
+        },
+      },
+      extensions = { fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true } },
     })
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("undo")
@@ -40,9 +49,9 @@ return {
   },
   keys = {
     {
-      "<Leader>ff",
+      "<Leader><Leader>",
       function()
-        require("telescope.builtin").fd({ hidden = true })
+        require("telescope.builtin").find_files({ hidden = true })
       end,
       desc = "Telescope find files",
     },

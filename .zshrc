@@ -6,6 +6,8 @@ source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export CPATH="/opt/homebrew/opt/llvm/bin:$CPATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export CPATH="/opt/homebrew/include:$CPATH"
 export DYLD_LIBRARY_PATH=/opt/homebrew/lib/
@@ -18,9 +20,10 @@ eval "$(zoxide init zsh)"
 
 # neovim config switcher
 alias nnvim="NVIM_APPNAME=nnvim nvim"
+alias mvim="NVIM_APPNAME=MichaelVim nvim"
 alias nh="NVIM_APPNAME=nh nvim"
 alias nlc="nvim leetcode.nvim"
-alias lvim="NVIM_APPNAME=LazyVim nvim"
+alias lvim="NVIM_APPNAME=lvim nvim"
 alias hvim="NVIM_APPNAME=hvim nvim"
 alias jvim="NVIM_APPNAME=jvim nvim"
 alias kvim="NVIM_APPNAME=kvim nvim"
@@ -30,6 +33,9 @@ alias epath="tr ':' '\n' <<< "$PATH""
 alias lg="lazygit"
 alias l="yazi"
 alias gc="git checkout"
+
+alias gcc="gcc-14"
+alias g++="g++-14"
 
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS

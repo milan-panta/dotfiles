@@ -3,7 +3,7 @@
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
-# window rules
+-- app rules
 yabai -m rule --add app="^(main|Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter|Movie Recording|RiotClient|League of Legends)$" manage=off
 
 # global settings

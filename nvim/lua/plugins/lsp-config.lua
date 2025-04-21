@@ -54,6 +54,7 @@ return {
     masonLspConfig.setup({
       ensure_installed = {
         "clangd",
+        "tinymist",
         "cssls",
         "emmet_language_server",
         "eslint",
@@ -91,6 +92,15 @@ return {
       })
     end
 
+    lspconfig.tinymist.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        formatterMode = "typstyle",
+        exportPdf = "never",
+      },
+    })
+
     lspconfig.clangd.setup({
       on_attach = on_attach,
       cmd = {
@@ -107,7 +117,7 @@ return {
       },
       filetypes = { "c", "cpp", "objc", "objcpp" },
       root_dir = require("lspconfig").util.root_pattern("src"),
-      init_option = { fallbackFlags = { "-std=c++2a" } },
+      init_option = { fallbackFlags = { "-std=c++23" } },
       capabilities = capabilities,
     })
 

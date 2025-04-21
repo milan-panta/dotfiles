@@ -6,6 +6,7 @@ return {
       ensure_installed = {
         "prettierd",
         "goimports-reviser",
+        "typstyle",
         "gofumpt",
         "golangci-lint",
       },
@@ -45,6 +46,7 @@ return {
           python = { "ruff_format", "ruff_fix" },
           tex = { "latexindent" },
           html = { "prettierd" },
+          typst = { "typstyle" },
           markdown = { "prettierd" },
           javascript = { "prettierd" },
           javascriptreact = { "prettierd" },

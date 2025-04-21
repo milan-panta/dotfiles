@@ -3,6 +3,7 @@ shift + cmd - o : open -na kitty
 shift + cmd - u : open -na "Zen Browser"
 shift + cmd - i : open -a "Zen Browser"
 rcmd - b : open -a Messages
+rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"
 rcmd - s : open -a sioyek
 rcmd - d : open -a Discord

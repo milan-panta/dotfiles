@@ -29,7 +29,7 @@ return {
       vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-      if client.supports_method("textDocument/inlayHint") then
+      if client:supports_method("textDocument/inlayHint") then
         vim.keymap.set("n", "<Leader>ti", function()
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr }), { bufnr })
         end, opts)

@@ -3,10 +3,6 @@ vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
 
 -- qflist navigation
-vim.keymap.set("n", "[q", "<cmd>cp<cr>", { desc = "Previous item on qf", silent = true })
-vim.keymap.set("n", "]q", "<cmd>cn<cr>", { desc = "Next item on qf", silent = true })
-vim.keymap.set("n", "[Q", "<cmd>cfirst<cr>", { desc = "First item on qf", silent = true })
-vim.keymap.set("n", "]Q", "<cmd>clast<cr>", { desc = "Last item on qf", silent = true })
 vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", { desc = "Open qf list", silent = true })
 
 -- kitty maps M to Cmmd inside tmux sessions

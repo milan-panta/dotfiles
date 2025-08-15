@@ -1,5 +1,6 @@
 return {
   "aktersnurra/no-clown-fiesta.nvim",
+  lazy = true,
   priority = 1000,
   config = function()
     require("no-clown-fiesta").setup({

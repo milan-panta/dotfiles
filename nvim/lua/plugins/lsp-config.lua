@@ -112,10 +112,10 @@ return {
         "--header-insertion-decorators",
         "--function-arg-placeholders",
         "--completion-style=detailed",
+        "--std=c++23",
       },
       filetypes = { "c", "cpp", "objc", "objcpp" },
       root_dir = require("lspconfig").util.root_pattern("src"),
-      init_option = { fallbackFlags = { "-std=c++23" } },
       capabilities = capabilities,
     })
 
@@ -152,8 +152,9 @@ return {
         showSuggestionsAsSnippets = true,
       },
     })
+
+    vim.diagnostic.config({
+      virtual_text = true,
+    })
   end,
-  vim.diagnostic.config({
-    virtual_text = true,
-  }),
 }

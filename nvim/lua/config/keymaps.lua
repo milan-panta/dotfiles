@@ -3,11 +3,7 @@ vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
 
 -- qflist navigation
-vim.keymap.set("n", "[q", "<cmd>cp<cr>", {desc = "Previous item on qf", silent = true})
-vim.keymap.set("n", "]q", "<cmd>cn<cr>", {desc = "Next item on qf", silent = true})
-vim.keymap.set("n", "[Q", "<cmd>cfirst<cr>", {desc = "First item on qf", silent = true})
-vim.keymap.set("n", "]Q", "<cmd>clast<cr>", {desc = "Last item on qf", silent = true})
-vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", {desc = "Open qf list", silent = true})
+vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", { desc = "Open qf list", silent = true })
 
 -- kitty maps M to Cmmd inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
@@ -61,15 +57,8 @@ function RunFile(dir)
   end
   vim.cmd(dir)
   if filetype == "cpp" then
-    vim.cmd("term clang++ -g -std=c++23 -Wall % -o %< && ./%<")
-    vim.fn.feedkeys("i")
-    return
-  elseif filetype == "go" then
-    vim.cmd("term go build && ./%<")
-    vim.fn.feedkeys("i")
-    return
-  end
-  if filetype == "python" then
+    vim.cmd("term g++-15 -g -std=c++23 -Wall % -o %< && ./%<")
+  elseif filetype == "python" then
     vim.cmd("term python3 -u %")
   elseif filetype == "rust" then
     vim.cmd("term cargo run")

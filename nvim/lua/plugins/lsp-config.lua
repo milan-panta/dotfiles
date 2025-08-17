@@ -58,7 +58,6 @@ return {
         "cssls",
         "emmet_language_server",
         "eslint",
-        "gopls",
         "html",
         "jsonls",
         "lua_ls",
@@ -74,7 +73,6 @@ return {
       "cssls",
       "emmet_language_server",
       "eslint",
-      "gopls",
       "hls",
       "html",
       "jsonls",
@@ -104,7 +102,7 @@ return {
     lspconfig.clangd.setup({
       on_attach = on_attach,
       cmd = {
-        "/opt/homebrew/opt/llvm@19/bin/clangd",
+        "/opt/homebrew/opt/llvm@20/bin/clangd",
         "--background-index",
         "--pch-storage=memory",
         "--all-scopes-completion",
@@ -114,10 +112,10 @@ return {
         "--header-insertion-decorators",
         "--function-arg-placeholders",
         "--completion-style=detailed",
+        "--std=c++23",
       },
       filetypes = { "c", "cpp", "objc", "objcpp" },
       root_dir = require("lspconfig").util.root_pattern("src"),
-      init_option = { fallbackFlags = { "-std=c++23" } },
       capabilities = capabilities,
     })
 
@@ -154,8 +152,9 @@ return {
         showSuggestionsAsSnippets = true,
       },
     })
+
+    vim.diagnostic.config({
+      virtual_text = true,
+    })
   end,
-  vim.diagnostic.config({
-    virtual_text = true,
-  }),
 }

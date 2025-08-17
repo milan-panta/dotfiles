@@ -1,6 +1,8 @@
 # shortcuts for opening apps
-shift + cmd - o : open -a kitty
-shift + cmd - u : open -a "Zen Browser"
+shift + cmd - o : open -na kitty
+rcmd - o : open -a kitty
+shift + cmd - u : open -na "Zen Browser"
+rcmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
 rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"

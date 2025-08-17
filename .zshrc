@@ -29,9 +29,6 @@ alias lg="lazygit"
 alias l="yazi"
 alias gc="git checkout"
 
-alias gcc="gcc-14"
-alias g++="g++-14"
-
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 

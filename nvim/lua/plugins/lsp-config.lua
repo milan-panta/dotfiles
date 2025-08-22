@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPost", "BufNewFile", "InsertEnter" },
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -8,9 +8,9 @@ return {
   },
 
   config = function()
-    -- declare variable
     local mason = require("mason")
     local masonLspConfig = require("mason-lspconfig")
+    local lspconfig = require("lspconfig")
 
     local on_attach = function(client, bufnr)
       local opts = { buffer = bufnr, noremap = true, silent = true }
@@ -27,17 +27,30 @@ return {
       vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, opts)
       vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
       vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-      if client:supports_method("textDocument/inlayHint") then
+      vim.keymap.set("n", "[d", function()
+        vim.diagnostic.jump({ count = -1 })
+      end, opts)
+      vim.keymap.set("n", "]d", function()
+        vim.diagnostic.jump({ count = 1 })
+      end, opts)
+      vim.keymap.set("n", "[e", function()
+        vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+      end, opts)
+
+      vim.keymap.set("n", "]e", function()
+        vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+      end, opts)
+
+      if client.server_capabilities.inlayHintProvider then
         vim.keymap.set("n", "<Leader>ti", function()
-          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr }), { bufnr })
+          local ih = vim.lsp.inlay_hint
+          local enabled = ih.is_enabled({ buf = bufnr })
+          ih.enable(not enabled, { buf = bufnr })
         end, opts)
       end
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local lspconfig = require("lspconfig")
 
     mason.setup({
       ui = {
@@ -50,30 +63,24 @@ return {
       },
     })
 
-    -- lsps
     masonLspConfig.setup({
       ensure_installed = {
-        "clangd",
-        "tinymist",
         "cssls",
         "emmet_language_server",
         "eslint",
         "html",
         "jsonls",
-        "lua_ls",
         "marksman",
-        "pyright",
         "rust_analyzer",
         "tailwindcss",
+        "tinymist",
       },
     })
 
-    -- default configs for these language servers
     local servers = {
+      "clangd",
       "cssls",
-      "emmet_language_server",
       "eslint",
-      "hls",
       "html",
       "jsonls",
       "marksman",
@@ -82,7 +89,6 @@ return {
       "tailwindcss",
     }
 
-    -- configure with default lsp settings
     for _, lsp in ipairs(servers) do
       lspconfig[lsp].setup({
         capabilities = capabilities,
@@ -91,51 +97,31 @@ return {
     end
 
     lspconfig.tinymist.setup({
-      on_attach = on_attach,
       capabilities = capabilities,
+      on_attach = on_attach,
       settings = {
         formatterMode = "typstyle",
         exportPdf = "never",
       },
     })
 
-    lspconfig.clangd.setup({
-      on_attach = on_attach,
-      cmd = {
-        "/opt/homebrew/opt/llvm@20/bin/clangd",
-        "--background-index",
-        "--pch-storage=memory",
-        "--all-scopes-completion",
-        "--pretty",
-        "--header-insertion=never",
-        "-j=4",
-        "--header-insertion-decorators",
-        "--function-arg-placeholders",
-        "--completion-style=detailed",
-        "--std=c++23",
-      },
-      filetypes = { "c", "cpp", "objc", "objcpp" },
-      root_dir = require("lspconfig").util.root_pattern("src"),
-      capabilities = capabilities,
-    })
-
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
+      on_attach = on_attach,
       settings = {
         Lua = {
-          completion = {
-            callSnippet = "Replace",
-          },
-          diagnostics = {
-            globals = { "vim", "bufnr" },
-          },
+          completion = { callSnippet = "Replace" },
+          diagnostics = { globals = { "vim" } },
           hint = { enable = true },
+          workspace = { checkThirdParty = false },
+          telemetry = { enable = false },
         },
       },
-      on_attach = on_attach,
     })
 
     lspconfig.emmet_language_server.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
       filetypes = {
         "css",
         "eruby",
@@ -153,8 +139,13 @@ return {
       },
     })
 
+    -- diagnostics look/feel
     vim.diagnostic.config({
-      virtual_text = true,
+      virtual_text = { spacing = 2, prefix = "●", source = "if_many" },
+      float = { border = "rounded", source = "always" },
+      severity_sort = true,
+      signs = true,
+      underline = true,
     })
   end,
 }

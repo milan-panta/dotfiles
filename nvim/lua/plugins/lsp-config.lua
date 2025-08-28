@@ -3,15 +3,16 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
+    { "williamboman/mason-lspconfig.nvim", opts = {
+      automatic_enable = false,
+    } },
+    "saghen/blink.cmp",
   },
-
   config = function()
     local mason = require("mason")
     local masonLspConfig = require("mason-lspconfig")
     local lspconfig = require("lspconfig")
-
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
     local on_attach = function(client, bufnr)
       local opts = { buffer = bufnr, noremap = true, silent = true }
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -36,11 +37,9 @@ return {
       vim.keymap.set("n", "[e", function()
         vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
       end, opts)
-
       vim.keymap.set("n", "]e", function()
         vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
       end, opts)
-
       if client.server_capabilities.inlayHintProvider then
         vim.keymap.set("n", "<Leader>ti", function()
           local ih = vim.lsp.inlay_hint
@@ -49,22 +48,15 @@ return {
         end, opts)
       end
     end
-
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
     mason.setup({
       ui = {
         border = "rounded",
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        },
+        icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
       },
     })
-
     masonLspConfig.setup({
       ensure_installed = {
+        "basedpyright",
         "cssls",
         "emmet_language_server",
         "eslint",
@@ -76,35 +68,16 @@ return {
         "tinymist",
       },
     })
-
-    local servers = {
-      "clangd",
-      "cssls",
-      "eslint",
-      "html",
-      "jsonls",
-      "marksman",
-      "pyright",
-      "rust_analyzer",
-      "tailwindcss",
-    }
-
+    local servers =
+      { "basedpyright", "clangd", "cssls", "eslint", "html", "jsonls", "marksman", "rust_analyzer", "tailwindcss" }
     for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
+      lspconfig[lsp].setup({ capabilities = capabilities, on_attach = on_attach })
     end
-
     lspconfig.tinymist.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = {
-        formatterMode = "typstyle",
-        exportPdf = "never",
-      },
+      settings = { formatterMode = "typstyle", exportPdf = "never" },
     })
-
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
@@ -118,7 +91,6 @@ return {
         },
       },
     })
-
     lspconfig.emmet_language_server.setup({
       capabilities = capabilities,
       on_attach = on_attach,
@@ -134,12 +106,8 @@ return {
         "scss",
         "typescriptreact",
       },
-      init_options = {
-        showSuggestionsAsSnippets = true,
-      },
+      init_options = { showSuggestionsAsSnippets = true },
     })
-
-    -- diagnostics look/feel
     vim.diagnostic.config({
       virtual_text = { spacing = 2, prefix = "●", source = "if_many" },
       float = { border = "rounded", source = "always" },

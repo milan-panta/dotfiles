@@ -1,49 +1,24 @@
 return {
+  { "rcarriga/nvim-dap-ui", enabled = false },
   {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      "rcarriga/nvim-dap-ui",
-      "theHamsta/nvim-dap-virtual-text",
-      "nvim-neotest/nvim-nio",
-      "jay-babu/mason-nvim-dap.nvim",
-      "williamboman/mason.nvim",
-    },
-    event = { "BufReadPost", "BufNewFile" },
+    "miroshQa/debugmaster.nvim",
+    -- osv is needed if you want to debug neovim lua code. Also can be used
+    -- as a way to quickly test-drive the plugin without configuring debug adapters
+    dependencies = { "mfussenegger/nvim-dap", "jbyuki/one-small-step-for-vimkind" },
     config = function()
+      local dm = require("debugmaster")
+      -- make sure you don't have any other keymaps that starts with "<leader>d" to avoid delay
+      -- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
+      vim.keymap.set({ "n", "v" }, "<leader>d", dm.mode.toggle, { nowait = true })
+      -- If you want to disable debug mode in addition to leader+d using the Escape key:
+      -- vim.keymap.set("n", "<Esc>", dm.mode.disable)
+      -- This might be unwanted if you already use Esc for ":noh"
+      vim.keymap.set("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+      dm.plugins.osv_integration.enabled = true -- needed if you want to debug neovim lua code
       local dap = require("dap")
-      local dapui = require("dapui")
-      dapui.setup()
-      require("nvim-dap-virtual-text").setup()
-
-      -- debugging
-      require("mason-nvim-dap").setup({
-        handlers = {},
-        ensure_installed = {
-          "codelldb",
-          "python",
-        },
-        automatic_installation = true,
-      })
-
-      -- Key mappings
-      vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
-      vim.keymap.set("n", "<leader>B", function()
-        require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-      end)
-
-      vim.keymap.set("n", "<leader>gb", dap.run_to_cursor)
-      vim.keymap.set("n", "<leader>?", function()
-        require("dapui").eval()
-      end)
-      vim.keymap.set("n", "<leader>dt", function()
-        require("dapui").toggle()
-      end)
-      vim.keymap.set("n", "<F1>", dap.continue)
-      vim.keymap.set("n", "<F2>", dap.step_into)
-      vim.keymap.set("n", "<F3>", dap.step_over)
-      vim.keymap.set("n", "<F4>", dap.step_out)
-      vim.keymap.set("n", "<F5>", dap.step_back)
-      vim.keymap.set("n", "<F10>", dap.restart)
+      -- Configure your debug adapters here
+      -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
     end,
   },
 }

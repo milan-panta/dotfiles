@@ -60,6 +60,7 @@ return {
         "cssls",
         "emmet_language_server",
         "eslint",
+        "hls",
         "html",
         "jsonls",
         "marksman",
@@ -69,7 +70,18 @@ return {
       },
     })
     local servers =
-      { "basedpyright", "clangd", "cssls", "eslint", "html", "jsonls", "marksman", "rust_analyzer", "tailwindcss" }
+      {
+          "basedpyright",
+          "clangd",
+          "cssls",
+          "eslint",
+          "hls",
+          "html",
+          "jsonls",
+          "marksman",
+          "rust_analyzer",
+          "tailwindcss"
+      }
     for _, lsp in ipairs(servers) do
       lspconfig[lsp].setup({ capabilities = capabilities, on_attach = on_attach })
     end
@@ -83,10 +95,11 @@ return {
       on_attach = on_attach,
       settings = {
         Lua = {
+          runtine = { version = "LuaJIT" },
           completion = { callSnippet = "Replace" },
-          diagnostics = { globals = { "vim" } },
+          diagnostics = { globals = { "vim", "require" } },
           hint = { enable = true },
-          workspace = { checkThirdParty = false },
+          workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
           telemetry = { enable = false },
         },
       },

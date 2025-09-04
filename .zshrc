@@ -4,8 +4,7 @@ export EDITOR=nvim
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh)"
 
-# # neovim config switcher
-alias mvim="NVIM_APPNAME=MichaelNvim nvim"
+# neovim config switcher
 alias lvim="NVIM_APPNAME=LazyVim nvim"
 
 alias n="nvim"

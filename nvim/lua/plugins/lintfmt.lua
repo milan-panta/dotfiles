@@ -12,9 +12,6 @@ return {
         "ruff",
       },
       auto_update = true,
-      run_on_start = true,
-      start_delay = 3000,
-      debounce_hours = 12,
     },
   },
 
@@ -28,7 +25,7 @@ return {
         python = { "ruff" },
       }
 
-      vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
         callback = function()
           require("lint").try_lint()
         end,

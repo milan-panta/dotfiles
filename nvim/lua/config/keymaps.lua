@@ -71,10 +71,10 @@ function RunFile(dir)
 end
 
 -- code running
-vim.keymap.set("n", "<leader>rv", function()
+vim.keymap.set("n", "<leader>r\\", function()
   RunFile("vsplit")
 end, { silent = true, desc = "Run vertically" })
-vim.keymap.set("n", "<leader>rh", function()
+vim.keymap.set("n", "<leader>r-", function()
   RunFile("split")
 end, { silent = true, desc = "Run horizontally" })
 

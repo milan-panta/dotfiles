@@ -1,7 +1,7 @@
 return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    event = { "BufReadPost", "BufNewFile", "InsertEnter" },
+    cmd = { "MasonToolsInstall" },
     opts = {
       ensure_installed = {
         "stylua",
@@ -25,7 +25,7 @@ return {
         python = { "ruff" },
       }
 
-      vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
         callback = function()
           require("lint").try_lint()
         end,

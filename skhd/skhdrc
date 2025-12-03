@@ -6,6 +6,7 @@ rcmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
 rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"
+rcmd - n : open -a Notion
 rcmd - s : open -a sioyek
 rcmd - d : open -a Discord
 rcmd - m : open -a Mail

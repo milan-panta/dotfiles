@@ -4,9 +4,7 @@ vim.opt.termguicolors = true
 vim.opt.confirm = true
 
 vim.opt.number = true
-vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
-vim.opt.numberwidth = 2
 vim.opt.relativenumber = true
 
 vim.opt.splitright = true

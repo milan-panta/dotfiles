@@ -71,7 +71,7 @@ return {
         vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
-        vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "[d", function()
           vim.diagnostic.jump({ count = -1 })
         end, opts)

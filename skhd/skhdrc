@@ -10,7 +10,6 @@ rcmd - n : open -a Notion
 rcmd - s : open -a sioyek
 rcmd - d : open -a Discord
 rcmd - m : open -a Mail
-rcmd - h : open -a Siri
 rcmd - t : open -a TickTick
 
 # restart yabai hotkey

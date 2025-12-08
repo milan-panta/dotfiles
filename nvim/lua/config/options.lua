@@ -1,6 +1,5 @@
 vim.opt.laststatus = 3 -- global statusline
 
-vim.opt.termguicolors = true
 vim.opt.confirm = true
 
 vim.opt.number = true

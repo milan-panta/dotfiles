@@ -8,9 +8,14 @@ return {
     words = { enabled = true },
     zen = { enabled = true },
     dim = { enabled = true },
+    notifier = { enabled = true },
+    scratch = { enabled = true },
+    scroll = { enabled = true },
     bigfile = { enabled = true },
+    gitbrowse = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
+    image = {enabled = true},
     picker = {
       enabled = true,
       win = {
@@ -25,14 +30,14 @@ return {
   },
   keys = {
     {
-      "<leader>zz",
+      "<Leader>zz",
       function()
         Snacks.zen()
       end,
       desc = "Toggle Zen Mode",
     },
     {
-      "<leader>zd",
+      "<Leader>zd",
       function()
         if Snacks.dim.enabled then
           Snacks.dim.disable()
@@ -43,123 +48,145 @@ return {
       desc = "Toggle Dim",
     },
     {
-      "<leader>.",
+      "<Leader>.",
       function()
         Snacks.scratch()
       end,
       desc = "Toggle Scratch Buffer",
     },
     {
-      "<leader>S",
+      "<Leader>S",
       function()
         Snacks.scratch.select()
       end,
       desc = "Select Scratch Buffer",
     },
     {
-      "<leader>n",
+      "<Leader>n",
       function()
         Snacks.notifier.show_history()
       end,
       desc = "Notification History",
     },
     {
-      "<leader>un",
+      "<Leader>un",
       function()
         Snacks.notifier.hide()
       end,
       desc = "Dismiss All Notifications",
     },
     {
-      "<leader><leader>",
+      "<Leader><Leader>",
       function()
         Snacks.picker.files()
       end,
       desc = "Find Files",
     },
     {
-      "<leader>fg",
+      "<Leader>fg",
       function()
         Snacks.picker.grep()
       end,
       desc = "Grep",
     },
     {
-      "<leader>fh",
+      "<Leader>fh",
       function()
         Snacks.picker.help()
       end,
       desc = "Help Pages",
     },
     {
-      "<leader>fd",
+      "<Leader>fd",
       function()
         Snacks.picker.diagnostics_buffer()
       end,
       desc = "Buffer Diagnostics",
     },
     {
-      "<leader>fl",
+      "<Leader>fl",
       function()
         Snacks.picker.lsp_symbols()
       end,
       desc = "LSP Symbols",
     },
     {
-      "<leader>fr",
+      "<Leader>fws",
+      function()
+        Snacks.picker.lsp_workspace_symbols()
+      end,
+      desc = "LSP Workspace Symbols",
+    },
+    {
+      "<Leader>fwd",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Workspace Diagnostics",
+    },
+    {
+      "<Leader>fr",
       function()
         Snacks.picker.recent()
       end,
       desc = "Recent",
     },
     {
-      "<leader>fk",
+      "<Leader>fk",
       function()
         Snacks.picker.keymaps()
       end,
       desc = "Keymaps",
     },
     {
-      "<leader>/",
+      "<Leader>/",
       function()
         Snacks.picker.lines()
       end,
       desc = "Buffer Lines",
     },
     {
-      "<leader>fq",
+      "<Leader>fq",
       function()
         Snacks.picker.qflist()
       end,
       desc = "Quickfix List",
     },
     {
-      "<leader>U",
+      "<Leader>U",
       function()
         Snacks.picker.git_status()
       end,
       desc = "Git Status",
     },
     {
-      "<leader>fb",
+      "<Leader>fb",
       function()
         Snacks.picker.buffers()
       end,
       desc = "Buffers",
     },
     {
-      "<leader>fc",
+      "<Leader>fc",
       function()
         Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
       end,
       desc = "Find Config File",
     },
     {
-      "<leader>e",
+      "<Leader>e",
       function()
         Snacks.explorer()
       end,
       desc = "File Explorer",
+    },
+    {
+      "<Leader>gb",
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = "Git Browse",
+      mode = { "n", "v" },
     },
   },
 }

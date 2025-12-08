@@ -1,8 +1,22 @@
 return {
   "saghen/blink.cmp",
   version = "1.*",
+  event = { "InsertEnter", "CmdlineEnter" },
   opts = {
-    keymap = { preset = "default" },
+    keymap = {
+      preset = "default",
+      ["<Tab>"] = {
+        function(cmp)
+          if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-l>", true, true, true), "m", true)
+            return true
+          end
+        end,
+        "select_next",
+        "snippet_forward",
+        "fallback",
+      },
+    },
     appearance = {
       nerd_font_variant = "mono",
     },

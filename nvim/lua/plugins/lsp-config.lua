@@ -1,8 +1,8 @@
 return {
-  -- 1. Mason: installs LSPs, DAPs, linters, etc.
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       ui = {
         border = "rounded",
@@ -15,9 +15,9 @@ return {
     },
   },
 
-  -- 2. mason-lspconfig: bridges Mason <-> nvim-lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig", -- make sure lspconfig is loaded first
@@ -44,7 +44,6 @@ return {
     },
   },
 
-  -- 3. LSP config (Neovim 0.11+ style)
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -72,7 +71,7 @@ return {
         vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
-        vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "[d", function()
           vim.diagnostic.jump({ count = -1 })
         end, opts)
@@ -101,13 +100,11 @@ return {
         end
       end
 
-      -- Global defaults for all LSP servers (on_attach + blink capabilities)
       vim.lsp.config("*", {
         capabilities = capabilities,
         on_attach = on_attach,
       })
 
-      -- Server-specific overrides
       vim.lsp.config("tinymist", {
         settings = {
           formatterMode = "typstyle",
@@ -167,6 +164,29 @@ return {
         "tinymist",
       })
 
+      vim.schedule(function()
+        if vim.fn.has("nvim-0.12") == 1 then
+          vim.lsp.inline_completion.enable()
+        end
+      end)
+
+      -- change these to whatever you like
+      vim.keymap.set({ "i", "n" }, "<M-]>", function()
+        vim.lsp.inline_completion.select({ count = 1 })
+      end, { desc = "Next Copilot suggestion" })
+
+      vim.keymap.set({ "i", "n" }, "<M-[>", function()
+        vim.lsp.inline_completion.select({ count = -1 })
+      end, { desc = "Prev Copilot suggestion" })
+
+      -- Accept the current inline suggestion
+      vim.keymap.set("i", "<C-l>", function()
+        -- returns true when it actually applied something, so we can fallback
+        if not vim.lsp.inline_completion.get() then
+          return "<C-l>"
+        end
+      end, { expr = true, desc = "Accept Copilot inline suggestion" })
+
       vim.diagnostic.config({
         severity_sort = true,
         signs = true,
@@ -175,4 +195,3 @@ return {
     end,
   },
 }
-

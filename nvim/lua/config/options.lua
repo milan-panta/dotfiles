@@ -4,9 +4,7 @@ vim.opt.termguicolors = true
 vim.opt.confirm = true
 
 vim.opt.number = true
-vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
-vim.opt.numberwidth = 2
 vim.opt.relativenumber = true
 
 vim.opt.splitright = true
@@ -26,5 +24,3 @@ vim.opt.smartcase = true
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
-
-vim.opt.guicursor = ""

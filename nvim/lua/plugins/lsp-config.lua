@@ -23,8 +23,6 @@ return {
       "neovim/nvim-lspconfig", -- make sure lspconfig is loaded first
     },
     opts = {
-      -- Only controls *installation*.
-      -- Enabling is done via vim.lsp.enable() below.
       ensure_installed = {
         "basedpyright",
         "clangd",

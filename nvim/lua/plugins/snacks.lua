@@ -7,7 +7,7 @@ return {
     indent = { enabled = true, animate = { enabled = false } },
     words = { enabled = true },
     zen = { enabled = true },
-    dim = { enabled = true, },
+    dim = { enabled = true },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },

@@ -110,11 +110,18 @@ return {
       desc = "LSP Symbols",
     },
     {
-      "<Leader>fw",
+      "<Leader>fws",
       function()
         Snacks.picker.lsp_workspace_symbols()
       end,
-      desc = "LSP Symbols",
+      desc = "LSP Workspace Symbols",
+    },
+    {
+      "<Leader>fwd",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Workspace Diagnostics",
     },
     {
       "<Leader>fr",

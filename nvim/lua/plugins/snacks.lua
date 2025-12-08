@@ -14,6 +14,7 @@ return {
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
+    image = {enabled = true},
     picker = {
       enabled = true,
       win = {
@@ -105,6 +106,13 @@ return {
       "<Leader>fl",
       function()
         Snacks.picker.lsp_symbols()
+      end,
+      desc = "LSP Symbols",
+    },
+    {
+      "<Leader>fw",
+      function()
+        Snacks.picker.lsp_workspace_symbols()
       end,
       desc = "LSP Symbols",
     },

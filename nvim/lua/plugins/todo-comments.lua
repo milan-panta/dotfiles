@@ -17,10 +17,5 @@ return {
       end,
       desc = "Previous todo comment",
     },
-    {
-      "<Leader>ft",
-      "<CMD>TodoTelescope<CR>",
-      desc = "Telescope todos",
-    },
   },
 }

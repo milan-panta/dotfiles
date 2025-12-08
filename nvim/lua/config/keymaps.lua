@@ -9,11 +9,11 @@ vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", { desc = "Open qf list", sile
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
 
 -- paste without replacing clipboard
-vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+vim.keymap.set("x", "<Leader>p", [["_dP]])
+vim.keymap.set({ "n", "v" }, "<Leader>d", [["_d]])
 
 -- select occurrances of word
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<Leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- maintain cursor position after joining
 vim.keymap.set("n", "J", "mzJ`z")
@@ -71,10 +71,10 @@ function RunFile(dir)
 end
 
 -- code running
-vim.keymap.set("n", "<leader>r\\", function()
+vim.keymap.set("n", "<Leader>r\\", function()
   RunFile("vsplit")
 end, { silent = true, desc = "Run vertically" })
-vim.keymap.set("n", "<leader>r-", function()
+vim.keymap.set("n", "<Leader>r-", function()
   RunFile("split")
 end, { silent = true, desc = "Run horizontally" })
 

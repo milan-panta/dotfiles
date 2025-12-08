@@ -37,18 +37,18 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- window management
-vim.keymap.set("n", "<M-=>", ":resize -2<cr>", { silent = true, noremap = true, desc = "Increase height" })
-vim.keymap.set("n", "<M-->", ":resize +2<cr>", { silent = true, noremap = true, desc = "Decrease height" })
-vim.keymap.set("n", "<M-.>", ":vertical resize +2<cr>", { silent = true, noremap = true, desc = "Increase width" })
-vim.keymap.set("n", "<M-,>", ":vertical resize -2<cr>", { silent = true, noremap = true, desc = "Decrease width" })
+vim.keymap.set("n", "<M-=>", ":resize -2<cr>", { silent = true, desc = "Increase height" })
+vim.keymap.set("n", "<M-->", ":resize +2<cr>", { silent = true, desc = "Decrease height" })
+vim.keymap.set("n", "<M-.>", ":vertical resize +2<cr>", { silent = true, desc = "Increase width" })
+vim.keymap.set("n", "<M-,>", ":vertical resize -2<cr>", { silent = true, desc = "Decrease width" })
 
 -- Consistent with tmux
-vim.api.nvim_set_keymap("n", "<C-w>-", "<C-w>s", { noremap = true, desc = "Create horizontal split" })
-vim.api.nvim_set_keymap("n", "<C-w>\\", "<C-w>v", { noremap = true, desc = "Create vertical split" })
-vim.api.nvim_set_keymap("n", "<C-w>z", "<C-w>_<C-w>|", { noremap = true, desc = "Max out split" })
+vim.keymap.set("n", "<C-w>-", "<C-w>s", { desc = "Create horizontal split" })
+vim.keymap.set("n", "<C-w>\\", "<C-w>v", { desc = "Create vertical split" })
+vim.keymap.set("n", "<C-w>z", "<C-w>_<C-w>|", { desc = "Max out split" })
 
 -- run file
-function RunFile(dir)
+local function RunFile(dir)
   vim.cmd("w")
   local filetype = vim.bo.filetype
   if filetype == "c" then

@@ -1,178 +1,142 @@
 return {
   {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      ui = {
-        border = "rounded",
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        },
-      },
-    },
-  },
-
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig", -- make sure lspconfig is loaded first
-    },
-    opts = {
-      ensure_installed = {
-        "basedpyright",
-        "clangd",
-        "copilot",
-        "cssls",
-        "emmet_language_server",
-        "eslint",
-        "hls",
-        "html",
-        "jsonls",
-        "lua_ls",
-        "marksman",
-        "rust_analyzer",
-        "tailwindcss",
-        "tinymist",
-      },
-    },
-  },
-
-  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "saghen/blink.cmp",
     },
-    config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-      local on_attach = function(client, bufnr)
-        local opts = { buffer = bufnr, noremap = true, silent = true }
-
-        vim.keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-        vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-        vim.keymap.set("n", "<Leader>wl", function()
-          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, opts)
-        vim.keymap.set("n", "[e", function()
-          vim.diagnostic.jump({
-            count = -1,
-            severity = vim.diagnostic.severity.ERROR,
-          })
-        end, opts)
-        vim.keymap.set("n", "]e", function()
-          vim.diagnostic.jump({
-            count = 1,
-            severity = vim.diagnostic.severity.ERROR,
-          })
-        end, opts)
-
-        if client.server_capabilities.inlayHintProvider then
-          vim.keymap.set("n", "<Leader>ti", function()
-            local ih = vim.lsp.inlay_hint
-            local enabled = ih.is_enabled({ buf = bufnr })
-            ih.enable(not enabled, { buf = bufnr })
-          end, opts)
-        end
-      end
-
-      vim.lsp.config("*", {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      vim.lsp.config("tinymist", {
-        settings = {
-          formatterMode = "typstyle",
-          exportPdf = "never",
+    opts = {
+      servers = {
+        basedpyright = {},
+        clangd = {},
+        copilot = {},
+        cssls = {},
+        eslint = {},
+        hls = {},
+        html = {},
+        jsonls = {},
+        marksman = {},
+        rust_analyzer = {},
+        tailwindcss = {},
+        tinymist = {
+          settings = {
+            formatterMode = "typstyle",
+            exportPdf = "never",
+          },
         },
-      })
-
-      vim.lsp.config("lua_ls", {
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            completion = { callSnippet = "Replace" },
-            diagnostics = { globals = { "vim", "require" } },
-            hint = { enable = true },
-            workspace = {
-              checkThirdParty = false,
-              library = vim.api.nvim_get_runtime_file("", true),
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = "LuaJIT" },
+              completion = { callSnippet = "Replace" },
+              hint = { enable = true },
+              workspace = {
+                checkThirdParty = false,
+              },
+              telemetry = { enable = false },
             },
-            telemetry = { enable = false },
+          },
+        },
+        emmet_language_server = {
+          filetypes = {
+            "css",
+            "eruby",
+            "html",
+            "javascript",
+            "javascriptreact",
+            "less",
+            "pug",
+            "sass",
+            "scss",
+            "typescriptreact",
+          },
+          init_options = {
+            showSuggestionsAsSnippets = true,
+          },
+        },
+      },
+    },
+    config = function(_, opts)
+      require("mason").setup({
+        ui = {
+          border = "rounded",
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
           },
         },
       })
 
-      vim.lsp.config("emmet_language_server", {
-        filetypes = {
-          "css",
-          "eruby",
-          "html",
-          "javascript",
-          "javascriptreact",
-          "less",
-          "pug",
-          "sass",
-          "scss",
-          "typescriptreact",
-        },
-        init_options = {
-          showSuggestionsAsSnippets = true,
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(opts.servers),
+        handlers = {
+          function(server_name)
+            local server_opts = opts.servers[server_name] or {}
+            server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
+            require("lspconfig")[server_name].setup(server_opts)
+          end,
         },
       })
 
-      -- Enable all the servers (this replaces lspconfig[server].setup)
-      vim.lsp.enable({
-        "basedpyright",
-        "clangd",
-        "copilot",
-        "cssls",
-        "emmet_language_server",
-        "eslint",
-        "hls",
-        "html",
-        "jsonls",
-        "lua_ls",
-        "marksman",
-        "rust_analyzer",
-        "tailwindcss",
-        "tinymist",
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+        callback = function(event)
+          local map = function(keys, func, desc)
+            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          end
+
+          map("<Leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
+          map("<Leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
+          map("<Leader>wl", function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, "List workspace folders")
+
+          map("[e", function()
+            vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+          end, "Previous Error")
+          map("]e", function()
+            vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+          end, "Next Error")
+
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.inlayHintProvider then
+            map("<Leader>ti", function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+            end, "Toggle Inlay Hints")
+          end
+        end,
       })
-
-      vim.schedule(function()
-        if vim.fn.has("nvim-0.12") == 1 then
-          vim.lsp.inline_completion.enable()
-        end
-      end)
-
-      -- change these to whatever you like
-      vim.keymap.set({ "i", "n" }, "<M-]>", function()
-        vim.lsp.inline_completion.select({ count = 1 })
-      end, { desc = "Next Copilot suggestion" })
-
-      vim.keymap.set({ "i", "n" }, "<M-[>", function()
-        vim.lsp.inline_completion.select({ count = -1 })
-      end, { desc = "Prev Copilot suggestion" })
-
-      -- Accept the current inline suggestion
-      vim.keymap.set("i", "<C-l>", function()
-        -- returns true when it actually applied something, so we can fallback
-        if not vim.lsp.inline_completion.get() then
-          return "<C-l>"
-        end
-      end, { expr = true, desc = "Accept Copilot inline suggestion" })
 
       vim.diagnostic.config({
         severity_sort = true,
         signs = true,
         underline = true,
       })
+
+      -- Nvim 0.12+ features
+      vim.schedule(function()
+        if vim.fn.has("nvim-0.12") == 1 then
+          vim.lsp.inline_completion.enable()
+          -- Inline completion keymaps
+          vim.keymap.set({ "i", "n" }, "<M-]>", function()
+            vim.lsp.inline_completion.select({ count = 1 })
+          end, { desc = "Next Copilot suggestion" })
+
+          vim.keymap.set({ "i", "n" }, "<M-[>", function()
+            vim.lsp.inline_completion.select({ count = -1 })
+          end, { desc = "Prev Copilot suggestion" })
+
+          vim.keymap.set("i", "<C-l>", function()
+            if not vim.lsp.inline_completion.get() then
+              return "<C-l>"
+            end
+            -- Accept logic is usually handled by the binding itself or the fallback here
+          end, { expr = true, desc = "Accept Copilot inline suggestion" })
+        end
+      end)
     end,
   },
 }

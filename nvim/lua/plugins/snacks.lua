@@ -4,7 +4,7 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    indent = { enabled = true, animate = { enabled = false } },
+    indent = { enabled = true },
     words = { enabled = true },
     zen = { enabled = true },
     dim = { enabled = true },
@@ -32,11 +32,15 @@ return {
       desc = "Toggle Zen Mode",
     },
     {
-      "<leader>zt",
+      "<leader>zd",
       function()
-        Snacks.zen.zoom()
+        if Snacks.dim.enabled then
+          Snacks.dim.disable()
+        else
+          Snacks.dim()
+        end
       end,
-      desc = "Toggle Zoom",
+      desc = "Toggle Dim",
     },
     {
       "<leader>.",

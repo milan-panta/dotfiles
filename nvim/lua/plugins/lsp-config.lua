@@ -69,7 +69,7 @@ return {
         end, opts)
 
         vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "gr", Snacks.picker.lsp_references, opts)
 
         vim.keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "[d", function()

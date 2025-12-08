@@ -12,6 +12,7 @@ return {
     scratch = { enabled = true },
     scroll = { enabled = true },
     bigfile = { enabled = true },
+    gitbrowse = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     image = {enabled = true},
@@ -178,6 +179,14 @@ return {
         Snacks.explorer()
       end,
       desc = "File Explorer",
+    },
+    {
+      "<Leader>gb",
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = "Git Browse",
+      mode = { "n", "v" },
     },
   },
 }

@@ -1,6 +1,8 @@
-vim.opt.laststatus = 3 -- global statusline
-
+vim.opt.termguicolors = true
 vim.opt.confirm = true
+
+vim.opt.laststatus = 3
+vim.opt.signcolumn = "yes"
 
 vim.opt.number = true
 vim.opt.cursorline = true
@@ -23,3 +25,7 @@ vim.opt.smartcase = true
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
+
+vim.opt.iskeyword = "@,48-57,_,192-255,-"
+vim.opt.updatetime = 200
+vim.opt.timeoutlen = 300

@@ -15,7 +15,7 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     "williamboman/mason.nvim",
   },
-  event = { "BufReadPost", "BufNewFile" },
+  -- event = { "BufReadPost", "BufNewFile" },
 
   -- stylua: ignore
   keys = {

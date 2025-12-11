@@ -6,11 +6,8 @@ return {
   opts = {
     indent = { enabled = true },
     words = { enabled = true },
-    zen = { enabled = true },
-    dim = { enabled = false },
     notifier = { enabled = true },
-    scratch = { enabled = true },
-    scroll = { enabled = false },
+    scroll = { enabled = true },
     bigfile = { enabled = true },
     gitbrowse = { enabled = true },
     quickfile = { enabled = true },

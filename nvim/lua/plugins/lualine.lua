@@ -6,6 +6,7 @@ return {
     options = {
       section_separators = "",
       component_separators = "",
+      globalstatus = true,
     },
     sections = {
       lualine_a = { "mode" },
@@ -21,5 +22,6 @@ return {
       lualine_y = { "branch" },
       lualine_z = { "location" },
     },
+    extensions = { "lazy", "mason", "oil", "quickfix" },
   },
 }

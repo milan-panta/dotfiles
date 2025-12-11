@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.splitjoin",
-  keys = { "<Leader>m", "<Leader>js", "<Leader>jj" },
+  keys = { "<Leader>jm", "<Leader>js", "<Leader>jj" },
   opts = {
     mappings = {
       toggle = "<Leader>m",

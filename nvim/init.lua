@@ -1,7 +1,7 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.cmd("set shortmess+=I")
+vim.opt.shortmess:append("I")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then

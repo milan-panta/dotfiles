@@ -1,4 +1,7 @@
 vim.opt.termguicolors = true
+
+vim.opt.swapfile = false
+vim.opt.backup = false
 vim.opt.confirm = true
 
 vim.opt.laststatus = 3
@@ -20,11 +23,15 @@ vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.incsearch = true
+vim.opt.hlsearch = false
+
+vim.opt.wrap = true
 
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
 
 vim.opt.iskeyword = "@,48-57,_,192-255,-"
-vim.opt.updatetime = 200
-vim.opt.timeoutlen = 300
+vim.opt.updatetime = 50
+vim.opt.signcolumn = "yes"

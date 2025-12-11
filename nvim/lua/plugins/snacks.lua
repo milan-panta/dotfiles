@@ -4,10 +4,12 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    indent = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = false },
+    },
     words = { enabled = true },
     notifier = { enabled = true },
-    scroll = { enabled = true },
     bigfile = { enabled = true },
     gitbrowse = { enabled = true },
     quickfile = { enabled = true },

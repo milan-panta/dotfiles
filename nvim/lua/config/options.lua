@@ -2,7 +2,6 @@ vim.opt.termguicolors = true
 vim.opt.confirm = true
 
 vim.opt.laststatus = 3
-vim.opt.signcolumn = "yes"
 
 vim.opt.number = true
 vim.opt.cursorline = true

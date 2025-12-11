@@ -15,8 +15,6 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     "williamboman/mason.nvim",
   },
-  -- event = { "BufReadPost", "BufNewFile" },
-
   -- stylua: ignore
   keys = {
     { "<Leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },

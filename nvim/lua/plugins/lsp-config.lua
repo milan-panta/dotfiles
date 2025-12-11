@@ -5,6 +5,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
       "saghen/blink.cmp",
     },
     opts = {
@@ -79,6 +80,19 @@ return {
             require("lspconfig")[server_name].setup(server_opts)
           end,
         },
+      })
+
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          "stylua",
+          "clang-format",
+          "prettierd",
+          "typstyle",
+          "latexindent",
+          "ruff",
+        },
+        auto_update = true,
+        run_on_start = true,
       })
 
       vim.api.nvim_create_autocmd("LspAttach", {

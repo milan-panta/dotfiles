@@ -1,21 +1,5 @@
 return {
   {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    cmd = { "MasonToolsInstall" },
-    opts = {
-      ensure_installed = {
-        "stylua",
-        "clang-format",
-        "prettierd",
-        "typstyle",
-        "latexindent",
-        "ruff",
-      },
-      auto_update = true,
-    },
-  },
-
-  {
     "mfussenegger/nvim-lint",
     event = { "BufReadPost", "BufNewFile" },
     config = function()

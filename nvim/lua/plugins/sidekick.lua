@@ -62,11 +62,6 @@ return {
       desc = "Sidekick Select Prompt",
     },
     {
-      "<Leader>ap",
-      function() require("sidekick.cli").toggle({ name = "copilot", focus = true }) end,
-      desc = "Sidekick Toggle Copilot",
-    },
-    {
       "<Leader>ac",
       function() require("sidekick.cli").toggle({ name = "cursor", focus = true }) end,
       desc = "Sidekick Toggle Cursor",

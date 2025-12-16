@@ -48,34 +48,52 @@ vim.keymap.set("n", "<C-w>\\", "<C-w>v", { desc = "Create vertical split" })
 vim.keymap.set("n", "<C-w>z", "<C-w>_<C-w>|", { desc = "Max out split" })
 
 -- run file
-local function RunFile(dir)
+local function RunFile(dir, args)
+  args = args or ""
   vim.cmd("w")
+  local file = vim.fn.expand("%")
+  local file_no_ext = vim.fn.expand("%:r")
   local filetype = vim.bo.filetype
+  local cmd = ""
+
   if filetype == "c" then
-    vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall -g -std=gnu99 % -o %< && ./%< ")
+    cmd = string.format("gcc -Wall -g -std=gnu99 '%s' -o '%s' && '%s' %s", file, file_no_ext, file_no_ext, args)
+  elseif filetype == "cpp" then
+    cmd = string.format("g++-15 -g -std=c++23 -Wall '%s' -o '%s' && '%s' %s", file, file_no_ext, file_no_ext, args)
+  elseif filetype == "python" then
+    cmd = string.format("python3 -u '%s' %s", file, args)
+  elseif filetype == "rust" then
+    if args ~= "" then
+      cmd = "cargo run -- " .. args
+    else
+      cmd = "cargo run"
+    end
+  elseif filetype == "javascript" then
+    cmd = string.format("node '%s' %s", file, args)
+  else
+    vim.notify("Filetype " .. filetype .. " is not supported", vim.log.levels.WARN)
     return
   end
+
   vim.cmd(dir)
-  if filetype == "cpp" then
-    vim.cmd("term g++-15 -g -std=c++23 -Wall % -o %< && ./%<")
-  elseif filetype == "python" then
-    vim.cmd("term python3 -u %")
-  elseif filetype == "rust" then
-    vim.cmd("term cargo run")
-  elseif filetype == "javascript" then
-    vim.cmd("term node %")
-  else
-    vim.api.nvim_out_write("Filetype " .. filetype .. " is not supported\n")
-  end
-  vim.fn.feedkeys("i")
+  vim.cmd("term " .. cmd .. "; " .. (vim.env.SHELL or "zsh"))
+  vim.cmd("startinsert")
 end
 
 -- code running
 vim.keymap.set("n", "<Leader>r\\", function()
-  RunFile("vsplit")
+  vim.ui.input({ prompt = "Args: " }, function(input)
+    if input then
+      RunFile("vsplit", input)
+    end
+  end)
 end, { silent = true, desc = "Run vertically" })
 vim.keymap.set("n", "<Leader>r-", function()
-  RunFile("split")
+  vim.ui.input({ prompt = "Args: " }, function(input)
+    if input then
+      RunFile("split", input)
+    end
+  end)
 end, { silent = true, desc = "Run horizontally" })
 
 -- markdown preview runner

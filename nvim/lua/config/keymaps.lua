@@ -51,8 +51,14 @@ vim.keymap.set("n", "<C-w>z", "<C-w>_<C-w>|", { desc = "Max out split" })
 local function RunFile(dir, args)
   args = args or ""
   vim.cmd("w")
-  local file = vim.fn.expand("%")
-  local file_no_ext = vim.fn.expand("%:r")
+
+  if not vim.env.TMUX then
+    vim.notify("Not in a tmux session", vim.log.levels.ERROR)
+    return
+  end
+
+  local file = vim.fn.expand("%:p")
+  local file_no_ext = vim.fn.expand("%:p:r")
   local filetype = vim.bo.filetype
   local cmd = ""
 
@@ -75,9 +81,32 @@ local function RunFile(dir, args)
     return
   end
 
-  vim.cmd(dir)
-  vim.cmd("term " .. cmd .. "; " .. (vim.env.SHELL or "zsh"))
-  vim.cmd("startinsert")
+  local tmux_split_cmd = ""
+  if dir == "vsplit" then
+    tmux_split_cmd = "tmux split-window -h -P -F '#{pane_id}'"
+  else
+    tmux_split_cmd = "tmux split-window -v -P -F '#{pane_id}'"
+  end
+
+  local handle = io.popen(tmux_split_cmd)
+  if not handle then
+    vim.notify("Failed to create tmux split", vim.log.levels.ERROR)
+    return
+  end
+  local pane_id = handle:read("*a")
+  handle:close()
+
+  if not pane_id or pane_id == "" then
+     vim.notify("Failed to get tmux pane id", vim.log.levels.ERROR)
+     return
+  end
+
+  pane_id = pane_id:gsub("%s+", "")
+
+  local clean_cmd = cmd:gsub('"', '\\"')
+  local send_keys_cmd = string.format('tmux send-keys -t %s "%s" Enter', pane_id, clean_cmd)
+
+  os.execute(send_keys_cmd)
 end
 
 -- code running

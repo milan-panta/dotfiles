@@ -14,7 +14,6 @@ return {
     gitbrowse = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
-    terminal = { enabled = true },
     image = {enabled = true},
     picker = {
       enabled = true,

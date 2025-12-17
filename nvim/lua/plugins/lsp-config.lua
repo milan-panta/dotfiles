@@ -18,29 +18,29 @@ return {
       jsonls = {},
       marksman = {},
       rust_analyzer = {
-      settings = {
-        ["rust-analyzer"] = {
-          cargo = {
-            features = "all",
-          },
-          checkOnSave = {
-            enable = true,
-          },
-          check = {
-            command = "clippy",
-          },
-          imports = {
-            group = {
-              enable = false,
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              features = "all",
             },
-          },
-          completion = {
-            postfix = {
-              enable = false,
+            checkOnSave = {
+              enable = true,
+            },
+            check = {
+              command = "clippy",
+            },
+            imports = {
+              group = {
+                enable = false,
+              },
+            },
+            completion = {
+              postfix = {
+                enable = false,
+              },
             },
           },
         },
-      },
       },
       tailwindcss = {},
       tinymist = {
@@ -59,6 +59,28 @@ return {
               checkThirdParty = false,
             },
             telemetry = { enable = false },
+            diagnostics = {
+              disable = { "incomplete-signature-doc", "trailing-space", "missing-local-export-doc" },
+              groupSeverity = {
+                strong = "Warning",
+                strict = "Warning",
+              },
+              groupFileStatus = {
+                ["ambiguity"] = "Opened",
+                ["await"] = "Opened",
+                ["codestyle"] = "None",
+                ["duplicate"] = "Opened",
+                ["global"] = "Opened",
+                ["luadoc"] = "Opened",
+                ["redefined"] = "Opened",
+                ["strict"] = "Opened",
+                ["strong"] = "Opened",
+                ["type-check"] = "Opened",
+                ["unbalanced"] = "Opened",
+                ["unused"] = "Opened",
+              },
+              unusedLocalExclude = { "_*" },
+            },
           },
         },
       },
@@ -88,6 +110,13 @@ return {
         function(server_name)
           local server_opts = opts.servers[server_name] or {}
           server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
+          
+          -- Hack to prevent dynamic registration of watched files (performance)
+          server_opts.capabilities.workspace = server_opts.capabilities.workspace or {}
+          server_opts.capabilities.workspace.didChangeWatchedFiles = {
+            dynamicRegistration = false,
+          }
+          
           require("lspconfig")[server_name].setup(server_opts)
         end,
       },

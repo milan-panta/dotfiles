@@ -8,9 +8,9 @@ return {
   },
   config = true,
   keys = {
-    { "<leader>gs", "<cmd>Neogit<cr>", desc = "Neogit Status" },
+    { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit Status" },
     { "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Neogit Commit" },
-    { "<leader>gp", "<cmd>Neogit push<cr>", desc = "Neogit Push" },
-    { "<leader>gl", "<cmd>Neogit pull<cr>", desc = "Neogit Pull" },
+    { "<leader>gP", "<cmd>Neogit push<cr>", desc = "Neogit Push" },
+    { "<leader>gp", "<cmd>Neogit pull<cr>", desc = "Neogit Pull" },
   },
 }

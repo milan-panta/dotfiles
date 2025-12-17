@@ -66,7 +66,19 @@ return {
 
     -- debugging
     require("mason-nvim-dap").setup({
-      handlers = {},
+      handlers = {
+        function(config)
+          require("mason-nvim-dap").default_setup(config)
+        end,
+        python = function(config)
+          config.adapters = {
+            type = "executable",
+            command = vim.fn.exepath("python3") or vim.fn.exepath("python") or "python",
+            args = { "-m", "debugpy.adapter" },
+          }
+          require("mason-nvim-dap").default_setup(config) -- don't forget this!
+        end,
+      },
       ensure_installed = {
         "codelldb",
         "python",

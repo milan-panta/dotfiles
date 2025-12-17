@@ -2,6 +2,9 @@ return {
   "saghen/blink.cmp",
   version = "1.*",
   event = { "InsertEnter", "CmdlineEnter" },
+  dependencies = {
+    { "saghen/blink.compat", version = "*", opts = {} },
+  },
   opts = {
     keymap = {
       preset = "default",
@@ -31,6 +34,15 @@ return {
     },
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      per_filetype = {
+        toml = { "lsp", "crates", "path", "snippets", "buffer" },
+      },
+      providers = {
+        crates = {
+          name = "crates",
+          module = "blink.compat.source",
+        },
+      },
     },
     fuzzy = { implementation = "rust" },
   },

@@ -17,31 +17,6 @@ return {
       html = {},
       jsonls = {},
       marksman = {},
-      rust_analyzer = {
-        settings = {
-          ["rust-analyzer"] = {
-            cargo = {
-              features = "all",
-            },
-            checkOnSave = {
-              enable = true,
-            },
-            check = {
-              command = "clippy",
-            },
-            imports = {
-              group = {
-                enable = false,
-              },
-            },
-            completion = {
-              postfix = {
-                enable = false,
-              },
-            },
-          },
-        },
-      },
       tailwindcss = {},
       tinymist = {
         settings = {
@@ -138,14 +113,9 @@ return {
         end, "Next Error")
 
         -- Native LSP Keymaps (Neovim 0.11+ style)
-        -- These are the "future standard" maps that you wanted to stick with.
-        -- We just ensure they are set if they aren't already by default or conflicts.
-
-        map("gra", vim.lsp.buf.code_action, "Code Action") -- 'gra' is the new standard (Go Run Action)
-        map("grn", vim.lsp.buf.rename, "Rename") -- 'grn' is the new standard (Go Run Name)
-        map("grr", vim.lsp.buf.references, "References") -- 'grr' (Go Run References)
-        map("gri", vim.lsp.buf.implementation, "Implementation") -- 'gri'
-        map("gO", vim.lsp.buf.document_symbol, "Document Symbols") -- 'gO' (Go Outline)
+        -- Modified to avoid conflicts with Snacks (gr) and avoid waiting
+        map("<leader>rn", vim.lsp.buf.rename, "Rename")
+        map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 
         -- Signature Help (CTRL-S is common in Insert mode, but 'gK' is standard in Normal)
         map("gK", vim.lsp.buf.signature_help, "Signature Help")

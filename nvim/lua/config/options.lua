@@ -38,7 +38,6 @@ vim.opt.updatetime = 50
 vim.opt.signcolumn = "yes"
 
 -- folke inspiration
-vim.opt.cmdheight = 0
 vim.opt.mousescroll = "ver:1,hor:4"
 vim.opt.fillchars:append({ eob = " " })
 
@@ -47,3 +46,6 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
+
+vim.o.timeout = true
+vim.o.timeoutlen = 200

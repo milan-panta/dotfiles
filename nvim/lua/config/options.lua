@@ -40,3 +40,9 @@ vim.opt.signcolumn = "yes"
 -- FolkeVim inspiration
 vim.opt.cmdheight = 0
 vim.opt.mousescroll = "ver:1,hor:4"
+
+-- Disable unused providers for startup speed
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0

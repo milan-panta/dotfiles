@@ -18,29 +18,29 @@ return {
       jsonls = {},
       marksman = {},
       rust_analyzer = {
-      settings = {
-        ["rust-analyzer"] = {
-          cargo = {
-            features = "all",
-          },
-          checkOnSave = {
-            enable = true,
-          },
-          check = {
-            command = "clippy",
-          },
-          imports = {
-            group = {
-              enable = false,
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              features = "all",
             },
-          },
-          completion = {
-            postfix = {
-              enable = false,
+            checkOnSave = {
+              enable = true,
+            },
+            check = {
+              command = "clippy",
+            },
+            imports = {
+              group = {
+                enable = false,
+              },
+            },
+            completion = {
+              postfix = {
+                enable = false,
+              },
             },
           },
         },
-      },
       },
       tailwindcss = {},
       tinymist = {
@@ -59,6 +59,28 @@ return {
               checkThirdParty = false,
             },
             telemetry = { enable = false },
+            diagnostics = {
+              disable = { "incomplete-signature-doc", "trailing-space", "missing-local-export-doc" },
+              groupSeverity = {
+                strong = "Warning",
+                strict = "Warning",
+              },
+              groupFileStatus = {
+                ["ambiguity"] = "Opened",
+                ["await"] = "Opened",
+                ["codestyle"] = "None",
+                ["duplicate"] = "Opened",
+                ["global"] = "Opened",
+                ["luadoc"] = "Opened",
+                ["redefined"] = "Opened",
+                ["strict"] = "Opened",
+                ["strong"] = "Opened",
+                ["type-check"] = "Opened",
+                ["unbalanced"] = "Opened",
+                ["unused"] = "Opened",
+                ["unusedLocalExclude"] = { "_*" },
+              },
+            },
           },
         },
       },
@@ -88,6 +110,13 @@ return {
         function(server_name)
           local server_opts = opts.servers[server_name] or {}
           server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
+
+          -- Hack to prevent dynamic registration of watched files (performance)
+          server_opts.capabilities.workspace = server_opts.capabilities.workspace or {}
+          server_opts.capabilities.workspace.didChangeWatchedFiles = {
+            dynamicRegistration = false,
+          }
+
           require("lspconfig")[server_name].setup(server_opts)
         end,
       },
@@ -100,12 +129,7 @@ return {
           vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
-        map("<Leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
-        map("<Leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
-        map("<Leader>wl", function()
-          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, "List workspace folders")
-
+        -- Diagnostic navigation
         map("[e", function()
           vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
         end, "Previous Error")
@@ -113,12 +137,19 @@ return {
           vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
         end, "Next Error")
 
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.inlayHintProvider then
-          map("<Leader>ti", function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-          end, "Toggle Inlay Hints")
-        end
+        -- Native LSP Keymaps (Neovim 0.11+ style)
+        -- These are the "future standard" maps that you wanted to stick with.
+        -- We just ensure they are set if they aren't already by default or conflicts.
+
+        map("gra", vim.lsp.buf.code_action, "Code Action") -- 'gra' is the new standard (Go Run Action)
+        map("grn", vim.lsp.buf.rename, "Rename") -- 'grn' is the new standard (Go Run Name)
+        map("grr", vim.lsp.buf.references, "References") -- 'grr' (Go Run References)
+        map("gri", vim.lsp.buf.implementation, "Implementation") -- 'gri'
+        map("gO", vim.lsp.buf.document_symbol, "Document Symbols") -- 'gO' (Go Outline)
+
+        -- Signature Help (CTRL-S is common in Insert mode, but 'gK' is standard in Normal)
+        map("gK", vim.lsp.buf.signature_help, "Signature Help")
+
       end,
     })
 

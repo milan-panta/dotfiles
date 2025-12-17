@@ -16,7 +16,7 @@ vim.keymap.set("x", "<Leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<Leader>d", [["_d]])
 
 -- select occurrances of word
-vim.keymap.set("n", "<Leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<Leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- maintain cursor position after joining
 vim.keymap.set("n", "J", "mzJ`z")

@@ -2,33 +2,6 @@ return {
   "chrishrb/gx.nvim",
   keys = {
     { "gx", "<cmd>Browse<cr>", mode = { "n" } },
-    {
-      "gx",
-      function()
-        local function get_visual()
-          local save_reg = vim.fn.getreg("v")
-          local save_type = vim.fn.getregtype("v")
-          vim.cmd('noau normal! "vy')
-          local text = vim.fn.getreg("v")
-          vim.fn.setreg("v", save_reg, save_type)
-          return text
-        end
-
-        local selection = get_visual()
-        local gx = require("gx")
-        local options = gx.options or {}
-        local handler_options = options.handler_options or { search_engine = "google" }
-        local search_handler = require("gx.handlers.search")
-        local url = search_handler.handle("v", selection, handler_options)
-
-        require("gx.shell").execute_with_error(
-          options.open_browser_app or "open",
-          options.open_browser_args or { "--background" },
-          url
-        )
-      end,
-      mode = { "x" },
-    },
   },
   cmd = { "Browse" },
   config = function()

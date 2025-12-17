@@ -59,7 +59,7 @@ return {
 
       vim.keymap.set({ "n", "v" }, "<Leader>lf", function()
         conform.format({
-          lsp_fallback = false,
+          lsp_fallback = true,
           async = false,
           timeout_ms = 2000,
         })

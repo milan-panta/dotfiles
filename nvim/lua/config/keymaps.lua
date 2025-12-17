@@ -5,6 +5,9 @@ vim.keymap.set("n", "k", "gk", { silent = true })
 -- qflist navigation
 vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", { desc = "Open qf list", silent = true })
 
+-- save file
+vim.keymap.set("n", "<Leader>w", "<cmd>w<cr>")
+
 -- kitty maps M to Cmmd inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
 
@@ -97,8 +100,8 @@ local function RunFile(dir, args)
   handle:close()
 
   if not pane_id or pane_id == "" then
-     vim.notify("Failed to get tmux pane id", vim.log.levels.ERROR)
-     return
+    vim.notify("Failed to get tmux pane id", vim.log.levels.ERROR)
+    return
   end
 
   pane_id = pane_id:gsub("%s+", "")

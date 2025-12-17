@@ -148,8 +148,6 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
           end, "Toggle Inlay Hints")
         end
-
-        map("<Leader>rn", vim.lsp.buf.rename, "Rename")
       end,
     })
 

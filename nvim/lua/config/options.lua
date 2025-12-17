@@ -36,3 +36,7 @@ vim.opt.undoreload = 10000
 vim.opt.iskeyword = "@,48-57,_,192-255,-"
 vim.opt.updatetime = 50
 vim.opt.signcolumn = "yes"
+
+-- FolkeVim inspiration
+vim.opt.cmdheight = 0
+vim.opt.mousescroll = "ver:1,hor:4"

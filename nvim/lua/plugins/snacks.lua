@@ -86,6 +86,8 @@ return {
       timeout = 3000,
     },
     quickfile = { enabled = true },
+    scroll = { enabled = true },
+    select = { enabled = true },
     scope = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
@@ -117,6 +119,8 @@ return {
     },
     zen = {
       toggles = {
+        git_signs = false,
+        diagnostics = false,
         dim = false,
       },
       win = {
@@ -400,14 +404,14 @@ return {
 
     -- Other
     {
-      "<leader>z",
+      "<leader>tz",
       function()
         Snacks.zen()
       end,
       desc = "Toggle Zen Mode",
     },
     {
-      "<leader>Z",
+      "<leader>tZ",
       function()
         Snacks.zen.zoom()
       end,
@@ -460,13 +464,13 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
+        -- Setup some globals for debugging (optional)
+        _G.Snacks = Snacks
+
         -- Create some toggle mappings
         Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>ts")
         Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
         Snacks.toggle.diagnostics():map("<leader>td")
-        Snacks.toggle
-          .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-          :map("<leader>tc")
         Snacks.toggle.treesitter():map("<leader>tT")
         Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>tb")
         Snacks.toggle.inlay_hints():map("<leader>th")

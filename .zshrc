@@ -5,6 +5,7 @@ eval "$(zoxide init zsh)"
 alias lvim="NVIM_APPNAME=LazyVim nvim"
 
 alias n="nvim"
+alias vim="nvim"
 alias epath="tr ':' '\n' <<< "$PATH""
 alias lg="lazygit"
 alias l="yazi"

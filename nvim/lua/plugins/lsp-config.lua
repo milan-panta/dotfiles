@@ -10,7 +10,7 @@ return {
     servers = {
       basedpyright = {},
       clangd = {},
-      -- copilot = {},
+      copilot = {},
       cssls = {},
       eslint = {},
       hls = {},
@@ -162,7 +162,7 @@ return {
     -- Nvim 0.12+ features
     vim.schedule(function()
       if vim.fn.has("nvim-0.12") == 1 then
-        vim.lsp.inline_completion.enable()
+        vim.lsp.inline_completion.enable(false)
         -- Inline completion keymaps
         vim.keymap.set({ "i", "n" }, "<M-]>", function()
           vim.lsp.inline_completion.select({ count = 1 })
@@ -178,6 +178,13 @@ return {
           end
           -- Accept logic is usually handled by the binding itself or the fallback here
         end, { expr = true, desc = "Accept Copilot inline suggestion" })
+
+        -- Toggle Copilot
+        vim.keymap.set("n", "<Leader>tc", function()
+          local enabled = vim.lsp.inline_completion.is_enabled()
+          vim.lsp.inline_completion.enable(not enabled)
+          vim.notify("Copilot " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)
+        end, { desc = "Toggle Copilot" })
       end
     end)
   end,

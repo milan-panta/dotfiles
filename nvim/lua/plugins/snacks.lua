@@ -8,8 +8,8 @@ return {
     bigfile = { enabled = true },
     dashboard = {
       sections = {
-        { section = "header" },
-        { section = "keys", gap = 1, padding = 1 },
+        { section = "header", pane = 1 },
+        { section = "keys", gap = 1, padding = 1, pane = 1 },
         {
           pane = 2,
           icon = " ",
@@ -23,17 +23,17 @@ return {
         function()
           local in_git = Snacks.git.get_root() ~= nil
           local cmds = {
-            {
-              title = "Notifications",
-              cmd = "gh notify -s -a -n5",
-              action = function()
-                vim.ui.open("https://github.com/notifications")
-              end,
-              key = "N",
-              icon = " ",
-              height = 5,
-              enabled = true,
-            },
+            -- {
+            --   title = "Notifications",
+            --   cmd = "gh notify -s -a -n5",
+            --   action = function()
+            --     vim.ui.open("https://github.com/notifications")
+            --   end,
+            --   key = "N",
+            --   icon = " ",
+            --   height = 5,
+            --   enabled = true,
+            -- },
             {
               title = "Open Issues",
               cmd = "gh issue list -L 3",
@@ -72,11 +72,14 @@ return {
             }, cmd)
           end, cmds)
         end,
-        { section = "startup" },
+        { section = "startup", pane = 1 },
       },
     },
     explorer = { enabled = true },
-    indent = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = false },
+    },
     input = { enabled = true },
     notifier = {
       enabled = true,
@@ -93,7 +96,7 @@ return {
       doc = { inline = true, float = true },
       math = { enabled = true },
     },
-    gitbrowse = {enabled = true},
+    gitbrowse = { enabled = true },
     picker = {
       enabled = true,
       previewers = {
@@ -110,6 +113,14 @@ return {
             ["<Esc>"] = { "close", mode = { "n", "i" } },
           },
         },
+      },
+    },
+    zen = {
+      toggles = {
+        dim = false,
+      },
+      win = {
+        backdrop = { transparent = false },
       },
     },
   },
@@ -452,9 +463,7 @@ return {
         -- Create some toggle mappings
         Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>ts")
         Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
-        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>tL")
         Snacks.toggle.diagnostics():map("<leader>td")
-        Snacks.toggle.line_number():map("<leader>tl")
         Snacks.toggle
           .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
           :map("<leader>tc")

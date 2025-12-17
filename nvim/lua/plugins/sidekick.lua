@@ -66,5 +66,10 @@ return {
       function() require("sidekick.cli").toggle({ name = "cursor", focus = true }) end,
       desc = "Sidekick Toggle Cursor",
     },
+    {
+      "<Leader>ag",
+      function() require("sidekick.cli").toggle({ name = "gemini", focus = true }) end,
+      desc = "Sidekick Toggle Gemini",
+    },
   },
 }

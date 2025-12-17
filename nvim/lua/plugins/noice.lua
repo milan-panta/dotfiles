@@ -3,7 +3,6 @@ return {
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
   },
   opts = function(_, opts)
     opts.routes = opts.routes or {}

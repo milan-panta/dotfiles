@@ -37,9 +37,10 @@ vim.opt.iskeyword = "@,48-57,_,192-255,-"
 vim.opt.updatetime = 50
 vim.opt.signcolumn = "yes"
 
--- FolkeVim inspiration
+-- folke inspiration
 vim.opt.cmdheight = 0
 vim.opt.mousescroll = "ver:1,hor:4"
+vim.opt.fillchars:append({ eob = " " })
 
 -- Disable unused providers for startup speed
 vim.g.loaded_python3_provider = 0

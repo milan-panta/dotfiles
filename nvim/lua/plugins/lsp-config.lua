@@ -10,7 +10,7 @@ return {
     servers = {
       basedpyright = {},
       clangd = {},
-      -- copilot = {},
+      copilot = {},
       cssls = {},
       eslint = {},
       hls = {},

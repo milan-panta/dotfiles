@@ -9,14 +9,28 @@ return {
       animate = { enabled = false },
     },
     words = { enabled = true },
-    notifier = { enabled = true },
+    notifier = {
+      enabled = true,
+      sort = { "added" },
+    },
     bigfile = { enabled = true },
     gitbrowse = { enabled = true },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = true },
-    image = {enabled = true},
+    statuscolumn = {
+      enabled = true,
+      folds = { open = false },
+    },
+    image = {
+      enabled = true,
+      doc = { inline = true, float = true },
+      math = { enabled = true },
+    },
     picker = {
       enabled = true,
+      sources = {
+        files = { hidden = true },
+        grep = { hidden = true },
+      },
       win = {
         input = {
           keys = {
@@ -77,9 +91,9 @@ return {
     {
       "<Leader><Leader>",
       function()
-        Snacks.picker.files()
+        Snacks.picker.smart()
       end,
-      desc = "Find Files",
+      desc = "Smart Open",
     },
     {
       "<Leader>fg",
@@ -186,6 +200,13 @@ return {
       end,
       desc = "Git Browse",
       mode = { "n", "v" },
+    },
+    {
+      "<Leader>t",
+      function()
+        Snacks.scratch({ icon = " ", name = "Todo", ft = "markdown", file = "TODO.md" })
+      end,
+      desc = "Todo List",
     },
   },
 }

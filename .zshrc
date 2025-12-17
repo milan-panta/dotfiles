@@ -3,8 +3,10 @@ eval "$(zoxide init zsh)"
 
 # neovim config switcher
 alias lvim="NVIM_APPNAME=LazyVim nvim"
+alias fvim="NVIM_APPNAME=FolkeVim nvim"
 
 alias n="nvim"
+alias vim="nvim"
 alias epath="tr ':' '\n' <<< "$PATH""
 alias lg="lazygit"
 alias l="yazi"

@@ -5,6 +5,9 @@ vim.keymap.set("n", "k", "gk", { silent = true })
 -- qflist navigation
 vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", { desc = "Open qf list", silent = true })
 
+-- save file
+vim.keymap.set("n", "<Leader>w", "<cmd>w<cr>")
+
 -- kitty maps M to Cmmd inside tmux sessions
 vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
 
@@ -48,34 +51,81 @@ vim.keymap.set("n", "<C-w>\\", "<C-w>v", { desc = "Create vertical split" })
 vim.keymap.set("n", "<C-w>z", "<C-w>_<C-w>|", { desc = "Max out split" })
 
 -- run file
-local function RunFile(dir)
+local function RunFile(dir, args)
+  args = args or ""
   vim.cmd("w")
-  local filetype = vim.bo.filetype
-  if filetype == "c" then
-    vim.fn.feedkeys(":" .. dir .. " | term gcc -Wall -g -std=gnu99 % -o %< && ./%< ")
+
+  if not vim.env.TMUX then
+    vim.notify("Not in a tmux session", vim.log.levels.ERROR)
     return
   end
-  vim.cmd(dir)
-  if filetype == "cpp" then
-    vim.cmd("term g++-15 -g -std=c++23 -Wall % -o %< && ./%<")
+
+  local file = vim.fn.expand("%:p")
+  local file_no_ext = vim.fn.expand("%:p:r")
+  local filetype = vim.bo.filetype
+  local cmd = ""
+
+  if filetype == "c" then
+    cmd = string.format("gcc -Wall -g -std=gnu99 '%s' -o '%s' && '%s' %s", file, file_no_ext, file_no_ext, args)
+  elseif filetype == "cpp" then
+    cmd = string.format("g++-15 -g -std=c++23 -Wall '%s' -o '%s' && '%s' %s", file, file_no_ext, file_no_ext, args)
   elseif filetype == "python" then
-    vim.cmd("term python3 -u %")
+    cmd = string.format("python3 -u '%s' %s", file, args)
   elseif filetype == "rust" then
-    vim.cmd("term cargo run")
+    if args ~= "" then
+      cmd = "cargo run -- " .. args
+    else
+      cmd = "cargo run"
+    end
   elseif filetype == "javascript" then
-    vim.cmd("term node %")
+    cmd = string.format("node '%s' %s", file, args)
   else
-    vim.api.nvim_out_write("Filetype " .. filetype .. " is not supported\n")
+    vim.notify("Filetype " .. filetype .. " is not supported", vim.log.levels.WARN)
+    return
   end
-  vim.fn.feedkeys("i")
+
+  local tmux_split_cmd = ""
+  if dir == "vsplit" then
+    tmux_split_cmd = "tmux split-window -h -P -F '#{pane_id}'"
+  else
+    tmux_split_cmd = "tmux split-window -v -P -F '#{pane_id}'"
+  end
+
+  local handle = io.popen(tmux_split_cmd)
+  if not handle then
+    vim.notify("Failed to create tmux split", vim.log.levels.ERROR)
+    return
+  end
+  local pane_id = handle:read("*a")
+  handle:close()
+
+  if not pane_id or pane_id == "" then
+    vim.notify("Failed to get tmux pane id", vim.log.levels.ERROR)
+    return
+  end
+
+  pane_id = pane_id:gsub("%s+", "")
+
+  local clean_cmd = cmd:gsub('"', '\\"')
+  local send_keys_cmd = string.format('tmux send-keys -t %s "%s" Enter', pane_id, clean_cmd)
+
+  os.execute(send_keys_cmd)
 end
 
 -- code running
 vim.keymap.set("n", "<Leader>r\\", function()
-  RunFile("vsplit")
+  vim.ui.input({ prompt = "Args: " }, function(input)
+    if input then
+      RunFile("vsplit", input)
+    end
+  end)
 end, { silent = true, desc = "Run vertically" })
 vim.keymap.set("n", "<Leader>r-", function()
-  RunFile("split")
+  vim.ui.input({ prompt = "Args: " }, function(input)
+    if input then
+      RunFile("split", input)
+    end
+  end)
 end, { silent = true, desc = "Run horizontally" })
 
 -- markdown preview runner

@@ -119,7 +119,6 @@ return {
 
         -- Signature Help (CTRL-S is common in Insert mode, but 'gK' is standard in Normal)
         map("gK", vim.lsp.buf.signature_help, "Signature Help")
-
       end,
     })
 
@@ -142,9 +141,9 @@ return {
           vim.lsp.inline_completion.select({ count = -1 })
         end, { desc = "Prev Copilot suggestion" })
 
-        vim.keymap.set("i", "<C-l>", function()
+        vim.keymap.set("i", "<C-y>", function()
           if not vim.lsp.inline_completion.get() then
-            return "<C-l>"
+            return "<C-y>"
           end
           -- Accept logic is usually handled by the binding itself or the fallback here
         end, { expr = true, desc = "Accept Copilot inline suggestion" })

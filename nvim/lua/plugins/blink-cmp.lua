@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
+  version = "1.*",
   dependencies = { "rafamadriz/friendly-snippets" },
-  build = "cargo build --release",
   event = { "InsertEnter", "CmdlineEnter" },
 
   opts = {
@@ -15,8 +15,8 @@ return {
     },
 
     completion = {
-      menu = { auto_show = true, auto_show_delay_ms = 0 },
-      documentation = { auto_show = true, auto_show_delay_ms = 0 },
+      menu = { auto_show = true },
+      documentation = { auto_show = true, auto_show_delay_ms = 200 },
     },
 
     signature = { enabled = true },

@@ -32,7 +32,7 @@ vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
 
 vim.opt.iskeyword = "@,48-57,_,192-255,-"
-vim.opt.updatetime = 200
+vim.opt.updatetime = 100
 vim.opt.signcolumn = "yes"
 
 -- folke inspiration

@@ -168,9 +168,11 @@ return {
           vim.lsp.inline_completion.select({ count = -1 })
         end, { desc = "Prev Copilot suggestion" })
 
-        vim.keymap.set("i", "<M-y>", function()
-          vim.lsp.inline_completion.accept()
-        end, { desc = "Accept Copilot inline suggestion" })
+        vim.keymap.set("i", "<Tab>", function()
+          if not vim.lsp.inline_completion.get() then
+            return "<Tab>"
+          end
+        end, { expr = true, desc = "Accept Copilot inline suggestion" })
 
         -- Toggle Copilot
         vim.keymap.set("n", "<Leader>tc", function()

@@ -3,15 +3,7 @@ vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
 
 -- qflist navigation
-vim.keymap.set("n", "<Leader>tq", function()
-  for _, win in pairs(vim.fn.getwininfo()) do
-    if win.quickfix == 1 then
-      vim.cmd("cclose")
-      return
-    end
-  end
-  vim.cmd("copen")
-end, { desc = "Toggle qf list", silent = true })
+vim.keymap.set("n", "<Leader>tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = true })
 
 -- save file
 vim.keymap.set("n", "<Leader>w", "<cmd>w<cr>")
@@ -29,8 +21,6 @@ vim.keymap.set("n", "<Leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 -- maintain cursor position after joining
 vim.keymap.set("n", "J", "mzJ`z")
 
-vim.keymap.set("o", "ir", "i[")
-vim.keymap.set("o", "ar", "a[")
 vim.keymap.set("o", "iq", 'i"')
 vim.keymap.set("o", "aq", 'a"')
 

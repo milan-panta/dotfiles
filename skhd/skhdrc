@@ -1,7 +1,7 @@
 # shortcuts for opening apps
-rcmd - o : open -a kitty
-shift + cmd - o : open -na kitty
-rcmd - u : open -a "Zen Browser"
+rcmd - k : open -a kitty
+shift + cmd - k : open -na kitty
+cmd - u : open -a "Zen Browser"
 shift + cmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
 rcmd - o : open -a Obsidian

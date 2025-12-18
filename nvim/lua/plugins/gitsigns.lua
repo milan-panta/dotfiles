@@ -58,12 +58,12 @@ return {
         vim.keymap.set("n", "<Leader>hb", function()
           gs.blame_line({ full = true })
         end, { desc = "Toggle blame on file" })
-        vim.keymap.set("n", "<Leader>htb", gs.toggle_current_line_blame, { desc = "Toggle blame on line" })
+        vim.keymap.set("n", "<Leader>hB", gs.toggle_current_line_blame, { desc = "Toggle blame on line" })
         vim.keymap.set("n", "<Leader>hd", gs.diffthis, { desc = "Git diff hunk" })
         vim.keymap.set("n", "<Leader>hD", function()
           gs.diffthis("~")
         end, { desc = "Git diff file" })
-        vim.keymap.set("n", "<Leader>td", gs.toggle_deleted, { desc = "Toggle deleted git" })
+        vim.keymap.set("n", "<Leader>tG", gs.toggle_deleted, { desc = "Toggle deleted git" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

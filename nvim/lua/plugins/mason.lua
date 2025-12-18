@@ -2,7 +2,6 @@ return {
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>m", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ui = {
         border = "rounded",
@@ -17,6 +16,7 @@ return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     lazy = true,
+    cmd = "MasonToolsInstall",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {

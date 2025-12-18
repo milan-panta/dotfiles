@@ -11,7 +11,6 @@ return {
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "theHamsta/nvim-dap-virtual-text",
-    "nvim-neotest/nvim-nio",
     "jay-babu/mason-nvim-dap.nvim",
     "williamboman/mason.nvim",
   },
@@ -35,7 +34,6 @@ return {
     { "<Leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
     { "<Leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
     { "<Leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-
 },
 
   config = function()
@@ -64,13 +62,8 @@ return {
       dapui.close({})
     end
 
-    -- debugging
     require("mason-nvim-dap").setup({
-      handlers = {},
-      ensure_installed = {
-        "codelldb",
-        "python",
-      },
+      ensure_installed = { "codelldb", "python" },
       automatic_installation = true,
     })
   end,

@@ -3,7 +3,15 @@ vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
 
 -- qflist navigation
-vim.keymap.set("n", "<Leader>q", "<cmd>copen<cr>", { desc = "Open qf list", silent = true })
+vim.keymap.set("n", "<Leader>tq", function()
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      vim.cmd("cclose")
+      return
+    end
+  end
+  vim.cmd("copen")
+end, { desc = "Toggle qf list", silent = true })
 
 -- save file
 vim.keymap.set("n", "<Leader>w", "<cmd>w<cr>")
@@ -13,7 +21,7 @@ vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
 
 -- paste without replacing clipboard
 vim.keymap.set("x", "<Leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "<Leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<Leader>x", [["_d]])
 
 -- select occurrances of word
 vim.keymap.set("n", "<Leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -55,11 +63,6 @@ local function RunFile(dir, args)
   args = args or ""
   vim.cmd("w")
 
-  if not vim.env.TMUX then
-    vim.notify("Not in a tmux session", vim.log.levels.ERROR)
-    return
-  end
-
   local file = vim.fn.expand("%:p")
   local file_no_ext = vim.fn.expand("%:p:r")
   local filetype = vim.bo.filetype
@@ -81,6 +84,18 @@ local function RunFile(dir, args)
     cmd = string.format("node '%s' %s", file, args)
   else
     vim.notify("Filetype " .. filetype .. " is not supported", vim.log.levels.WARN)
+    return
+  end
+
+  -- Fallback to standard terminal if not in tmux
+  if not vim.env.TMUX then
+    if dir == "vsplit" then
+      vim.cmd("vsplit")
+    else
+      vim.cmd("split")
+    end
+    vim.cmd("term " .. cmd)
+    vim.cmd("startinsert")
     return
   end
 

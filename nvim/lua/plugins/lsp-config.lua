@@ -100,11 +100,31 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
-        local map = function(keys, func, desc)
-          vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+        local map = function(keys, func, desc, mode)
+          mode = mode or "n"
+          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
-        -- Diagnostic navigation
+        -- Delete Neovim 0.11+ default LSP keymaps (we define our own)
+        pcall(vim.keymap.del, "n", "grn", { buffer = event.buf })
+        pcall(vim.keymap.del, { "n", "x" }, "gra", { buffer = event.buf })
+        pcall(vim.keymap.del, "n", "grr", { buffer = event.buf })
+        pcall(vim.keymap.del, "n", "gri", { buffer = event.buf })
+        pcall(vim.keymap.del, "n", "gO", { buffer = event.buf })
+        pcall(vim.keymap.del, "i", "<C-S>", { buffer = event.buf })
+
+        -- Hover (K is default in 0.10+ but we explicitly set it)
+        map("K", vim.lsp.buf.hover, "Hover Documentation")
+
+        -- Diagnostic navigation (all severities)
+        map("[d", function()
+          vim.diagnostic.jump({ count = -1 })
+        end, "Previous Diagnostic")
+        map("]d", function()
+          vim.diagnostic.jump({ count = 1 })
+        end, "Next Diagnostic")
+
+        -- Diagnostic navigation (errors only)
         map("[e", function()
           vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
         end, "Previous Error")
@@ -112,13 +132,20 @@ return {
           vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
         end, "Next Error")
 
-        -- Native LSP Keymaps (Neovim 0.11+ style)
-        -- Modified to avoid conflicts with Snacks (gr) and avoid waiting
+        -- Diagnostic float
+        map("<C-W>d", vim.diagnostic.open_float, "Line Diagnostics")
+
+        -- Rename & Code Action
         map("<leader>rn", vim.lsp.buf.rename, "Rename")
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+        map("<leader>ca", vim.lsp.buf.code_action, "Code Action", "x")
 
-        -- Signature Help (CTRL-S is common in Insert mode, but 'gK' is standard in Normal)
+        -- Signature Help
         map("gK", vim.lsp.buf.signature_help, "Signature Help")
+        map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
+
+        -- NOTE: Navigation keymaps (gd, gD, gr, gI, gy) are defined in snacks.lua
+        -- using Snacks.picker for better UX
       end,
     })
 

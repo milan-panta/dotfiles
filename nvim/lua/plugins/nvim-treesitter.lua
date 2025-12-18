@@ -1,23 +1,11 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPost", "BufNewFile" },
+  branch = "main",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre", "VeryLazy" },
+  cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
   build = ":TSUpdate",
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require("nvim-treesitter.configs")
-
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      modules = {},
-      -- enable indentation
-      indent = { enable = false },
-      -- ignore installed
-      ignore_install = {},
-      -- ensure these language parsers are installed
+    require("nvim-treesitter").setup({
       ensure_installed = {
         "bash",
         "c",
@@ -32,6 +20,7 @@ return {
         "python",
         "query",
         "regex",
+        "ron",
         "rust",
         "toml",
         "tsx",
@@ -39,17 +28,24 @@ return {
         "vim",
         "vimdoc",
       },
-      sync_install = false,
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<M-space>",
-          node_incremental = "<M-space>",
-          node_decremental = "<bs>",
-        },
-      },
-      -- auto install above language parsers
-      auto_install = false,
+    })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      desc = "Enable Treesitter features",
+      callback = function()
+        local filetype = vim.bo.filetype
+        local lang = vim.treesitter.language.get_lang(filetype)
+        if not lang then
+          return
+        end
+
+        if vim.treesitter.query.get(lang, "highlights") then
+          vim.treesitter.start()
+        end
+        if vim.treesitter.query.get(lang, "indents") then
+          vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+        end
+      end,
     })
   end,
 }

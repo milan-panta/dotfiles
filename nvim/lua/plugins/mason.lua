@@ -16,6 +16,7 @@ return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     lazy = true,
+    cmd = "MasonToolsInstall",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {

@@ -1,7 +1,6 @@
 return {
   {
     "mrcjkb/rustaceanvim",
-    lazy = false,
     ft = "rust",
     config = function()
       vim.g.rustaceanvim = {

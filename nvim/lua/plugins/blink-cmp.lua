@@ -1,13 +1,10 @@
 return {
   "saghen/blink.cmp",
-  dependencies = { "rafamadriz/friendly-snippets" },
-
   version = "1.*",
-  build = "cargo build --release",
+  dependencies = { "rafamadriz/friendly-snippets" },
+  event = { "InsertEnter", "CmdlineEnter" },
 
   opts = {
-    keymap = { preset = "super-tab" },
-
     appearance = {
       nerd_font_variant = "mono",
     },
@@ -18,8 +15,8 @@ return {
     },
 
     completion = {
-      menu = { auto_show = true, auto_show_delay_ms = 0 },
-      documentation = { auto_show = true, auto_show_delay_ms = 0 },
+      menu = { auto_show = true },
+      documentation = { auto_show = true, auto_show_delay_ms = 200 },
     },
 
     signature = { enabled = true },

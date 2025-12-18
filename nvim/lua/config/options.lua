@@ -27,8 +27,6 @@ vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
 
-vim.opt.wrap = true
-
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000

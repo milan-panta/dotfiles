@@ -1,0 +1,13 @@
+theme = TokyoNight Night
+macos-titlebar-style = hidden
+
+font-size = 16
+
+font-family = JetBrainsMono Nerd Font Mono
+font-family-bold = JetBrainsMono NFM Bold
+font-family-italic = JetBrainsMono NFM ExtraLight Italic
+font-family-bold-italic = JetBrainsMono NFM Bold Italic
+
+macos-option-as-alt = true
+
+auto-update = off

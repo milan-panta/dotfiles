@@ -5,6 +5,7 @@ cmd - u : open -a "Zen Browser"
 shift + cmd - u : open -a "Zen Browser"
 rcmd - c : open -a "Google Chrome"
 rcmd - b : open -a Messages
+rcmd - i : open -a IINA
 rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"
 rcmd - n : open -a Notion

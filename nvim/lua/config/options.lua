@@ -40,6 +40,10 @@ vim.opt.ruler = true
 vim.opt.mousescroll = "ver:1,hor:4"
 vim.opt.fillchars:append({ eob = " " })
 
+vim.opt.diffopt:append("iwhite")
+vim.opt.diffopt:append("algorithm:histogram")
+vim.opt.diffopt:append("indent-heuristic")
+
 -- Disable unused providers for startup speed
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0

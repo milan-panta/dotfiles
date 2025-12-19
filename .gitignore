@@ -1,0 +1,17 @@
+/*
+!alacritty
+!.gitignore
+!kitty
+!neofetch
+!nvim
+!skhd
+!tmux
+!yabai
+!README.md
+!starship.toml
+!NvimVscode
+!.zshrc
+!vimium.txt
+tmux/plugins
+nvim/spell
+nvim/lua/plugins/leetcode.lua

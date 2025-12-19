@@ -1,4 +1,5 @@
 # shortcuts for opening apps
+lcmd - return : open -a Ghostty
 rcmd - k : open -a Ghostty
 shift + cmd - k : open -na Ghostty
 rcmd - u : open -a "Zen Browser"
@@ -89,6 +90,12 @@ ctrl + lalt - j : yabai -m window --warp south
 ctrl + lalt - k : yabai -m window --warp north
 ctrl + lalt - h : yabai -m window --warp west
 ctrl + lalt - l : yabai -m window --warp east
+
+# move window
+shift + lalt - a : yabai -m window --move rel:-20:0
+shift + lalt - s : yabai -m window --move rel:0:20
+shift + lalt - w : yabai -m window --move rel:0:-20
+shift + lalt - d : yabai -m window --move rel:20:0
 
 # resize windows
 lalt - a : yabai -m window --resize right:-20:0 2> /dev/null || yabai -m window --resize left:-20:0 2> /dev/null

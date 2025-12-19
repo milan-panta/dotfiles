@@ -16,13 +16,29 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without replacing cli
 vim.keymap.set({ "n", "v" }, "<leader>x", [["_d]], { desc = "Delete without copying" })
 
 -- select occurrances of word
-vim.keymap.set("n", "<leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word" })
+vim.keymap.set(
+  "n",
+  "<leader>rs",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Search and replace word" }
+)
 
 -- maintain cursor position after joining
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 
 vim.keymap.set("o", "iq", 'i"', { desc = "Inside quotes" })
 vim.keymap.set("o", "aq", 'a"', { desc = "Around quotes" })
+
+-- "very magic" (less escaping needed) regexes by default
+vim.keymap.set("n", "?", "?\\v")
+vim.keymap.set("n", "/", "/\\v")
+
+-- center the file after common movements
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "*", "*zz")
+vim.keymap.set("n", "#", "#zz")
+vim.keymap.set("n", "g*", "g*zz")
 
 -- Maintain cursor position after yank
 vim.keymap.set("v", "y", "ygv<Esc>", { desc = "Yank (keep cursor)" })

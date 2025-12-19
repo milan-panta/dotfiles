@@ -76,10 +76,10 @@ return {
       end
 
       local swap = require("nvim-treesitter-textobjects.swap")
-      vim.keymap.set("n", "<Leader>Ca", function()
+      vim.keymap.set("n", "<leader>Ca", function()
         swap.swap_next("@parameter.inner")
       end, { buffer = buf, desc = "Swap parameter with next" })
-      vim.keymap.set("n", "<Leader>CA", function()
+      vim.keymap.set("n", "<leader>CA", function()
         swap.swap_previous("@parameter.inner")
       end, { buffer = buf, desc = "Swap parameter with previous" })
 

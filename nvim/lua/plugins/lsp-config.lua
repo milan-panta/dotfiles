@@ -175,7 +175,7 @@ return {
         end, { expr = true, desc = "Accept Copilot inline suggestion" })
 
         -- Toggle Copilot
-        vim.keymap.set("n", "<Leader>tc", function()
+        vim.keymap.set("n", "<leader>Tc", function()
           local enabled = vim.lsp.inline_completion.is_enabled()
           vim.lsp.inline_completion.enable(not enabled)
           vim.notify("Copilot " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)

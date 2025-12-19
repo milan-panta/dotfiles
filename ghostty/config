@@ -8,6 +8,13 @@ font-family-bold = JetBrainsMono NFM Bold
 font-family-italic = JetBrainsMono NFM ExtraLight Italic
 font-family-bold-italic = JetBrainsMono NFM Bold Italic
 
+cursor-style = block
+cursor-style-blink = false
+
+mouse-hide-while-typing = true
 macos-option-as-alt = true
+
+quit-after-last-window-closed = true
+confirm-close-surface = false
 
 auto-update = off

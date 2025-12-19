@@ -1,45 +1,45 @@
 -- better naviation with line wrap on
-vim.keymap.set("n", "j", "gj", { silent = true })
-vim.keymap.set("n", "k", "gk", { silent = true })
+vim.keymap.set("n", "j", "gj", { silent = true, desc = "Move down (wrap-aware)" })
+vim.keymap.set("n", "k", "gk", { silent = true, desc = "Move up (wrap-aware)" })
 
 -- qflist navigation
-vim.keymap.set("n", "<Leader>Tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = true })
+vim.keymap.set("n", "<leader>Tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = true })
 
 -- save file
-vim.keymap.set("n", "<Leader>w", "<cmd>w<cr>")
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 
 -- kitty maps M to Cmmd inside tmux sessions
-vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG")
+vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG", { desc = "Select all" })
 
 -- paste without replacing clipboard
-vim.keymap.set("x", "<Leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "<Leader>x", [["_d]])
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without replacing clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>x", [["_d]], { desc = "Delete without copying" })
 
 -- select occurrances of word
-vim.keymap.set("n", "<Leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word" })
 
 -- maintain cursor position after joining
-vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 
-vim.keymap.set("o", "iq", 'i"')
-vim.keymap.set("o", "aq", 'a"')
+vim.keymap.set("o", "iq", 'i"', { desc = "Inside quotes" })
+vim.keymap.set("o", "aq", 'a"', { desc = "Around quotes" })
 
 -- Maintain cursor position after yank
-vim.keymap.set("v", "y", "ygv<Esc>")
+vim.keymap.set("v", "y", "ygv<Esc>", { desc = "Yank (keep cursor)" })
 
 -- +y to copy to system clipboard
-vim.keymap.set({ "n", "v" }, "Y", '"+y')
+vim.keymap.set({ "n", "v" }, "Y", '"+y', { desc = "Yank to system clipboard" })
 
 -- Remove text highlight after search
 vim.keymap.set("n", "<Esc>", "<cmd>noh<cr>", { silent = true, desc = "Clear highlights" })
 
 -- Back to back indents
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right" })
 
 -- window management
-vim.keymap.set("n", "<M-=>", ":resize -2<cr>", { silent = true, desc = "Increase height" })
-vim.keymap.set("n", "<M-->", ":resize +2<cr>", { silent = true, desc = "Decrease height" })
+vim.keymap.set("n", "<M-=>", ":resize +2<cr>", { silent = true, desc = "Increase height" })
+vim.keymap.set("n", "<M-->", ":resize -2<cr>", { silent = true, desc = "Decrease height" })
 vim.keymap.set("n", "<M-.>", ":vertical resize +2<cr>", { silent = true, desc = "Increase width" })
 vim.keymap.set("n", "<M-,>", ":vertical resize -2<cr>", { silent = true, desc = "Decrease width" })
 
@@ -72,6 +72,8 @@ local function RunFile(dir, args)
     end
   elseif filetype == "javascript" then
     cmd = string.format("node '%s' %s", file, args)
+  elseif filetype == "typescript" then
+    cmd = string.format("npx tsx '%s' %s", file, args)
   else
     vim.notify("Filetype " .. filetype .. " is not supported", vim.log.levels.WARN)
     return
@@ -118,14 +120,14 @@ local function RunFile(dir, args)
 end
 
 -- code running
-vim.keymap.set("n", "<Leader>r\\", function()
+vim.keymap.set("n", "<leader>r\\", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
     if input then
       RunFile("vsplit", input)
     end
   end)
 end, { silent = true, desc = "Run vertically" })
-vim.keymap.set("n", "<Leader>r-", function()
+vim.keymap.set("n", "<leader>r-", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
     if input then
       RunFile("split", input)
@@ -134,4 +136,4 @@ vim.keymap.set("n", "<Leader>r-", function()
 end, { silent = true, desc = "Run horizontally" })
 
 -- markdown preview runner
-vim.keymap.set("n", "<Leader>rm", "<Cmd>MarkdownPreviewToggle<cr>")
+vim.keymap.set("n", "<leader>rm", "<Cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })

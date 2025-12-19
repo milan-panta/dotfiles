@@ -12,14 +12,14 @@ return {
   },
   keys = {
     {
-      "<Leader>aa",
+      "<leader>aa",
       function()
         require("sidekick.cli").toggle()
       end,
       desc = "Sidekick Toggle CLI",
     },
     {
-      "<Leader>as",
+      "<leader>as",
       function()
         require("sidekick.cli").select()
       end,
@@ -28,14 +28,14 @@ return {
       desc = "Select CLI",
     },
     {
-      "<Leader>ad",
+      "<leader>ad",
       function()
         require("sidekick.cli").close()
       end,
       desc = "Detach a CLI Session",
     },
     {
-      "<Leader>at",
+      "<leader>at",
       function()
         require("sidekick.cli").send({ msg = "{this}" })
       end,
@@ -43,14 +43,14 @@ return {
       desc = "Send This",
     },
     {
-      "<Leader>af",
+      "<leader>af",
       function()
         require("sidekick.cli").send({ msg = "{file}" })
       end,
       desc = "Send File",
     },
     {
-      "<Leader>av",
+      "<leader>av",
       function()
         require("sidekick.cli").send({ msg = "{selection}" })
       end,
@@ -58,7 +58,7 @@ return {
       desc = "Send Visual Selection",
     },
     {
-      "<Leader>ap",
+      "<leader>ap",
       function()
         require("sidekick.cli").prompt()
       end,
@@ -66,14 +66,14 @@ return {
       desc = "Sidekick Select Prompt",
     },
     {
-      "<Leader>ac",
+      "<leader>ac",
       function()
         require("sidekick.cli").toggle({ name = "cursor", focus = true })
       end,
       desc = "Sidekick Toggle Cursor",
     },
     {
-      "<Leader>ag",
+      "<leader>ag",
       function()
         require("sidekick.cli").toggle({ name = "gemini", focus = true })
       end,

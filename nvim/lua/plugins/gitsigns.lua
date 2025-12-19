@@ -2,7 +2,6 @@ return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPost", "BufNewFile" },
   config = function()
-    vim.opt.ruler = true
     require("gitsigns").setup({
       signs = {
         add = { text = "▎" },
@@ -43,27 +42,27 @@ return {
         end, { expr = true })
 
         -- Actions
-        vim.keymap.set("n", "<Leader>hs", gs.stage_hunk, { desc = "Stage hunk" })
-        vim.keymap.set("n", "<Leader>hr", gs.reset_hunk, { desc = "Git reset hunk" })
-        vim.keymap.set("v", "<Leader>hs", function()
+        vim.keymap.set("n", "<leader>hs", gs.stage_hunk, { desc = "Stage hunk" })
+        vim.keymap.set("n", "<leader>hr", gs.reset_hunk, { desc = "Git reset hunk" })
+        vim.keymap.set("v", "<leader>hs", function()
           gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Stage selected hunk" })
-        vim.keymap.set("v", "<Leader>hr", function()
+        vim.keymap.set("v", "<leader>hr", function()
           gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Git reset selected" })
-        vim.keymap.set("n", "<Leader>hS", gs.stage_buffer, { desc = "Stage buffer" })
-        vim.keymap.set("n", "<Leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
-        vim.keymap.set("n", "<Leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
-        vim.keymap.set("n", "<Leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
-        vim.keymap.set("n", "<Leader>hb", function()
+        vim.keymap.set("n", "<leader>hS", gs.stage_buffer, { desc = "Stage buffer" })
+        vim.keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+        vim.keymap.set("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
+        vim.keymap.set("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
+        vim.keymap.set("n", "<leader>hb", function()
           gs.blame_line({ full = true })
         end, { desc = "Toggle blame on file" })
-        vim.keymap.set("n", "<Leader>hB", gs.toggle_current_line_blame, { desc = "Toggle blame on line" })
-        vim.keymap.set("n", "<Leader>hd", gs.diffthis, { desc = "Git diff hunk" })
-        vim.keymap.set("n", "<Leader>hD", function()
+        vim.keymap.set("n", "<leader>hB", gs.toggle_current_line_blame, { desc = "Toggle blame on line" })
+        vim.keymap.set("n", "<leader>hd", gs.diffthis, { desc = "Git diff hunk" })
+        vim.keymap.set("n", "<leader>hD", function()
           gs.diffthis("~")
         end, { desc = "Git diff file" })
-        vim.keymap.set("n", "<Leader>TG", gs.toggle_deleted, { desc = "Toggle deleted git" })
+        vim.keymap.set("n", "<leader>TG", gs.toggle_deleted, { desc = "Toggle deleted git" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

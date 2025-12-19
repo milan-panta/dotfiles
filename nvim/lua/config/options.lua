@@ -25,7 +25,7 @@ vim.opt.scrolloff = 8
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
@@ -34,6 +34,7 @@ vim.opt.undoreload = 10000
 vim.opt.iskeyword = "@,48-57,_,192-255,-"
 vim.opt.updatetime = 100
 vim.opt.signcolumn = "yes"
+vim.opt.ruler = true
 
 -- folke inspiration
 vim.opt.mousescroll = "ver:1,hor:4"

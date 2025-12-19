@@ -1,8 +1,8 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = true,
-    priority = 1000,
+    lazy = false,
+    -- priority = 1000,
     opts = {},
     config = function()
       vim.cmd("colorscheme tokyonight-night")
@@ -10,11 +10,11 @@ return {
   },
   {
     "rose-pine/neovim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    -- priority = 1000,
     name = "rose-pine",
     config = function()
-      vim.cmd("colorscheme rose-pine-moon")
+      vim.cmd("colorscheme rose-pine-main")
     end,
   },
 }

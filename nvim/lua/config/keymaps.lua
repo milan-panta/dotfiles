@@ -3,7 +3,7 @@ vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
 
 -- qflist navigation
-vim.keymap.set("n", "<Leader>tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = true })
+vim.keymap.set("n", "<Leader>Tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = true })
 
 -- save file
 vim.keymap.set("n", "<Leader>w", "<cmd>w<cr>")

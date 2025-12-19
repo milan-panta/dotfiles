@@ -132,8 +132,8 @@ return {
     { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 
     -- Other
-    { "<leader>tz", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-    { "<leader>tZ", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+    { "<leader>Tz", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+    { "<leader>TZ", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     { "<leader>lR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
@@ -149,14 +149,14 @@ return {
         _G.Snacks = Snacks
 
         -- Create some toggle mappings
-        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>ts")
-        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
-        Snacks.toggle.diagnostics():map("<leader>td")
-        Snacks.toggle.treesitter():map("<leader>tT")
-        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>tb")
-        Snacks.toggle.inlay_hints():map("<leader>th")
-        Snacks.toggle.indent():map("<leader>tg")
-        Snacks.toggle.dim():map("<leader>tD")
+        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")
+        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>Tw")
+        Snacks.toggle.diagnostics():map("<leader>Td")
+        Snacks.toggle.treesitter():map("<leader>TT")
+        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>Tb")
+        Snacks.toggle.inlay_hints():map("<leader>Th")
+        Snacks.toggle.indent():map("<leader>Tg")
+        Snacks.toggle.dim():map("<leader>TD")
       end,
     })
   end,

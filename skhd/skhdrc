@@ -3,6 +3,7 @@ rcmd - k : open -a kitty
 shift + cmd - k : open -na kitty
 cmd - u : open -a "Zen Browser"
 shift + cmd - u : open -a "Zen Browser"
+rcmd - c : open -a "Google Chrome"
 rcmd - b : open -a Messages
 rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"
@@ -69,12 +70,12 @@ alt + shift - 8 : yabai -m window --space 8 --focus
 alt + shift - 9 : yabai -m window --space 9 --focus
 
 # focus monitor
-cmd + shift - l  : yabai -m display --focus next
-cmd + shift - h  : yabai -m display --focus prev
+cmd + shift - l  : yabai -m display --focus prev
+cmd + shift - h  : yabai -m display --focus next
 
 # send window to monitor and follow focus
-ctrl + cmd - h  : yabai -m window --display prev; yabai -m display --focus prev
-ctrl + cmd - l  : yabai -m window --display next; yabai -m display --focus next
+ctrl + cmd - l  : yabai -m window --display prev; yabai -m display --focus prev
+ctrl + cmd - h  : yabai -m window --display next; yabai -m display --focus next
 
 # swap windows
 shift + alt - j : yabai -m window --swap south

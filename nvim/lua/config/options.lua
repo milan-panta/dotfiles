@@ -35,6 +35,7 @@ vim.opt.iskeyword = "@,48-57,_,192-255,-"
 vim.opt.updatetime = 100
 vim.opt.signcolumn = "yes"
 vim.opt.ruler = true
+vim.opt.showmode = false
 
 -- folke inspiration
 vim.opt.mousescroll = "ver:1,hor:4"

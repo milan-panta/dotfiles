@@ -1,0 +1,27 @@
+theme = TokyoNight Night
+# macos-titlebar-style = hidden
+window-decoration = false
+
+font-size = 16
+
+font-family = JetBrains Mono
+font-family-bold = JetBrains Mono Regular Bold
+font-family-italic = JetBrains Mono ExtraLight Italic
+font-family-bold-italic = JetBrains Mono SemiBold Italic
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+font-thicken = true
+window-padding-balance = true
+window-padding-x = 0
+window-padding-y = 2
+
+mouse-hide-while-typing = true
+macos-option-as-alt = true
+
+quit-after-last-window-closed = true
+confirm-close-surface = false
+
+auto-update = off

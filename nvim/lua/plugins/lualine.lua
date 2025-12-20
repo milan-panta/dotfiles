@@ -7,22 +7,21 @@ return {
       section_separators = "",
       component_separators = "",
       globalstatus = true,
+      theme = "auto",
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { { "filename", path = 3 } },
+      lualine_b = { "branch" },
       lualine_c = {
-
-        {
-          "diagnostics",
-          sections = { "error", "warn" },
-          symbols = { error = "", warn = "", info = "", hint = "" },
-        },
+        { "filename", path = 1 },
       },
-      lualine_x = { "diff" },
-      lualine_y = { "branch" },
+      lualine_x = {
+        "diagnostics",
+        "diff",
+        { "filetype", icons_enabled = false },
+      },
+      lualine_y = { "progress" },
       lualine_z = { "location" },
     },
-    extensions = { "lazy", "mason", "oil", "quickfix" },
   },
 }

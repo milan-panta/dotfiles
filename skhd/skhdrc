@@ -1,8 +1,8 @@
 # shortcuts for opening apps
-lcmd - return : open -a Ghostty
+rcmd - return : open -a Ghostty
 rcmd - k : open -a Ghostty
 shift + cmd - k : open -na Ghostty
-rcmd - u : open -a "Zen Browser"
+rcmd - j : open -a "Zen Browser"
 rcmd - v : open -a "Visual Studio Code"
 shift + cmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
@@ -25,7 +25,7 @@ lalt - l : yabai -m window --focus east
 lalt - j : yabai -m window --focus south
 
 # window oapcity
-lalt + ctrl - t : yabai -m window --opacity 0.88
+lalt + ctrl - t : yabai -m window --opacity 0.90
 lalt + ctrl - o : yabai -m window --opacity 1.0
 
 # rotate layout clockwise

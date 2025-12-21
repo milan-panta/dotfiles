@@ -1,3 +1,18 @@
+local colors = {
+  blue = "#7aa2f7",
+  bg = "#16161e",
+  purple = "#bb9af7",
+  fg = "#a9b1d6",
+  grey = "#565f89",
+}
+
+local theme_config = {
+  a = { fg = colors.blue, bg = colors.bg, gui = "bold" },
+  b = { fg = colors.purple, bg = colors.bg },
+  c = { fg = colors.fg, bg = colors.bg },
+  z = { fg = colors.blue, bg = colors.bg, gui = "bold" },
+}
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -8,42 +23,12 @@ return {
       component_separators = { left = "│", right = "│" },
       globalstatus = true,
       theme = {
-        normal = {
-          a = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-          b = { fg = "#bb9af7", bg = "#16161e" },
-          c = { fg = "#a9b1d6", bg = "#16161e" },
-          z = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-        },
-        insert = {
-          a = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-          b = { fg = "#bb9af7", bg = "#16161e" },
-          c = { fg = "#a9b1d6", bg = "#16161e" },
-          z = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-        },
-        visual = {
-          a = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-          b = { fg = "#bb9af7", bg = "#16161e" },
-          c = { fg = "#a9b1d6", bg = "#16161e" },
-          z = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-        },
-        replace = {
-          a = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-          b = { fg = "#bb9af7", bg = "#16161e" },
-          c = { fg = "#a9b1d6", bg = "#16161e" },
-          z = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-        },
-        command = {
-          a = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-          b = { fg = "#bb9af7", bg = "#16161e" },
-          c = { fg = "#a9b1d6", bg = "#16161e" },
-          z = { fg = "#7aa2f7", bg = "#16161e", gui = "bold" },
-        },
-        inactive = {
-          a = { fg = "#565f89", bg = "#16161e" },
-          b = { fg = "#565f89", bg = "#16161e" },
-          c = { fg = "#565f89", bg = "#16161e" },
-          z = { fg = "#565f89", bg = "#16161e" },
-        },
+        normal = theme_config,
+        insert = theme_config,
+        visual = theme_config,
+        replace = theme_config,
+        command = theme_config,
+        inactive = theme_config,
       },
     },
     sections = {

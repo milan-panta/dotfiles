@@ -78,13 +78,6 @@ return {
         },
       },
     },
-    setup = {
-      jdtls = function(_, server_opts)
-        require("java").setup({})
-        require("lspconfig").jdtls.setup(server_opts)
-        return true
-      end,
-    },
   },
   config = function(_, opts)
     local function setup_server(server_name)

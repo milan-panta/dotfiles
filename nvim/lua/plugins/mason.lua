@@ -26,7 +26,6 @@ return {
         "typstyle",
         "latexindent",
         "ruff",
-        "google-java-format",
       },
       auto_update = true,
       run_on_start = true,

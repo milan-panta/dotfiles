@@ -156,6 +156,15 @@ return {
 
         map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
 
+        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
+          vim.lsp.codelens.refresh()
+          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            buffer = event.buf,
+            callback = vim.lsp.codelens.refresh,
+          })
+        end
+        map("<leader>cc", vim.lsp.codelens.run, "Run Codelens")
+
         -- NOTE: Navigation keymaps (gd, gD, gr, gI, gy) are defined in snacks.lua
         -- using Snacks.picker for better UX
       end,

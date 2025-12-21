@@ -1,10 +1,10 @@
 return {
   "stevearc/oil.nvim",
+  dependencies = { "echasnovski/mini.icons" },
   cmd = "Oil",
   keys = {
     { "-", function() require("oil").toggle_float() end, desc = "Open Parent Directory" },
   },
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     columns = { "icon" },
     delete_to_trash = true,

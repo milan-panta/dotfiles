@@ -63,7 +63,7 @@ return {
     end
 
     require("mason-nvim-dap").setup({
-      ensure_installed = { "codelldb", "python" },
+      ensure_installed = { "codelldb", "python", "javadbg", "javatest" },
       automatic_installation = true,
     })
   end,

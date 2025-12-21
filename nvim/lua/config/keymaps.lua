@@ -90,6 +90,8 @@ local function RunFile(dir, args)
     cmd = string.format("node '%s' %s", file, args)
   elseif filetype == "typescript" then
     cmd = string.format("npx tsx '%s' %s", file, args)
+  elseif filetype == "java" then
+    cmd = string.format("java '%s' %s", file, args)
   else
     vim.notify("Filetype " .. filetype .. " is not supported", vim.log.levels.WARN)
     return

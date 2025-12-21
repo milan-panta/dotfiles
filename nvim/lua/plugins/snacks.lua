@@ -169,5 +169,19 @@ return {
     Snacks.toggle.inlay_hints():map("<leader>Th")
     Snacks.toggle.indent():map("<leader>Tg")
     Snacks.toggle.dim():map("<leader>TD")
+    Snacks.toggle({
+      name = "CodeLens",
+      get = function()
+        return vim.g.codelens_enabled ~= false
+      end,
+      set = function(state)
+        vim.g.codelens_enabled = state
+        if state then
+          vim.lsp.codelens.refresh()
+        else
+          vim.lsp.codelens.clear()
+        end
+      end,
+    }):map("<leader>Tc")
   end,
 }

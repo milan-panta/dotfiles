@@ -145,8 +145,6 @@ return {
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action", "x")
 
-        -- Signature Help
-        map("gK", vim.lsp.buf.signature_help, "Signature Help")
         map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
 
         -- NOTE: Navigation keymaps (gd, gD, gr, gI, gy) are defined in snacks.lua

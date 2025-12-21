@@ -22,7 +22,7 @@ return {
             { "<leader>co", function() vim.cmd.RustLsp("openDocs") end, desc = "Open docs.rs", buffer = bufnr },
             { "<leader>cC", function() vim.cmd.RustLsp("openCargo") end, desc = "Open Cargo.toml", buffer = bufnr },
             { "<leader>dr", function() vim.cmd.RustLsp("debuggables") end, desc = "Debuggables (Rust)", buffer = bufnr },
-            { "<leader>dR", function() vim.cmd.RustLsp("testables") end, desc = "Testables (Rust)", buffer = bufnr },
+            { "<leader>st", function() vim.cmd.RustLsp("testables") end, desc = "Search testables (Rust)", buffer = bufnr },
             { "K", function() vim.cmd.RustLsp({ "hover", "actions" }) end, desc = "Hover Actions", buffer = bufnr },
           })
           -- stylua: ignore end

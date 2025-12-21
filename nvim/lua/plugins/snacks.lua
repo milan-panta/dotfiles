@@ -44,7 +44,11 @@ return {
     quickfile = { enabled = true },
     select = { enabled = true },
     scope = { enabled = true },
-    statuscolumn = { enabled = true },
+    statuscolumn = {
+      left = { "sign" },
+      right = { "git" },
+      folds = { open = true, git_hl = true },
+    },
     words = { enabled = true },
     image = {
       enabled = true,

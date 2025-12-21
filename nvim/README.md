@@ -8,4 +8,5 @@
 - [ ripgrep ](https://github.com/BurntSushi/ripgrep)
 
 ## Note
+
 Enable option as alt on MacOS since some of the keymaps depend on it.

@@ -1,9 +1,13 @@
 return {
   "iamcco/markdown-preview.nvim",
-  cmd = { "MarkdownPreview" },
   build = "cd app && yarn install",
+  ft = { "markdown" },
+  -- markdown preview runner
+  cmd = { "MarkdownPreview" },
+  keys = {
+    { "<leader>rm", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" } },
+  },
   init = function()
     vim.g.mkdp_filetypes = { "markdown" }
   end,
-  ft = { "markdown" },
 }

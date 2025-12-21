@@ -1,6 +1,5 @@
 return {
   "neovim/nvim-lspconfig",
-  -- event = { "BufReadPost", "BufWritePost", "BufNewFile" },
   event = "VeryLazy",
   dependencies = {
     "williamboman/mason.nvim",
@@ -10,7 +9,6 @@ return {
   opts = {
     servers = {
       basedpyright = {},
-      clangd = {},
       -- copilot = {},
       cssls = {},
       eslint = {},
@@ -28,6 +26,7 @@ return {
       lua_ls = {
         settings = {
           Lua = {
+            codeLens = { enable = true },
             runtime = { version = "LuaJIT" },
             completion = { callSnippet = "Replace" },
             hint = { enable = true },
@@ -80,35 +79,44 @@ return {
     },
   },
   config = function(_, opts)
+    local function setup_server(server_name)
+      local server_opts = opts.servers[server_name] or {}
+      server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
+
+      -- Hack to prevent dynamic registration of watched files (performance)
+      server_opts.capabilities.workspace = server_opts.capabilities.workspace or {}
+      server_opts.capabilities.workspace.didChangeWatchedFiles = {
+        dynamicRegistration = false,
+      }
+      return server_opts
+    end
+
     require("mason-lspconfig").setup({
       ensure_installed = vim.tbl_keys(opts.servers),
       handlers = {
         function(server_name)
-          local server_opts = opts.servers[server_name] or {}
-          server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
-
-          -- Hack to prevent dynamic registration of watched files (performance)
-          server_opts.capabilities.workspace = server_opts.capabilities.workspace or {}
-          server_opts.capabilities.workspace.didChangeWatchedFiles = {
-            dynamicRegistration = false,
-          }
-
+          local server_opts = setup_server(server_name)
+          if opts.setup and opts.setup[server_name] then
+            -- vim.notify("Running custom setup for " .. server_name)
+            if opts.setup[server_name](server_name, server_opts) then
+              return
+            end
+          end
           require("lspconfig")[server_name].setup(server_opts)
         end,
       },
     })
-
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client then
-          client.server_capabilities.semanticTokensProvider = nil
-        end
-
         local map = function(keys, func, desc, mode)
           mode = mode or "n"
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+        end
+
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client then
+          client.server_capabilities.semanticTokensProvider = nil
         end
 
         -- Delete Neovim 0.11+ default LSP keymaps (we define our own)
@@ -148,6 +156,15 @@ return {
 
         map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
 
+        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
+          vim.lsp.codelens.refresh()
+          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            buffer = event.buf,
+            callback = vim.lsp.codelens.refresh,
+          })
+        end
+        map("<leader>cc", vim.lsp.codelens.run, "Run Codelens")
+
         -- NOTE: Navigation keymaps (gd, gD, gr, gI, gy) are defined in snacks.lua
         -- using Snacks.picker for better UX
       end,
@@ -158,33 +175,5 @@ return {
       signs = true,
       underline = true,
     })
-
-    -- Nvim 0.12+ features
-    -- vim.schedule(function()
-    --   if vim.fn.has("nvim-0.12") == 1 then
-    --     vim.lsp.inline_completion.enable(false)
-    --     -- Inline completion keymaps
-    --     vim.keymap.set({ "i", "n" }, "<M-]>", function()
-    --       vim.lsp.inline_completion.select({ count = 1 })
-    --     end, { desc = "Next Copilot suggestion" })
-    --
-    --     vim.keymap.set({ "i", "n" }, "<M-[>", function()
-    --       vim.lsp.inline_completion.select({ count = -1 })
-    --     end, { desc = "Prev Copilot suggestion" })
-    --
-    --     vim.keymap.set("i", "<Tab>", function()
-    --       if not vim.lsp.inline_completion.get() then
-    --         return "<Tab>"
-    --       end
-    --     end, { expr = true, desc = "Accept Copilot inline suggestion" })
-    --
-    --     -- Toggle Copilot
-    --     vim.keymap.set("n", "<leader>Tc", function()
-    --       local enabled = vim.lsp.inline_completion.is_enabled()
-    --       vim.lsp.inline_completion.enable(not enabled)
-    --       vim.notify("Copilot " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)
-    --     end, { desc = "Toggle Copilot" })
-    --   end
-    -- end)
   end,
 }

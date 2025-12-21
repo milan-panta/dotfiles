@@ -150,6 +150,3 @@ vim.keymap.set("n", "<leader>r-", function()
     end
   end)
 end, { silent = true, desc = "Run horizontally" })
-
--- markdown preview runner
-vim.keymap.set("n", "<leader>rm", "<Cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })

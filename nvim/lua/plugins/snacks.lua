@@ -69,6 +69,7 @@ return {
         },
       },
     },
+    toggle = { enabled = true },
     zen = {
       toggles = {
         git_signs = false,
@@ -84,6 +85,7 @@ return {
     -- stylua: ignore start
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
@@ -136,28 +138,25 @@ return {
     { "<leader>TZ", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-    { "<leader>lR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+    { "<leader>rf", function() Snacks.rename.rename_file() end, desc = "Rename File" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
     { "<leader>N", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     -- stylua: ignore end
   },
-  init = function()
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "VeryLazy",
-      callback = function()
-        -- Setup some globals for debugging (optional)
-        _G.Snacks = Snacks
+  config = function(_, opts)
+    require("snacks").setup(opts)
 
-        -- Create some toggle mappings
-        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")
-        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>Tw")
-        Snacks.toggle.diagnostics():map("<leader>Td")
-        Snacks.toggle.treesitter():map("<leader>TT")
-        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>Tb")
-        Snacks.toggle.inlay_hints():map("<leader>Th")
-        Snacks.toggle.indent():map("<leader>Tg")
-        Snacks.toggle.dim():map("<leader>TD")
-      end,
-    })
+    -- Setup some globals for debugging (optional)
+    _G.Snacks = Snacks
+
+    -- Create some toggle mappings
+    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")
+    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>Tw")
+    Snacks.toggle.diagnostics():map("<leader>Td")
+    Snacks.toggle.treesitter():map("<leader>TT")
+    Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>Tb")
+    Snacks.toggle.inlay_hints():map("<leader>Th")
+    Snacks.toggle.indent():map("<leader>Tg")
+    Snacks.toggle.dim():map("<leader>TD")
   end,
 }

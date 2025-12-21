@@ -1,6 +1,7 @@
 theme = TokyoNight Night
-# macos-titlebar-style = hidden
-window-decoration = false
+
+macos-titlebar-style = hidden
+# window-decoration = false
 
 font-size = 16
 

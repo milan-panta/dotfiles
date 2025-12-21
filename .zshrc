@@ -26,3 +26,5 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+eval "$(starship init zsh)"

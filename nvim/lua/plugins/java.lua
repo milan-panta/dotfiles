@@ -32,7 +32,7 @@ return {
         os_config = "mac"
         -- Use ARM config if available on Apple Silicon
         if vim.fn.system("uname -m"):find("arm64") and vim.fn.isdirectory(jdtls_path .. "/config_mac_arm") == 1 then
-           os_config = "mac_arm"
+          os_config = "mac_arm"
         end
       elseif vim.fn.has("win32") == 1 then
         os_config = "win"
@@ -149,8 +149,8 @@ return {
         on_attach = function(client, bufnr)
           -- DAP Setup
           if pcall(require, "jdtls.dap") then
-             require("jdtls").setup_dap({ hotcodereplace = "auto" })
-             require("jdtls.dap").setup_dap_main_class_configs()
+            require("jdtls").setup_dap({ hotcodereplace = "auto" })
+            require("jdtls.dap").setup_dap_main_class_configs()
           end
 
           -- Enable codelens
@@ -187,7 +187,7 @@ return {
 
     -- Attach to current buffer
     if vim.bo.filetype == "java" then
-        attach_jdtls()
+      attach_jdtls()
     end
 
     -- Attach to future buffers
@@ -197,3 +197,4 @@ return {
     })
   end,
 }
+

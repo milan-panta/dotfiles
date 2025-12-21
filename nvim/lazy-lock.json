@@ -1,6 +1,7 @@
 {
   "blink.cmp": { "branch": "main", "commit": "b19413d214068f316c78978b08264ed1c41830ec" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "1606e9d5d04ff254023c3f3c62842d065708d6d3" },
+  "clangd_extensions.nvim": { "branch": "main", "commit": "6fd7f12df71a04dd9ec398fc63aaa23fbe9f525f" },
   "conform.nvim": { "branch": "master", "commit": "a7c61e7dd94170f9dd84f5b5546b874f98c7d5bd" },
   "crates.nvim": { "branch": "main", "commit": "ac9fa498a9edb96dc3056724ff69d5f40b898453" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },

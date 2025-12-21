@@ -10,7 +10,41 @@ return {
   opts = {
     servers = {
       basedpyright = {},
-      clangd = {},
+      clangd = {
+        keys = {
+          { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+        },
+        root_dir = function(fname)
+          return require("lspconfig.util").root_pattern(
+            "Makefile",
+            "configure.ac",
+            "configure.in",
+            "config.h.in",
+            "meson.build",
+            "opt/build/ninja.build",
+            "build.ninja"
+          )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+            fname
+          ) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
+        end,
+        capabilities = {
+          offsetEncoding = { "utf-16" },
+        },
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+        },
+        init_options = {
+          usePlaceholders = true,
+          completeUnimported = true,
+          clangdFileStatus = true,
+        },
+      },
       -- copilot = {},
       cssls = {},
       eslint = {},
@@ -92,6 +126,14 @@ return {
           server_opts.capabilities.workspace.didChangeWatchedFiles = {
             dynamicRegistration = false,
           }
+
+          if server_name == "clangd" then
+            local clangd_ext_opts = require("lazy.core.config").spec.plugins["clangd_extensions.nvim"].opts
+            require("clangd_extensions").setup(
+              vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = server_opts })
+            )
+            return
+          end
 
           require("lspconfig")[server_name].setup(server_opts)
         end,

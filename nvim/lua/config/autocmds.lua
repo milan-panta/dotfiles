@@ -49,34 +49,41 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Close certain filetypes with <q>
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   group = augroup("close_with_q"),
-  pattern = {
-    "PlenaryTestPopup",
-    "checkhealth",
-    "dbout",
-    "gitsigns-blame",
-    "grug-far",
-    "help",
-    "lspinfo",
-    "neotest-output",
-    "neotest-output-panel",
-    "neotest-summary",
-    "ClangdAST",
-    "notify",
-    "qf",
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
-  },
   callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.schedule(function()
-      vim.keymap.set("n", "q", function()
-        vim.cmd("close")
-        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-      end, { buffer = event.buf, silent = true, desc = "Quit buffer" })
-    end)
+    local patterns = {
+      "PlenaryTestPopup",
+      "checkhealth",
+      "dbout",
+      "gitsigns-blame",
+      "grug-far",
+      "help",
+      "lspinfo",
+      "neotest-output",
+      "neotest-output-panel",
+      "neotest-summary",
+      "ClangdAST",
+      "notify",
+      "qf",
+      "spectre_panel",
+      "startuptime",
+      "tsplayground",
+    }
+    local ft = vim.bo[event.buf].filetype
+    if vim.tbl_contains(patterns, ft) then
+      vim.bo[event.buf].buflisted = false
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(event.buf) then
+          vim.keymap.set("n", "q", function()
+            vim.cmd("close")
+            if not ft:match("neotest") then
+              pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+            end
+          end, { buffer = event.buf, silent = true, desc = "Quit buffer" })
+        end
+      end)
+    end
   end,
 })
 

@@ -29,13 +29,11 @@ return {
     status = { virtual_text = true },
     output = { open_on_run = true },
     adapters = {
-      -- Use table format for lazy loading of adapters
       ["neotest-python"] = {
         dap = { justMyCode = false },
         args = { "--log-level", "DEBUG" },
         runner = "pytest",
       },
-      -- rustaceanvim provides its own neotest adapter
       ["rustaceanvim.neotest"] = {},
     },
   },
@@ -44,14 +42,12 @@ return {
     vim.diagnostic.config({
       virtual_text = {
         format = function(diagnostic)
-          -- Replace newline and tab characters with space for more compact diagnostics
           local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
           return message
         end,
       },
     }, neotest_ns)
 
-    -- Process adapters from opts.adapters table
     if opts.adapters then
       local adapters = {}
       for name, config in pairs(opts.adapters) do
@@ -62,18 +58,15 @@ return {
           adapters[#adapters + 1] = config
         elseif config ~= false then
           local adapter = require(name)
-          if type(config) == "table" and not vim.tbl_isempty(config) then
-            local meta = getmetatable(adapter)
-            if adapter.setup then
-              adapter.setup(config)
-            elseif adapter.adapter then
-              adapter.adapter(config)
-              adapter = adapter.adapter
-            elseif meta and meta.__call then
-              adapter = adapter(config)
-            else
-              error("Adapter " .. name .. " does not support setup")
-            end
+          if type(adapter) == "function" then
+            adapter = adapter(config)
+          elseif adapter.setup then
+            adapter.setup(config)
+          elseif adapter.adapter then
+            adapter.adapter(config)
+            adapter = adapter.adapter
+          elseif getmetatable(adapter) and getmetatable(adapter).__call then
+            adapter = adapter(config)
           end
           adapters[#adapters + 1] = adapter
         end
@@ -84,3 +77,4 @@ return {
     require("neotest").setup(opts)
   end,
 }
+

@@ -44,7 +44,6 @@ return {
           json = { "prettierd" },
           typescript = { "prettierd" },
           typescriptreact = { "prettierd" },
-          java = { "google-java-format" },
         },
 
         formatters = {

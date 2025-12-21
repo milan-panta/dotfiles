@@ -1,6 +1,6 @@
 return {
   "kylechui/nvim-surround",
-  event = "VeryLazy",
+  event = { "BufReadPost", "BufNewFile" },
   opts = {
     keymaps = {
       normal = "gs",

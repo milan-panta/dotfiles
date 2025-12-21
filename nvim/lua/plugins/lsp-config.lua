@@ -1,6 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  -- event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+  event = "VeryLazy",
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",

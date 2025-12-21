@@ -1,5 +1,6 @@
 return {
   "folke/snacks.nvim",
+  dependencies = { "echasnovski/mini.icons" },
   priority = 1000,
   lazy = false,
   ---@type snacks.Config
@@ -58,8 +59,14 @@ return {
         git = { builtin = false },
       },
       sources = {
-        files = { hidden = true },
-        grep = { hidden = true },
+        files = {
+          hidden = true,
+          exclude = { ".git", "node_modules", ".venv", ".python-version", ".DS_Store" },
+        },
+        grep = {
+          hidden = true,
+          exclude = { ".git", "node_modules", ".venv", ".python-version", ".DS_Store" },
+        },
       },
       win = {
         input = {

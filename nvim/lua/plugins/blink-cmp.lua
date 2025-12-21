@@ -5,6 +5,12 @@ return {
   event = { "InsertEnter", "CmdlineEnter" },
 
   opts = {
+    keymap = {
+      preset = "default",
+      ["<C-b>"] = { "scroll_documentation_up", "scroll_signature_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "scroll_signature_down", "fallback" },
+    },
+
     appearance = {
       nerd_font_variant = "mono",
     },
@@ -16,10 +22,13 @@ return {
 
     completion = {
       menu = { auto_show = true },
-      documentation = { auto_show = true, auto_show_delay_ms = 200 },
+      documentation = { auto_show = true, auto_show_delay_ms = 100 },
     },
 
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      window = { show_documentation = true, scrollbar = true },
+    },
 
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },

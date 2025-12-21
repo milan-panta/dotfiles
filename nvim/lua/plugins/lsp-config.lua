@@ -127,14 +127,6 @@ return {
             dynamicRegistration = false,
           }
 
-          if server_name == "clangd" then
-            local clangd_ext_opts = require("lazy.core.config").spec.plugins["clangd_extensions.nvim"].opts
-            require("clangd_extensions").setup(
-              vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = server_opts })
-            )
-            return
-          end
-
           require("lspconfig")[server_name].setup(server_opts)
         end,
       },

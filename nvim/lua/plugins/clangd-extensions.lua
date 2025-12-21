@@ -1,10 +1,9 @@
 return {
   "p00f/clangd_extensions.nvim",
   lazy = true,
-  config = function() end,
   opts = {
     inlay_hints = {
-      inline = false,
+      inline = true,
     },
     ast = {
       role_icons = {

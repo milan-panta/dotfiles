@@ -25,6 +25,17 @@ return {
       local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
       local jdtls_path = mason_path .. "/jdtls"
       local lombok_path = jdtls_path .. "/lombok.jar"
+      local java_debug_path = mason_path .. "/java-debug-adapter"
+      local java_test_path = mason_path .. "/java-test"
+
+      local bundles = {}
+      if vim.fn.isdirectory(java_debug_path) == 1 then
+        vim.list_extend(bundles, vim.split(vim.fn.glob(java_debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n"))
+      end
+
+      if vim.fn.isdirectory(java_test_path) == 1 then
+        vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar"), "\n"))
+      end
 
       -- System-specific config
       local os_config = "linux"
@@ -143,7 +154,7 @@ return {
         },
 
         init_options = {
-          bundles = {},
+          bundles = bundles,
         },
 
         on_attach = function(client, bufnr)

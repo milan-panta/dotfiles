@@ -9,12 +9,11 @@ return {
   opts = {
     servers = {
       basedpyright = {},
-      -- copilot = {},
+      copilot = {},
       cssls = {},
       eslint = {},
       hls = {},
       html = {},
-      jdtls = {},
       jsonls = {},
       marksman = {},
       tailwindcss = {},
@@ -163,10 +162,38 @@ return {
       end,
     })
 
+    -- Nvim 0.12+ features
+    vim.schedule(function()
+      if vim.fn.has("nvim-0.12") == 1 then
+        vim.lsp.inline_completion.enable(false)
+        -- Inline completion keymaps
+        vim.keymap.set({ "i", "n" }, "<M-]>", function()
+          vim.lsp.inline_completion.select({ count = 1 })
+        end, { desc = "Next Copilot suggestion" })
+
+        vim.keymap.set({ "i", "n" }, "<M-[>", function()
+          vim.lsp.inline_completion.select({ count = -1 })
+        end, { desc = "Prev Copilot suggestion" })
+
+        vim.keymap.set("i", "<Tab>", function()
+          if not vim.lsp.inline_completion.get() then
+            return "<Tab>"
+          end
+        end, { expr = true, desc = "Accept Copilot inline suggestion" })
+
+        -- Toggle Copilot
+        vim.keymap.set("n", "<leader>Tc", function()
+          local enabled = vim.lsp.inline_completion.is_enabled()
+          vim.lsp.inline_completion.enable(not enabled)
+          vim.notify("Copilot " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)
+        end, { desc = "Toggle Copilot" })
+      end
+    end)
+
     vim.diagnostic.config({
       severity_sort = true,
       signs = true,
-      underline = true,
+      underline = false,
     })
   end,
 }

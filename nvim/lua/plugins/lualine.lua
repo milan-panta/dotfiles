@@ -42,7 +42,7 @@ return {
         { "filetype", icons_enabled = false },
       },
       lualine_y = { "progress" },
-      lualine_z = { "location" },
+      lualine_z = { { "location", padding = { left = 0 } } },
     },
   },
 }

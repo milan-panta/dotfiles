@@ -66,11 +66,11 @@ return {
       sources = {
         files = {
           hidden = true,
-          exclude = { ".git", "node_modules", ".venv", ".python-version", ".DS_Store" },
+          exclude = { ".git", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
         },
         grep = {
           hidden = true,
-          exclude = { ".git", "node_modules", ".venv", ".python-version", ".DS_Store" },
+          exclude = { ".git", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
         },
       },
       win = {

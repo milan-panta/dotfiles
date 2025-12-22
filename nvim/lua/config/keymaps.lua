@@ -1,68 +1,65 @@
+local map = vim.keymap.set
+
 -- better naviation with line wrap on
-vim.keymap.set("n", "j", "gj", { silent = true, desc = "Move down (wrap-aware)" })
-vim.keymap.set("n", "k", "gk", { silent = true, desc = "Move up (wrap-aware)" })
+map("n", "j", "gj", { silent = true, desc = "Move down (wrap-aware)" })
+map("n", "k", "gk", { silent = true, desc = "Move up (wrap-aware)" })
 
 -- qflist navigation
-vim.keymap.set("n", "<leader>Tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = true })
+map("n", "<leader>Tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = true })
 
 -- save file
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
+map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 
 -- kitty maps M to Cmmd inside tmux sessions
-vim.keymap.set({ "n", "i" }, "<M-a>", "<ESC>ggVG", { desc = "Select all" })
+map({ "n", "i" }, "<M-a>", "<ESC>ggVG", { desc = "Select all" })
 
 -- paste without replacing clipboard
-vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without replacing clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>x", [["_d]], { desc = "Delete without copying" })
+map("x", "<leader>p", [["_dP]], { desc = "Paste without replacing clipboard" })
+map({ "n", "v" }, "<leader>x", [["_d]], { desc = "Delete without copying" })
 
 -- select occurrances of word
-vim.keymap.set(
-  "n",
-  "<leader>rs",
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Search and replace word" }
-)
+map("n", "<leader>rs", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word" })
 
 -- maintain cursor position after joining
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
+map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 
-vim.keymap.set("o", "iq", 'i"', { desc = "Inside quotes" })
-vim.keymap.set("o", "aq", 'a"', { desc = "Around quotes" })
+map("o", "iq", 'i"', { desc = "Inside quotes" })
+map("o", "aq", 'a"', { desc = "Around quotes" })
 
 -- "very magic" (less escaping needed) regexes by default
-vim.keymap.set("n", "?", "?\\v")
-vim.keymap.set("n", "/", "/\\v")
+map("n", "?", "?\\v")
+map("n", "/", "/\\v")
 
 -- center the file after common movements
-vim.keymap.set("n", "n", "nzz")
-vim.keymap.set("n", "N", "Nzz")
-vim.keymap.set("n", "*", "*zz")
-vim.keymap.set("n", "#", "#zz")
-vim.keymap.set("n", "g*", "g*zz")
+map("n", "n", "nzz")
+map("n", "N", "Nzz")
+map("n", "*", "*zz")
+map("n", "#", "#zz")
+map("n", "g*", "g*zz")
 
 -- Maintain cursor position after yank
-vim.keymap.set("v", "y", "ygv<Esc>", { desc = "Yank (keep cursor)" })
+map("v", "y", "ygv<Esc>", { desc = "Yank (keep cursor)" })
 
 -- +y to copy to system clipboard
-vim.keymap.set({ "n", "v" }, "Y", '"+y', { desc = "Yank to system clipboard" })
+map({ "n", "v" }, "Y", '"+y', { desc = "Yank to system clipboard" })
 
 -- Remove text highlight after search
-vim.keymap.set("n", "<Esc>", "<cmd>noh<cr>", { silent = true, desc = "Clear highlights" })
+map("n", "<Esc>", "<cmd>noh<cr>", { silent = true, desc = "Clear highlights" })
 
 -- Back to back indents
-vim.keymap.set("v", "<", "<gv", { desc = "Indent left" })
-vim.keymap.set("v", ">", ">gv", { desc = "Indent right" })
+map("v", "<", "<gv", { desc = "Indent left" })
+map("v", ">", ">gv", { desc = "Indent right" })
 
 -- window management
-vim.keymap.set("n", "<M-=>", ":resize +2<cr>", { silent = true, desc = "Increase height" })
-vim.keymap.set("n", "<M-->", ":resize -2<cr>", { silent = true, desc = "Decrease height" })
-vim.keymap.set("n", "<M-.>", ":vertical resize +2<cr>", { silent = true, desc = "Increase width" })
-vim.keymap.set("n", "<M-,>", ":vertical resize -2<cr>", { silent = true, desc = "Decrease width" })
+map("n", "<M-=>", ":resize +2<cr>", { silent = true, desc = "Increase height" })
+map("n", "<M-->", ":resize -2<cr>", { silent = true, desc = "Decrease height" })
+map("n", "<M-.>", ":vertical resize +2<cr>", { silent = true, desc = "Increase width" })
+map("n", "<M-,>", ":vertical resize -2<cr>", { silent = true, desc = "Decrease width" })
 
 -- Consistent with tmux
-vim.keymap.set("n", "<C-w>-", "<C-w>s", { desc = "Create horizontal split" })
-vim.keymap.set("n", "<C-w>\\", "<C-w>v", { desc = "Create vertical split" })
-vim.keymap.set("n", "<C-w>z", "<C-w>_<C-w>|", { desc = "Max out split" })
+map("n", "<C-w>-", "<C-w>s", { desc = "Create horizontal split" })
+map("n", "<C-w>\\", "<C-w>v", { desc = "Create vertical split" })
+map("n", "<C-w>z", "<C-w>_<C-w>|", { desc = "Max out split" })
 
 -- run file
 local function RunFile(dir, args)
@@ -136,14 +133,14 @@ local function RunFile(dir, args)
 end
 
 -- code running
-vim.keymap.set("n", "<leader>r\\", function()
+map("n", "<leader>r\\", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
     if input then
       RunFile("vsplit", input)
     end
   end)
 end, { silent = true, desc = "Run vertically" })
-vim.keymap.set("n", "<leader>r-", function()
+map("n", "<leader>r-", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
     if input then
       RunFile("split", input)

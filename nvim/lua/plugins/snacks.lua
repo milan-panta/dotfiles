@@ -55,6 +55,7 @@ return {
       doc = { inline = true, float = true },
       math = { enabled = true },
     },
+    lazygit = { enabled = true },
     gitbrowse = { enabled = true },
     picker = {
       enabled = true,
@@ -65,11 +66,11 @@ return {
       sources = {
         files = {
           hidden = true,
-          exclude = { ".git", "node_modules", ".venv", ".python-version", ".DS_Store" },
+          exclude = { ".git", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
         },
         grep = {
           hidden = true,
-          exclude = { ".git", "node_modules", ".venv", ".python-version", ".DS_Store" },
+          exclude = { ".git", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
         },
       },
       win = {
@@ -110,13 +111,15 @@ return {
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
 
     -- Git
+    { "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, desc = "Lazygit (Root Dir)" },
+    { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit (cwd)" },
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
-    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+    { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Git Log" },
     { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
     { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
-    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+    { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Git Log File" },
 
     -- Grep
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },

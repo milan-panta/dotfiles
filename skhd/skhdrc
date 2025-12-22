@@ -7,6 +7,7 @@ rcmd - v : open -a "Visual Studio Code"
 shift + cmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
 rcmd - i : open -a IINA
+rcmd - l : open -a RustRover
 rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"
 rcmd - n : open -a Notion

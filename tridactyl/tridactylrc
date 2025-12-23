@@ -5,6 +5,17 @@ set hintnames numeric
 
 unbind J
 unbind K
+unbind a
+unbind x
+unbind zz
+unbind zi
+unbind zI
+unbind zo
+unbind zO
+unbind zm
+unbind zM
+unbind zr
+unbind zR
 
 bind J tabnext
 bind K tabprev

@@ -1,7 +1,7 @@
 theme = TokyoNight Night
 
-macos-titlebar-style = hidden
-# window-decoration = false
+# macos-titlebar-style = hidden
+window-decoration = false
 
 font-size = 16
 
@@ -19,7 +19,6 @@ window-padding-balance = true
 window-padding-x = 0
 window-padding-y = 2
 
-mouse-hide-while-typing = true
 macos-option-as-alt = true
 
 quit-after-last-window-closed = true
@@ -37,4 +36,7 @@ keybind = command+digit_6=csi:54;9u
 keybind = command+digit_7=csi:55;9u
 keybind = command+digit_8=csi:56;9u
 keybind = command+digit_9=csi:57;9u
+keybind = command+f=csi:102;9u
 keybind = command+g=csi:103;9u
+keybind = command+t=csi:116;9u
+keybind = command+w=csi:119;9u

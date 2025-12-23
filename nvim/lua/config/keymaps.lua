@@ -13,6 +13,9 @@ map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 -- kitty maps M to Cmmd inside tmux sessions
 map({ "n", "i" }, "<M-a>", "<ESC>ggVG", { desc = "Select all" })
 
+-- ghostty can use <M-BS>
+map({ "i" }, "<M-BS>", "<C-w>", { silent = true, desc = "Delete word" })
+
 -- paste without replacing clipboard
 map("x", "<leader>p", [["_dP]], { desc = "Paste without replacing clipboard" })
 map({ "n", "v" }, "<leader>x", [["_d]], { desc = "Delete without copying" })

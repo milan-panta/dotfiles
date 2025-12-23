@@ -8,7 +8,7 @@ sudo yabai --load-sa
 yabai -m rule --add app="^(main|Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter|Movie Recording)$" manage=off
 
 # Workspace Assignments
-yabai -m rule --add app="^(Zen|Safari|Google Chrome|Firefox)$" space=1
+yabai -m rule --add app="^(Zen|Safari|Firefox)$" space=1
 yabai -m rule --add app="^Ghostty$" space=2
 yabai -m rule --add app="^(TickTick|Mail)$" space=5
 yabai -m rule --add app="^(Spotify|Discord)$" space=6
@@ -17,28 +17,31 @@ yabai -m rule --add app="^(IINA|Messages)$" space=8
 
 # global settings
 yabai -m config                                 \
+    external_bar                 off:40:0       \
+    menubar_opacity              1.0            \
     mouse_follows_focus          off            \
     focus_follows_mouse          off            \
+    display_arrangement_order    default        \
     window_origin_display        default        \
     window_placement             second_child   \
+    window_insertion_point       focused        \
     window_zoom_persist          on             \
-    window_topmost               off            \
     window_shadow                on             \
-    window_animation_duration    0.0            \
-    window_animation_frame_rate  120            \
-    window_opacity_duration      0.0            \
+    window_animation_duration    0.1            \
+    window_animation_easing      ease_out_circ  \
+    window_opacity_duration      0.15           \
     active_window_opacity        1              \
     normal_window_opacity        1              \
-    window_opacity               on             \
+    window_opacity               off            \
     insert_feedback_color        0xffd75f5f     \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
-    top_padding                  0              \
-    bottom_padding               0              \
-    left_padding                 0              \
-    right_padding                0              \
-    window_gap                   1              \
+    top_padding                  6              \
+    bottom_padding               6              \
+    left_padding                 6              \
+    right_padding                6              \
+    window_gap                   6              \
     layout                       bsp            \
     mouse_modifier               fn             \
     mouse_action1                move           \

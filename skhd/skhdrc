@@ -1,13 +1,12 @@
 # shortcuts for opening apps
-rcmd - return : open -a Ghostty
+rcmd - return : open -na Ghostty
 rcmd - k : open -a Ghostty
-shift + cmd - k : open -na Ghostty
 rcmd - j : open -a "Zen Browser"
 rcmd - v : open -a "Visual Studio Code"
 shift + cmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
 rcmd - i : open -a IINA
-rcmd - l : open -a RustRover
+rcmd - l : open -a CLion
 rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"
 rcmd - n : open -a Notion

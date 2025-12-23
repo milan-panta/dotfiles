@@ -1,0 +1,24 @@
+colors --url https://raw.githubusercontent.com/llbn5866/tokyonight-tridactyl-theme/refs/heads/main/tokyonight.css tokyonight
+
+set hintfiltermode vimperator-reflow
+set hintnames numeric
+
+unbind J
+unbind K
+unbind a
+unbind x
+unbind zz
+unbind zi
+unbind zI
+unbind zo
+unbind zO
+unbind zm
+unbind zM
+unbind zr
+unbind zR
+
+bind J tabnext
+bind K tabprev
+
+bind --mode=ex <C-n>  ex.next_completion
+bind --mode=ex <C-p>  ex.prev_completion

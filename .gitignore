@@ -3,6 +3,7 @@
 !.gitignore
 !kitty
 !neofetch
+!tridactyl
 !nvim
 !skhd
 !tmux

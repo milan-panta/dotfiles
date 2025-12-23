@@ -27,4 +27,21 @@ setopt HIST_IGNORE_ALL_DUPS
 export HISTSIZE=10000
 export SAVEHIST=10000
 
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+zle     -N             sesh-sessions
+bindkey -M emacs '02;9u' sesh-sessions
+bindkey -M vicmd '02;9u' sesh-sessions
+bindkey -M viins '02;9u' sesh-sessions
+
 eval "$(starship init zsh)"

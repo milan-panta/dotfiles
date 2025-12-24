@@ -3,7 +3,7 @@ theme = TokyoNight Night
 # macos-titlebar-style = hidden
 window-decoration = false
 
-font-size = 14
+font-size = 15
 
 font-family = JetBrains Mono
 font-family-bold = JetBrains Mono Regular Bold

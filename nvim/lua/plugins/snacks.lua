@@ -150,7 +150,15 @@ return {
     Snacks.toggle.diagnostics():map("<leader>Td")
     Snacks.toggle.treesitter():map("<leader>TT")
     Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>Tb")
-    Snacks.toggle.inlay_hints():map("<leader>Th")
+    Snacks.toggle({
+      name = "Inlay Hints",
+      get = function()
+        return vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+      end,
+      set = function(state)
+        vim.lsp.inlay_hint.enable(state)
+      end,
+    }):map("<leader>Th")
     Snacks.toggle.indent():map("<leader>Tg")
     Snacks.toggle.dim():map("<leader>TD")
     Snacks.toggle({

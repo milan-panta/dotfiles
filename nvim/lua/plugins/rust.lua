@@ -47,24 +47,6 @@ return {
                 ["async-recursion"] = { "async_recursion" },
               },
             },
-            inlayHints = {
-              bindingModeHints = { enable = false },
-              closureCaptureHints = { enable = true },
-              closureReturnTypeHints = { enable = "always" },
-              closureStyle = "impl_fn",
-              discriminantHints = { enable = "fieldless" },
-              expressionAdjustmentHints = { enable = "never" },
-              implicitDrops = { enable = false },
-              lifetimeElisionHints = { enable = "skip_trivial" },
-              parameterHints = { enable = false },
-              rangeExclusiveHints = { enable = true },
-              reborrowHints = { enable = "mutable" },
-              typeHints = {
-                enable = true,
-                hideClosureInitialization = true,
-                hideNamedConstructor = true,
-              },
-            },
             files = {
               excludeDirs = {
                 ".direnv",

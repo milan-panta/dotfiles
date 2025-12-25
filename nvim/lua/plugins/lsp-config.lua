@@ -9,7 +9,7 @@ return {
   opts = {
     servers = {
       basedpyright = {},
-      copilot = {},
+      -- copilot = {},
       cssls = {},
       eslint = {},
       hls = {},
@@ -194,7 +194,9 @@ return {
       severity_sort = true,
       signs = true,
       underline = false,
-      virtual_text = true,
+      virtual_text = {
+        severity = vim.diagnostic.severity.ERROR,
+      },
     })
   end,
 }

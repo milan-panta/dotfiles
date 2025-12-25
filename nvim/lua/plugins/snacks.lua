@@ -94,7 +94,7 @@ return {
     -- Git
     { "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, desc = "Lazygit (Root Dir)" },
     { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit (cwd)" },
-    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+    { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git blame" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Git Log" },
     { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },

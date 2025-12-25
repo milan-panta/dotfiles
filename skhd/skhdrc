@@ -13,7 +13,7 @@ rcmd - n : open -a Notion
 rcmd - s : open -a Spotify
 rcmd - d : open -a Discord
 rcmd - m : open -a Mail
-rcmd - t : open -a TickTick
+rcmd - t : open -a Things3
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service

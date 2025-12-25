@@ -44,7 +44,7 @@ map("n", "g*", "g*zz")
 map("v", "y", "ygv<Esc>", { desc = "Yank (keep cursor)" })
 
 -- +y to copy to system clipboard
-map({ "n", "v" }, "Y", '"+y', { desc = "Yank to system clipboard" })
+map({ "n", "v" }, "Y", '"+ygv<Esc>', { desc = "Yank to system clipboard" })
 
 -- Remove text highlight after search
 map("n", "<Esc>", "<cmd>noh<cr>", { silent = true, desc = "Clear highlights" })

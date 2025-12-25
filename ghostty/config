@@ -42,3 +42,5 @@ keybind = command+h=csi:104;9u
 keybind = command+l=csi:108;9u
 keybind = command+t=csi:116;9u
 keybind = command+w=csi:119;9u
+keybind = command+backslash=csi:92;9u
+keybind = command+minus=csi:45;9u

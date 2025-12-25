@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------
+-- Lazy.nvim Plugin Manager Bootstrap
+--------------------------------------------------------------------------------
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -15,11 +19,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Enable bytecode cache for faster startup
 vim.loader.enable()
+
+-- Set leader keys before lazy
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- Skip intro message
 vim.opt.shortmess:append("I")
 
+-- Setup lazy.nvim
 require("lazy").setup({
   spec = {
     { import = "plugins" },
@@ -27,12 +37,15 @@ require("lazy").setup({
   defaults = {
     lazy = true,
   },
+  install = {
+    colorscheme = { "tokyonight-night" },
+  },
+  checker = {
+    enabled = false, -- Don't auto-check for plugin updates
+  },
   performance = {
-    cache = {
-      enabled = true,
-    },
+    cache = { enabled = true },
     rtp = {
-      -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
         "matchit",

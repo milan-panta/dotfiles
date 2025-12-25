@@ -1,55 +1,58 @@
-vim.opt.termguicolors = true
+local opt = vim.opt
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.confirm = true
+-- UI
+opt.termguicolors = true
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
+opt.signcolumn = "yes"
+opt.laststatus = 3 -- Global statusline
+opt.showmode = false -- Mode shown in statusline
+opt.scrolloff = 8
+opt.wrap = false
+opt.fillchars:append({ eob = " " }) -- remove welcome message
+opt.mousescroll = "ver:1,hor:4"
 
-vim.opt.laststatus = 3
+-- Files & Persistence
+opt.swapfile = false
+opt.backup = false
+opt.undofile = true
+opt.undolevels = 1000
+opt.undoreload = 10000
+opt.confirm = true -- Confirm unsaved changes
 
-vim.opt.number = true
-vim.opt.cursorline = true
-vim.opt.relativenumber = true
+-- Splits
+opt.splitright = true
+opt.splitbelow = true
 
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+-- Indentation
+opt.expandtab = true
+opt.shiftwidth = 4
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.smartindent = true
 
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.smartindent = true
-vim.opt.softtabstop = 4
+-- Search
+opt.ignorecase = true
+opt.smartcase = true
+opt.incsearch = true
+opt.hlsearch = true
 
-vim.opt.wrap = false
-vim.opt.scrolloff = 8
+-- Editing
+opt.iskeyword = "@,48-57,_,192-255,-"
+opt.updatetime = 100
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
+-- Diff
+opt.diffopt:append("iwhite")
+opt.diffopt:append("algorithm:histogram")
+opt.diffopt:append("indent-heuristic")
 
-vim.opt.undofile = true
-vim.opt.undolevels = 1000
-vim.opt.undoreload = 10000
-
-vim.opt.iskeyword = "@,48-57,_,192-255,-"
-vim.opt.updatetime = 100
-vim.opt.signcolumn = "yes"
-vim.opt.ruler = true
-vim.opt.showmode = false
-
--- folke inspiration
-vim.opt.mousescroll = "ver:1,hor:4"
-vim.opt.fillchars:append({ eob = " " })
-
-vim.opt.diffopt:append("iwhite")
-vim.opt.diffopt:append("algorithm:histogram")
-vim.opt.diffopt:append("indent-heuristic")
+-- Timeout (whichkey and gitsigns)
+vim.o.timeout = true
+vim.o.timeoutlen = 200
 
 -- Disable unused providers for startup speed
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
-
-vim.o.timeout = true
-vim.o.timeoutlen = 200

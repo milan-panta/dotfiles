@@ -1,6 +1,10 @@
+-- Global keymaps (plugin-specific live with their plugins)
+
 local map = vim.keymap.set
 
--- better naviation with line wrap on
+-- Navigation
+
+-- Better navigation with line wrap
 map("n", "j", "gj", { silent = true, desc = "Move down (wrap-aware)" })
 map("n", "k", "gk", { silent = true, desc = "Move up (wrap-aware)" })
 

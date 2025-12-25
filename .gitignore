@@ -3,6 +3,7 @@
 !.gitignore
 !kitty
 !neofetch
+!btop
 !gh-dash
 !yazi
 !tridactyl
@@ -13,7 +14,6 @@
 !README.md
 !starship.toml
 !ghostty
-!NvimVscode
 !.zshrc
 !vimium.txt
 tmux/plugins

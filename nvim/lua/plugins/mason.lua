@@ -1,7 +1,10 @@
+-- Mason: package manager for external tools
+
 return {
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
+    build = ":MasonUpdate",
     opts = {
       ui = {
         border = "rounded",
@@ -11,24 +14,21 @@ return {
           package_uninstalled = "✗",
         },
       },
+      max_concurrent_installers = 4,
     },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      local tools = require("config.tools")
+      local mr = require("mason-registry")
+      mr.refresh(function()
+        for _, tool in ipairs(tools.ensure_installed or {}) do
+          local ok, p = pcall(mr.get_package, tool)
+          if ok and not p:is_installed() then
+            p:install()
+          end
+        end
+      end)
+    end,
   },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    lazy = true,
-    cmd = "MasonToolsInstall",
-    dependencies = { "williamboman/mason.nvim" },
-    opts = {
-      ensure_installed = {
-        "stylua",
-        "clang-format",
-        "prettierd",
-        "typstyle",
-        "latexindent",
-        "ruff",
-      },
-      auto_update = true,
-      run_on_start = true,
-    },
-  },
+  { "williamboman/mason-lspconfig.nvim", lazy = true },
 }

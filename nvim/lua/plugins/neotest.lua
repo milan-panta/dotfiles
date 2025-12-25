@@ -77,4 +77,3 @@ return {
     require("neotest").setup(opts)
   end,
 }
-

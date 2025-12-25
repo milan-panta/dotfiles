@@ -12,11 +12,10 @@ return {
       -- copilot = {},
       cssls = {},
       eslint = {},
-      hls = {},
       html = {},
       jsonls = {},
       marksman = {},
-      tailwindcss = {},
+      -- tailwindcss = {},
       tinymist = {
         settings = {
           formatterMode = "typstyle",

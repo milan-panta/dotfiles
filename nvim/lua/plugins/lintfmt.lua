@@ -36,14 +36,14 @@ return {
           lua = { "stylua" },
           python = { "ruff_fix", "ruff_format" },
           tex = { "latexindent" },
-          html = { "prettierd" },
+          markdown = { "prettier" },
+          html = { "prettier" },
           typst = { "typstyle" },
-          markdown = { "prettierd" },
-          javascript = { "prettierd" },
-          javascriptreact = { "prettierd" },
-          json = { "prettierd" },
-          typescript = { "prettierd" },
-          typescriptreact = { "prettierd" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          json = { "prettier" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
         },
 
         formatters = {
@@ -56,9 +56,6 @@ return {
               "-",
             },
             stdin = true,
-          },
-          prettierd = {
-            try_node_modules = true,
           },
         },
       })

@@ -22,7 +22,7 @@ return {
       ensure_installed = {
         "stylua",
         "clang-format",
-        "prettierd",
+        "prettier",
         "typstyle",
         "latexindent",
         "ruff",

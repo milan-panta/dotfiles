@@ -3,7 +3,7 @@ theme = TokyoNight Night
 # macos-titlebar-style = hidden
 window-decoration = false
 
-font-size = 16
+font-size = 15
 
 font-family = JetBrains Mono
 font-family-bold = JetBrains Mono Regular Bold
@@ -38,5 +38,7 @@ keybind = command+digit_8=csi:56;9u
 keybind = command+digit_9=csi:57;9u
 keybind = command+f=csi:102;9u
 keybind = command+g=csi:103;9u
+keybind = command+h=csi:104;9u
+keybind = command+l=csi:108;9u
 keybind = command+t=csi:116;9u
 keybind = command+w=csi:119;9u

@@ -9,7 +9,7 @@ return {
   opts = {
     servers = {
       basedpyright = {},
-      copilot = {},
+      -- copilot = {},
       cssls = {},
       eslint = {},
       hls = {},
@@ -114,10 +114,10 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client then
-          client.server_capabilities.semanticTokensProvider = nil
-        end
+        -- local client = vim.lsp.get_client_by_id(event.data.client_id)
+        -- if client then
+        --   client.server_capabilities.semanticTokensProvider = nil
+        -- end
 
         -- Delete Neovim 0.11+ default LSP keymaps (we define our own)
         pcall(vim.keymap.del, "n", "grn", { buffer = event.buf })
@@ -182,7 +182,7 @@ return {
         end, { expr = true, desc = "Accept Copilot inline suggestion" })
 
         -- Toggle Copilot
-        vim.keymap.set("n", "<leader>Tc", function()
+        vim.keymap.set("n", "<leader>TC", function()
           local enabled = vim.lsp.inline_completion.is_enabled()
           vim.lsp.inline_completion.enable(not enabled)
           vim.notify("Copilot " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)
@@ -194,6 +194,9 @@ return {
       severity_sort = true,
       signs = true,
       underline = false,
+      virtual_text = {
+        severity = vim.diagnostic.severity.ERROR,
+      },
     })
   end,
 }

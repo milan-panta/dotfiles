@@ -19,7 +19,7 @@ return {
   opts = {
     options = {
       section_separators = "",
-      component_separators = { left = "│", right = "│" },
+      component_separators = "",
       globalstatus = true,
       theme = {
         normal = theme_config,
@@ -32,7 +32,7 @@ return {
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { "branch" },
+      lualine_b = { { "branch", icons_enabled = false } },
       lualine_c = {
         { "filename", path = 1 },
       },
@@ -42,7 +42,7 @@ return {
         { "filetype", icons_enabled = false },
       },
       lualine_y = { "progress" },
-      lualine_z = { { "location", padding = { left = 0 } } },
+      lualine_z = { { "location" } },
     },
   },
 }

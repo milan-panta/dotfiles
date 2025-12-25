@@ -9,31 +9,13 @@ return {
     bigfile = { enabled = true },
     dashboard = {
       sections = {
-        { section = "header" },
         {
-          pane = 2,
           section = "terminal",
           cmd = "colorscript -e square",
           height = 5,
           padding = 1,
         },
         { section = "keys", gap = 1, padding = 1 },
-        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-        {
-          pane = 2,
-          icon = " ",
-          title = "Git Status",
-          section = "terminal",
-          enabled = function()
-            return Snacks.git.get_root() ~= nil
-          end,
-          cmd = "git status --short --branch --renames",
-          height = 5,
-          padding = 1,
-          ttl = 5 * 60,
-          indent = 3,
-        },
         { section = "startup" },
       },
     },
@@ -98,7 +80,6 @@ return {
     { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-    { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
@@ -113,7 +94,7 @@ return {
     -- Git
     { "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, desc = "Lazygit (Root Dir)" },
     { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit (cwd)" },
-    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+    { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git blame" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Git Log" },
     { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
@@ -122,7 +103,7 @@ return {
     { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Git Log File" },
 
     -- Grep
-    { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+    { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
     { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
@@ -169,7 +150,15 @@ return {
     Snacks.toggle.diagnostics():map("<leader>Td")
     Snacks.toggle.treesitter():map("<leader>TT")
     Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>Tb")
-    Snacks.toggle.inlay_hints():map("<leader>Th")
+    Snacks.toggle({
+      name = "Inlay Hints",
+      get = function()
+        return vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+      end,
+      set = function(state)
+        vim.lsp.inlay_hint.enable(state)
+      end,
+    }):map("<leader>Th")
     Snacks.toggle.indent():map("<leader>Tg")
     Snacks.toggle.dim():map("<leader>TD")
     Snacks.toggle({

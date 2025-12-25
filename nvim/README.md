@@ -8,6 +8,5 @@
 - [ ripgrep ](https://github.com/BurntSushi/ripgrep)
 - [ tmux ](https://github.com/tmux/tmux)
 
-## Note
-
-Enable option as alt on MacOS since some of the keymaps depend on it.
+> [!IMPORTANT]
+> Enable option as alt on MacOS since some of the keymaps depend on it.

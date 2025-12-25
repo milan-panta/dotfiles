@@ -43,8 +43,12 @@ map("n", "g*", "g*zz")
 -- Maintain cursor position after yank
 map("v", "y", "ygv<Esc>", { desc = "Yank (keep cursor)" })
 
+-- switch between most recent files using F
+map("n", "<BS>", "<C->", { silent = true })
+
 -- +y to copy to system clipboard
-map({ "n", "v" }, "Y", '"+ygv<Esc>', { desc = "Yank to system clipboard" })
+map("n", "Y", '"+y', { desc = "Yank to system clipboard" })
+map("v", "Y", '"+ygv<Esc>', { desc = "Yank to system clipboard" })
 
 -- Remove text highlight after search
 map("n", "<Esc>", "<cmd>noh<cr>", { silent = true, desc = "Clear highlights" })

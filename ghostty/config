@@ -36,6 +36,7 @@ keybind = command+digit_6=csi:54;9u
 keybind = command+digit_7=csi:55;9u
 keybind = command+digit_8=csi:56;9u
 keybind = command+digit_9=csi:57;9u
+keybind = command+a=csi:97;9u
 keybind = command+f=csi:102;9u
 keybind = command+g=csi:103;9u
 keybind = command+h=csi:104;9u

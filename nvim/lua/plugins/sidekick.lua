@@ -3,12 +3,6 @@ return {
   opts = {
     -- add any options here
     nes = { enabled = false },
-    cli = {
-      mux = {
-        backend = "tmux",
-        enabled = true,
-      },
-    },
   },
   keys = {
     {

@@ -14,8 +14,9 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^Y' autosuggest-accept
 
 # neovim config switcher
-alias lvim="NVIM_APPNAME=LazyVim nvim"
 alias fvim="NVIM_APPNAME=FolkeVim nvim"
+alias pl="NVIM_APPNAME=PureLazy nvim"
+alias nnvim="NVIM_APPNAME=newVim nvim"
 alias n="nvim"
 alias vim="nvim"
 alias epath="tr ':' '\n' <<< "$PATH""

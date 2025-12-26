@@ -81,7 +81,6 @@ return {
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 
     -- Find
@@ -129,20 +128,19 @@ return {
     { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 
     -- Other
+    { "<leader>uu", function() Snacks.picker.undo() end, desc = "Undo History" },
     { "<leader>Tz", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
     { "<leader>TZ", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     { "<leader>rf", function() Snacks.rename.rename_file() end, desc = "Rename File" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
+    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>N", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     -- stylua: ignore end
   },
   config = function(_, opts)
     require("snacks").setup(opts)
-
-    -- Setup some globals for debugging (optional)
-    _G.Snacks = Snacks
 
     -- Create some toggle mappings
     Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")

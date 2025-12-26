@@ -1,40 +1,24 @@
+-- Treesitter: syntax parsing/highlighting
+
 return {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
-  event = "VeryLazy",
   build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile" },
+  lazy = vim.fn.argc(-1) == 0, -- Load early when opening a file from cmdline
+  cmd = { "TSUpdate", "TSInstall", "TSInstallInfo" },
   config = function()
+    local tools = require("config.tools")
     local ts = require("nvim-treesitter")
     ts.setup()
 
-    ts.install({
-      "bash",
-      "c",
-      "cpp",
-      "css",
-      "gitignore",
-      "java",
-      "javascript",
-      "json",
-      "kotlin",
-      "lua",
-      "markdown",
-      "markdown_inline",
-      "python",
-      "query",
-      "regex",
-      "ron",
-      "rust",
-      "toml",
-      "tsx",
-      "typescript",
-      "vim",
-      "vimdoc",
-      "yaml",
-    })
+    -- Install configured parsers
+    ts.install(tools.treesitter_parsers)
 
+    -- Enable treesitter features per-filetype
     vim.api.nvim_create_autocmd("FileType", {
-      desc = "Enable Treesitter features",
+      group = vim.api.nvim_create_augroup("treesitter_features", { clear = true }),
+      desc = "Enable Treesitter highlighting and indentation",
       callback = function()
         local filetype = vim.bo.filetype
         local lang = vim.treesitter.language.get_lang(filetype)
@@ -42,9 +26,12 @@ return {
           return
         end
 
+        -- Enable highlighting if available
         if vim.treesitter.query.get(lang, "highlights") then
           vim.treesitter.start()
         end
+
+        -- Enable treesitter-based indentation if available
         if vim.treesitter.query.get(lang, "indents") then
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end

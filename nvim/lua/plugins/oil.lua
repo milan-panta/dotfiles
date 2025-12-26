@@ -3,7 +3,13 @@ return {
   dependencies = { "echasnovski/mini.icons" },
   cmd = "Oil",
   keys = {
-    { "-", function() require("oil").toggle_float() end, desc = "Open Parent Directory" },
+    {
+      "-",
+      function()
+        require("oil").toggle_float()
+      end,
+      desc = "Open Parent Directory",
+    },
   },
   opts = {
     columns = { "icon" },

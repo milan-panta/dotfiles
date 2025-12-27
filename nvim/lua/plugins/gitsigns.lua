@@ -54,10 +54,6 @@ return {
       map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
       map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
       map("n", "<leader>hB", gs.toggle_current_line_blame, { desc = "Toggle line blame" })
-      map("n", "<leader>hd", gs.diffthis, { desc = "Diff this" })
-      map("n", "<leader>hD", function()
-        gs.diffthis("~")
-      end, { desc = "Diff this ~" })
       map("n", "<leader>TG", gs.toggle_deleted, { desc = "Toggle deleted" })
 
       -- Text object

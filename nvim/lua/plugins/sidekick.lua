@@ -1,7 +1,20 @@
 return {
   "folke/sidekick.nvim",
   opts = {
-    -- add any options here
+    cli = {
+      win = {
+        keys = {
+          nav_left = { "<M-h>", "nav_left", expr = true, desc = "navigate to the left window" },
+          nav_down = { "<M-j>", "nav_down", expr = true, desc = "navigate to the below window" },
+          nav_up = { "<M-k>", "nav_up", expr = true, desc = "navigate to the above window" },
+          nav_right = { "<M-l>", "nav_right", expr = true, desc = "navigate to the right window" },
+        },
+        split = {
+          width = 0,
+          height = 0,
+        },
+      },
+    },
     nes = { enabled = false },
   },
   keys = {

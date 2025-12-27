@@ -14,9 +14,6 @@ map("n", "<leader>Tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = tru
 -- save file
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 
--- kitty maps M to Cmmd inside tmux sessions
-map({ "n", "i" }, "<M-a>", "<ESC>ggVG", { desc = "Select all" })
-
 -- ghostty can use <M-BS>
 map({ "i" }, "<M-BS>", "<C-w>", { silent = true, desc = "Delete word" })
 

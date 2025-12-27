@@ -36,11 +36,15 @@ keybind = command+digit_6=csi:54;9u
 keybind = command+digit_7=csi:55;9u
 keybind = command+digit_8=csi:56;9u
 keybind = command+digit_9=csi:57;9u
+keybind = command+a=csi:97;9u
 keybind = command+f=csi:102;9u
 keybind = command+g=csi:103;9u
 keybind = command+h=csi:104;9u
+keybind = command+j=csi:106;9u
+keybind = command+k=csi:107;9u
 keybind = command+l=csi:108;9u
 keybind = command+t=csi:116;9u
 keybind = command+w=csi:119;9u
 keybind = command+backslash=csi:92;9u
 keybind = command+minus=csi:45;9u
+keybind = command+semicolon=csi:59;9u

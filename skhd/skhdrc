@@ -2,10 +2,11 @@
 rcmd - return : open -na Ghostty
 rcmd - k : open -a Ghostty
 rcmd - j : open -a "Zen Browser"
-rcmd - v : open -a "Visual Studio Code"
+rcmd - v : pgrep -x mpv > /dev/null \
+          && yabai -m window --focus $(yabai -m query --windows | jq -r '.[] | select(.app == "mpv") | .id' | head -n 1) \
+          || /opt/homebrew/bin/mpv --idle
 shift + cmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
-rcmd - i : open -a IINA
 rcmd - l : open -a CLion
 rcmd - o : open -a Obsidian
 rcmd - c : open -a "Notion Calendar"

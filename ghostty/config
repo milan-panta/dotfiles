@@ -48,6 +48,6 @@ keybind = command+k=csi:107;9u
 keybind = command+l=csi:108;9u
 keybind = command+t=csi:116;9u
 keybind = command+w=csi:119;9u
-keybind = command+backslash=csi:92;9u
-keybind = command+minus=csi:45;9u
 keybind = command+semicolon=csi:59;9u
+keybind = command+backspace=text:\x15
+keybind = option+backspace=text:\x17

@@ -1,84 +1,35 @@
+# Default colors
 [colors.primary]
-background = "#1E1E2E"
-foreground = "#CDD6F4"
-dim_foreground = "#CDD6F4"
-bright_foreground = "#CDD6F4"
+background = '#1a1b26'
+foreground = '#c0caf5'
 
-[colors.cursor]
-text = "#1E1E2E"
-cursor = "#F5E0DC"
-
-[colors.vi_mode_cursor]
-text = "#1E1E2E"
-cursor = "#B4BEFE"
-
-[colors.search.matches]
-foreground = "#1E1E2E"
-background = "#A6ADC8"
-
-[colors.search.focused_match]
-foreground = "#1E1E2E"
-background = "#A6E3A1"
-
-[colors.footer_bar]
-foreground = "#1E1E2E"
-background = "#A6ADC8"
-
-[colors.hints.start]
-foreground = "#1E1E2E"
-background = "#F9E2AF"
-
-[colors.hints.end]
-foreground = "#1E1E2E"
-background = "#A6ADC8"
-
-[colors.selection]
-text = "#1E1E2E"
-background = "#F5E0DC"
-
+# Normal colors
 [colors.normal]
-black = "#45475A"
-red = "#F38BA8"
-green = "#A6E3A1"
-yellow = "#F9E2AF"
-blue = "#89B4FA"
-magenta = "#F5C2E7"
-cyan = "#94E2D5"
-white = "#BAC2DE"
+black = '#15161e'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+magenta = '#bb9af7'
+cyan = '#7dcfff'
+white = '#a9b1d6'
 
+# Bright colors
 [colors.bright]
-black = "#585B70"
-red = "#F38BA8"
-green = "#A6E3A1"
-yellow = "#F9E2AF"
-blue = "#89B4FA"
-magenta = "#F5C2E7"
-cyan = "#94E2D5"
-white = "#A6ADC8"
-
-[colors.dim]
-black = "#45475A"
-red = "#F38BA8"
-green = "#A6E3A1"
-yellow = "#F9E2AF"
-blue = "#89B4FA"
-magenta = "#F5C2E7"
-cyan = "#94E2D5"
-white = "#BAC2DE"
-
-[[colors.indexed_colors]]
-index = 16
-color = "#FAB387"
-
-[[colors.indexed_colors]]
-index = 17
-color = "#F5E0DC"
+black = '#414868'
+red = '#ff899d'
+green = '#9fe044'
+yellow = '#faba4a'
+blue = '#8db0ff'
+magenta = '#c7a9ff'
+cyan = '#a4daff'
+white = '#c0caf5'
 
 [env]
 TERM = "xterm-256color"
 
 [font]
-size = 16
+size = 15
 
 [font.bold]
 family = "JetBrainsMonoNL Nerd Font Propo"
@@ -90,7 +41,7 @@ style = "Bold Italic"
 
 [font.italic]
 family = "JetBrainsMonoNL Nerd Font Propo"
-style = "Thin Italic"
+style = "Italic"
 
 [font.normal]
 family = "JetBrainsMonoNL Nerd Font Propo"
@@ -181,6 +132,61 @@ chars = "\u001B[57;9u"
 key = "Key9"
 mods = "Command"
 
+[[keyboard.bindings]]
+chars = "\u001B[102;9u"
+key = "F"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[103;9u"
+key = "G"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[104;9u"
+key = "H"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[106;9u"
+key = "J"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[107;9u"
+key = "K"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[108;9u"
+key = "L"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[119;9u"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[92;9u"
+key = "Backslash"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[59;9u"
+key = "Semicolon"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0015"
+key = "Back"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0017"
+key = "Back"
+mods = "Alt"
+
 [scrolling]
 history = 10000
 multiplier = 3
@@ -189,7 +195,7 @@ multiplier = 3
 save_to_clipboard = false
 
 [window]
-decorations = "Buttonless"
+decorations = "None"
 dynamic_padding = true
 opacity = 1
 option_as_alt = "Both"

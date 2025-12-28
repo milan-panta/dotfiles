@@ -45,4 +45,8 @@ bindkey -M emacs '02;9u' sesh-sessions
 bindkey -M vicmd '02;9u' sesh-sessions
 bindkey -M viins '02;9u' sesh-sessions
 
+function mpv() {
+    nohup /opt/homebrew/bin/mpv "$@" >/dev/null 2>&1 & disown
+}
+
 eval "$(starship init zsh)"

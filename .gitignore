@@ -1,6 +1,7 @@
 /*
 !alacritty
 !.gitignore
+!mpv
 !kitty
 !neofetch
 !btop
@@ -21,3 +22,5 @@
 tmux/plugins
 nvim/spell
 nvim/lua/plugins/leetcode.lua
+mpv/memo-history.log
+mpv/watch_later

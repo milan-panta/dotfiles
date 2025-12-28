@@ -22,6 +22,8 @@ alias vim="nvim"
 alias epath="tr ':' '\n' <<< "$PATH""
 alias lg="lazygit"
 alias l="yazi"
+alias ls="eza -lh --group-directories-first --icons=auto"
+alias lt="eza --tree --level=2 --long --icons --git"
 
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
@@ -50,3 +52,4 @@ function mpv() {
 }
 
 eval "$(starship init zsh)"
+export EZA_CONFIG_DIR="$HOME/.config/eza"

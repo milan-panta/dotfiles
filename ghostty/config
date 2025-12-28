@@ -3,6 +3,9 @@ theme = TokyoNight Night
 # macos-titlebar-style = hidden
 window-decoration = false
 
+# useful for laptop
+macos-non-native-fullscreen = visible-menu
+
 font-size = 15
 
 font-family = JetBrains Mono
@@ -17,7 +20,7 @@ shell-integration-features = no-cursor
 font-thicken = true
 window-padding-balance = true
 window-padding-x = 0
-window-padding-y = 2
+window-padding-y = 0
 
 macos-option-as-alt = true
 

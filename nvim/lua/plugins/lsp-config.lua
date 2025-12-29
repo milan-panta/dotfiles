@@ -63,13 +63,27 @@ return {
         map("]e", function()
           vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
         end, "Next Error")
-        map("<C-W>d", vim.diagnostic.open_float, "Line Diagnostics")
+        map("<C-s>", vim.diagnostic.open_float, "Line Diagnostics")
 
         -- Actions
         map("<leader>rn", vim.lsp.buf.rename, "Rename")
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action", "x")
         map("<leader>cc", vim.lsp.codelens.run, "Run Codelens")
+
+        if client and client.supports_method("textDocument/codeLens") then
+          vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+            buffer = event.buf,
+            callback = function()
+              if vim.g.codelens_enabled ~= false then
+                vim.lsp.codelens.refresh()
+              end
+            end,
+          })
+          if vim.g.codelens_enabled ~= false then
+            vim.lsp.codelens.refresh()
+          end
+        end
       end,
     })
 

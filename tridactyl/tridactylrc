@@ -2,6 +2,7 @@ colors --url https://raw.githubusercontent.com/llbn5866/tokyonight-tridactyl-the
 
 unbind J
 unbind K
+unbind m
 unbind a
 unbind d
 unbind s

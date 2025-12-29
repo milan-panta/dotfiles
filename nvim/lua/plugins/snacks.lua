@@ -95,10 +95,10 @@ return {
     { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit (cwd)" },
     { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git blame" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Git Log" },
-    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
     { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
-    { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Git Log File" },
+    { "<leader>hl", function() Snacks.lazygit.log_file() end, desc = "Git Log File" },
+    { "<leader>hL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
 
     -- Grep
     { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },

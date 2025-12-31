@@ -92,6 +92,17 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   end,
 })
 
+-- Close terminal with q
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(ev)
+    vim.keymap.set("n", "q", "<cmd>close<CR>", {
+      buffer = ev.buf,
+      silent = true,
+      nowait = true,
+    })
+  end,
+})
+
 -- Make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),

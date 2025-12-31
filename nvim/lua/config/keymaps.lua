@@ -32,6 +32,10 @@ map("n", "?", "?\\v")
 map("n", "/", "/\\v")
 
 -- center the file after common movements
+map("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-f>", "<C-f>zz")
+map("n", "<C-b>", "<C-b>zz")
 map("n", "n", "nzz")
 map("n", "N", "Nzz")
 map("n", "*", "*zz")

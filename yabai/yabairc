@@ -5,15 +5,16 @@ yabai -m signal --add event=window_created action='yabai -m window $YABAI_WINDOW
 sudo yabai --load-sa
 
 -- app rules
-yabai -m rule --add app="^(main|Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter|Movie Recording)$" manage=off
+yabai -m rule --add app="^(main|Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter|Movie Recording|mpv)$" manage=off
 
 # Workspace Assignments
 yabai -m rule --add app="^(Zen|Safari|Firefox)$" space=1
-yabai -m rule --add app="^Ghostty$" space=2
+yabai -m rule --add app="^(Ghostty|Alacritty)$" space=2
 yabai -m rule --add app="^(CLion|IntelliJ)$" space=3
+yabai -m rule --add app="^mpv$" space=4
 yabai -m rule --add app="^(TickTick|Mail)$" space=5
 yabai -m rule --add app="^(Spotify|Discord)$" space=6
-yabai -m rule --add app="^(Things|Notion Calendar)$" space=7
+yabai -m rule --add app="^(Things|Calendar)$" space=7
 yabai -m rule --add app="^(IINA|Messages)$" space=8
 
 # global settings
@@ -38,11 +39,11 @@ yabai -m config                                 \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
-    top_padding                  6              \
-    bottom_padding               6              \
-    left_padding                 6              \
-    right_padding                6              \
-    window_gap                   6              \
+    top_padding                  0              \
+    bottom_padding               0              \
+    left_padding                 0              \
+    right_padding                0              \
+    window_gap                   0              \
     layout                       bsp            \
     mouse_modifier               fn             \
     mouse_action1                move           \

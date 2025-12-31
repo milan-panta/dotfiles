@@ -8,6 +8,21 @@ return {
     -- Core & UI
     bigfile = { enabled = true },
     dashboard = {
+      preset = {
+        -- stylua: ignore start
+        keys = {
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "e", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = "󰠮 ", key = "n", desc = "Notes", action = ":lua Snacks.picker.files({cwd = vim.fn.expand('~/Notes/Private')})" },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
+        -- stylua: ignore end
+      },
       sections = {
         {
           section = "terminal",
@@ -19,7 +34,6 @@ return {
         { section = "startup" },
       },
     },
-    explorer = { enabled = true },
     indent = { enabled = true, animate = { enabled = false } },
     input = { enabled = true },
     notifier = { enabled = true, timeout = 3000 },
@@ -48,11 +62,11 @@ return {
       sources = {
         files = {
           hidden = true,
-          exclude = { ".git", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
+          exclude = { ".git", ".obsidian", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
         },
         grep = {
           hidden = true,
-          exclude = { ".git", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
+          exclude = { ".git", ".obsidian", "node_modules", "venv", ".venv", ".python-version", ".DS_Store" },
         },
       },
       win = {
@@ -80,30 +94,30 @@ return {
     { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 
     -- Find
-    { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
     { "<leader><leader>", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+    { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("Config") }) end, desc = "Find Config File" },
 
     -- Git
     { "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, desc = "Lazygit (Root Dir)" },
     { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit (cwd)" },
     { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git blame" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Git Log" },
-    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
     { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
-    { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Git Log File" },
+    { "<leader>hl", function() Snacks.lazygit.log_file() end, desc = "Git Log File" },
+    { "<leader>hL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
 
     -- Grep
     { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
     { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>sn", function() Snacks.picker.grep({ cwd = vim.fn.expand("~/Notes") }) end, desc = "Search Notes" },
     { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
 
     -- Search

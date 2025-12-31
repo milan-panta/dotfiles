@@ -3,6 +3,9 @@ theme = TokyoNight Night
 # macos-titlebar-style = hidden
 window-decoration = false
 
+# useful for laptop
+macos-non-native-fullscreen = visible-menu
+
 font-size = 15
 
 font-family = JetBrains Mono
@@ -17,7 +20,7 @@ shell-integration-features = no-cursor
 font-thicken = true
 window-padding-balance = true
 window-padding-x = 0
-window-padding-y = 2
+window-padding-y = 0
 
 macos-option-as-alt = true
 
@@ -45,6 +48,6 @@ keybind = command+k=csi:107;9u
 keybind = command+l=csi:108;9u
 keybind = command+t=csi:116;9u
 keybind = command+w=csi:119;9u
-keybind = command+backslash=csi:92;9u
-keybind = command+minus=csi:45;9u
 keybind = command+semicolon=csi:59;9u
+keybind = command+backspace=text:\x15
+keybind = option+backspace=text:\x17

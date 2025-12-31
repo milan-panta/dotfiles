@@ -57,9 +57,11 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   group = augroup("close_with_q"),
   callback = function(event)
     local patterns = {
+      "ClangdAST",
       "PlenaryTestPopup",
       "checkhealth",
       "dbout",
+      "git",
       "gitsigns-blame",
       "grug-far",
       "help",
@@ -67,7 +69,6 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
       "neotest-output",
       "neotest-output-panel",
       "neotest-summary",
-      "ClangdAST",
       "notify",
       "qf",
       "spectre_panel",
@@ -88,6 +89,17 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
         end
       end)
     end
+  end,
+})
+
+-- Close terminal with q
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(ev)
+    vim.keymap.set("n", "q", "<cmd>close<CR>", {
+      buffer = ev.buf,
+      silent = true,
+      nowait = true,
+    })
   end,
 })
 

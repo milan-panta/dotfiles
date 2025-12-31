@@ -1,12 +1,8 @@
+[indicator]
+padding = { open = "█", close = "█" }
+
 [mgr]
-# NOTE: can be combined with tmTheme (sublime colorshceme file) for preview code highlight
-# syntect_theme = "path/to/tmTheme"
-
 cwd = { fg = "#a9b1d6", italic = true }
-
-# Hovered
-hovered         = { bg = "#292e42" }
-preview_hovered = { bg = "#292e42" }
 
 # Find
 find_keyword  = { fg = "#16161e", bg = "#ff9e64", bold = true }
@@ -131,30 +127,26 @@ hovered = { bg = "#292e42" }
 footer  = { fg = "#c0caf5", bg = "#1a1b26" }
 
 [filetype]
-
 rules = [
-	# Images
+	# Image
 	{ mime = "image/*", fg = "#e0af68" },
-
 	# Media
 	{ mime = "{audio,video}/*", fg = "#bb9af7" },
-
-	# Archives
-	{ mime = "application/*zip", fg = "#f7768e" },
-	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#f7768e" },
-
-	# Documents
-	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#7dcfff" },
-
-	# Empty files
-	# { mime = "inode/x-empty", fg = "#f7768e" },
-
-	# Special files
-	{ name = "*", is = "orphan", bg = "#f7768e" },
-	{ name = "*", is = "exec"  , fg = "#9ece6a" },
-
+	# Archive
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#f7768e" },
+	# Document
+	{ mime = "application/{pdf,doc,rtf}", fg = "#7dcfff" },
+	# Virtual file system
+	{ mime = "vfs/{absent,stale}", fg = "#c0caf5" },
+	# Special file
+	{ url = "*", is = "orphan", bg = "#f7768e" },
+	{ url = "*", is = "exec"  , fg = "#9ece6a" },
+	# Dummy file
+	{ url = "*", is = "dummy", bg = "#c0caf5" },
+	{ url = "*/", is = "dummy", bg = "#7aa2f7" },
 	# Fallback
-	{ name = "*/", fg = "#7aa2f7" },
-	{ name = "*", fg = "#c0caf5" }
+	{ url = "*/", fg = "#7aa2f7" }
 ]
     
+
+

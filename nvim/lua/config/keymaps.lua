@@ -14,9 +14,6 @@ map("n", "<leader>Tq", "<cmd>copen<cr>", { desc = "Toggle qf list", silent = tru
 -- save file
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 
--- ghostty can use <M-BS>
-map({ "i" }, "<M-BS>", "<C-w>", { silent = true, desc = "Delete word" })
-
 -- paste without replacing clipboard
 map("x", "<leader>p", [["_dP]], { desc = "Paste without replacing clipboard" })
 map({ "n", "v" }, "<leader>x", [["_d]], { desc = "Delete without copying" })
@@ -35,6 +32,10 @@ map("n", "?", "?\\v")
 map("n", "/", "/\\v")
 
 -- center the file after common movements
+map("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-f>", "<C-f>zz")
+map("n", "<C-b>", "<C-b>zz")
 map("n", "n", "nzz")
 map("n", "N", "Nzz")
 map("n", "*", "*zz")
@@ -65,8 +66,6 @@ map("n", "<M-.>", ":vertical resize +2<cr>", { silent = true, desc = "Increase w
 map("n", "<M-,>", ":vertical resize -2<cr>", { silent = true, desc = "Decrease width" })
 
 -- Consistent with tmux
-map("n", "<C-w>-", "<C-w>s", { desc = "Create horizontal split" })
-map("n", "<C-w>\\", "<C-w>v", { desc = "Create vertical split" })
 map("n", "<C-w>z", "<C-w>_<C-w>|", { desc = "Max out split" })
 
 -- run file

@@ -1,6 +1,5 @@
 return {
   "obsidian-nvim/obsidian.nvim",
-  version = "*",
   lazy = true,
   ft = "markdown",
   cmd = "Obsidian",
@@ -26,8 +25,6 @@ return {
     { "<leader>oL", "<cmd>Obsidian link<cr>", mode = "v", desc = "Link selection" },
     { "<leader>oE", "<cmd>Obsidian extract_note<cr>", mode = "v", desc = "Extract to note" },
   },
-  ---@module 'obsidian'
-  ---@type obsidian.config
   opts = {
     legacy_commands = false,
     workspaces = {

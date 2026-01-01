@@ -15,7 +15,6 @@ return {
             vim.keymap.set("n", keys, cmd, { buffer = bufnr, desc = "Rust: " .. desc })
           end
 
-          map("<leader>cr", function() vim.cmd.RustLsp("codeAction") end, "Code Action")
           map("<leader>cR", function() vim.cmd.RustLsp("runnables") end, "Runnables")
           map("<leader>ce", function() vim.cmd.RustLsp("explainError") end, "Explain Error")
           map("<leader>cE", function() vim.cmd.RustLsp("renderDiagnostic") end, "Render Diagnostic")

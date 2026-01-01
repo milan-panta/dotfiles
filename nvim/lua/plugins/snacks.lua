@@ -3,7 +3,6 @@ return {
   dependencies = { "echasnovski/mini.icons" },
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
   opts = {
     -- Core & UI
     bigfile = { enabled = true },
@@ -24,9 +23,10 @@ return {
         -- stylua: ignore end
       },
       sections = {
+        -- https://github.com/shreyas-a-s/shell-color-scripts for more scripts
         {
           section = "terminal",
-          cmd = "colorscript -e square",
+          cmd = "~/.config/nvim/scripts/square.sh",
           height = 5,
           padding = 1,
         },
@@ -137,8 +137,8 @@ return {
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-    { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-    { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+    { "<leader>sS", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    { "<leader>ss", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 
     -- Other
     { "<leader>uu", function() Snacks.picker.undo() end, desc = "Undo History" },

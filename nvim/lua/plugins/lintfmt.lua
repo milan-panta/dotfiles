@@ -7,7 +7,7 @@ return {
     cmd = { "ConformInfo" },
     keys = {
       {
-        "<leader>lf",
+        "<leader>cf",
         function()
           require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 2000 })
           vim.cmd("w")
@@ -16,8 +16,6 @@ return {
         desc = "Format file/range",
       },
     },
-    ---@module "conform"
-    ---@type conform.setupOpts
     opts = function()
       local tools = require("config.tools")
       return {

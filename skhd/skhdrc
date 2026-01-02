@@ -8,7 +8,6 @@ rcmd - v : pgrep -x mpv > /dev/null \
 shift + cmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
 rcmd - l : open -a CLion
-rcmd - o : open -a Obsidian
 rcmd - c : open -a ~/Applications/Calendar.app
 rcmd - n : open -a Notion
 rcmd - s : open -a Spotify

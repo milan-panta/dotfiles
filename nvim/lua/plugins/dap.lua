@@ -2,9 +2,9 @@
 
 local dap_icons = {
   Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-  Breakpoint = " ",
-  BreakpointCondition = " ",
-  BreakpointRejected = { " ", "DiagnosticError" },
+  Breakpoint = " ",
+  BreakpointCondition = " ",
+  BreakpointRejected = { " ", "DiagnosticError" },
   LogPoint = ".>",
 }
 

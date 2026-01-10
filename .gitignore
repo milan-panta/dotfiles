@@ -18,6 +18,7 @@
 !ghostty
 !.zshrc
 !vimium.txt
+!.ideavimrc
 tmux/plugins
 nvim/spell
 nvim/lua/plugins/leetcode.lua

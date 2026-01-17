@@ -1,5 +1,5 @@
 return {
-  "esmuellert/vscode-diff.nvim",
+  "esmuellert/codediff.nvim",
   branch = "next",
   dependencies = { "MunifTanjim/nui.nvim" },
   cmd = "CodeDiff",

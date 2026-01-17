@@ -70,3 +70,4 @@ fi
 
 eval "$(starship init zsh)"
 export EZA_CONFIG_DIR="$HOME/.config/eza"
+export XDG_CONFIG_HOME="$HOME/.config"

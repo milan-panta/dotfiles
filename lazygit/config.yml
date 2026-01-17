@@ -26,7 +26,7 @@ gui:
     defaultFgColor:
       - "#c0caf5"
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never
-    useConfig: true
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
+      useConfig: true

@@ -1,12 +1,12 @@
 return {
   "obsidian-nvim/obsidian.nvim",
-  version = "*",
   lazy = true,
   ft = "markdown",
   cmd = "Obsidian",
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
     { "<leader>ot", "<cmd>Obsidian today<cr>", desc = "Today's note" },
+    { "<leader>oo", "<cmd>Obsidian<cr>", desc = "Open Obsidian options" },
     { "<leader>oy", "<cmd>Obsidian yesterday<cr>", desc = "Yesterday's note" },
     { "<leader>om", "<cmd>Obsidian tomorrow<cr>", desc = "Tomorrow's note" },
     { "<leader>od", "<cmd>Obsidian dailies<cr>", desc = "Daily notes list" },
@@ -24,14 +24,12 @@ return {
     { "<leader>os", "<cmd>Obsidian toc<cr>", desc = "Table of contents" },
     { "<leader>ow", "<cmd>Obsidian workspace<cr>", desc = "Switch workspace" },
     { "<leader>oL", "<cmd>Obsidian link<cr>", mode = "v", desc = "Link selection" },
-    { "<leader>oE", "<cmd>Obsidian extract_note<cr>", mode = "v", desc = "Extract to note" },
+    { "<leader>ox", "<cmd>Obsidian extract_note<cr>", mode = "v", desc = "Extract to note" },
   },
-  ---@module 'obsidian'
-  ---@type obsidian.config
   opts = {
     legacy_commands = false,
     workspaces = {
-      { name = "Private", path = "~/Notes/Private" },
+      { name = "Private", path = "~/Documents/Notes/Private" },
     },
 
     -- Daily notes for journaling thoughts
@@ -84,6 +82,11 @@ return {
           or path.name
         return string.format("![[assets/imgs/%s]]", name)
       end,
+    },
+
+    completion = {
+      nvim_cmp = true,
+      min_chars = 0,
     },
   },
 }

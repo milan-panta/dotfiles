@@ -1,8 +1,8 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    -- priority = 1000,
     opts = {
       style = "night",
     },
@@ -16,5 +16,14 @@ return {
     lazy = true,
     name = "rose-pine",
     opts = {},
+  },
+  {
+    "https://gitlab.com/motaz-shokry/gruvbox.nvim",
+    lazy = false,
+    name = "gruvbox",
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme gruvbox-hard")
+    end,
   },
 }

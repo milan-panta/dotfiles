@@ -1,21 +1,10 @@
 #!/usr/bin/env sh
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-yabai -m signal --add event=window_created action='yabai -m window $YABAI_WINDOW_ID --focus'
 sudo yabai --load-sa
 
--- app rules
+# app rules
 yabai -m rule --add app="^(main|Calculator|Archive Utility|System Settings|Raycast|Flow|Digital Color Meter|Movie Recording|mpv)$" manage=off
-
-# Workspace Assignments
-yabai -m rule --add app="^(Zen|Safari|Firefox)$" space=1
-yabai -m rule --add app="^(Ghostty|Alacritty)$" space=2
-yabai -m rule --add app="^(CLion|IntelliJ)$" space=3
-yabai -m rule --add app="^mpv$" space=4
-yabai -m rule --add app="^(TickTick|Mail)$" space=5
-yabai -m rule --add app="^(Spotify|Discord)$" space=6
-yabai -m rule --add app="^(Things|Calendar)$" space=7
-yabai -m rule --add app="^(IINA|Messages)$" space=8
 
 # global settings
 yabai -m config                                 \

@@ -154,10 +154,11 @@ M.treesitter_parsers = {
 M.diagnostic_config = {
   severity_sort = true,
   signs = true,
-  underline = false,
+  underline = true,
   virtual_text = {
     severity = vim.diagnostic.severity.ERROR,
   },
+  -- virtual_text = true,
   float = {
     border = "rounded",
     source = true,

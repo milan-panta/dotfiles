@@ -121,6 +121,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Enable spellcheck for markdown and text files
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("spellcheck"),
+  pattern = { "markdown", "text" },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
+
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),

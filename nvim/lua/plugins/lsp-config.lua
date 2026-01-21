@@ -66,7 +66,7 @@ return {
         map("<C-s>", vim.diagnostic.open_float, "Line Diagnostics")
 
         -- Actions
-        map("<leader>rn", vim.lsp.buf.rename, "Rename")
+        map("<leader>cr", vim.lsp.buf.rename, "Rename")
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action", "x")
         map("<leader>cc", vim.lsp.codelens.run, "Run Codelens")

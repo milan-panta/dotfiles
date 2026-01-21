@@ -8,7 +8,6 @@ rcmd - v : pgrep -x mpv > /dev/null \
 shift + cmd - u : open -a "Zen Browser"
 rcmd - b : open -a Messages
 rcmd - l : open -a CLion
-rcmd - o : open -a Obsidian
 rcmd - c : open -a ~/Applications/Calendar.app
 rcmd - n : open -a Notion
 rcmd - s : open -a Spotify
@@ -24,10 +23,6 @@ lalt - h : yabai -m window --focus west
 lalt - k : yabai -m window --focus north
 lalt - l : yabai -m window --focus east
 lalt - j : yabai -m window --focus south
-
-# window oapcity
-lalt + ctrl - t : yabai -m window --opacity 0.92
-lalt + ctrl - o : yabai -m window --opacity 1.0
 
 # rotate layout clockwise
 lalt - r : yabai -m space --rotate 270

@@ -1,0 +1,123 @@
+" .ideavimrc is a configuration file for IdeaVim plugin.
+" Generated based on ~/.config/nvim config
+
+" --- General Settings ---
+let mapleader = " "
+
+set scrolloff=8
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set visualbell
+set noerrorbells
+set surround
+set relativenumber
+set number
+set nowrap
+set iskeyword=@,48-57,_,192-255,-
+
+" Show a few lines of context around the cursor.
+set scrolloff=8
+
+" Enable IdeaVim plugins
+" https://jb.gg/ideavim-plugins
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+
+" --- Keymaps ---
+
+" Better navigation (wrap-aware)
+nnoremap j gj
+nnoremap k gk
+
+" Toggle Problems View (approximating qflist)
+nmap <leader>Tq <Action>(ActivateProblemsViewToolWindow)
+
+" Save file
+nmap <leader>w <Action>(SaveAll)
+
+" Select all (consistent with kitty/tmux map)
+nmap <M-a> <Esc>ggVG
+imap <M-a> <Esc>ggVG
+
+" Paste without replacing clipboard
+xnoremap <leader>p "_dP
+
+" Delete without copying
+nnoremap <leader>x "_d
+vnoremap <leader>x "_d
+
+" Search and replace word
+" Note: IdeaVim supports :substitute
+nmap <leader>rs :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" Join lines (keep cursor)
+nnoremap J mzJ`z
+
+" Quotes text objects (emulating custom maps)
+omap iq i"
+omap aq a"
+
+" Very magic regex by default
+nnoremap ? ?\v
+nnoremap / /\v
+
+" Center cursor after movement
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+
+" Maintain cursor position after yank
+vnoremap y ygv<Esc>
+
+" Yank to system clipboard
+nnoremap Y "+y
+vnoremap Y "+y
+
+" Clear highlights with Esc
+nnoremap <Esc> :noh<CR>
+
+" Indent keeping selection
+vnoremap < <gv
+vnoremap > >gv
+
+" Window management (Resizing)
+nnoremap <M-=> :resize +2<CR>
+nnoremap <M--> :resize -2<CR>
+nnoremap <M-.> :vertical resize +2<CR>
+nnoremap <M-,> :vertical resize -2<CR>
+
+" Splits (Consistent with tmux/nvim config)
+nnoremap <C-w>- <C-w>s
+nnoremap <C-w>\ <C-w>v
+" Max out split (Zoom)
+nnoremap <C-w>z <C-w>_<C-w>|
+
+" --- IDE Actions ---
+
+" Run configurations (Approximating custom run function)
+" Run context (e.g. current test or class)
+nmap <leader>r <Action>(RunClass)
+" Run generic
+nmap <leader>R <Action>(Run)
+
+" Reformat Code
+map \r <Action>(ReformatCode)
+
+" Debug
+map <leader>d <Action>(Debug)
+
+" Toggle breakpoint
+map \b <Action>(ToggleLineBreakpoint)
+
+" Navigate back/forward (Standard IDE navigation)
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+" Go to definition (IDE native is usually better than Vim's gd)
+nmap gd <Action>(GotoDeclaration)
+nmap gr <Action>(ShowUsages)
+nmap gi <Action>(GotoImplementation)

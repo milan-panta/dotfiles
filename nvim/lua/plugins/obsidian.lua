@@ -76,12 +76,7 @@ return {
 
     -- Attachments (images)
     attachments = {
-      confirm_img_paste = false,
-      img_text_func = function(path)
-        local name = Obsidian.opts.preferred_link_style == "markdown" and require("obsidian.util").urlencode(path.name)
-          or path.name
-        return string.format("![[assets/imgs/%s]]", name)
-      end,
+      confirm_img_paste = true,
     },
 
     completion = {

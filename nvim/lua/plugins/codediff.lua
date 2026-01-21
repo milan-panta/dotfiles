@@ -1,6 +1,5 @@
 return {
   "esmuellert/codediff.nvim",
-  branch = "next",
   dependencies = { "MunifTanjim/nui.nvim" },
   cmd = "CodeDiff",
   keys = {

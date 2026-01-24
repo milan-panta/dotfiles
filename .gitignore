@@ -17,7 +17,7 @@
 !starship.toml
 !ghostty
 !.zshrc
-!vimium.txt
+!vimium-c.txt
 !.ideavimrc
 tmux/plugins
 nvim/spell

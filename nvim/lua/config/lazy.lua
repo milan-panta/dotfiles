@@ -38,7 +38,7 @@ require("lazy").setup({
     lazy = true,
   },
   install = {
-    colorscheme = { "tokyonight-night" },
+    colorscheme = { "gruvbox-hard" },
   },
   checker = {
     enabled = false, -- Don't auto-check for plugin updates

@@ -114,13 +114,13 @@ M.dap_adapters = {
 
 -- Mason packages (non-LSP tools to auto-install)
 M.ensure_installed = {
-  "stylua",
-  "clang-format",
-  "prettier",
   "biome",
-  "typstyle",
+  "clang-format",
   "latexindent",
+  "prettier",
   "ruff",
+  "stylua",
+  "typstyle",
 }
 
 -- Treesitter parsers
@@ -130,6 +130,7 @@ M.treesitter_parsers = {
   "cpp",
   "css",
   "gitignore",
+  "html",
   "java",
   "javascript",
   "json",

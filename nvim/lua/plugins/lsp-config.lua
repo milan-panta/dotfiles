@@ -71,7 +71,7 @@ return {
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action", "x")
         map("<leader>cc", vim.lsp.codelens.run, "Run Codelens")
 
-        if client and client.supports_method("textDocument/codeLens") then
+        if client and client:supports_method("textDocument/codeLens") then
           vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
             buffer = event.buf,
             callback = function()

@@ -153,7 +153,11 @@ return {
     -- stylua: ignore end
   },
   config = function(_, opts)
-    require("snacks").setup(opts)
+    local Snacks = require("snacks")
+    Snacks.setup(opts)
+
+    vim.ui.select = Snacks.picker.select
+    vim.ui.input = Snacks.input.input
 
     -- Create some toggle mappings
     Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")

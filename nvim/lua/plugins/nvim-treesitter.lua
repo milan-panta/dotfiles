@@ -12,8 +12,10 @@ return {
     local ts = require("nvim-treesitter")
     ts.setup()
 
-    -- Install configured parsers
-    ts.install(tools.treesitter_parsers)
+    -- Install configured parsers (async to not block startup)
+    vim.schedule(function()
+      ts.install(tools.treesitter_parsers)
+    end)
 
     -- Enable treesitter features per-filetype
     vim.api.nvim_create_autocmd("FileType", {

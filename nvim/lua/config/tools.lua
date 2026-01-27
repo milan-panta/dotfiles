@@ -47,6 +47,9 @@ M.servers = {
     },
   },
 
+  -- Kotlin
+  kotlin_language_server = {},
+
   -- C/C++
   clangd = {
     cmd = {
@@ -87,6 +90,8 @@ M.servers = {
 M.formatters_by_ft = {
   c = { "clang_format" },
   cpp = { "clang_format" },
+  java = { "google-java-format" },
+  kotlin = { "ktlint" },
   lua = { "stylua" },
   python = { "ruff_fix", "ruff_format" },
   tex = { "latexindent" },
@@ -110,6 +115,7 @@ M.linters_by_ft = {
 M.dap_adapters = {
   "codelldb", -- C/C++/Rust
   "python", -- Python (debugpy)
+  -- Note: java-debug-adapter is handled by nvim-jdtls
 }
 
 -- Mason packages (non-LSP tools to auto-install)
@@ -121,6 +127,12 @@ M.ensure_installed = {
   "typstyle",
   "latexindent",
   "ruff",
+  -- Java/Kotlin
+  "jdtls",
+  "google-java-format",
+  "java-debug-adapter",
+  "java-test",
+  "ktlint",
 }
 
 -- Treesitter parsers
@@ -130,10 +142,13 @@ M.treesitter_parsers = {
   "cpp",
   "css",
   "gitignore",
+  "groovy", -- Gradle build files
+  "html",
   "java",
   "javascript",
   "json",
   "kotlin",
+  "latex",
   "lua",
   "markdown",
   "markdown_inline",
@@ -145,6 +160,7 @@ M.treesitter_parsers = {
   "toml",
   "tsx",
   "typescript",
+  "typst",
   "vim",
   "vimdoc",
   "yaml",
@@ -154,11 +170,10 @@ M.treesitter_parsers = {
 M.diagnostic_config = {
   severity_sort = true,
   signs = true,
-  underline = true,
+  underline = false,
   virtual_text = {
     severity = vim.diagnostic.severity.ERROR,
   },
-  -- virtual_text = true,
   float = {
     border = "rounded",
     source = true,

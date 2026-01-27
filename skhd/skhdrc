@@ -1,11 +1,12 @@
 # shortcuts for opening apps
 rcmd - return : open -na Ghostty
 rcmd - k : open -a Ghostty
-rcmd - j : open -a "Zen Browser"
-rcmd - v : pgrep -x mpv > /dev/null \
+rcmd - j : open -a "Google Chrome"
+rcmd - p : pgrep -x mpv > /dev/null \
           && yabai -m window --focus $(yabai -m query --windows | jq -r '.[] | select(.app == "mpv") | .id' | head -n 1) \
           || /opt/homebrew/bin/mpv --idle
-shift + cmd - u : open -a "Zen Browser"
+rcmd - v : open -a "Visual Studio Code"
+shift + cmd - j : open -na "Google Chrome"
 rcmd - b : open -a Messages
 rcmd - l : open -a CLion
 rcmd - c : open -a ~/Applications/Calendar.app
@@ -14,6 +15,7 @@ rcmd - s : open -a Spotify
 rcmd - d : open -a Discord
 rcmd - m : open -a Mail
 rcmd - t : open -a Things3
+rcmd - o : open -a OBS
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service
@@ -46,6 +48,8 @@ lalt - m : yabai -m window --toggle zoom-fullscreen
 lalt - e : yabai -m space --balance
 
 # Fast focus spaces
+ctrl - left : yabai -m space --focus prev
+ctrl - right : yabai -m space --focus next
 lalt - 1 : yabai -m space --focus 1
 lalt - 2 : yabai -m space --focus 2
 lalt - 3 : yabai -m space --focus 3

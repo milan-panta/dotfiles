@@ -1,0 +1,105 @@
+# Reset all default mappings
+unmapAll
+
+# --- Fix for the "-" key error ---
+# We must explicitly unmap "-" before using it for zoom
+unmap -
+
+# --- Navigation (Scrolling) ---
+map j scrollDown
+map k scrollUp
+map h scrollLeft
+map l scrollRight
+map <c-d> scrollPageDown
+map <c-u> scrollPageUp
+map gg scrollToTop
+map G scrollToBottom
+
+# --- Tabs ---
+map t Vomnibar.activateInNewTab
+map b Vomnibar.activateTabs
+map u restoreTab
+map K previousTab
+map J nextTab
+map D removeTab
+map g0 firstTab
+map g$ lastTab
+map <backspace> visitPreviousTab
+map <c-p> togglePinTab
+map <c-m> toggleMuteTab
+map W moveTabToNextWindow
+map << moveTabLeft
+map >> moveTabRight
+map gX closeOtherTabs
+
+# --- History ---
+map H goBack
+map L goForward
+
+# --- URL Navigation ---
+map gu goUp
+map gU goToRoot
+map [[ goPrevious
+map ]] goNext
+
+# --- Vomnibar & URLs ---
+map o Vomnibar.activate
+map O Vomnibar.activateInNewTab
+map T Vomnibar.activateTabs
+map ge Vomnibar.activateEditUrl
+map gE Vomnibar.activateEditUrlInNewTab
+map B Vomnibar.activateBookmarksInNewTab
+
+# --- Clipboard / Yank ---
+map yy copyCurrentUrl
+map yt copyCurrentTitle
+map yw copyWindowInfo
+map p openCopiedUrlInCurrentTab
+map P openCopiedUrlInNewTab
+
+# --- Link Hints ---
+map f LinkHints.activate
+map F LinkHints.activateOpenInNewTab
+map <c-f> LinkHints.activateWithQueue
+map ;i LinkHints.activateOpenImage
+map ;I LinkHints.activateDownloadImage
+map ;d LinkHints.activateDownloadLink
+map ;h LinkHints.activateHover
+map ;H LinkHints.activateLeave
+map ;f LinkHints.activateFocus
+map ;y LinkHints.activateCopyLinkUrl
+map ;o LinkHints.activateOpenVomnibar
+map ;s LinkHints.activateSearchLinkText
+map ;e LinkHints.activateEdit
+map ;v LinkHints.activateSelect
+
+# --- Search / Find ---
+map / enterFindMode
+map n performFind
+map N performBackwardsFind
+map * searchAs
+
+# --- Zoom ---
+map - zoomOut
+map = zoomIn
+
+# --- Marks ---
+map m Marks.activateCreate
+map ` Marks.activate
+
+# --- Insert Mode Toggle (like Tridactyl) ---
+# Shift+Escape toggles insert mode on/off
+map <s-esc> enterInsertMode key="<s-esc>"
+map <s-esc:i> reset
+
+# --- Frames ---
+map gf nextFrame
+map gF mainFrame
+
+# --- Inputs & Misc ---
+map gi focusInput
+map r reload
+map R reload hard
+map gs toggleViewSource
+map gr toggleReaderMode
+map ? showHelp

@@ -15,6 +15,7 @@ rcmd - s : open -a Spotify
 rcmd - d : open -a Discord
 rcmd - m : open -a Mail
 rcmd - t : open -a Things3
+rcmd - o : open -a OBS
 
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service

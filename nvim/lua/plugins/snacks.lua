@@ -40,6 +40,7 @@ return {
     quickfile = { enabled = true },
     select = { enabled = true },
     scope = { enabled = true },
+    animate = { enabled = true },
     statuscolumn = {
       left = { "sign" },
       right = { "git" },
@@ -56,8 +57,8 @@ return {
     picker = {
       enabled = true,
       previewers = {
-        diff = { builtin = false },
-        git = { builtin = false },
+        diff = { builtin = true },
+        git = { builtin = true },
       },
       sources = {
         files = {

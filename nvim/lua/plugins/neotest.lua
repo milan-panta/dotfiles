@@ -7,6 +7,7 @@ return {
     -- Adapters
     "nvim-neotest/neotest-python",
     "nvim-neotest/neotest-go",
+    "rcasia/neotest-java",
   },
   -- stylua: ignore
   keys = {
@@ -35,6 +36,7 @@ return {
         runner = "pytest",
       },
       ["rustaceanvim.neotest"] = {},
+      ["neotest-java"] = {},
     },
   },
   config = function(_, opts)

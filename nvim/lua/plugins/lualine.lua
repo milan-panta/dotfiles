@@ -15,7 +15,7 @@ local theme_config = {
 
 return {
   "nvim-lualine/lualine.nvim",
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     options = {
       section_separators = "",

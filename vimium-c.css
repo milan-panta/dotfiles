@@ -1,0 +1,23 @@
+/* #ui */
+.HUD {
+    position: fixed !important;
+    bottom: 5px !important;
+    right: 5px !important;
+    left: auto !important;
+    top: auto !important;
+    font-size: 0 !important;
+    padding: 2px 5px !important;
+    background: rgba(40, 40, 40, 0.85) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    min-width: auto !important;
+}
+
+.HUD::before {
+    content: "ignore" !important;
+    font-size: 12px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-family: system-ui, sans-serif !important;
+    text-transform: lowercase !important;
+}

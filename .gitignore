@@ -18,6 +18,7 @@
 !ghostty
 !.zshrc
 !vimium-c.txt
+!vimium-c.css
 !.ideavimrc
 tmux/plugins
 nvim/spell

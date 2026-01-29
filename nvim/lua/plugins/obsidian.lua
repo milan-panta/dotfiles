@@ -30,6 +30,7 @@ return {
     legacy_commands = false,
     workspaces = {
       { name = "Private", path = "~/Documents/Notes/Private" },
+      { name = "Current", path = "." },
     },
 
     -- Daily notes for journaling thoughts

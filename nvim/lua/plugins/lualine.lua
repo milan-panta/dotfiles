@@ -1,18 +1,3 @@
-local colors = {
-  blue = "#7aa2f7",
-  bg = "#16161e",
-  purple = "#bb9af7",
-  fg = "#a9b1d6",
-  grey = "#565f89",
-}
-
-local theme_config = {
-  a = { fg = colors.blue, bg = colors.bg, gui = "bold" },
-  b = { fg = colors.purple, bg = colors.bg },
-  c = { fg = colors.fg, bg = colors.bg },
-  z = { fg = colors.blue, bg = colors.bg, gui = "bold" },
-}
-
 return {
   "nvim-lualine/lualine.nvim",
   event = { "BufReadPre", "BufNewFile" },
@@ -21,14 +6,6 @@ return {
       section_separators = "",
       component_separators = "",
       globalstatus = true,
-      theme = {
-        normal = theme_config,
-        insert = theme_config,
-        visual = theme_config,
-        replace = theme_config,
-        command = theme_config,
-        inactive = theme_config,
-      },
     },
     sections = {
       lualine_a = { "mode" },

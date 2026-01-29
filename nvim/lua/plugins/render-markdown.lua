@@ -17,7 +17,6 @@ return {
       name = "Render Markdown",
       get = require("render-markdown").get,
       set = require("render-markdown").set,
-    }):map("Tm")
-    vim.keymap.set("n", "TM", "<cmd>RenderMarkdown<cr>", { desc = "Render Markdown Preview" })
+    }):map("<leader>Tm")
   end,
 }

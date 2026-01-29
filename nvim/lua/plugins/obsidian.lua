@@ -77,6 +77,8 @@ return {
     -- Attachments (images)
     attachments = {
       confirm_img_paste = true,
+      -- Save images in the same folder as the note
+      folder = "./",
     },
 
     completion = {

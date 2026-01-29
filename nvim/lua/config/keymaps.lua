@@ -45,8 +45,8 @@ map("n", "g*", "g*zz")
 -- Maintain cursor position after yank
 map("v", "y", "ygv<Esc>", { desc = "Yank (keep cursor)" })
 
--- switch between most recent files using F
-map("n", "<BS>", "<C->", { silent = true })
+-- switch between most recent files
+map("n", "<BS>", "<C-^>", { silent = true, desc = "Alternate file" })
 
 -- +y to copy to system clipboard
 map("n", "Y", '"+y', { desc = "Yank to system clipboard" })

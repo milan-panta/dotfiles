@@ -3,9 +3,9 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   opts = {
     keymaps = {
-      normal = "gs",
-      normal_cur = "gss",
-      normal_cur_line = "gSS",
+      normal = "ys",
+      normal_cur = "yss",
+      normal_cur_line = "ySS",
       visual = "S",
       delete = "ds",
       change = "cs",

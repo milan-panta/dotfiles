@@ -66,9 +66,9 @@ return {
         map("<C-s>", vim.diagnostic.open_float, "Line Diagnostics")
 
         -- Actions
-        map("<leader>cr", vim.lsp.buf.rename, "Rename")
-        map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-        map("<leader>ca", vim.lsp.buf.code_action, "Code Action", "x")
+        map("cd", vim.lsp.buf.rename, "Rename")
+        map("g.", vim.lsp.buf.code_action, "Code Action")
+        map("g.", vim.lsp.buf.code_action, "Code Action", "x")
         map("<leader>cc", vim.lsp.codelens.run, "Run Codelens")
 
         if client and client:supports_method("textDocument/codeLens") then
@@ -76,12 +76,12 @@ return {
             buffer = event.buf,
             callback = function()
               if vim.g.codelens_enabled ~= false then
-                vim.lsp.codelens.refresh()
+                vim.lsp.codelens.enable(true, { bufnr = event.buf })
               end
             end,
           })
           if vim.g.codelens_enabled ~= false then
-            vim.lsp.codelens.refresh()
+            vim.lsp.codelens.enable(true, { bufnr = event.buf })
           end
         end
       end,

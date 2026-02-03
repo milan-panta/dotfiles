@@ -57,6 +57,7 @@ return {
       return os.date("%Y-%m-%d-%H%M")
     end,
 
+    -- Ensure new notes are created in the same directory as the current file
     new_notes_location = "current_dir",
 
     -- Wiki-style links [[note]]
@@ -77,6 +78,8 @@ return {
     -- Attachments (images)
     attachments = {
       confirm_img_paste = true,
+      -- Save images in the same folder as the note
+      folder = "./",
     },
 
     completion = {

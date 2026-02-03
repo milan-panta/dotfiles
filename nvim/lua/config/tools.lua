@@ -50,6 +50,9 @@ M.servers = {
   -- Kotlin
   kotlin_language_server = {},
 
+  -- Go
+  gopls = {},
+
   -- C/C++
   clangd = {
     cmd = {
@@ -90,6 +93,7 @@ M.servers = {
 M.formatters_by_ft = {
   c = { "clang_format" },
   cpp = { "clang_format" },
+  go = { "gofumpt", "goimports" },
   java = { "google-java-format" },
   kotlin = { "ktlint" },
   lua = { "stylua" },
@@ -108,6 +112,7 @@ M.formatters_by_ft = {
 
 -- Linters (nvim-lint)
 M.linters_by_ft = {
+  go = { "golangcilint" },
   python = { "ruff" },
 }
 
@@ -133,6 +138,11 @@ M.ensure_installed = {
   "java-debug-adapter",
   "java-test",
   "ktlint",
+  -- Go
+  "delve",
+  "gofumpt",
+  "goimports",
+  "golangci-lint",
 }
 
 -- Treesitter parsers
@@ -142,6 +152,10 @@ M.treesitter_parsers = {
   "cpp",
   "css",
   "gitignore",
+  "go",
+  "gomod",
+  "gosum",
+  "gowork",
   "groovy", -- Gradle build files
   "html",
   "java",

@@ -185,9 +185,9 @@ return {
       set = function(state)
         vim.g.codelens_enabled = state
         if state then
-          vim.lsp.codelens.refresh()
+          vim.lsp.codelens.enable(true, { bufnr = 0 })
         else
-          vim.lsp.codelens.clear()
+          vim.lsp.codelens.enable(false, { bufnr = 0 })
         end
       end,
     }):map("<leader>Tc")

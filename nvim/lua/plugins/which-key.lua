@@ -3,12 +3,14 @@ return {
   event = "VeryLazy",
   opts = {
     spec = {
+      { "<leader>a", group = "ai/sidekick" },
       { "<leader>c", group = "code" },
       { "<leader>d", group = "debug" },
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
       { "<leader>h", group = "hunk" },
       { "<leader>l", group = "lsp" },
+      { "<leader>o", group = "obsidian" },
       { "<leader>q", group = "session" },
       { "<leader>r", group = "run/refactor" },
       { "<leader>s", group = "search" },

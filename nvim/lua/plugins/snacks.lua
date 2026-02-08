@@ -102,7 +102,6 @@ return {
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fc", function() Snacks.picker.files({cwd = vim.fs.normalize('~/.config')}) end, desc = "Find Config File" },
 
-    { "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, desc = "Lazygit (Root Dir)" },
     { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit (cwd)" },
     { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git blame" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Git Log" },

@@ -19,6 +19,22 @@ return {
           require("lspconfig")[server_name].setup(server_opts)
         end,
 
+        ["copilot"] = function()
+          local server_opts = vim.deepcopy(tools.servers.copilot or {})
+          server_opts.capabilities = tools.make_capabilities(server_opts)
+          server_opts.handlers = {
+            didChangeStatus = function(err, res)
+              if err then
+                return
+              end
+              if res.status == "Error" then
+                vim.notify("Copilot: Please sign in with :LspCopilotSignIn", vim.log.levels.ERROR)
+              end
+            end,
+          }
+          require("lspconfig").copilot.setup(server_opts)
+        end,
+
         ["rust_analyzer"] = function() end, -- handled by rustaceanvim
       },
     })
@@ -84,21 +100,19 @@ return {
     })
 
     vim.schedule(function()
-      vim.lsp.inline_completion.enable(false)
+      vim.lsp.inline_completion.enable()
 
-      vim.keymap.set({ "i", "n" }, "<M-]>", function()
-        vim.lsp.inline_completion.select({ count = 1 })
-      end, { desc = "Next inline suggestion" })
-
-      vim.keymap.set({ "i", "n" }, "<M-[>", function()
-        vim.lsp.inline_completion.select({ count = -1 })
-      end, { desc = "Previous inline suggestion" })
-
+      -- stylua: ignore start
       vim.keymap.set("i", "<Tab>", function()
-        if not vim.lsp.inline_completion.get() then
-          return "<Tab>"
+        local ok, result = pcall(vim.lsp.inline_completion.get)
+        if not ok or not result then
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
         end
-      end, { expr = true, desc = "Accept inline suggestion" })
+      end, { desc = "Accept inline suggestion" })
+
+      vim.keymap.set({ "i", "n" }, "<M-]>", function() vim.lsp.inline_completion.select({ count = 1 }) end, { desc = "Next Copilot Suggestion" })
+      vim.keymap.set({ "i", "n" }, "<M-[>", function() vim.lsp.inline_completion.select({ count = -1 }) end, { desc = "Prev Copilot Suggestion" })
+      -- stylua: ignore end
 
       vim.keymap.set("n", "<leader>ui", function()
         local enabled = vim.lsp.inline_completion.is_enabled()

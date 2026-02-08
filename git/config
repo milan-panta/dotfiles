@@ -12,10 +12,16 @@
 
 [merge]
     conflictstyle = diff3
+	tool = codediff
 
 [diff]
     colorMoved = default
+	tool = codediff
 
 [user]
     email = milan.panta@icloud.com
     name = Milan Panta
+[mergetool "codediff"]
+	cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
+[difftool "codediff"]
+	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff file $LOCAL $REMOTE\"

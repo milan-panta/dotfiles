@@ -46,6 +46,12 @@ return {
         vim.g.disable_autoformat = false
         vim.notify("Auto-format enabled", vim.log.levels.INFO)
       end, { desc = "Enable autoformat" })
+
+      vim.keymap.set("n", "<leader>uf", function()
+        vim.g.disable_autoformat = not vim.g.disable_autoformat
+        local state = vim.g.disable_autoformat and "disabled" or "enabled"
+        vim.notify("Format on save " .. state, vim.log.levels.INFO)
+      end, { desc = "Toggle format on save" })
     end,
   },
 

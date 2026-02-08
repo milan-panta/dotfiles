@@ -1,23 +1,103 @@
-/* #ui */
-.HUD {
-    position: fixed !important;
-    bottom: 5px !important;
-    right: 5px !important;
-    left: auto !important;
-    top: auto !important;
-    font-size: 0 !important;
-    padding: 2px 5px !important;
-    background: rgba(40, 40, 40, 0.85) !important;
-    border: none !important;
-    border-radius: 4px !important;
-    box-shadow: none !important;
-    min-width: auto !important;
+/* Vimium-C · Minimal Dark Theme */
+
+/* ---- Ignore indicator ---- */
+
+.HUD,
+.TEE {
+  bottom: 16px !important;
+  right: 16px !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 22px !important;
+  padding: 4px 10px !important;
+  font-size: 0 !important;
+  line-height: 22px !important;
+  letter-spacing: normal !important;
 }
 
 .HUD::before {
-    content: "ignore" !important;
-    font-size: 12px !important;
-    color: rgba(255, 255, 255, 0.7) !important;
-    font-family: system-ui, sans-serif !important;
-    text-transform: lowercase !important;
+  content: "ignore";
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  font-family: system-ui, sans-serif !important;
+  line-height: 22px !important;
+  letter-spacing: normal !important;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.HUD:after {
+  background: rgba(28, 28, 30, 0.82) !important;
+  border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* ---- Find mode ---- */
+
+.HUD.UI {
+  min-width: 160px !important;
+  max-width: 320px !important;
+  height: 28px !important;
+  padding: 4px 12px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.HUD.UI::before {
+  content: none !important;
+}
+.HUD.UI:after {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ---- Link hints ---- */
+
+.LH {
+  background: rgba(28, 28, 30, 0.88) !important;
+  border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  padding: 2px 5px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  font-family: system-ui, sans-serif !important;
+  line-height: 14px !important;
+  color: #ffd60a !important;
+  text-transform: uppercase !important;
+}
+
+.MC,
+.MH {
+  color: #ffd60a !important;
+}
+.BH {
+  color: #ff453a !important;
+}
+
+/* ---- Find bar ---- */
+/*#find*/
+
+.r {
+  background: rgba(28, 28, 30, 0.88) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.24),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  padding: 4px 10px !important;
+  height: 22px !important;
+}
+
+* {
+  font-size: 13px !important;
+  font-family: system-ui, sans-serif !important;
+  line-height: 18px !important;
 }

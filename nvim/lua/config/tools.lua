@@ -1,14 +1,8 @@
--- tools.lua: all external tooling lives here
--- Add a language? Update this file, mason/lsp/formatters just work.
-
 local M = {}
 
--- LSP servers: mason-lspconfig name -> lspconfig opts (empty {} = defaults)
 M.servers = {
-  -- copilot
   copilot = {},
 
-  -- Lua
   lua_ls = {
     settings = {
       Lua = {
@@ -26,34 +20,45 @@ M.servers = {
     },
   },
 
-  -- Python
-  basedpyright = {},
-
-  -- Web
-  html = {},
-  cssls = {},
-  jsonls = {},
-  tailwindcss = {},
-  vtsls = {},
-
-  -- Markdown
-  marksman = {},
-
-  -- Typst
-  tinymist = {
+  basedpyright = {
     settings = {
-      formatterMode = "typstyle",
-      exportPdf = "never",
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = "standard",
+          autoImportCompletions = true,
+        },
+      },
     },
   },
 
-  -- Kotlin
+  html = {},
+  cssls = {},
+  jsonls = {},
+  vtsls = {},
+
+  marksman = {},
+
   kotlin_language_server = {},
 
-  -- Go
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        gofumpt = true,
+        analyses = { unusedparams = true, unusedwrite = true, useany = true },
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
+        staticcheck = true,
+      },
+    },
+  },
 
-  -- C/C++
   clangd = {
     cmd = {
       "clangd",
@@ -63,6 +68,10 @@ M.servers = {
       "--completion-style=detailed",
       "--function-arg-placeholders",
       "--fallback-style=llvm",
+      "--pch-storage=memory",
+      "--enable-config",
+      "--limit-results=500",
+      "-j=" .. tostring(#vim.uv.cpu_info()),
     },
     capabilities = { offsetEncoding = { "utf-16" } },
     init_options = {
@@ -73,6 +82,7 @@ M.servers = {
     root_dir = function(fname)
       local util = require("lspconfig.util")
       return util.root_pattern(
+        "CMakeLists.txt",
         "Makefile",
         "configure.ac",
         "configure.in",
@@ -89,17 +99,16 @@ M.servers = {
   -- rust-analyzer: handled by rustaceanvim
 }
 
--- Formatters (conform.nvim)
 M.formatters_by_ft = {
   c = { "clang_format" },
   cpp = { "clang_format" },
   go = { "gofumpt", "goimports" },
+  rust = { "rustfmt" },
   java = { "google-java-format" },
   kotlin = { "ktlint" },
   lua = { "stylua" },
   python = { "ruff_fix", "ruff_format" },
   tex = { "latexindent" },
-  typst = { "typstyle" },
   markdown = { "prettier" },
   html = { "biome" },
   css = { "biome" },
@@ -110,45 +119,40 @@ M.formatters_by_ft = {
   json = { "biome" },
 }
 
--- Linters (nvim-lint)
 M.linters_by_ft = {
   go = { "golangcilint" },
   python = { "ruff" },
 }
 
--- DAP adapters (mason-nvim-dap)
 M.dap_adapters = {
-  "codelldb", -- C/C++/Rust
-  "python", -- Python (debugpy)
-  -- Note: java-debug-adapter is handled by nvim-jdtls
+  "codelldb",
+  "delve",
+  "python",
+  -- java-debug-adapter is handled by nvim-jdtls
 }
 
--- Mason packages (non-LSP tools to auto-install)
 M.ensure_installed = {
   "stylua",
   "clang-format",
   "prettier",
   "biome",
-  "typstyle",
   "latexindent",
   "ruff",
-  -- Java/Kotlin
   "jdtls",
   "google-java-format",
   "java-debug-adapter",
   "java-test",
   "ktlint",
-  -- Go
   "delve",
   "gofumpt",
   "goimports",
   "golangci-lint",
 }
 
--- Treesitter parsers
 M.treesitter_parsers = {
   "bash",
   "c",
+  "cmake",
   "cpp",
   "css",
   "gitignore",
@@ -156,7 +160,7 @@ M.treesitter_parsers = {
   "gomod",
   "gosum",
   "gowork",
-  "groovy", -- Gradle build files
+  "groovy",
   "html",
   "java",
   "javascript",
@@ -166,6 +170,7 @@ M.treesitter_parsers = {
   "lua",
   "markdown",
   "markdown_inline",
+  "proto",
   "python",
   "query",
   "regex",
@@ -174,19 +179,17 @@ M.treesitter_parsers = {
   "toml",
   "tsx",
   "typescript",
-  "typst",
   "vim",
   "vimdoc",
   "yaml",
 }
 
--- Diagnostics config
 M.diagnostic_config = {
   severity_sort = true,
   signs = true,
   underline = false,
   virtual_text = {
-    severity = vim.diagnostic.severity.ERROR,
+    severity = { min = vim.diagnostic.severity.WARN },
   },
   float = {
     border = "rounded",
@@ -194,7 +197,6 @@ M.diagnostic_config = {
   },
 }
 
--- Helpers
 function M.get_server_names()
   return vim.tbl_keys(M.servers)
 end
@@ -202,12 +204,10 @@ end
 function M.make_capabilities(server_opts)
   server_opts = server_opts or {}
 
-  -- Get base capabilities - blink.cmp is guaranteed loaded by lsp-config dependencies
   local has_blink, blink = pcall(require, "blink.cmp")
   local capabilities = has_blink and blink.get_lsp_capabilities(server_opts.capabilities)
     or vim.lsp.protocol.make_client_capabilities()
 
-  -- Merge any server-specific capabilities
   if server_opts.capabilities then
     capabilities = vim.tbl_deep_extend("force", capabilities, server_opts.capabilities)
   end

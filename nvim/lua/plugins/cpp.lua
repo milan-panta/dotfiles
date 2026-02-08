@@ -1,5 +1,3 @@
--- C/C++: clangd extensions (AST, type hierarchy, etc.)
-
 return {
   "p00f/clangd_extensions.nvim",
   ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
@@ -28,7 +26,6 @@ return {
   config = function(_, opts)
     require("clangd_extensions").setup(opts)
 
-    -- Setup keymaps when clangd attaches
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("clangd_keymaps", { clear = true }),
       callback = function(event)
@@ -37,12 +34,10 @@ return {
           return
         end
 
-        -- Enable inlay hints
         if client.server_capabilities.inlayHintProvider then
           vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
         end
 
-        -- Clangd-specific keymaps
         local map = function(keys, cmd, desc)
           vim.keymap.set("n", keys, cmd, { buffer = event.buf, desc = "C/C++: " .. desc })
         end

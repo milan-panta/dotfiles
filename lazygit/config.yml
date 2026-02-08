@@ -1,52 +1,6 @@
-gui:
-  nerdFontsVersion: "3"
-  theme:
-    activeBorderColor:
-      - "#fe8019"
-      - "bold"
-    inactiveBorderColor:
-      - "#8ec07c"
-    searchingActiveBorderColor:
-      - "#fe8019"
-      - "bold"
-    optionsTextColor:
-      - "#83a598"
-    selectedLineBgColor:
-      - "#3c3836"
-    cherryPickedCommitFgColor:
-      - "#83a598"
-    cherryPickedCommitBgColor:
-      - "#d3869b"
-    markedBaseCommitFgColor:
-      - "#83a598"
-    markedBaseCommitBgColor:
-      - "#fabd2f"
-    unstagedChangesColor:
-      - "#fb4934"
-    defaultFgColor:
-      - "#ebdbb2"
 git:
-  overrideGpg: true
-  autoFetch: false
-  autoRefresh: false
-  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
-  disableForcePushing: false
-  parseEmoji: true
   pagers:
     - colorArg: always
       pager: delta --paging=never
-      useConfig: true
-  allBranchesLogCmds:
-    - git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=medium
 os:
   editPreset: nvim
-  copyToClipboardCmd: pbcopy
-promptToReturnFromSubprocess: false
-notARepository: skip
-keybinding:
-  universal:
-    return: <esc>
-    quit: q
-    quitWithoutChangingDirectory: Q
-confirmOnQuit: false
-quitOnTopLevelReturn: true

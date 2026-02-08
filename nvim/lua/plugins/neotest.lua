@@ -4,15 +4,15 @@ return {
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    -- Adapters
     "nvim-neotest/neotest-python",
-    "nvim-neotest/neotest-go",
     "rcasia/neotest-java",
+    "fredrikaverpil/neotest-golang",
+    "alfaix/neotest-gtest",
   },
   -- stylua: ignore
   keys = {
     { "<leader>ta", function() require("neotest").run.attach() end, desc = "Attach to Test (Neotest)" },
-    { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File (Neotest)" },
+    { "<leader>tt", function() require("neotest").run.run(vim.api.nvim_buf_get_name(0)) end, desc = "Run File (Neotest)" },
     { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files (Neotest)" },
     { "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest (Neotest)" },
     { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Run Last (Neotest)" },
@@ -20,9 +20,9 @@ return {
     { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output (Neotest)" },
     { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel (Neotest)" },
     { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop (Neotest)" },
-    { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, desc = "Toggle Watch (Neotest)" },
+    { "<leader>tw", function() require("neotest").watch.toggle(vim.api.nvim_buf_get_name(0)) end, desc = "Toggle Watch (Neotest)" },
     { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
-    { "<leader>tD", function() require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" }) end, desc = "Debug File" },
+    { "<leader>tD", function() require("neotest").run.run({ vim.api.nvim_buf_get_name(0), strategy = "dap" }) end, desc = "Debug File" },
     { "[t", function() require("neotest").jump.prev({ status = "failed" }) end, desc = "Prev Failed Test" },
     { "]t", function() require("neotest").jump.next({ status = "failed" }) end, desc = "Next Failed Test" },
   },
@@ -32,11 +32,13 @@ return {
     adapters = {
       ["neotest-python"] = {
         dap = { justMyCode = false },
-        args = { "--log-level", "DEBUG" },
+        args = { "--log-level", "INFO" },
         runner = "pytest",
       },
       ["rustaceanvim.neotest"] = {},
       ["neotest-java"] = {},
+      ["neotest-golang"] = {},
+      ["neotest-gtest"] = {},
     },
   },
   config = function(_, opts)

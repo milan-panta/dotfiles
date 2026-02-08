@@ -7,7 +7,6 @@ return {
   dependencies = {
     { "nvim-lua/plenary.nvim", lazy = true },
   },
-  ---@type YaziConfig
   opts = {
     open_for_directories = false,
     integrations = {

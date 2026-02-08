@@ -1,18 +1,15 @@
--- Completion: blink.cmp
-
 return {
   "saghen/blink.cmp",
   version = "1.*",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "rafamadriz/friendly-snippets",
-    { "saghen/blink.compat", version = "*", opts = {} },
   },
 
   opts = {
     keymap = {
       preset = "default",
-      ["<C-space>"] = { "accept", "fallback" },
+      ["<C-space>"] = { "select_and_accept", "fallback" },
       ["<C-b>"] = { "scroll_documentation_up", "scroll_signature_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "scroll_signature_down", "fallback" },
     },
@@ -39,24 +36,11 @@ return {
     },
 
     sources = {
-      default = { "obsidian", "obsidian_new", "obsidian_tags", "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "snippets", "buffer" },
       providers = {
-        obsidian = {
-          name = "obsidian",
-          module = "blink.compat.source",
-        },
-        obsidian_new = {
-          name = "obsidian_new",
-          module = "blink.compat.source",
-        },
-        obsidian_tags = {
-          name = "obsidian_tags",
-          module = "blink.compat.source",
-        },
         lsp = {
           transform_items = function(_, items)
             -- Filter out Text (1) and Reference (18) from markdown files (likely marksman headers)
-            -- We want files (17) or folders (19) mainly.
             if vim.bo.filetype == "markdown" then
               local kind = require("blink.cmp.types").CompletionItemKind
               return vim.tbl_filter(function(item)

@@ -3,6 +3,7 @@ $directory\
 $git_branch\
 $git_status\
 $fill\
+$c\
 $python\
 $lua\
 $nodejs\
@@ -19,7 +20,7 @@ $character"""
 
 add_newline = false
 command_timeout = 5000
-palette = "gruvbox_hard"
+palette = "rose_pine"
 
 [directory]
 style = 'bold fg:teal'
@@ -40,8 +41,7 @@ symbol = ' '
 format = '[on](white) [$symbol$branch ]($style)'
 
 [git_status]
-style = 'fg:red'
-format = '([$all_status$ahead_behind]($style) )'
+disabled = true
 
 [fill]
 symbol = ' '
@@ -73,6 +73,11 @@ symbol = ' '
 style = 'orange'
 symbol = ' '
 
+[c]
+style = 'blue'
+symbol = ' '
+detect_extensions = ['c', 'h', 'cpp', 'hpp', 'cc', 'cxx']
+
 [ruby]
 style = 'blue'
 symbol = ' '
@@ -103,15 +108,15 @@ min_time = 500
 style = 'fg:gray'
 format = '[$duration]($style)'
 
-[palettes.gruvbox_hard]
-dark_blue = '#458588'
-blue = '#83a598'
-teal = '#8ec07c'
-red = '#fb4934'
-orange = '#fe8019'
-green = '#b8bb26'
-yellow = '#fabd2f'
-purple = '#d3869b'
-gray = '#928374'
-black = '#3c3836'
-white = '#ebdbb2'
+[palettes.rose_pine]
+dark_blue = '#31748f'
+blue = '#9ccfd8'
+teal = '#9ccfd8'
+red = '#eb6f92'
+orange = '#f6c177'
+green = '#31748f'
+yellow = '#f6c177'
+purple = '#c4a7e7'
+gray = '#6e6a86'
+black = '#26233a'
+white = '#e0def4'

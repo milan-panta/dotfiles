@@ -1,5 +1,3 @@
--- Rust: rustaceanvim (manages rust-analyzer) + crates.nvim
-
 return {
   {
     "mrcjkb/rustaceanvim",
@@ -66,10 +64,10 @@ return {
       },
     },
     config = function(_, opts)
-      -- Configure DAP adapter (codelldb) if installed via Mason
-      local mason_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/"
-      local codelldb_path = mason_path .. "adapter/codelldb"
-      local liblldb_path = mason_path .. "lldb/lib/liblldb.dylib"
+      local mason_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "codelldb", "extension")
+      local codelldb_path = vim.fs.joinpath(mason_path, "adapter", "codelldb")
+      local liblldb_name = vim.uv.os_uname().sysname == "Darwin" and "liblldb.dylib" or "liblldb.so"
+      local liblldb_path = vim.fs.joinpath(mason_path, "lldb", "lib", liblldb_name)
 
       if vim.uv.fs_stat(codelldb_path) and vim.uv.fs_stat(liblldb_path) then
         opts.dap = {

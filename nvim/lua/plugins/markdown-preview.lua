@@ -8,12 +8,12 @@ return {
   keys = {
     {
       "<leader>rm",
-      ft = "markdown",
       "<cmd>MarkdownPreviewToggle<cr>",
+      ft = "markdown",
       desc = "Markdown Preview",
     },
   },
   config = function()
-    vim.cmd([[do FileType]])
+    vim.cmd.doautocmd("FileType")
   end,
 }

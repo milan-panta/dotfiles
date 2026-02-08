@@ -1,5 +1,4 @@
-theme = Gruvbox Dark Hard
-background = 1b1b1b
+theme = Rose Pine
 
 # macos-titlebar-style = hidden
 window-decoration = false
@@ -7,7 +6,7 @@ window-decoration = false
 # useful for laptop
 macos-non-native-fullscreen = visible-menu
 
-font-size = 14
+font-size = 15
 
 font-family = JetBrains Mono
 font-family-bold = JetBrains Mono Regular Bold
@@ -53,4 +52,6 @@ keybind = command+w=text:\x1b[119;9~
 keybind = command+semicolon=text:\x1b[59;9~
 keybind = command+backspace=text:\x15
 keybind = option+backspace=text:\x17
+keybind = alt+left=text:\x1b[1;3D
+keybind = alt+right=text:\x1b[1;3C
 keybind = shift+enter=text:\x1b\r

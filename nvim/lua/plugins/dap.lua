@@ -1,5 +1,3 @@
--- DAP: debugging
-
 local dap_icons = {
   Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
   Breakpoint = " ",
@@ -39,7 +37,6 @@ return {
   },
 
   config = function()
-    -- Define DAP signs
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
     for name, sign in pairs(dap_icons) do
       sign = type(sign) == "table" and sign or { sign }
@@ -54,17 +51,12 @@ return {
     local dap = require("dap")
     local dapui = require("dapui")
 
-    -- Setup DAP UI
-    dapui.setup({
-      -- Use default layouts, customize if needed
-    })
+    dapui.setup({})
 
-    -- Setup virtual text
     require("nvim-dap-virtual-text").setup({
-      commented = true, -- Prefix virtual text with comment string
+      commented = true,
     })
 
-    -- Auto-open/close DAP UI
     dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open({})
     end
@@ -75,12 +67,49 @@ return {
       dapui.close({})
     end
 
-    -- Setup mason-nvim-dap for auto-installation
     local tools = require("config.tools")
     require("mason-nvim-dap").setup({
       ensure_installed = tools.dap_adapters,
       automatic_installation = true,
-      handlers = {}, -- Use default handlers
+      handlers = {},
     })
+
+    -- C/C++ launch configs (cmake-tools.nvim handles project builds,
+    -- this covers standalone files and custom executables)
+    dap.configurations.c = dap.configurations.c or {}
+    dap.configurations.cpp = dap.configurations.cpp or {}
+    local cpp_configs = {
+      {
+        name = "Launch executable",
+        type = "codelldb",
+        request = "launch",
+        program = function()
+          return vim.fn.input("Executable: ", vim.uv.cwd() .. "/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+      },
+      {
+        name = "Launch with args",
+        type = "codelldb",
+        request = "launch",
+        program = function()
+          return vim.fn.input("Executable: ", vim.uv.cwd() .. "/", "file")
+        end,
+        args = function()
+          return vim.split(vim.fn.input("Args: "), " ", { trimempty = true })
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+      },
+      {
+        name = "Attach to process",
+        type = "codelldb",
+        request = "attach",
+        pid = require("dap.utils").pick_process,
+      },
+    }
+    vim.list_extend(dap.configurations.c, cpp_configs)
+    vim.list_extend(dap.configurations.cpp, cpp_configs)
   end,
 }

@@ -15,9 +15,12 @@ return {
       end,
       desc = "Diff against revision",
     },
-    { "<leader>hd", "<cmd>CodeDiff file HEAD<cr>", desc = "Diff file" },
+    { "<leader>gp", "<cmd>CodeDiff main...<cr>", desc = "PR diff (vs main)" },
+    { "<leader>gh", "<cmd>CodeDiff history origin/main..HEAD<cr>", desc = "PR commit history" },
+    { "<leader>gH", "<cmd>CodeDiff history %<cr>", desc = "File history (all time)" },
+    { "<leader>gf", "<cmd>CodeDiff file HEAD<cr>", desc = "Diff file vs HEAD" },
     {
-      "<leader>hD",
+      "<leader>gF",
       function()
         vim.ui.input({ prompt = "File diff against: " }, function(input)
           if input then
@@ -25,7 +28,7 @@ return {
           end
         end)
       end,
-      desc = "Diff file against revision",
+      desc = "Diff file vs revision",
     },
   },
 }

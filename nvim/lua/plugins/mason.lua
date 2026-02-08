@@ -1,5 +1,3 @@
--- Mason: package manager for external tools
-
 return {
   {
     "williamboman/mason.nvim",

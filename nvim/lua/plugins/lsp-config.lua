@@ -1,5 +1,3 @@
--- LSP: server setup and keymaps
-
 return {
   "neovim/nvim-lspconfig",
   event = "VeryLazy",
@@ -34,7 +32,8 @@ return {
         end
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client then
+        -- Keep semantic tokens for clangd (much better than treesitter for C++)
+        if client and client.name ~= "clangd" then
           client.server_capabilities.semanticTokensProvider = nil
         end
 
@@ -46,11 +45,9 @@ return {
         pcall(vim.keymap.del, "n", "gO", { buffer = event.buf })
         pcall(vim.keymap.del, "i", "<C-S>", { buffer = event.buf })
 
-        -- Documentation
         map("K", vim.lsp.buf.hover, "Hover Documentation")
         map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
 
-        -- Diagnostics (jump API is Nvim 0.11+)
         map("[d", function()
           vim.diagnostic.jump({ count = -1 })
         end, "Previous Diagnostic")
@@ -65,7 +62,6 @@ return {
         end, "Next Error")
         map("<C-s>", vim.diagnostic.open_float, "Line Diagnostics")
 
-        -- Actions
         map("cd", vim.lsp.buf.rename, "Rename")
         map("g.", vim.lsp.buf.code_action, "Code Action")
         map("g.", vim.lsp.buf.code_action, "Code Action", "x")
@@ -87,31 +83,28 @@ return {
       end,
     })
 
-    -- Nvim 0.12+ inline completion
-    if vim.fn.has("nvim-0.12") == 1 then
-      vim.schedule(function()
-        vim.lsp.inline_completion.enable(false)
+    vim.schedule(function()
+      vim.lsp.inline_completion.enable(false)
 
-        vim.keymap.set({ "i", "n" }, "<M-]>", function()
-          vim.lsp.inline_completion.select({ count = 1 })
-        end, { desc = "Next inline suggestion" })
+      vim.keymap.set({ "i", "n" }, "<M-]>", function()
+        vim.lsp.inline_completion.select({ count = 1 })
+      end, { desc = "Next inline suggestion" })
 
-        vim.keymap.set({ "i", "n" }, "<M-[>", function()
-          vim.lsp.inline_completion.select({ count = -1 })
-        end, { desc = "Previous inline suggestion" })
+      vim.keymap.set({ "i", "n" }, "<M-[>", function()
+        vim.lsp.inline_completion.select({ count = -1 })
+      end, { desc = "Previous inline suggestion" })
 
-        vim.keymap.set("i", "<Tab>", function()
-          if not vim.lsp.inline_completion.get() then
-            return "<Tab>"
-          end
-        end, { expr = true, desc = "Accept inline suggestion" })
+      vim.keymap.set("i", "<Tab>", function()
+        if not vim.lsp.inline_completion.get() then
+          return "<Tab>"
+        end
+      end, { expr = true, desc = "Accept inline suggestion" })
 
-        vim.keymap.set("n", "<leader>TC", function()
-          local enabled = vim.lsp.inline_completion.is_enabled()
-          vim.lsp.inline_completion.enable(not enabled)
-          vim.notify("Inline completion " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)
-        end, { desc = "Toggle copilot suggestoins" })
-      end)
-    end
+      vim.keymap.set("n", "<leader>ui", function()
+        local enabled = vim.lsp.inline_completion.is_enabled()
+        vim.lsp.inline_completion.enable(not enabled)
+        vim.notify("Inline completion " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)
+      end, { desc = "Toggle inline completion" })
+    end)
   end,
 }

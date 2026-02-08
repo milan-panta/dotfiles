@@ -1,4 +1,3 @@
--- Load core pieces (order matters)
 require("config.lazy")
 require("config.options")
 require("config.keymaps")

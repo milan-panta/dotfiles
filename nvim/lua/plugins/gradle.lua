@@ -1,4 +1,3 @@
--- Gradle build task management
 return {
   "oclay1st/gradle.nvim",
   ft = { "java", "kotlin", "groovy" },

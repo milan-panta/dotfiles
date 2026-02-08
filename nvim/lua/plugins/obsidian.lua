@@ -32,7 +32,6 @@ return {
       { name = "Private", path = "~/Documents/Notes/Private" },
     },
 
-    -- Daily notes for journaling thoughts
     daily_notes = {
       folder = "daily",
       date_format = "%Y-%m-%d",
@@ -42,14 +41,12 @@ return {
       workdays_only = false,
     },
 
-    -- Templates for structured notes
     templates = {
       folder = "templates",
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
     },
 
-    -- Just use the title as filename, lowercase with dashes
     note_id_func = function(title)
       if title and title ~= "" then
         return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
@@ -57,10 +54,8 @@ return {
       return os.date("%Y-%m-%d-%H%M")
     end,
 
-    -- Ensure new notes are created in the same directory as the current file
     new_notes_location = "current_dir",
 
-    -- Wiki-style links [[note]]
     preferred_link_style = "wiki",
 
     -- Disable built-in UI (using render-markdown.nvim instead)
@@ -70,20 +65,18 @@ return {
 
     frontmatter = { enabled = false },
 
-    -- Simple checkbox cycling
     checkbox = {
       order = { " ", "x" },
     },
 
-    -- Attachments (images)
     attachments = {
       confirm_img_paste = true,
-      -- Save images in the same folder as the note
       folder = "./",
     },
 
     completion = {
-      nvim_cmp = true,
+      blink = true,
+      nvim_cmp = false,
       min_chars = 0,
     },
   },

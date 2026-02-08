@@ -2,30 +2,27 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    -- priority = 1000,
-    opts = {
-      style = "night",
-    },
+    opts = { style = "night" },
     config = function(_, opts)
       require("tokyonight").setup(opts)
-      vim.cmd.colorscheme("tokyonight-night")
+      vim.cmd.colorscheme("tokyonight")
     end,
   },
   {
     "rose-pine/neovim",
-    lazy = true,
-    -- priority = 1000,
+    lazy = false,
+    priority = 1000,
     name = "rose-pine",
-    opts = {},
+    config = function()
+      vim.cmd.colorscheme("rose-pine")
+    end,
   },
   {
     "https://gitlab.com/motaz-shokry/gruvbox.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     name = "gruvbox",
-    priority = 1000,
     config = function()
-      vim.cmd("colorscheme gruvbox-hard")
+      vim.cmd.colorscheme("gruvbox-hard")
     end,
   },
 }

@@ -2,6 +2,10 @@ return {
   "folke/sidekick.nvim",
   opts = {
     cli = {
+      mux = {
+        backend = "tmux",
+        enabled = true,
+      },
       win = {
         keys = {
           nav_left = { "<M-h>", "nav_left", expr = true, desc = "navigate to the left window" },
@@ -30,8 +34,6 @@ return {
       function()
         require("sidekick.cli").select()
       end,
-      -- Or to select only installed tools:
-      -- require("sidekick.cli").select({ filter = { installed = true } })
       desc = "Select CLI",
     },
     {
@@ -74,6 +76,13 @@ return {
     },
     {
       "<leader>ac",
+      function()
+        require("sidekick.cli").toggle({ name = "claude", focus = true })
+      end,
+      desc = "Sidekick Toggle Claude",
+    },
+    {
+      "<leader>ao",
       function()
         require("sidekick.cli").toggle({ name = "copilot", focus = true })
       end,

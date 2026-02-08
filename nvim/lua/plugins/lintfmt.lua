@@ -1,5 +1,3 @@
--- Formatting (conform) & Linting (nvim-lint)
-
 return {
   {
     "stevearc/conform.nvim",
@@ -9,8 +7,13 @@ return {
       {
         "<leader>cf",
         function()
-          require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 2000 })
-          vim.cmd("w")
+          require("conform").format({
+            lsp_format = "fallback",
+            async = true,
+            timeout_ms = 2000,
+          }, function()
+            vim.cmd.write()
+          end)
         end,
         mode = { "n", "v" },
         desc = "Format file/range",
@@ -21,16 +24,14 @@ return {
       return {
         formatters_by_ft = tools.formatters_by_ft,
         format_on_save = function(bufnr)
-          -- Disable with global or buffer-local variable
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
           end
-          return { timeout_ms = 500, lsp_fallback = true }
+          return { timeout_ms = 1000, lsp_format = "fallback" }
         end,
       }
     end,
     init = function()
-      -- Commands to toggle formatting
       vim.api.nvim_create_user_command("FormatDisable", function(args)
         if args.bang then
           vim.b.disable_autoformat = true
@@ -56,11 +57,9 @@ return {
       local lint = require("lint")
       lint.linters_by_ft = tools.linters_by_ft
 
-      -- Run linting on these events
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
         group = vim.api.nvim_create_augroup("nvim_lint", { clear = true }),
         callback = function()
-          -- Only lint if buffer is modifiable
           if vim.bo.modifiable then
             lint.try_lint()
           end

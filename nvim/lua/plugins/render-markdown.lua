@@ -10,13 +10,13 @@ return {
       enabled = false,
     },
   },
-  ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
+  ft = "markdown",
   config = function(_, opts)
     require("render-markdown").setup(opts)
     Snacks.toggle({
       name = "Render Markdown",
       get = require("render-markdown").get,
       set = require("render-markdown").set,
-    }):map("<leader>Tm")
+    }):map("<leader>um")
   end,
 }

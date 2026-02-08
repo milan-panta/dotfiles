@@ -4,7 +4,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    -- Core & UI
     bigfile = { enabled = true },
     dashboard = {
       preset = {
@@ -14,8 +13,8 @@ return {
           { icon = " ", key = "e", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = "󰠮 ", key = "n", desc = "Notes", action = ":lua Snacks.picker.files({cwd = vim.fn.expand('~/Documents/Notes/Private')})" },
-          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.picker.files({cwd = vim.fn.expand('~/.config')})" },
+          { icon = "󰠮 ", key = "n", desc = "Notes", action = ":lua Snacks.picker.files({cwd = vim.fs.normalize('~/Documents/Notes/Private')})" },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.picker.files({cwd = vim.fs.normalize('~/.config')})" },
           { icon = " ", key = "s", desc = "Restore Session", section = "session" },
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
@@ -23,7 +22,6 @@ return {
         -- stylua: ignore end
       },
       sections = {
-        -- https://github.com/shreyas-a-s/shell-color-scripts for more scripts
         {
           section = "terminal",
           cmd = "~/.config/nvim/scripts/square.sh",
@@ -84,6 +82,7 @@ return {
         git_signs = false,
         diagnostics = false,
         dim = false,
+        blink_cmp = false,
       },
       win = {
         backdrop = { transparent = false },
@@ -97,14 +96,12 @@ return {
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 
-    -- Find
     { "<leader><leader>", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
-    { "<leader>fc", function() Snacks.picker.files({cwd = vim.fn.expand('~/.config')}) end, desc = "Find Config File" },
+    { "<leader>fc", function() Snacks.picker.files({cwd = vim.fs.normalize('~/.config')}) end, desc = "Find Config File" },
 
-    -- Git
     { "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, desc = "Lazygit (Root Dir)" },
     { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit (cwd)" },
     { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git blame" },
@@ -114,14 +111,12 @@ return {
     { "<leader>hl", function() Snacks.lazygit.log_file() end, desc = "Git Log File" },
     { "<leader>hL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
 
-    -- Grep
     { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
     { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
-    { "<leader>sn", function() Snacks.picker.files({ cwd = vim.fn.expand("~/Documents/Notes/Private") }) end, desc = "Search Notes" },
+    { "<leader>sn", function() Snacks.picker.files({ cwd = vim.fs.normalize("~/Documents/Notes/Private") }) end, desc = "Search Notes" },
     { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
 
-    -- Search
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History" },
     { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
@@ -132,7 +127,6 @@ return {
     { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-    -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
@@ -141,10 +135,9 @@ return {
     { "<leader>sS", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
     { "<leader>ss", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 
-    -- Other
     { "<leader>uu", function() Snacks.picker.undo() end, desc = "Undo History" },
-    { "<leader>Tz", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-    { "<leader>TZ", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+    { "<leader>uz", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+    { "<c-w>z", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
     { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     { "<leader>rf", function() Snacks.rename.rename_file() end, desc = "Rename File" },
@@ -160,12 +153,23 @@ return {
     vim.ui.select = Snacks.picker.select
     vim.ui.input = Snacks.input.input
 
-    -- Create some toggle mappings
-    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>Ts")
-    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>Tw")
-    Snacks.toggle.diagnostics():map("<leader>Td")
-    Snacks.toggle.treesitter():map("<leader>TT")
-    Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>Tb")
+    local blink_enabled = true
+    Snacks.toggle({
+      id = "blink_cmp",
+      name = "Blink Completion",
+      get = function()
+        return blink_enabled
+      end,
+      set = function(state)
+        blink_enabled = state
+        vim.b.completion = state
+      end,
+    })
+
+    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+    Snacks.toggle.diagnostics():map("<leader>ud")
+    Snacks.toggle.treesitter():map("<leader>uT")
     Snacks.toggle({
       name = "Inlay Hints",
       get = function()
@@ -174,9 +178,9 @@ return {
       set = function(state)
         vim.lsp.inlay_hint.enable(state)
       end,
-    }):map("<leader>Th")
-    Snacks.toggle.indent():map("<leader>Tg")
-    Snacks.toggle.dim():map("<leader>TD")
+    }):map("<leader>uh")
+    Snacks.toggle.indent():map("<leader>ug")
+    Snacks.toggle.dim():map("<leader>uD")
     Snacks.toggle({
       name = "CodeLens",
       get = function()
@@ -190,6 +194,6 @@ return {
           vim.lsp.codelens.enable(false, { bufnr = 0 })
         end
       end,
-    }):map("<leader>Tc")
+    }):map("<leader>uc")
   end,
 }

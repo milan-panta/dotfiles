@@ -30,26 +30,27 @@ confirm-close-surface = false
 
 auto-update = off
 
-# hacky way to allow <Cmmd-*> keys for <M-*> commands in tmux
-keybind = command+digit_1=csi:49;9u
-keybind = command+digit_2=csi:50;9u
-keybind = command+digit_3=csi:51;9u
-keybind = command+digit_4=csi:52;9u
-keybind = command+digit_5=csi:53;9u
-keybind = command+digit_6=csi:54;9u
-keybind = command+digit_7=csi:55;9u
-keybind = command+digit_8=csi:56;9u
-keybind = command+digit_9=csi:57;9u
-keybind = command+a=csi:97;9u
-keybind = command+f=csi:102;9u
-keybind = command+g=csi:103;9u
-keybind = command+h=csi:104;9u
-keybind = command+j=csi:106;9u
-keybind = command+k=csi:107;9u
-keybind = command+l=csi:108;9u
-keybind = command+t=csi:116;9u
-keybind = command+w=csi:119;9u
-keybind = command+semicolon=csi:59;9u
+# Cmd+* sends CSI tilde sequences matched by tmux user-keys.
+# Uses ~ terminator (not u) to bypass tmux's kitty keyboard protocol parser.
+keybind = command+digit_1=text:\x1b[49;9~
+keybind = command+digit_2=text:\x1b[50;9~
+keybind = command+digit_3=text:\x1b[51;9~
+keybind = command+digit_4=text:\x1b[52;9~
+keybind = command+digit_5=text:\x1b[53;9~
+keybind = command+digit_6=text:\x1b[54;9~
+keybind = command+digit_7=text:\x1b[55;9~
+keybind = command+digit_8=text:\x1b[56;9~
+keybind = command+digit_9=text:\x1b[57;9~
+keybind = command+a=text:\x1b[97;9~
+keybind = command+f=text:\x1b[102;9~
+keybind = command+g=text:\x1b[103;9~
+keybind = command+h=text:\x1b[104;9~
+keybind = command+j=text:\x1b[106;9~
+keybind = command+k=text:\x1b[107;9~
+keybind = command+l=text:\x1b[108;9~
+keybind = command+t=text:\x1b[116;9~
+keybind = command+w=text:\x1b[119;9~
+keybind = command+semicolon=text:\x1b[59;9~
 keybind = command+backspace=text:\x15
 keybind = option+backspace=text:\x17
 keybind = shift+enter=text:\x1b\r

@@ -28,7 +28,7 @@ map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 map("o", "iq", 'i"', { desc = "Inside quotes" })
 map("o", "aq", 'a"', { desc = "Around quotes" })
 
-map("n", "?", "?\\v")
+map("n", "?", "?\\v") -- very magic regex mode by default
 map("n", "/", "/\\v")
 
 map("n", "<C-u>", "<C-u>zz")

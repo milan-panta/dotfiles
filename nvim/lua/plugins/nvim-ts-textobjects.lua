@@ -116,12 +116,14 @@ return {
         attach(ev.buf)
       end,
     })
+    -- attach to buffers already loaded before plugin init
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_is_loaded(buf) then
         attach(buf)
       end
     end
 
+    -- make ; , also repeat treesitter motions
     local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
     vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
     vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)

@@ -11,6 +11,7 @@ return {
         note = { pattern = "%f[%w]()NOTE:()", group = "MiniHipatternsNote" },
         hex_color = hi.gen_highlighter.hex_color({ priority = 2000 }),
         shorthand = {
+          -- expand #RGB shorthand to #RRGGBB for color preview
           pattern = "()#%x%x%x()%f[^%x%w]",
           group = function(_, _, data)
             ---@type string

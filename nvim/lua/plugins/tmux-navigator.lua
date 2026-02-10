@@ -13,6 +13,6 @@ return {
     { "<M-l>", "<cmd>TmuxNavigateRight<cr>" },
   },
   init = function()
-    vim.g.tmux_navigator_no_mappings = 1
+    vim.g.tmux_navigator_no_mappings = 1 -- disable defaults, we use custom M-hjkl
   end,
 }

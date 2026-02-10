@@ -14,6 +14,6 @@ return {
     },
   },
   config = function()
-    vim.cmd.doautocmd("FileType")
+    vim.cmd.doautocmd("FileType") -- re-trigger FileType to register preview commands
   end,
 }

@@ -100,7 +100,7 @@ return {
     })
 
     vim.schedule(function()
-      vim.lsp.inline_completion.enable(false)
+      vim.lsp.inline_completion.enable(false) -- off by default, toggle with <leader>ui
 
       -- stylua: ignore start
       vim.keymap.set("i", "<Tab>", function()

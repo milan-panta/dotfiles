@@ -14,12 +14,12 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.loader.enable()
+vim.loader.enable() -- byte-compile cache for faster startup
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.opt.shortmess:append("I")
+vim.opt.shortmess:append("I") -- suppress intro screen
 
 require("lazy").setup({
   spec = {

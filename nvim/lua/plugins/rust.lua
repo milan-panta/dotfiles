@@ -64,6 +64,7 @@ return {
       },
     },
     config = function(_, opts)
+      -- auto-detect mason-installed codelldb for DAP
       local mason_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "codelldb", "extension")
       local codelldb_path = vim.fs.joinpath(mason_path, "adapter", "codelldb")
       local liblldb_name = vim.uv.os_uname().sysname == "Darwin" and "liblldb.dylib" or "liblldb.so"

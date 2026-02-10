@@ -149,6 +149,7 @@ return {
     local Snacks = require("snacks")
     Snacks.setup(opts)
 
+    -- override vim's built-in UI pickers with Snacks
     vim.ui.select = Snacks.picker.select
     vim.ui.input = Snacks.input.input
 

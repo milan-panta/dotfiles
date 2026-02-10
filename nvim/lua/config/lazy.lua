@@ -29,7 +29,7 @@ require("lazy").setup({
     lazy = true,
   },
   install = {
-    colorscheme = { "rose-pine" },
+    colorscheme = { "gruvbox" },
   },
   checker = {
     enabled = false,

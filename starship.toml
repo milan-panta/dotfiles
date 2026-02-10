@@ -20,7 +20,7 @@ $character"""
 
 add_newline = false
 command_timeout = 5000
-palette = "rose_pine"
+palette = "gruvbox"
 
 [directory]
 style = 'bold fg:teal'
@@ -108,15 +108,15 @@ min_time = 500
 style = 'fg:gray'
 format = '[$duration]($style)'
 
-[palettes.rose_pine]
-dark_blue = '#31748f'
-blue = '#9ccfd8'
-teal = '#9ccfd8'
-red = '#eb6f92'
-orange = '#f6c177'
-green = '#31748f'
-yellow = '#f6c177'
-purple = '#c4a7e7'
-gray = '#6e6a86'
-black = '#26233a'
-white = '#e0def4'
+[palettes.gruvbox]
+dark_blue = '#458588'
+blue = '#83A598'
+teal = '#8EC07C'
+red = '#FB4934'
+orange = '#FE8019'
+green = '#B8BB26'
+yellow = '#FABD2F'
+purple = '#D3869B'
+gray = '#928374'
+black = '#3C3836'
+white = '#EBDBB2'

@@ -29,7 +29,8 @@ Add a language:
 ## Dependencies
 
 - node, yarn
-- python3
+- tree-sitter, tree-sitter-cli
+- python3, go
 - fzf, fd, ripgrep
 - tmux (optional, for run keymaps)
 

@@ -1,10 +1,9 @@
 return {
   "neovim/nvim-lspconfig",
-  event = "VeryLazy",
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     { "williamboman/mason.nvim", config = true },
     "williamboman/mason-lspconfig.nvim",
-    "saghen/blink.cmp",
   },
   config = function()
     local tools = require("config.tools")
@@ -87,12 +86,12 @@ return {
           vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
             buffer = event.buf,
             callback = function()
-              if vim.g.codelens_enabled ~= false then
+              if vim.g.codelens_enabled == true then
                 vim.lsp.codelens.enable(true, { bufnr = event.buf })
               end
             end,
           })
-          if vim.g.codelens_enabled ~= false then
+          if vim.g.codelens_enabled == true then
             vim.lsp.codelens.enable(true, { bufnr = event.buf })
           end
         end

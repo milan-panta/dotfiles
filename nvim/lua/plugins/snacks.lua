@@ -153,15 +153,13 @@ return {
     vim.ui.select = Snacks.picker.select
     vim.ui.input = Snacks.input.input
 
-    local blink_enabled = true
     Snacks.toggle({
       id = "blink_cmp",
       name = "Blink Completion",
       get = function()
-        return blink_enabled
+        return vim.b.completion ~= false
       end,
       set = function(state)
-        blink_enabled = state
         vim.b.completion = state
       end,
     })
@@ -184,7 +182,7 @@ return {
     Snacks.toggle({
       name = "CodeLens",
       get = function()
-        return vim.g.codelens_enabled ~= false
+        return vim.g.codelens_enabled == true
       end,
       set = function(state)
         vim.g.codelens_enabled = state

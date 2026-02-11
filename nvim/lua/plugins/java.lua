@@ -157,7 +157,6 @@ return {
   ft = "java",
   dependencies = {
     "williamboman/mason.nvim",
-    "saghen/blink.cmp",
   },
   config = function()
     start_jdtls()

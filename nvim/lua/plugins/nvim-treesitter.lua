@@ -2,7 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
   build = ":TSUpdate",
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPre", "BufNewFile" },
   lazy = vim.fn.argc(-1) == 0, -- Load early when opening a file from cmdline
   cmd = { "TSUpdate", "TSInstall", "TSInstallInfo" },
   config = function()

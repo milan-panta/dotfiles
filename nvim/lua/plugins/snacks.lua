@@ -24,7 +24,7 @@ return {
       sections = {
         {
           section = "terminal",
-          cmd = "~/.config/nvim/scripts/square.sh",
+          cmd = vim.fn.stdpath("config") .. "/scripts/square.sh",
           height = 5,
           padding = 1,
         },

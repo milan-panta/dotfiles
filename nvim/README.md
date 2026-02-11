@@ -1,4 +1,4 @@
-# Nvim 0.11+
+# Nvim 0.13+ (nightly build)
 
 ## Layout
 

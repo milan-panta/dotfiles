@@ -46,7 +46,7 @@ return {
         map("<leader>ct", "<cmd>ClangdTypeHierarchy<cr>", "Type Hierarchy")
         map("<leader>cm", "<cmd>ClangdMemoryUsage<cr>", "Memory Usage")
         map("<leader>ci", "<cmd>ClangdSymbolInfo<cr>", "Symbol Info")
-        map("<leader>cA", "<cmd>ClangdAST<cr>", "View AST")
+        map("<leader>ca", "<cmd>ClangdAST<cr>", "View AST")
       end,
     })
   end,

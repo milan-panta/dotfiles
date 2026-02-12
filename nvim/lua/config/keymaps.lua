@@ -71,7 +71,7 @@ local function RunFile(dir, args)
     cmd = string.format("gcc -Wall -g -std=gnu99 '%s' -o '%s' && '%s' %s", file, file_no_ext, file_no_ext, args)
   elseif filetype == "cpp" then
     cmd = string.format(
-      "g++ -g -std=c++23 -Wall -Wextra -Wpedantic -fsanitize=address,undefined '%s' -o '%s' && '%s' %s",
+      "g++ -O1 -g -std=c++23 -Wall -Wextra -Wpedantic -fsanitize=address,undefined '%s' -o '%s' && '%s' %s",
       file,
       file_no_ext,
       file_no_ext,

@@ -3,7 +3,7 @@ local function augroup(name)
 end
 
 -- re-read files when nvim regains focus or a terminal closes
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "CursorHold" }, {
   group = augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
@@ -53,6 +53,7 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
   callback = function(event)
     local patterns = {
       "ClangdAST",
+      "ClangdTypeHierarchy",
       "checkhealth",
       "git",
       "gitsigns-blame",

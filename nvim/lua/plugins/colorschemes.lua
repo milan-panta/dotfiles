@@ -1,6 +1,7 @@
 return {
   {
     "milan-panta/gruvbox.nvim",
+    -- dir = "~/Developer/open_source/gruvbox.nvim",
     lazy = false,
     priority = 1000,
     config = function()

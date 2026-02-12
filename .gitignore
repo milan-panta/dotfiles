@@ -26,3 +26,4 @@ nvim/spell
 mpv/memo-history.log
 mpv/watch_later
 nvim/CLAUDE.md
+/nvim/lazy-lock.json

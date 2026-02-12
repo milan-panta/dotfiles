@@ -11,6 +11,7 @@ opt.wrap = false
 opt.fillchars:append({ eob = " " }) -- hide ~ after end of buffer
 opt.mousescroll = "ver:1,hor:4"
 
+opt.autoread = true
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true

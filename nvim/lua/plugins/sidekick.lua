@@ -2,10 +2,6 @@ return {
   "folke/sidekick.nvim",
   opts = {
     cli = {
-      mux = {
-        backend = "tmux",
-        enabled = true,
-      },
       win = {
         keys = {
           nav_left = { "<M-h>", "nav_left", expr = true, desc = "navigate to the left window" },

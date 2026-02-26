@@ -28,6 +28,9 @@ map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 map("o", "iq", 'i"', { desc = "Inside quotes" })
 map("o", "aq", 'a"', { desc = "Around quotes" })
 
+map("n", "<C-w>-", "<C-w>s", { desc = "Split horizontally" })
+map("n", "<C-w>\\", "<C-w>v", { desc = "Split vertically" })
+
 map("n", "?", "?\\v") -- very magic regex mode by default
 map("n", "/", "/\\v")
 
@@ -127,11 +130,54 @@ map("n", "<leader>r\\", function()
       RunFile("vsplit", input)
     end
   end)
-end, { silent = true, desc = "Run vertically" })
+end, { silent = true, desc = "Run vertical" })
+
 map("n", "<leader>r-", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
     if input then
       RunFile("split", input)
     end
   end)
-end, { silent = true, desc = "Run horizontally" })
+end, { silent = true, desc = "Run horizontal" })
+
+local function run_build_cmd(cmd)
+  if vim.env.TMUX then
+    local result = vim.system({ "tmux", "split-window", "-v", "-P", "-F", "#{pane_id}" }):wait()
+    if result.code == 0 and result.stdout and result.stdout ~= "" then
+      local pane_id = result.stdout:gsub("%s+", "")
+      vim.system({ "tmux", "send-keys", "-t", pane_id, cmd, "Enter" })
+    end
+  else
+    vim.cmd.split()
+    vim.cmd.terminal(cmd)
+    vim.cmd.startinsert()
+  end
+end
+
+-- Build System Keymaps (C++)
+map("n", "<leader>bm", function() run_build_cmd("make -j") end, { desc = "C++ Make build" })
+map("n", "<leader>bn", function() run_build_cmd("make ninja") end, { desc = "C++ Ninja build" })
+map("n", "<leader>bC", function() run_build_cmd("make clean") end, { desc = "C++ Make clean" })
+
+-- Copy file:line to system clipboard (for code reviews / Slack)
+map("n", "<leader>cp", function()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
+  local line = vim.fn.line(".")
+  local loc = path .. ":" .. line
+  vim.fn.setreg("+", loc)
+  vim.notify(loc, vim.log.levels.INFO)
+end, { desc = "Copy file:line" })
+
+-- CMake build
+map("n", "<leader>bc", function()
+  run_build_cmd("cmake --build build -j" .. tostring(#vim.uv.cpu_info()))
+end, { silent = true, desc = "CMake build" })
+
+-- Bazel build
+map("n", "<leader>bb", function()
+  run_build_cmd("bazel build //...")
+end, { silent = true, desc = "Bazel Build All" })
+
+map("n", "<leader>bt", function()
+  run_build_cmd("bazel test //...")
+end, { silent = true, desc = "Bazel Test All" })

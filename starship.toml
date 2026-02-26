@@ -4,6 +4,7 @@ $git_branch\
 $git_status\
 $fill\
 $c\
+$custom\
 $python\
 $lua\
 $nodejs\
@@ -107,6 +108,13 @@ format = '[$symbol]($style)'
 min_time = 500
 style = 'fg:gray'
 format = '[$duration]($style)'
+
+[custom.cmake_build_type]
+command = "cat build/CMakeCache.txt 2>/dev/null | grep 'CMAKE_BUILD_TYPE:STRING=' | cut -d= -f2"
+when = "test -f CMakeLists.txt -a -f build/CMakeCache.txt"
+format = '[\[$output\]]($style) '
+style = 'fg:orange'
+description = 'CMake build type'
 
 [palettes.gruvbox]
 dark_blue = '#458588'

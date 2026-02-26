@@ -26,8 +26,8 @@ return {
     { "<leader>dk", function() require("dap").up() end, desc = "Up Stack" },
     { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
     { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-    { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
-    { "<leader>dP", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
     { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
     { "<leader>ds", function() require("dap").session() end, desc = "Session" },
     { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
@@ -74,8 +74,8 @@ return {
       handlers = {},
     })
 
-    -- C/C++ launch configs (cmake-tools.nvim handles project builds,
-    -- this covers standalone files and custom executables)
+    -- C/C++ launch configs
+    -- (This covers standalone files and custom executables)
     dap.configurations.c = dap.configurations.c or {}
     dap.configurations.cpp = dap.configurations.cpp or {}
     local cpp_configs = {

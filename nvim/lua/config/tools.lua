@@ -37,6 +37,7 @@ M.servers = {
   vtsls = {},
 
   marksman = {},
+  starpls = {},
 
   kotlin_language_server = {},
 
@@ -64,13 +65,19 @@ M.servers = {
       "clangd",
       "--background-index",
       "--clang-tidy",
-      "--header-insertion=iwyu",
-      "--completion-style=detailed",
-      "--function-arg-placeholders",
+      "--header-insertion=never",
+      "--header-insertion-decorators=0",
+      "--completion-style=bundled",
+      "--function-arg-placeholders=1",
+      "--all-scopes-completion",
+      "--ranking-model=decision_forest",
       "--fallback-style=llvm",
       "--pch-storage=memory",
       "--enable-config",
-      "--limit-results=500",
+      "--malloc-trim",
+      "--log=error",
+      "--limit-results=50",
+      "--limit-references=200",
       "-j=" .. tostring(#vim.uv.cpu_info()),
     },
     capabilities = { offsetEncoding = { "utf-16" } },
@@ -82,13 +89,15 @@ M.servers = {
     root_dir = function(fname)
       local util = require("lspconfig.util")
       return util.root_pattern(
+        "WORKSPACE",
+        "WORKSPACE.bazel",
+        "MODULE.bazel",
         "CMakeLists.txt",
         "Makefile",
         "configure.ac",
         "configure.in",
         "config.h.in",
         "meson.build",
-        "opt/build/ninja.build",
         "build.ninja"
       )(fname) or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname) or vim.fs.dirname(
         vim.fs.find(".git", { path = fname, upward = true })[1]
@@ -106,6 +115,7 @@ M.formatters_by_ft = {
   rust = { "rustfmt" },
   java = { "google-java-format" },
   kotlin = { "ktlint" },
+  bzl = { "buildifier" },
   lua = { "stylua" },
   python = { "ruff_fix", "ruff_format" },
   tex = { "latexindent" },
@@ -134,6 +144,7 @@ M.dap_adapters = {
 M.ensure_installed = {
   "stylua",
   "clang-format",
+  "buildifier",
   "prettier",
   "biome",
   "latexindent",
@@ -154,6 +165,7 @@ M.treesitter_parsers = {
   "c",
   "cmake",
   "cpp",
+  "starlark",
   "css",
   "gitignore",
   "go",

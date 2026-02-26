@@ -10,6 +10,7 @@ opt.scrolloff = 8
 opt.wrap = false
 opt.fillchars:append({ eob = " " }) -- hide ~ after end of buffer
 opt.mousescroll = "ver:1,hor:4"
+opt.colorcolumn = "120"
 
 opt.autoread = true
 opt.swapfile = false
@@ -37,6 +38,15 @@ opt.incsearch = true
 opt.hlsearch = true
 
 opt.updatetime = 100 -- faster CursorHold events (gitsigns, lsp)
+
+opt.synmaxcol = 250 -- prevent lag on very long lines
+opt.smoothscroll = false
+
+-- treesitter-based folding
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99
+opt.foldtext = ""
 
 opt.diffopt:append("iwhite")
 opt.diffopt:append("algorithm:histogram")

@@ -19,6 +19,7 @@ cursor-style-blink = false
 shell-integration-features = no-cursor
 
 font-thicken = true
+adjust-cell-height = 1
 window-padding-balance = true
 window-padding-x = 0
 window-padding-y = 0
@@ -28,6 +29,7 @@ macos-option-as-alt = true
 quit-after-last-window-closed = true
 confirm-close-surface = false
 
+scrollback-limit = 100000
 auto-update = off
 
 # Cmd+* sends CSI tilde sequences matched by tmux user-keys.

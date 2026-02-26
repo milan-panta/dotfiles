@@ -1,6 +1,7 @@
 [core]
     pager = delta
     editor = nvim
+    fsmonitor = true
 
 [interactive]
     diffFilter = delta --color-only
@@ -25,3 +26,12 @@
 	cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
 [difftool "codediff"]
 	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff file $LOCAL $REMOTE\"
+
+[feature]
+    manyFiles = true
+
+[fetch]
+    parallel = 0
+
+[submodule]
+    fetchJobs = 0

@@ -24,8 +24,9 @@ return {
     },
 
     completion = {
-      menu = { auto_show = true },
-      documentation = { auto_show = true, auto_show_delay_ms = 100 },
+      menu = { auto_show = true, max_height = 20 },
+      list = { max_items = 50 },
+      documentation = { auto_show = true, auto_show_delay_ms = 50 },
       ghost_text = { enabled = false },
       accept = { auto_brackets = { enabled = true } },
     },

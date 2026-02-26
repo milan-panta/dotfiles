@@ -65,6 +65,7 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
       "notify",
       "qf",
       "startuptime",
+      "terminal",
     }
     local ft = vim.bo[event.buf].filetype
     if vim.tbl_contains(patterns, ft) then
@@ -73,7 +74,7 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
         if vim.api.nvim_buf_is_valid(event.buf) then
           vim.keymap.set("n", "q", function()
             vim.cmd.close()
-            if not ft:match("neotest") then -- neotest manages its own buffers
+            if not ft:match("neotest") and ft ~= "terminal" then -- neotest/terminal manage own
               pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
             end
           end, { buffer = event.buf, silent = true, desc = "Quit buffer" })
@@ -133,6 +134,36 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.ruler = false
     vim.opt_local.showcmd = false
+  end,
+})
+
+-- force .h files to C++ filetype (C++ codebases use .h for headers)
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("h_as_cpp"),
+  pattern = "*.h",
+  callback = function()
+    vim.bo.filetype = "cpp"
+  end,
+})
+
+-- strip trailing whitespace on save for C/C++ files
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("trim_whitespace_cpp"),
+  pattern = { "*.c", "*.cpp", "*.cc", "*.h", "*.hpp" },
+  callback = function()
+    local view = vim.fn.winsaveview()
+    vim.cmd([[silent! %s/\s\+$//e]])
+    vim.fn.winrestview(view)
+  end,
+})
+
+-- 2-space indent for C/C++ files (indent-o-matic overrides with detected values)
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("cpp_indent"),
+  pattern = { "c", "cpp" },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
   end,
 })
 

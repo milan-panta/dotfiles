@@ -18,28 +18,8 @@ return {
     { "<leader>gp", "<cmd>CodeDiff main...<cr>", desc = "PR diff (vs main)" },
     { "<leader>gh", "<cmd>CodeDiff history<cr>", desc = "Show git history" },
     { "<leader>gH", "<cmd>CodeDiff history %<cr>", desc = "File history" },
-    {
-      "<leader>gg",
-      function()
-        local file = vim.fn.expand("%")
-        if file == "" then
-          vim.notify("No file in current buffer", vim.log.levels.WARN)
-          return
-        end
-        local result = vim.fn.systemlist({ "git", "log", "--pretty=format:%h %s", "-20", "--", file })
-        if vim.v.shell_error ~= 0 or #result == 0 then
-          vim.notify("No git history for this file", vim.log.levels.WARN)
-          return
-        end
-        vim.ui.select(result, { prompt = "Diff current file vs commit:" }, function(choice)
-          if choice then
-            local sha = choice:match("^(%S+)")
-            vim.cmd("CodeDiff file " .. sha)
-          end
-        end)
-      end,
-      desc = "Diff file vs picked commit",
-    },
+    { "<leader>gc", "<cmd>CodeDiff history --base WORKING<cr>", desc = "Diff repo vs picked commit" },
+    { "<leader>gC", "<cmd>CodeDiff history --base WORKING %<cr>", desc = "Diff file vs picked commit" },
     { "<leader>gf", "<cmd>CodeDiff file HEAD<cr>", desc = "Diff file vs HEAD" },
     {
       "<leader>gF",

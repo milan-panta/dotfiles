@@ -101,6 +101,7 @@ return {
     { "<leader>fc", function() Snacks.picker.files({cwd = vim.fs.normalize('~/.config')}) end, desc = "Find Config File" },
 
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+    { "<leader>gG", function() Snacks.lazygit({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Lazygit (current file)" },
     { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log" },

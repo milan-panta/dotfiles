@@ -8,7 +8,7 @@ rcmd - p : pgrep -x mpv > /dev/null \
 rcmd - v : open -a "Visual Studio Code"
 shift + lcmd - j : open -na "Google Chrome"
 rcmd - b : open -a Messages
-rcmd - l : open -a CLion
+rcmd - l : open -a Claude
 rcmd - c : open -a ~/Applications/Calendar.app
 rcmd - n : open -a Notion
 rcmd - s : open -a Spotify

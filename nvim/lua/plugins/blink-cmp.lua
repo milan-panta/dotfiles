@@ -1,6 +1,7 @@
 return {
   "saghen/blink.cmp",
-  version = "1.*",
+  -- version = "1.*",
+  branch = "fix/visual-artifacts",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "rafamadriz/friendly-snippets",
@@ -54,7 +55,7 @@ return {
       },
     },
 
-    fuzzy = { implementation = "rust" },
+    fuzzy = { implementation = "rust", prebuilt_binaries = { force_version = "v1.9.1" } },
   },
   opts_extend = { "sources.default" },
 }

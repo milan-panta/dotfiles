@@ -56,7 +56,7 @@ return {
 
     new_notes_location = "current_dir",
 
-    preferred_link_style = "wiki",
+    link = { style = "wiki" },
 
     -- Disable built-in UI (using render-markdown.nvim instead)
     ui = { enable = false },

@@ -52,8 +52,8 @@ opt.diffopt:append("iwhite")
 opt.diffopt:append("algorithm:histogram")
 opt.diffopt:append("indent-heuristic")
 
-vim.o.timeout = true
-vim.o.timeoutlen = 200
+opt.timeout = true
+opt.timeoutlen = 200
 
 opt.pumheight = 10
 opt.completeopt = "menu,menuone,noselect"

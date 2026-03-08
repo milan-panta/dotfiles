@@ -61,6 +61,15 @@ map("n", "<M-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<M-Right>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<M-Left>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
+local runner_pane_ids = {}
+local build_pane_id = nil
+
+local function tmux_pane_exists(pane_id)
+  if not pane_id then return false end
+  local result = vim.system({ "tmux", "display-message", "-p", "-t", pane_id, "#{pane_dead}" }):wait()
+  return result.code == 0 and result.stdout and vim.trim(result.stdout) == "0"
+end
+
 local function RunFile(dir, args)
   args = args or ""
   vim.cmd.write()
@@ -110,8 +119,14 @@ local function RunFile(dir, args)
     return
   end
 
-  local tmux_split_args = dir == "vsplit" and { "tmux", "split-window", "-h", "-P", "-F", "#{pane_id}" }
-    or { "tmux", "split-window", "-v", "-P", "-F", "#{pane_id}" }
+  if tmux_pane_exists(runner_pane_ids[dir]) then
+    vim.system({ "tmux", "send-keys", "-t", runner_pane_ids[dir], "C-c" }):wait()
+    vim.system({ "tmux", "send-keys", "-t", runner_pane_ids[dir], cmd, "Enter" })
+    return
+  end
+
+  local tmux_split_args = dir == "vsplit" and { "tmux", "split-window", "-d", "-h", "-P", "-F", "#{pane_id}" }
+    or { "tmux", "split-window", "-d", "-v", "-P", "-F", "#{pane_id}" }
 
   local result = vim.system(tmux_split_args):wait()
   if result.code ~= 0 or not result.stdout or result.stdout == "" then
@@ -119,10 +134,12 @@ local function RunFile(dir, args)
     return
   end
 
-  local pane_id = result.stdout:gsub("%s+", "")
-
-  vim.system({ "tmux", "send-keys", "-t", pane_id, cmd, "Enter" })
+  runner_pane_ids[dir] = result.stdout:gsub("%s+", "")
+  vim.system({ "tmux", "send-keys", "-t", runner_pane_ids[dir], cmd, "Enter" })
 end
+
+map("n", "<leader>rv", function() RunFile("vsplit") end, { silent = true, desc = "Run vertical" })
+map("n", "<leader>rh", function() RunFile("split") end, { silent = true, desc = "Run horizontal" })
 
 map("n", "<leader>r\\", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
@@ -130,7 +147,7 @@ map("n", "<leader>r\\", function()
       RunFile("vsplit", input)
     end
   end)
-end, { silent = true, desc = "Run vertical" })
+end, { silent = true, desc = "Run vertical (args)" })
 
 map("n", "<leader>r-", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
@@ -138,14 +155,19 @@ map("n", "<leader>r-", function()
       RunFile("split", input)
     end
   end)
-end, { silent = true, desc = "Run horizontal" })
+end, { silent = true, desc = "Run horizontal (args)" })
 
 local function run_build_cmd(cmd)
   if vim.env.TMUX then
-    local result = vim.system({ "tmux", "split-window", "-v", "-P", "-F", "#{pane_id}" }):wait()
+    if tmux_pane_exists(build_pane_id) then
+      vim.system({ "tmux", "send-keys", "-t", build_pane_id, "C-c" }):wait()
+      vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
+      return
+    end
+    local result = vim.system({ "tmux", "split-window", "-d", "-v", "-P", "-F", "#{pane_id}" }):wait()
     if result.code == 0 and result.stdout and result.stdout ~= "" then
-      local pane_id = result.stdout:gsub("%s+", "")
-      vim.system({ "tmux", "send-keys", "-t", pane_id, cmd, "Enter" })
+      build_pane_id = result.stdout:gsub("%s+", "")
+      vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
     end
   else
     vim.cmd.split()
@@ -156,7 +178,7 @@ end
 
 -- Build System Keymaps (C++)
 map("n", "<leader>bm", function() run_build_cmd("make -j") end, { desc = "C++ Make build" })
-map("n", "<leader>bn", function() run_build_cmd("make ninja") end, { desc = "C++ Ninja build" })
+map("n", "<leader>bn", function() run_build_cmd("ninja -C build") end, { desc = "Ninja build" })
 map("n", "<leader>bC", function() run_build_cmd("make clean") end, { desc = "C++ Make clean" })
 
 -- Copy file:line to system clipboard (for code reviews / Slack)

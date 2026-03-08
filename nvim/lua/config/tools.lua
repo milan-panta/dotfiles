@@ -1,7 +1,18 @@
 local M = {}
 
 M.servers = {
-  copilot = {},
+  copilot = {
+    handlers = {
+      didChangeStatus = function(err, res)
+        if err then
+          return
+        end
+        if res.status == "Error" then
+          vim.notify("Copilot: Please sign in with :LspCopilotSignIn", vim.log.levels.ERROR)
+        end
+      end,
+    },
+  },
 
   lua_ls = {
     settings = {
@@ -38,8 +49,6 @@ M.servers = {
 
   marksman = {},
   starpls = {},
-
-  kotlin_language_server = {},
 
   gopls = {
     settings = {
@@ -86,23 +95,21 @@ M.servers = {
       completeUnimported = true,
       clangdFileStatus = true,
     },
-    root_dir = function(fname)
-      local util = require("lspconfig.util")
-      return util.root_pattern(
-        "WORKSPACE",
-        "WORKSPACE.bazel",
-        "MODULE.bazel",
-        "CMakeLists.txt",
-        "Makefile",
-        "configure.ac",
-        "configure.in",
-        "config.h.in",
-        "meson.build",
-        "build.ninja"
-      )(fname) or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname) or vim.fs.dirname(
-        vim.fs.find(".git", { path = fname, upward = true })[1]
-      )
-    end,
+    root_markers = {
+      "WORKSPACE",
+      "WORKSPACE.bazel",
+      "MODULE.bazel",
+      "CMakeLists.txt",
+      "Makefile",
+      "configure.ac",
+      "configure.in",
+      "config.h.in",
+      "meson.build",
+      "build.ninja",
+      "compile_commands.json",
+      "compile_flags.txt",
+      ".git",
+    },
   },
 
   -- rust-analyzer: handled by rustaceanvim
@@ -113,8 +120,6 @@ M.formatters_by_ft = {
   cpp = { "clang_format" },
   go = { "gofumpt", "goimports" },
   rust = { "rustfmt" },
-  java = { "google-java-format" },
-  kotlin = { "ktlint" },
   bzl = { "buildifier" },
   lua = { "stylua" },
   python = { "ruff_fix", "ruff_format" },
@@ -131,14 +136,12 @@ M.formatters_by_ft = {
 
 M.linters_by_ft = {
   go = { "golangcilint" },
-  python = { "ruff" },
 }
 
 M.dap_adapters = {
   "codelldb",
   "delve",
   "python",
-  -- java-debug-adapter is handled by nvim-jdtls
 }
 
 M.ensure_installed = {
@@ -149,11 +152,6 @@ M.ensure_installed = {
   "biome",
   "latexindent",
   "ruff",
-  "jdtls",
-  "google-java-format",
-  "java-debug-adapter",
-  "java-test",
-  "ktlint",
   "delve",
   "gofumpt",
   "goimports",
@@ -172,12 +170,9 @@ M.treesitter_parsers = {
   "gomod",
   "gosum",
   "gowork",
-  "groovy",
   "html",
-  "java",
   "javascript",
   "json",
-  "kotlin",
   "latex",
   "lua",
   "markdown",
@@ -213,16 +208,10 @@ function M.get_server_names()
   return vim.tbl_keys(M.servers)
 end
 
-function M.make_capabilities(server_opts)
-  server_opts = server_opts or {}
-
+function M.make_capabilities()
   local has_blink, blink = pcall(require, "blink.cmp")
-  local capabilities = has_blink and blink.get_lsp_capabilities(server_opts.capabilities)
+  local capabilities = has_blink and blink.get_lsp_capabilities()
     or vim.lsp.protocol.make_client_capabilities()
-
-  if server_opts.capabilities then
-    capabilities = vim.tbl_deep_extend("force", capabilities, server_opts.capabilities)
-  end
 
   -- Disable dynamic watched files registration for performance
   capabilities.workspace = capabilities.workspace or {}

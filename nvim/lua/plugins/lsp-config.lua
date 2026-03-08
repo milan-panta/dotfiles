@@ -9,33 +9,21 @@ return {
     local tools = require("config.tools")
     vim.diagnostic.config(tools.diagnostic_config)
 
+    -- Shared capabilities for all LSP servers
+    vim.lsp.config("*", {
+      capabilities = tools.make_capabilities(),
+    })
+
+    -- Per-server settings
+    for name, opts in pairs(tools.servers) do
+      vim.lsp.config(name, opts)
+    end
+
+    -- Auto-install and auto-enable only our explicit server list
+    local server_names = tools.get_server_names()
     require("mason-lspconfig").setup({
-      ensure_installed = tools.get_server_names(),
-      handlers = {
-        function(server_name)
-          local server_opts = vim.deepcopy(tools.servers[server_name] or {})
-          server_opts.capabilities = tools.make_capabilities(server_opts)
-          require("lspconfig")[server_name].setup(server_opts)
-        end,
-
-        ["copilot"] = function()
-          local server_opts = vim.deepcopy(tools.servers.copilot or {})
-          server_opts.capabilities = tools.make_capabilities(server_opts)
-          server_opts.handlers = {
-            didChangeStatus = function(err, res)
-              if err then
-                return
-              end
-              if res.status == "Error" then
-                vim.notify("Copilot: Please sign in with :LspCopilotSignIn", vim.log.levels.ERROR)
-              end
-            end,
-          }
-          require("lspconfig").copilot.setup(server_opts)
-        end,
-
-        ["rust_analyzer"] = function() end, -- handled by rustaceanvim
-      },
+      ensure_installed = server_names,
+      automatic_enable = server_names,
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {

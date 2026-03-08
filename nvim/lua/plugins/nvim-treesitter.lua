@@ -23,11 +23,13 @@ return {
           return
         end
 
-        if vim.treesitter.query.get(lang, "highlights") then
+        local ok, hl_query = pcall(vim.treesitter.query.get, lang, "highlights")
+        if ok and hl_query then
           vim.treesitter.start()
         end
 
-        if vim.treesitter.query.get(lang, "indents") then
+        local ok2, indent_query = pcall(vim.treesitter.query.get, lang, "indents")
+        if ok2 and indent_query then
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
       end,

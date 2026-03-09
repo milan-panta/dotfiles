@@ -10,7 +10,7 @@ opt.scrolloff = 8
 opt.wrap = false
 opt.fillchars:append({ eob = " " }) -- hide ~ after end of buffer
 opt.mousescroll = "ver:1,hor:4"
-opt.colorcolumn = "120"
+opt.colorcolumn = "80"
 
 opt.autoread = true
 opt.swapfile = false

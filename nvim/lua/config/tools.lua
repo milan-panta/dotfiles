@@ -83,7 +83,7 @@ M.servers = {
       "--fallback-style=llvm",
       "--pch-storage=memory",
       "--enable-config",
-      "--malloc-trim",
+      -- "--malloc-trim", -- only on linux
       "--log=error",
       "--limit-results=50",
       "--limit-references=200",
@@ -194,10 +194,8 @@ M.treesitter_parsers = {
 M.diagnostic_config = {
   severity_sort = true,
   signs = true,
-  underline = false,
-  virtual_text = {
-    severity = { min = vim.diagnostic.severity.WARN },
-  },
+  underline = true,
+  virtual_text = true,
   float = {
     border = "rounded",
     source = true,
@@ -210,8 +208,7 @@ end
 
 function M.make_capabilities()
   local has_blink, blink = pcall(require, "blink.cmp")
-  local capabilities = has_blink and blink.get_lsp_capabilities()
-    or vim.lsp.protocol.make_client_capabilities()
+  local capabilities = has_blink and blink.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
   -- Disable dynamic watched files registration for performance
   capabilities.workspace = capabilities.workspace or {}

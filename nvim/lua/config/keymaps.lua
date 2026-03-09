@@ -65,7 +65,9 @@ local runner_pane_ids = {}
 local build_pane_id = nil
 
 local function tmux_pane_exists(pane_id)
-  if not pane_id then return false end
+  if not pane_id then
+    return false
+  end
   local result = vim.system({ "tmux", "display-message", "-p", "-t", pane_id, "#{pane_dead}" }):wait()
   return result.code == 0 and result.stdout and vim.trim(result.stdout) == "0"
 end
@@ -138,8 +140,12 @@ local function RunFile(dir, args)
   vim.system({ "tmux", "send-keys", "-t", runner_pane_ids[dir], cmd, "Enter" })
 end
 
-map("n", "<leader>rv", function() RunFile("vsplit") end, { silent = true, desc = "Run vertical" })
-map("n", "<leader>rh", function() RunFile("split") end, { silent = true, desc = "Run horizontal" })
+map("n", "<leader>rv", function()
+  RunFile("vsplit")
+end, { silent = true, desc = "Run vertical" })
+map("n", "<leader>rh", function()
+  RunFile("split")
+end, { silent = true, desc = "Run horizontal" })
 
 map("n", "<leader>r\\", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
@@ -177,9 +183,15 @@ local function run_build_cmd(cmd)
 end
 
 -- Build System Keymaps (C++)
-map("n", "<leader>bm", function() run_build_cmd("make -j") end, { desc = "C++ Make build" })
-map("n", "<leader>bn", function() run_build_cmd("ninja -C build") end, { desc = "Ninja build" })
-map("n", "<leader>bC", function() run_build_cmd("make clean") end, { desc = "C++ Make clean" })
+map("n", "<leader>bm", function()
+  run_build_cmd("make -j")
+end, { desc = "C++ Make build" })
+map("n", "<leader>bn", function()
+  run_build_cmd("ninja -C build")
+end, { desc = "Ninja build" })
+map("n", "<leader>bC", function()
+  run_build_cmd("make clean")
+end, { desc = "C++ Make clean" })
 
 -- Copy file:line to system clipboard (for code reviews / Slack)
 map("n", "<leader>cp", function()

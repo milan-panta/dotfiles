@@ -157,16 +157,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- 2-space indent for C/C++ files (indent-o-matic overrides with detected values)
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("cpp_indent"),
-  pattern = { "c", "cpp" },
-  callback = function()
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-  end,
-})
-
 -- auto-create parent directories when saving to a new path
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),

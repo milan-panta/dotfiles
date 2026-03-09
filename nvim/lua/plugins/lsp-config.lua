@@ -8,6 +8,7 @@ return {
   config = function()
     local tools = require("config.tools")
     vim.diagnostic.config(tools.diagnostic_config)
+    vim.diagnostic.enable(false)
 
     -- Shared capabilities for all LSP servers
     vim.lsp.config("*", {

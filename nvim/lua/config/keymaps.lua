@@ -127,8 +127,9 @@ local function RunFile(dir, args)
     return
   end
 
-  local tmux_split_args = dir == "vsplit" and { "tmux", "split-window", "-d", "-h", "-P", "-F", "#{pane_id}" }
-    or { "tmux", "split-window", "-d", "-v", "-P", "-F", "#{pane_id}" }
+  local tmux_split_args = dir == "vsplit"
+      and { "tmux", "split-window", "-d", "-h", "-p", "40", "-P", "-F", "#{pane_id}" }
+    or { "tmux", "split-window", "-d", "-v", "-p", "40", "-P", "-F", "#{pane_id}" }
 
   local result = vim.system(tmux_split_args):wait()
   if result.code ~= 0 or not result.stdout or result.stdout == "" then
@@ -170,7 +171,7 @@ local function run_build_cmd(cmd)
       vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
       return
     end
-    local result = vim.system({ "tmux", "split-window", "-d", "-v", "-P", "-F", "#{pane_id}" }):wait()
+    local result = vim.system({ "tmux", "split-window", "-d", "-v", "-p", "40", "-P", "-F", "#{pane_id}" }):wait()
     if result.code == 0 and result.stdout and result.stdout ~= "" then
       build_pane_id = result.stdout:gsub("%s+", "")
       vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
@@ -193,7 +194,7 @@ map("n", "<leader>bC", function()
   run_build_cmd("make clean")
 end, { desc = "C++ Make clean" })
 
--- Copy file:line to system clipboard (for code reviews / Slack)
+-- Copy file:line to system clipboard
 map("n", "<leader>cp", function()
   local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
   local line = vim.fn.line(".")
@@ -201,6 +202,18 @@ map("n", "<leader>cp", function()
   vim.fn.setreg("+", loc)
   vim.notify(loc, vim.log.levels.INFO)
 end, { desc = "Copy file:line" })
+
+map("v", "<leader>cp", function()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+  local loc = start_line == end_line and path .. ":" .. start_line or path .. ":" .. start_line .. "-" .. end_line
+  vim.fn.setreg("+", loc)
+  vim.notify(loc, vim.log.levels.INFO)
+end, { desc = "Copy file:line range" })
 
 -- CMake build
 map("n", "<leader>bc", function()

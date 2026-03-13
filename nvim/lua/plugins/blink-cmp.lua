@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
   -- version = "1.*",
-  branch = "fix/visual-artifacts",
+  -- branch = "fix/visual-artifacts",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "rafamadriz/friendly-snippets",
@@ -9,8 +9,7 @@ return {
 
   opts = {
     keymap = {
-      preset = "default",
-      ["<C-space>"] = { "select_and_accept", "fallback" },
+      preset = "super-tab",
       ["<C-b>"] = { "scroll_documentation_up", "scroll_signature_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "scroll_signature_down", "fallback" },
     },

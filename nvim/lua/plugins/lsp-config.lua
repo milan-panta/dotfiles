@@ -91,10 +91,10 @@ return {
       vim.lsp.inline_completion.enable(false) -- off by default, toggle with <leader>ui
 
       -- stylua: ignore start
-      vim.keymap.set("i", "<Tab>", function()
+      vim.keymap.set("i", "<C-y>", function()
         local ok, result = pcall(vim.lsp.inline_completion.get)
         if not ok or not result then
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-y>", true, false, true), "n", false)
         end
       end, { desc = "Accept inline suggestion" })
 

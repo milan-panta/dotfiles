@@ -15,6 +15,20 @@ return {
       capabilities = tools.make_capabilities(),
     })
 
+    -- Copilot: registered but NOT in automatic_enable — opt-in via <leader>ui
+    vim.lsp.config("copilot", {
+      handlers = {
+        didChangeStatus = function(err, res)
+          if err then
+            return
+          end
+          if res.status == "Error" then
+            vim.notify("Copilot: Please sign in with :LspCopilotSignIn", vim.log.levels.ERROR)
+          end
+        end,
+      },
+    })
+
     -- Per-server settings
     for name, opts in pairs(tools.servers) do
       vim.lsp.config(name, opts)
@@ -103,10 +117,20 @@ return {
       -- stylua: ignore end
 
       vim.keymap.set("n", "<leader>ui", function()
-        local enabled = vim.lsp.inline_completion.is_enabled()
-        vim.lsp.inline_completion.enable(not enabled)
-        vim.notify("Inline completion " .. (enabled and "disabled" or "enabled"), vim.log.levels.INFO)
-      end, { desc = "Toggle inline completion" })
+        local clients = vim.lsp.get_clients({ name = "copilot" })
+        if #clients > 0 then
+          vim.lsp.inline_completion.enable(false)
+          for _, c in ipairs(clients) do
+            c:stop()
+          end
+          vim.lsp.enable("copilot", false)
+          vim.notify("Copilot disabled", vim.log.levels.INFO)
+        else
+          vim.lsp.enable("copilot")
+          vim.lsp.inline_completion.enable(true)
+          vim.notify("Copilot enabled", vim.log.levels.INFO)
+        end
+      end, { desc = "Toggle Copilot" })
     end)
   end,
 }

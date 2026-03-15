@@ -1,19 +1,6 @@
 local M = {}
 
 M.servers = {
-  copilot = {
-    handlers = {
-      didChangeStatus = function(err, res)
-        if err then
-          return
-        end
-        if res.status == "Error" then
-          vim.notify("Copilot: Please sign in with :LspCopilotSignIn", vim.log.levels.ERROR)
-        end
-      end,
-    },
-  },
-
   lua_ls = {
     settings = {
       Lua = {
@@ -31,16 +18,7 @@ M.servers = {
     },
   },
 
-  basedpyright = {
-    settings = {
-      basedpyright = {
-        analysis = {
-          typeCheckingMode = "standard",
-          autoImportCompletions = true,
-        },
-      },
-    },
-  },
+  pyrefly = {},
 
   html = {},
   cssls = {},

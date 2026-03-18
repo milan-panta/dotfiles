@@ -1,5 +1,3 @@
-colors --url https://raw.githubusercontent.com/llbn5866/tokyonight-tridactyl-theme/refs/heads/main/tokyonight.css tokyonight
-
 unbind J
 unbind K
 unbind m

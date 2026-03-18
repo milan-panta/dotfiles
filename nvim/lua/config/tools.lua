@@ -18,7 +18,16 @@ M.servers = {
     },
   },
 
-  pyrefly = {},
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = "standard",
+          autoImportCompletions = true,
+        },
+      },
+    },
+  },
 
   html = {},
   cssls = {},

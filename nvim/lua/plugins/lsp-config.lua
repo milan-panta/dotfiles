@@ -35,9 +35,10 @@ return {
     end
 
     -- Auto-install and auto-enable only our explicit server list
+    -- Copilot is installed but NOT auto-enabled (toggled via <leader>ui)
     local server_names = tools.get_server_names()
     require("mason-lspconfig").setup({
-      ensure_installed = server_names,
+      ensure_installed = vim.list_extend(vim.deepcopy(server_names), { "copilot" }),
       automatic_enable = server_names,
     })
 

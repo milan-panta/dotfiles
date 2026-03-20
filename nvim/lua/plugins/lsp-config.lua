@@ -50,6 +50,8 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
+        vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
+
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         -- Keep semantic tokens for clangd (much better than treesitter for C++)
         if client and client.name ~= "clangd" then

@@ -2,7 +2,6 @@ return {
   "p00f/clangd_extensions.nvim",
   ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
   opts = {
-    inlay_hints = { inline = true },
     ast = {
       role_icons = {
         type = "",
@@ -32,10 +31,6 @@ return {
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if not client or client.name ~= "clangd" then
           return
-        end
-
-        if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
         end
 
         local map = function(keys, cmd, desc)

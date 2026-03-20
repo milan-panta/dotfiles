@@ -18,6 +18,10 @@ rcmd - m : open -a Mail
 rcmd - t : open -a Things3
 rcmd - o : open -a OBS
 
+# open things in the terminal
+lcmd + ctrl - t : ~/.config/skhd/scripts/launch-tui.sh btop
+lcmd + ctrl - m : ~/.config/skhd/scripts/launch-tui.sh spotify_player
+
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service
 

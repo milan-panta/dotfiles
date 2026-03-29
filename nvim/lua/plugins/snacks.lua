@@ -81,6 +81,7 @@ return {
         diagnostics = false,
         dim = false,
         blink_cmp = false,
+        spell = false,
       },
       win = {
         backdrop = { transparent = false },

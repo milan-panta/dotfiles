@@ -159,7 +159,7 @@ return {
       set = function(state)
         vim.b.completion = state
       end,
-    })
+    }):map("<leader>ua")
 
     Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
     Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")

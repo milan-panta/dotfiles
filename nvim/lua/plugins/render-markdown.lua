@@ -18,6 +18,7 @@ return {
   config = function(_, opts)
     require("render-markdown").setup(opts)
     Snacks.toggle({
+      id = "render_markdown",
       name = "Render Markdown",
       get = require("render-markdown").get,
       set = require("render-markdown").set,

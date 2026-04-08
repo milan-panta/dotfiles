@@ -81,6 +81,7 @@ return {
         diagnostics = false,
         dim = false,
         blink_cmp = false,
+        render_markdown = false,
         spell = false,
       },
       win = {

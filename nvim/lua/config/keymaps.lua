@@ -31,9 +31,6 @@ map("o", "aq", 'a"', { desc = "Around quotes" })
 map("n", "<C-w>-", "<C-w>s", { desc = "Split horizontally" })
 map("n", "<C-w>\\", "<C-w>v", { desc = "Split vertically" })
 
-map("n", "?", "?\\v") -- very magic regex mode by default
-map("n", "/", "/\\v")
-
 map("n", "<C-u>", "<C-u>zz")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-f>", "<C-f>zz")
@@ -85,7 +82,8 @@ local function RunFile(dir, args)
     cmd = string.format("gcc -Wall -g -std=gnu99 '%s' -o '%s' && '%s' %s", file, file_no_ext, file_no_ext, args)
   elseif filetype == "cpp" then
     cmd = string.format(
-      "clang++ -g -fsanitize=address,undefined -std=c++23 -Wall -Wextra -Wpedantic '%s' -o '%s' && '%s' %s",
+      -- "clang++ -g -fsanitize=address,undefined -std=c++23 -Wall -Wextra -Wpedantic '%s' -o '%s' && '%s' %s",
+      "g++-15 -g -std=c++23 -Wall -Wextra -Wpedantic '%s' -o '%s' && '%s' %s",
       file,
       file_no_ext,
       file_no_ext,

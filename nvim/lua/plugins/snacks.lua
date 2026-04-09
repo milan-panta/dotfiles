@@ -15,7 +15,7 @@ return {
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = "󰠮 ", key = "n", desc = "Notes", action = ":lua Snacks.picker.files({cwd = vim.fs.normalize('~/Documents/Notes/Private')})" },
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.picker.files({cwd = vim.fs.normalize('~/.config')})" },
-          { icon = " ", key = "s", desc = "Restore Session", action = function() require("persistence").load({ last = true }) end },
+          { icon = " ", key = "s", desc = "Restore Session", action = function() require("persistence").load() end },
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = function() require("lazy").show() end, enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
@@ -77,7 +77,6 @@ return {
     toggle = { enabled = true },
     zen = {
       toggles = {
-        git_signs = false,
         diagnostics = false,
         dim = false,
         blink_cmp = false,
@@ -86,6 +85,12 @@ return {
       },
       win = {
         backdrop = { transparent = false },
+        width = 79,
+        wo = {
+          number = false,
+          relativenumber = false,
+          signcolumn = "no",
+        },
       },
     },
   },

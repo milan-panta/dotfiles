@@ -58,8 +58,9 @@ map("n", "<M-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<M-Right>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<M-Left>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
-local runner_pane_ids = {}
+local runner_pane_id = nil
 local build_pane_id = nil
+local cpu_count = tostring(#vim.uv.cpu_info())
 
 local function tmux_pane_exists(pane_id)
   if not pane_id then
@@ -69,8 +70,9 @@ local function tmux_pane_exists(pane_id)
   return result.code == 0 and result.stdout and vim.trim(result.stdout) == "0"
 end
 
-local function RunFile(dir, args)
+local function RunFile(args, mode)
   args = args or ""
+  mode = mode or "debug"
   vim.cmd.write()
 
   local file = vim.api.nvim_buf_get_name(0)
@@ -79,24 +81,25 @@ local function RunFile(dir, args)
   local cmd = ""
 
   if filetype == "c" then
-    cmd = string.format("gcc -Wall -g -std=gnu99 '%s' -o '%s' && '%s' %s", file, file_no_ext, file_no_ext, args)
+    local flags = mode == "release" and "-O3 -std=gnu99" or "-Wall -g -std=gnu99"
+    local out = mode == "release" and (file_no_ext .. "_release") or file_no_ext
+    cmd = string.format("gcc %s '%s' -o '%s' && '%s' %s", flags, file, out, out, args)
   elseif filetype == "cpp" then
+    local flags = mode == "release" and "-O3 -std=c++23" or "-g -std=c++23 -Wall -Wextra -Wpedantic"
+    local out = mode == "release" and (file_no_ext .. "_release") or file_no_ext
     cmd = string.format(
-      -- "clang++ -g -fsanitize=address,undefined -std=c++23 -Wall -Wextra -Wpedantic '%s' -o '%s' && '%s' %s",
-      "g++-15 -g -std=c++23 -Wall -Wextra -Wpedantic '%s' -o '%s' && '%s' %s",
+      "g++-15 %s '%s' -o '%s' && '%s' %s",
+      flags,
       file,
-      file_no_ext,
-      file_no_ext,
+      out,
+      out,
       args
     )
   elseif filetype == "python" then
     cmd = string.format("python3 -u '%s' %s", file, args)
   elseif filetype == "rust" then
-    if args ~= "" then
-      cmd = "cargo run -- " .. args
-    else
-      cmd = "cargo run"
-    end
+    local release_flag = mode == "release" and " --release" or ""
+    cmd = args ~= "" and ("cargo run" .. release_flag .. " -- " .. args) or ("cargo run" .. release_flag)
   elseif filetype == "go" then
     cmd = string.format("go run '%s' %s", file, args)
   elseif filetype == "javascript" then
@@ -109,58 +112,47 @@ local function RunFile(dir, args)
   end
 
   if not vim.env.TMUX then
-    if dir == "vsplit" then
-      vim.cmd.vsplit()
-    else
-      vim.cmd.split()
-    end
+    vim.cmd.split()
     vim.cmd.terminal(cmd)
     vim.cmd.startinsert()
     return
   end
 
-  if tmux_pane_exists(runner_pane_ids[dir]) then
-    vim.system({ "tmux", "send-keys", "-t", runner_pane_ids[dir], "C-c" }):wait()
-    vim.system({ "tmux", "send-keys", "-t", runner_pane_ids[dir], cmd, "Enter" })
+  if tmux_pane_exists(runner_pane_id) then
+    vim.system({ "tmux", "send-keys", "-t", runner_pane_id, "C-c" }):wait()
+    vim.system({ "tmux", "send-keys", "-t", runner_pane_id, cmd, "Enter" })
     return
   end
 
-  local tmux_split_args = dir == "vsplit"
-      and { "tmux", "split-window", "-d", "-h", "-p", "40", "-P", "-F", "#{pane_id}" }
-    or { "tmux", "split-window", "-d", "-v", "-p", "40", "-P", "-F", "#{pane_id}" }
-
-  local result = vim.system(tmux_split_args):wait()
+  local result = vim.system({ "tmux", "new-window", "-d", "-P", "-F", "#{pane_id}" }):wait()
   if result.code ~= 0 or not result.stdout or result.stdout == "" then
-    vim.notify("Failed to create tmux split", vim.log.levels.ERROR)
+    vim.notify("Failed to create tmux window", vim.log.levels.ERROR)
     return
   end
 
-  runner_pane_ids[dir] = result.stdout:gsub("%s+", "")
-  vim.system({ "tmux", "send-keys", "-t", runner_pane_ids[dir], cmd, "Enter" })
+  runner_pane_id = result.stdout:gsub("%s+", "")
+  vim.system({ "tmux", "send-keys", "-t", runner_pane_id, cmd, "Enter" })
 end
 
-map("n", "<leader>rv", function()
-  RunFile("vsplit")
-end, { silent = true, desc = "Run vertical" })
-map("n", "<leader>rh", function()
-  RunFile("split")
-end, { silent = true, desc = "Run horizontal" })
+map("n", "<leader>rr", function()
+  RunFile()
+end, { silent = true, desc = "Run file" })
 
-map("n", "<leader>r\\", function()
+map("n", "<leader>ra", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
-    if input then
-      RunFile("vsplit", input)
+    if input ~= nil then
+      RunFile(input)
     end
   end)
-end, { silent = true, desc = "Run vertical (args)" })
+end, { silent = true, desc = "Run file (args)" })
 
-map("n", "<leader>r-", function()
+map("n", "<leader>ro", function()
   vim.ui.input({ prompt = "Args: " }, function(input)
-    if input then
-      RunFile("split", input)
+    if input ~= nil then
+      RunFile(input, "release")
     end
   end)
-end, { silent = true, desc = "Run horizontal (args)" })
+end, { silent = true, desc = "Run file optimized (args)" })
 
 local function run_build_cmd(cmd)
   if vim.env.TMUX then
@@ -169,7 +161,7 @@ local function run_build_cmd(cmd)
       vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
       return
     end
-    local result = vim.system({ "tmux", "split-window", "-d", "-v", "-p", "40", "-P", "-F", "#{pane_id}" }):wait()
+    local result = vim.system({ "tmux", "new-window", "-d", "-P", "-F", "#{pane_id}" }):wait()
     if result.code == 0 and result.stdout and result.stdout ~= "" then
       build_pane_id = result.stdout:gsub("%s+", "")
       vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
@@ -181,16 +173,10 @@ local function run_build_cmd(cmd)
   end
 end
 
--- Build System Keymaps (C++)
-map("n", "<leader>bm", function()
-  run_build_cmd("make -j")
-end, { desc = "C++ Make build" })
+-- Build System Keymaps
 map("n", "<leader>bn", function()
   run_build_cmd("ninja -C build")
 end, { desc = "Ninja build" })
-map("n", "<leader>bC", function()
-  run_build_cmd("make clean")
-end, { desc = "C++ Make clean" })
 
 -- Copy file:line to system clipboard
 map("n", "<leader>cp", function()
@@ -215,7 +201,7 @@ end, { desc = "Copy file:line range" })
 
 -- CMake build
 map("n", "<leader>bc", function()
-  run_build_cmd("cmake --build build -j" .. tostring(#vim.uv.cpu_info()))
+  run_build_cmd("cmake --build build -j" .. cpu_count)
 end, { silent = true, desc = "CMake build" })
 
 -- Bazel build

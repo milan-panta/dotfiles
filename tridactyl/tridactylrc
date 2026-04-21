@@ -1,4 +1,5 @@
 unbind J
+unbind .
 unbind K
 unbind m
 unbind a

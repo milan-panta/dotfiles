@@ -1,13 +1,19 @@
 return {
   "saghen/blink.cmp",
-  -- version = "1.*",
-  -- branch = "fix/visual-artifacts",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
+    "saghen/blink.lib",
     "rafamadriz/friendly-snippets",
   },
 
+  build = function()
+    -- build the fuzzy matcher, wait up to 60 seconds
+    -- you can use `gb` in `:Lazy` to rebuild the plugin as needed
+    require("blink.cmp").build():wait(60000)
+  end,
+
   opts = {
+    fuzzy = { implementation = "rust" },
     keymap = {
       preset = "super-tab",
       ["<C-b>"] = { "scroll_documentation_up", "scroll_signature_up", "fallback" },
@@ -53,8 +59,6 @@ return {
         },
       },
     },
-
-    fuzzy = { implementation = "rust", prebuilt_binaries = { force_version = "v1.9.1" } },
   },
   opts_extend = { "sources.default" },
 }

@@ -25,6 +25,11 @@ lcmd + ctrl - m : ~/.config/skhd/scripts/launch-tui.sh spotify_player
 # restart yabai hotkey
 ctrl + alt + cmd - r : yabai --restart-service
 
+# toggle yabai tiling on current space (bsp <-> float)
+ctrl + alt + cmd - t : [ "$(yabai -m query --spaces --space | jq -r '.type')" = "bsp" ] \
+                      && yabai -m space --layout float \
+                      || yabai -m space --layout bsp
+
 # focus window
 lalt - h : yabai -m window --focus west
 lalt - k : yabai -m window --focus north

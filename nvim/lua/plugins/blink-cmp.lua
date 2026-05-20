@@ -43,8 +43,12 @@ return {
     },
 
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "filemention", "lsp", "path", "snippets", "buffer" },
       providers = {
+        filemention = {
+          name = "filemention",
+          module = "filemention.sources.blink",
+        },
         lsp = {
           transform_items = function(_, items)
             -- Filter out Text (1) and Reference (18) from markdown files (likely marksman headers)

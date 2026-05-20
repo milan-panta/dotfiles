@@ -1,31 +1,23 @@
 /* Vimium-C · Minimal Dark Theme */
 
-/* ---- Ignore indicator ---- */
-
+/* ---- HUD toast (insert mode, copy, mute, paste, marks, etc.) ---- */
 .HUD,
 .TEE {
   bottom: 16px !important;
   right: 16px !important;
   min-width: 0 !important;
   max-width: none !important;
-  height: 22px !important;
+  height: auto !important;
   padding: 4px 10px !important;
-  font-size: 0 !important;
-  line-height: 22px !important;
+  font:
+    500 12px / 18px system-ui,
+    sans-serif !important;
   letter-spacing: normal !important;
+  color: rgba(255, 255, 255, 0.72) !important;
 }
 
-.HUD::before {
-  content: "ignore";
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  font-family: system-ui, sans-serif !important;
-  line-height: 22px !important;
-  letter-spacing: normal !important;
-  color: rgba(255, 255, 255, 0.64);
-}
-
-.HUD:after {
+.HUD:after,
+.TEE:after {
   background: rgba(28, 28, 30, 0.82) !important;
   border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 8px !important;
@@ -34,31 +26,22 @@
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
 }
 
-/* ---- Find mode ---- */
-
+/* ---- Find-mode outer wrapper (on the host page) ---- */
 .HUD.UI {
-  min-width: 160px !important;
-  max-width: 320px !important;
   height: 28px !important;
-  padding: 4px 12px !important;
-  font-size: 13px !important;
-  line-height: 20px !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  min-width: 240px !important;
+  max-width: 480px !important;
+  padding: 0 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
-.HUD.UI::before {
-  content: none !important;
-}
 .HUD.UI:after {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
 }
 
 /* ---- Link hints ---- */
-
 .LH {
   background: rgba(28, 28, 30, 0.88) !important;
   border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
@@ -66,10 +49,9 @@
   backdrop-filter: blur(20px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
   padding: 2px 5px !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  font-family: system-ui, sans-serif !important;
-  line-height: 14px !important;
+  font:
+    600 11px / 14px system-ui,
+    sans-serif !important;
   color: #ffd60a !important;
   text-transform: uppercase !important;
 }
@@ -82,8 +64,14 @@
   color: #ff453a !important;
 }
 
-/* ---- Find bar ---- */
 /*#find*/
+/* Everything below applies inside the find-bar iframe */
+
+:host,
+body {
+  background: transparent !important;
+  height: 28px !important;
+}
 
 .r {
   background: rgba(28, 28, 30, 0.88) !important;
@@ -91,13 +79,29 @@
   box-shadow:
     0 1px 4px rgba(0, 0, 0, 0.24),
     inset 0 0 0 0.5px rgba(255, 255, 255, 0.1) !important;
-  color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  height: 28px !important;
   padding: 4px 10px !important;
-  height: 22px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 * {
-  font-size: 13px !important;
-  font-family: system-ui, sans-serif !important;
-  line-height: 18px !important;
+  font:
+    13px / 20px system-ui,
+    sans-serif !important;
+  color: inherit !important;
+  background: transparent !important;
+  caret-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+#s::after {
+  content: "/" !important;
+  opacity: 0.5;
+}
+#c {
+  opacity: 0.55;
+  margin-left: 8px !important;
 }

@@ -3,7 +3,8 @@ return {
   event = "InsertEnter",
   dependencies = {
     {
-      "dmtrKovalenko/fff.nvim",
+      "dmtrKovalenko/fff",
+      version = "0.*",
       build = function()
         require("fff.download").download_or_build_binary()
       end,

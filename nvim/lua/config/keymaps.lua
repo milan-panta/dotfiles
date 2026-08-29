@@ -79,33 +79,29 @@ local function RunFile(args, mode)
   local file_no_ext = vim.fn.fnamemodify(file, ":r")
   local filetype = vim.bo.filetype
   local cmd = ""
+  local escaped_file = vim.fn.shellescape(file)
 
   if filetype == "c" then
     local flags = mode == "release" and "-O3 -std=gnu99" or "-Wall -g -std=gnu99"
     local out = mode == "release" and (file_no_ext .. "_release") or file_no_ext
-    cmd = string.format("gcc %s '%s' -o '%s' && '%s' %s", flags, file, out, out, args)
+    local escaped_out = vim.fn.shellescape(out)
+    cmd = string.format("gcc %s %s -o %s && %s %s", flags, escaped_file, escaped_out, escaped_out, args)
   elseif filetype == "cpp" then
     local flags = mode == "release" and "-O3 -std=c++23" or "-g -std=c++23 -Wall -Wextra -Wpedantic"
     local out = mode == "release" and (file_no_ext .. "_release") or file_no_ext
-    cmd = string.format(
-      "g++-15 %s '%s' -o '%s' && '%s' %s",
-      flags,
-      file,
-      out,
-      out,
-      args
-    )
+    local escaped_out = vim.fn.shellescape(out)
+    cmd = string.format("g++ %s %s -o %s && %s %s", flags, escaped_file, escaped_out, escaped_out, args)
   elseif filetype == "python" then
-    cmd = string.format("python3 -u '%s' %s", file, args)
+    cmd = string.format("python3 -u %s %s", escaped_file, args)
   elseif filetype == "rust" then
     local release_flag = mode == "release" and " --release" or ""
     cmd = args ~= "" and ("cargo run" .. release_flag .. " -- " .. args) or ("cargo run" .. release_flag)
   elseif filetype == "go" then
-    cmd = string.format("go run '%s' %s", file, args)
+    cmd = string.format("go run %s %s", escaped_file, args)
   elseif filetype == "javascript" then
-    cmd = string.format("node '%s' %s", file, args)
+    cmd = string.format("node %s %s", escaped_file, args)
   elseif filetype == "typescript" then
-    cmd = string.format("npx tsx '%s' %s", file, args)
+    cmd = string.format("npx tsx %s %s", escaped_file, args)
   else
     vim.notify("Filetype " .. filetype .. " is not supported", vim.log.levels.WARN)
     return
@@ -177,6 +173,16 @@ end
 map("n", "<leader>bn", function()
   run_build_cmd("ninja -C build")
 end, { desc = "Ninja build" })
+
+map("n", "<leader>bp", function()
+  local cmd, name = require("config.debug").build_shell_command()
+  if not cmd then
+    vim.notify("No CMake, Meson, Make, or Ninja project found", vim.log.levels.WARN)
+    return
+  end
+  vim.notify("Building with " .. name, vim.log.levels.INFO)
+  run_build_cmd(cmd)
+end, { desc = "Build project (auto)" })
 
 -- Copy file:line to system clipboard
 map("n", "<leader>cp", function()

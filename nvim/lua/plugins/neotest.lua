@@ -36,7 +36,7 @@ return {
       },
       ["rustaceanvim.neotest"] = {},
       ["neotest-golang"] = {},
-      ["neotest-gtest"] = {},
+      ["neotest-gtest"] = { debug_adapter = "gdb" },
     },
   },
   config = function(_, opts)

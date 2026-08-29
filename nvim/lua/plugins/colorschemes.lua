@@ -1,20 +1,23 @@
 return {
-  {
-    "milan-panta/gruvbox.nvim",
-    -- dir = "~/Developer/open_source/gruvbox.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("gruvbox")
-    end,
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = true,
-  },
-  {
-    "rose-pine/neovim",
-    lazy = true,
-    name = "rose-pine",
-  },
+  -- Omarchy supported theme plugins (lazy-loaded on demand)
+  { "ficcdaf/ashen.nvim", lazy = true, priority = 1000 },
+  { "bjarneo/aether.nvim", branch = "v3", name = "aether", lazy = true, priority = 1000 },
+  { "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
+  { "folke/tokyonight.nvim", lazy = true, priority = 1000 },
+  { "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
+  { "ellisonleao/gruvbox.nvim", lazy = true, priority = 1000 },
+  { "neanias/everforest-nvim", lazy = true, priority = 1000 },
+  { "kepano/flexoki-neovim", lazy = true, priority = 1000 },
+  { "rebelot/kanagawa.nvim", lazy = true, priority = 1000 },
+  { "tahayvr/matteblack.nvim", lazy = true, priority = 1000 },
+  { "EdenEast/nightfox.nvim", lazy = true, priority = 1000 },
+  { "ribru17/bamboo.nvim", lazy = true, priority = 1000 },
+  { "OldJobobo/retro-82.nvim", lazy = true, priority = 1000 },
+  { "omacom-io/lumon.nvim", lazy = true, priority = 1000 },
+  { "bjarneo/hackerman.nvim", lazy = true, priority = 1000 },
+  { "bjarneo/ethereal.nvim", lazy = true, priority = 1000 },
+  { "bjarneo/vantablack.nvim", lazy = true, priority = 1000 },
+  { "bjarneo/white.nvim", lazy = true, priority = 1000 },
+  { "OldJobobo/miasma.nvim", lazy = true, priority = 1000 },
+  { "gthelding/monokai-pro.nvim", lazy = true, priority = 1000 },
 }

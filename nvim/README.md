@@ -23,7 +23,7 @@ Add a language:
 1. `tools.servers` (LSP)
 2. `tools.formatters_by_ft`
 3. `tools.linters_by_ft`
-4. `tools.dap_adapters` (if needed)
+4. `tools.mason_dap_adapters` (if needed; GDB is installed system-wide)
 5. `tools.treesitter_parsers`
 
 ## Dependencies
@@ -31,9 +31,16 @@ Add a language:
 - node, yarn
 - tree-sitter, tree-sitter-cli
 - python3, go
+- gcc, g++, gdb 14+
 - fzf, fd, ripgrep
 - tmux (optional, for run keymaps)
+- cmake, meson, make, ninja (optional, for project builds)
+- latexmk or tectonic (optional, for VimTeX compilation and rendered math)
 
-## macOS note
+This configuration targets Linux and integrates with Omarchy when available.
 
-Enable “Option as Meta” so the Alt/Meta keymaps work.
+## C/C++ build and debug
+
+- `<leader>bp` detects and builds CMake, Meson, Make, or Ninja projects.
+- `<leader>dd` builds the current project (or standalone source) and starts GDB.
+- DAP launch choices also support quoted arguments, core dumps, and gdbserver.

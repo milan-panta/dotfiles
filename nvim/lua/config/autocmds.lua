@@ -3,7 +3,7 @@ local function augroup(name)
 end
 
 -- re-read files when nvim regains focus or a terminal closes
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "CursorHold" }, {
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "CursorHo
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
-    vim.hl.on_yank()
+    vim.hl.hl_op()
   end,
 })
 

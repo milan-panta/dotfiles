@@ -12,14 +12,21 @@ return {
       'Package siunitx Warning: Detected the "physics" package:',
       "Package hyperref Warning: Token not allowed in a PDF string",
     }
-    vim.g.vimtex_compiler_latexmk = {
-      options = {
-        "-verbose",
-        "-file-line-error",
-        "-synctex=1",
-        "-interaction=nonstopmode",
-        "--shell-escape",
-      },
-    }
+    if vim.fn.executable("latexmk") == 1 then
+      vim.g.vimtex_compiler_method = "latexmk"
+      vim.g.vimtex_compiler_latexmk = {
+        options = {
+          "-verbose",
+          "-file-line-error",
+          "-synctex=1",
+          "-interaction=nonstopmode",
+          "--shell-escape",
+        },
+      }
+    elseif vim.fn.executable("tectonic") == 1 then
+      vim.g.vimtex_compiler_method = "tectonic"
+    else
+      vim.notify("VimTeX: install latexmk or tectonic to enable compilation", vim.log.levels.WARN)
+    end
   end,
 }

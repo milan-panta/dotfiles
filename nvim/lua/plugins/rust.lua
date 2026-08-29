@@ -6,6 +6,20 @@ return {
       tools = {
         hover_actions = { replace_builtin_hover = false },
       },
+      dap = {
+        -- Rustaceanvim uses the "lldb" adapter key for every executable
+        -- adapter. Disable its LLDB-only setup while retaining Cargo-built
+        -- debuggables and using GDB as the underlying DAP process.
+        adapter = {
+          type = "executable",
+          command = "gdb",
+          args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+          name = "gdb",
+        },
+        load_rust_types = false,
+        auto_generate_source_map = false,
+        add_dynamic_library_paths = false,
+      },
       server = {
         on_attach = function(_, bufnr)
           -- stylua: ignore start
@@ -64,18 +78,6 @@ return {
       },
     },
     config = function(_, opts)
-      -- auto-detect mason-installed codelldb for DAP
-      local mason_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "codelldb", "extension")
-      local codelldb_path = vim.fs.joinpath(mason_path, "adapter", "codelldb")
-      local liblldb_name = vim.uv.os_uname().sysname == "Darwin" and "liblldb.dylib" or "liblldb.so"
-      local liblldb_path = vim.fs.joinpath(mason_path, "lldb", "lib", liblldb_name)
-
-      if vim.uv.fs_stat(codelldb_path) and vim.uv.fs_stat(liblldb_path) then
-        opts.dap = {
-          adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
-        }
-      end
-
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
     end,
   },

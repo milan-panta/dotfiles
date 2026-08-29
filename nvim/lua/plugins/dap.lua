@@ -12,7 +12,7 @@ return {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
-    { "jay-babu/mason-nvim-dap.nvim", dependencies = "williamboman/mason.nvim" },
+    { "jay-babu/mason-nvim-dap.nvim", dependencies = "mason-org/mason.nvim" },
   },
   -- stylua: ignore
   keys = {
@@ -20,6 +20,7 @@ return {
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>dd", function() require("config.debug").build_and_debug() end, desc = "Build and Debug" },
     { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
     { "<leader>dj", function() require("dap").down() end, desc = "Down Stack" },
@@ -50,6 +51,13 @@ return {
 
     local dap = require("dap")
     local dapui = require("dapui")
+    local debug = require("config.debug")
+
+    dap.adapters.gdb = {
+      type = "executable",
+      command = "gdb",
+      args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+    }
 
     dapui.setup({})
 
@@ -69,47 +77,74 @@ return {
 
     local tools = require("config.tools")
     require("mason-nvim-dap").setup({
-      ensure_installed = tools.dap_adapters,
+      ensure_installed = tools.mason_dap_adapters,
       automatic_installation = true,
-      handlers = {},
+      handlers = {
+        -- Do not let an accidentally installed CodeLLDB package inject LLDB
+        -- launch configurations into this GDB-only setup.
+        codelldb = function() end,
+      },
     })
 
-    -- C/C++ launch configs
-    -- (This covers standalone files and custom executables)
+    -- Native-code launch configs for standalone files and project executables.
     dap.configurations.c = dap.configurations.c or {}
     dap.configurations.cpp = dap.configurations.cpp or {}
+    dap.configurations.rust = dap.configurations.rust or {}
     local cpp_configs = {
       {
         name = "Launch executable",
-        type = "codelldb",
+        type = "gdb",
         request = "launch",
         program = function()
-          return vim.fn.input("Executable: ", vim.uv.cwd() .. "/", "file")
+          return debug.prompt_executable()
         end,
         cwd = "${workspaceFolder}",
-        stopOnEntry = false,
+        stopAtBeginningOfMainSubprogram = false,
       },
       {
         name = "Launch with args",
-        type = "codelldb",
+        type = "gdb",
         request = "launch",
         program = function()
-          return vim.fn.input("Executable: ", vim.uv.cwd() .. "/", "file")
+          return debug.prompt_executable()
         end,
-        args = function()
-          return vim.split(vim.fn.input("Args: "), " ", { trimempty = true })
-        end,
+        args = debug.prompt_args,
         cwd = "${workspaceFolder}",
-        stopOnEntry = false,
+        stopAtBeginningOfMainSubprogram = false,
       },
       {
         name = "Attach to process",
-        type = "codelldb",
+        type = "gdb",
         request = "attach",
+        program = function()
+          return debug.prompt_executable()
+        end,
         pid = require("dap.utils").pick_process,
+        cwd = "${workspaceFolder}",
+      },
+      {
+        name = "Open core dump",
+        type = "gdb",
+        request = "attach",
+        program = debug.prompt_executable,
+        coreFile = function()
+          return vim.fn.input("Core file: ", vim.uv.cwd() .. "/core", "file")
+        end,
+        cwd = "${workspaceFolder}",
+      },
+      {
+        name = "Attach to gdbserver",
+        type = "gdb",
+        request = "attach",
+        target = function()
+          return vim.fn.input("Target: ", "localhost:1234")
+        end,
+        program = debug.prompt_executable,
+        cwd = "${workspaceFolder}",
       },
     }
     vim.list_extend(dap.configurations.c, cpp_configs)
     vim.list_extend(dap.configurations.cpp, cpp_configs)
+    vim.list_extend(dap.configurations.rust, cpp_configs)
   end,
 }

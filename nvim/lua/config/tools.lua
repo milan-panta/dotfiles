@@ -125,8 +125,9 @@ M.linters_by_ft = {
   go = { "golangcilint" },
 }
 
-M.dap_adapters = {
-  "codelldb",
+-- DAP adapters managed by Mason. GDB is provided by the Linux system and
+-- configured directly in plugins/dap.lua.
+M.mason_dap_adapters = {
   "delve",
   "python",
 }

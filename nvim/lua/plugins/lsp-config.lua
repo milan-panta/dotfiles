@@ -2,8 +2,8 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    { "williamboman/mason.nvim", config = true },
-    "williamboman/mason-lspconfig.nvim",
+    { "mason-org/mason.nvim", config = true },
+    "mason-org/mason-lspconfig.nvim",
   },
   config = function()
     local tools = require("config.tools")
@@ -53,9 +53,10 @@ return {
         vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        -- Keep semantic tokens for clangd (much better than treesitter for C++)
+        -- Keep semantic tokens for clangd (much better than treesitter for C++).
+        -- Use the public toggle rather than mutating the server's capabilities.
         if client and client.name ~= "clangd" then
-          client.server_capabilities.semanticTokensProvider = nil
+          vim.lsp.semantic_tokens.enable(false, { bufnr = event.buf, client_id = client.id })
         end
 
         -- Remove Nvim 0.11+ defaults (using Snacks.picker instead)
@@ -90,7 +91,7 @@ return {
 
         if client and client:supports_method("textDocument/codeLens") then
           vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
-            buffer = event.buf,
+            buf = event.buf,
             callback = function()
               if vim.g.codelens_enabled == true then
                 vim.lsp.codelens.enable(true, { bufnr = event.buf })

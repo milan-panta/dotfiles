@@ -1,6 +1,6 @@
 return {
   "folke/snacks.nvim",
-  dependencies = { "echasnovski/mini.icons" },
+  dependencies = { "nvim-mini/mini.icons" },
   priority = 1000,
   lazy = false,
   opts = {
@@ -46,7 +46,7 @@ return {
     image = {
       enabled = true,
       doc = { inline = true, float = true },
-      math = { enabled = true },
+      math = { enabled = vim.fn.executable("tectonic") == 1 or vim.fn.executable("pdflatex") == 1 },
     },
     lazygit = { enabled = true },
     gitbrowse = { enabled = true },

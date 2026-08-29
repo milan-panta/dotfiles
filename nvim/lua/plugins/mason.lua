@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = "Mason",
     build = function()
       pcall(vim.cmd, "MasonUpdate")
@@ -30,5 +30,5 @@ return {
       end)
     end,
   },
-  { "williamboman/mason-lspconfig.nvim", lazy = true },
+  { "mason-org/mason-lspconfig.nvim", lazy = true },
 }

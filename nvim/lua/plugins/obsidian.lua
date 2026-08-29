@@ -84,11 +84,5 @@ return {
     checkbox = { order = { " ", "x" } },
 
     attachments = { folder = "./" },
-
-    completion = {
-      blink = true,
-      nvim_cmp = false,
-      min_chars = 0,
-    },
   },
 }

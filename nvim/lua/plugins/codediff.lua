@@ -1,7 +1,6 @@
 return {
   "esmuellert/codediff.nvim",
   dependencies = { "MunifTanjim/nui.nvim" },
-  commit = "5e69152",
   cmd = "CodeDiff",
   keys = {
     { "<leader>gd", "<cmd>CodeDiff<cr>", desc = "Changes Explorer" },

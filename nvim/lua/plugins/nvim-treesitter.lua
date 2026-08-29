@@ -11,7 +11,17 @@ return {
     ts.setup()
 
     vim.schedule(function()
-      ts.install(tools.treesitter_parsers)
+      local installed = {}
+      for _, lang in ipairs(ts.get_installed("parsers")) do
+        installed[lang] = true
+      end
+
+      local missing = vim.tbl_filter(function(lang)
+        return not installed[lang]
+      end, tools.treesitter_parsers)
+      if #missing > 0 then
+        ts.install(missing)
+      end
     end)
 
     vim.api.nvim_create_autocmd("FileType", {

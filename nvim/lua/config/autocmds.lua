@@ -2,12 +2,21 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("config_" .. name, { clear = true })
 end
 
--- re-read files when nvim regains focus or a terminal closes
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup("checktime"),
-  callback = function()
-    if vim.o.buftype ~= "nofile" then
-      vim.cmd.checktime()
+-- Save before handing a file off to another buffer (for example, an AI terminal).
+-- Neovim's 'autoread' file watcher can then reload external edits without a conflict.
+vim.api.nvim_create_autocmd("BufLeave", {
+  group = augroup("autosave_on_leave"),
+  callback = function(event)
+    local buf = event.buf
+
+    if vim.bo[buf].modified
+      and vim.bo[buf].modifiable
+      and vim.bo[buf].buftype == ""
+      and vim.api.nvim_buf_get_name(buf) ~= ""
+    then
+      vim.api.nvim_buf_call(buf, function()
+        vim.cmd("silent update")
+      end)
     end
   end,
 })

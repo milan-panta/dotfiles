@@ -36,7 +36,15 @@ return {
       },
       ["rustaceanvim.neotest"] = {},
       ["neotest-golang"] = {},
-      ["neotest-gtest"] = { debug_adapter = "gdb" },
+      -- Default: only test_*.cpp and *_test.cpp files; restore this to limit discovery.
+      -- ["neotest-gtest"] = { debug_adapter = "gdb" },
+      ["neotest-gtest"] = {
+        debug_adapter = "gdb",
+        -- Scan every .cpp file so embedded TEST macros are visible to Neotest.
+        is_test_file = function(file)
+          return file:match("%.cpp$") ~= nil
+        end,
+      },
     },
   },
   config = function(_, opts)

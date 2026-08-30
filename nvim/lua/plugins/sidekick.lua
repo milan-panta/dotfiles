@@ -2,6 +2,15 @@ return {
   "folke/sidekick.nvim",
   opts = {
     cli = {
+      tools = {
+        codex = {
+          cmd = { "codex", "--yolo" },
+        },
+        agy = {
+          cmd = { "agy", "--dangerously-skip-permissions" },
+          is_proc = "\\<agy\\>",
+        },
+      },
       win = {
         keys = {
           nav_left = { "<M-h>", "nav_left", expr = true, desc = "navigate to the left window" },
@@ -80,9 +89,16 @@ return {
     {
       "<leader>ao",
       function()
-        require("sidekick.cli").toggle({ name = "copilot", focus = true })
+        require("sidekick.cli").toggle({ name = "codex", focus = true })
       end,
-      desc = "Sidekick Toggle Copilot",
+      desc = "Sidekick Toggle Codex",
+    },
+    {
+      "<leader>ag",
+      function()
+        require("sidekick.cli").toggle({ name = "agy", focus = true })
+      end,
+      desc = "Sidekick Toggle Agy",
     },
   },
 }

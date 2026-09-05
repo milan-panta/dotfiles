@@ -19,5 +19,5 @@ return {
   { "bjarneo/vantablack.nvim", lazy = true, priority = 1000 },
   { "bjarneo/white.nvim", lazy = true, priority = 1000 },
   { "OldJobobo/miasma.nvim", lazy = true, priority = 1000 },
-  { "gthelding/monokai-pro.nvim", lazy = true, priority = 1000 },
+  { "loctvl842/monokai-pro.nvim", lazy = true, priority = 1000 },
 }

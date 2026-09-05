@@ -63,6 +63,23 @@ return {
       folder = "templates",
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
+      substitutions = {
+        date = function(ctx, suffix)
+          local format = suffix or Obsidian.opts.templates.date_format
+          local note = ctx.partial_note
+
+          -- The built-in {{date}} substitution always uses os.time(), which
+          -- makes tomorrow's and yesterday's daily-note templates say today.
+          -- Daily note IDs are dates, so use the note's date when available.
+          if note and note.id and note.id:match("^%d%d%d%d%-%d%d%-%d%d$") then
+            local year, month, day = note.id:match("^(%d%d%d%d)%-(%d%d)%-(%d%d)$")
+            local timestamp = os.time({ year = tonumber(year), month = tonumber(month), day = tonumber(day), hour = 12 })
+            return require("obsidian.util").format_date(timestamp, format)
+          end
+
+          return require("obsidian.util").format_date(os.time(), format)
+        end,
+      },
     },
 
     note_id_func = function(title)

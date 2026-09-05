@@ -11,6 +11,7 @@ return {
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
       { "<leader>h", group = "hunk" },
+      { "<leader>l", group = "latex/vimtex" },
       { "<leader>o", group = "obsidian" },
       { "<leader>q", group = "session" },
       { "<leader>r", group = "run" },

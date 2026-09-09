@@ -2,10 +2,19 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("config_" .. name, { clear = true })
 end
 
+-- Shared scratchpad: external edits win, including over unsaved buffer edits.
+vim.api.nvim_create_autocmd("FileChangedShell", {
+  group = augroup("external_edits"),
+  callback = function()
+    vim.v.fcs_choice = vim.v.fcs_reason == "deleted" and "ask" or "reload"
+  end,
+})
+
 -- Save before handing a file off to another buffer (for example, an AI terminal).
 -- Neovim's 'autoread' file watcher can then reload external edits without a conflict.
 vim.api.nvim_create_autocmd("BufLeave", {
   group = augroup("autosave_on_leave"),
+  nested = true, -- allow checktime to trigger FileChangedShell
   callback = function(event)
     local buf = event.buf
 
@@ -15,6 +24,8 @@ vim.api.nvim_create_autocmd("BufLeave", {
       and vim.api.nvim_buf_get_name(buf) ~= ""
     then
       vim.api.nvim_buf_call(buf, function()
+        -- Accept pending external edits before autosave can overwrite them.
+        vim.cmd("checktime " .. buf)
         vim.cmd("silent update")
       end)
     end
@@ -146,12 +157,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- force .h files to C++ filetype (C++ codebases use .h for headers)
+-- Use C headers for the pantadiw course repo; retain C++ elsewhere.
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("h_as_cpp"),
   pattern = "*.h",
-  callback = function()
-    vim.bo.filetype = "cpp"
+  callback = function(event)
+    local path = vim.fs.normalize(vim.api.nvim_buf_get_name(event.buf))
+    local course_root = vim.fn.expand("~/Documents/School/369/pantadiw/")
+    vim.bo[event.buf].filetype = path:sub(1, #course_root) == course_root and "c" or "cpp"
   end,
 })
 

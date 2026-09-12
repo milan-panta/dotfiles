@@ -1,0 +1,43 @@
+# Dynamic theme colors
+config-file = ?"~/.local/state/omarchy/current/theme/ghostty.conf"
+
+# Font Settings
+font-family = "JetBrainsMono Nerd Font"
+font-family-bold = "JetBrainsMono Nerd Font Bold"
+font-family-italic = "JetBrainsMono Nerd Font Italic"
+font-family-bold-italic = "JetBrainsMono Nerd Font Bold Italic"
+font-style = Regular
+font-size = 10
+font-thicken = true
+adjust-cell-height = 1
+
+# Window
+unfocused-split-opacity = 1
+window-theme = ghostty
+window-padding-balance = true
+window-padding-x = 0
+window-padding-y = 0
+confirm-close-surface = false
+resize-overlay = never
+gtk-toolbar-style = flat
+
+# Cursor styling
+cursor-style = block
+cursor-style-blink = false
+
+# Shell integration
+shell-integration-features = no-cursor,ssh-env
+mouse-scroll-multiplier = 0.95
+scrollback-limit = 100000
+auto-update = off
+
+# Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
+async-backend = epoll
+
+# Keyboard bindings
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+# Send Shift+Enter as CSI-u so TUIs can distinguish it from Enter.
+keybind = shift+enter=csi:13;2u
+# Legacy encoding sends Alt+Shift+Enter the same as Alt+Enter; send CSI-u so tmux can match M-S-Enter.
+keybind = alt+shift+enter=csi:13;4u

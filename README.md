@@ -31,7 +31,8 @@ dotfiles/
 │   ├── alacritty/      # Alacritty (Omarchy dynamic theme)
 │   ├── btop/           # btop (Omarchy dynamic theme)
 │   ├── ghostty/        # Ghostty (epoll backend, Omarchy dynamic theme)
-│   ├── git/            # Omarchy Git settings (gh credential helper)
+│   ├── git/            # Omarchy Git settings (Delta pager, gh helper, codediff)
+│   ├── hypr/           # Hyprland (window manager, keybindings, monitors)
 │   ├── starship.toml   # Omarchy prompt
 │   └── tmux/           # Tmux (Alt keys, Omarchy theme, move-pane.sh)
 │

@@ -1,8 +1,11 @@
-# Reset all default mappings
+# Vimium C — Linux / Omarchy
+# Paste into "Custom key mappings" in Vimium C's options.
+# Keep Ctrl shortcuts available to Chromium (find, print, bookmark, source,
+# tabs, clipboard, etc.) and Super shortcuts available to Hyprland.
+# Letter sequences below apply in normal mode, not while typing in a field.
 unmapAll
 
-# --- Fix for the "-" key error ---
-# We must explicitly unmap "-" before using it for zoom
+# Release the negative-count prefix before mapping "-" to zoom out.
 unmap -
 
 # --- Navigation (Scrolling) ---
@@ -10,8 +13,10 @@ map j scrollDown
 map k scrollUp
 map h scrollLeft
 map l scrollRight
-map <c-d> scrollPageDown
-map <c-u> scrollPageUp
+# Half-page scrolling; leave d for the video speed controller and u for restoreTab.
+# Alt+j / Alt+k mirror j/k and avoid conflicting with Chrome's Alt+D (address bar).
+map <a-j> scrollPageDown
+map <a-k> scrollPageUp
 map gg scrollToTop
 map G scrollToBottom
 
@@ -25,8 +30,8 @@ map D removeTab
 map g0 firstTab
 map g$ lastTab
 map <backspace> visitPreviousTab
-map <c-p> togglePinTab
-map <c-m> toggleMuteTab
+map gp togglePinTab
+map gm toggleMuteTab
 map W moveTabToNextWindow
 map << moveTabLeft
 map >> moveTabRight
@@ -60,7 +65,7 @@ map P openCopiedUrlInNewTab
 # --- Link Hints ---
 map f LinkHints.activate
 map F LinkHints.activateOpenInNewTab
-map <c-f> LinkHints.activateWithQueue
+map ;F LinkHints.activateWithQueue
 map ;i LinkHints.activateOpenImage
 map ;I LinkHints.activateDownloadImage
 map ;d LinkHints.activateDownloadLink
@@ -88,7 +93,7 @@ map m Marks.activateCreate
 map ` Marks.activate
 
 # --- Insert Mode Toggle (like Tridactyl) ---
-# Shift+Escape toggles insert mode on/off
+# Shift+Escape toggles insert mode on/off. Keep this binding unchanged.
 map <s-esc> enterInsertMode key="<s-esc>"
 map <s-esc:i> reset
 

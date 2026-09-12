@@ -1,107 +1,201 @@
-/* Vimium-C · Minimal Dark Theme */
+/* Vimium C — minimal dark
+ * Paste this entire file into "Custom CSS for Vimium C UI".
+ * Section markers route rules to separate documents; keep them intact.
+ * Vomnibar row heights stay at their defaults (no custom sizes needed).
+ */
 
-/* ---- HUD toast (insert mode, copy, mute, paste, marks, etc.) ---- */
-.HUD,
-.TEE {
-  bottom: 16px !important;
-  right: 16px !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  height: auto !important;
-  padding: 4px 10px !important;
+/* #ui */
+
+/* Notifications. Leave .TEE (the clipboard helper) to Vimium C. */
+.HUD {
+  bottom: 16px;
+  right: 16px;
+  min-width: 0;
+  max-width: min(480px, calc(100% - 32px));
+  height: auto;
+  padding: 6px 10px;
   font:
     500 12px / 18px system-ui,
-    sans-serif !important;
-  letter-spacing: normal !important;
-  color: rgba(255, 255, 255, 0.72) !important;
+    sans-serif;
 }
 
-.HUD:after,
-.TEE:after {
-  background: rgba(28, 28, 30, 0.82) !important;
-  border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 8px !important;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+.HUD,
+.HUD.D {
+  color: #e4e4e7;
 }
 
-/* ---- Find-mode outer wrapper (on the host page) ---- */
+.HUD::after,
+.HUD.D::after {
+  background: #202024;
+  border: 1px solid #3a3a40;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #0003;
+}
+
+/* Match the find iframe's outer height to the 32px bar below. */
 .HUD.UI {
-  height: 28px !important;
-  min-width: 240px !important;
-  max-width: 480px !important;
-  padding: 0 !important;
-  color: rgba(255, 255, 255, 0.85) !important;
+  box-sizing: border-box;
+  /* Vimium sets an inline width; a minimum keeps short queries readable. */
+  min-width: min(360px, calc(100% - 32px));
+  height: 32px;
+  padding: 0;
 }
 
-.HUD.UI:after {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+.HUD.UI::after {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
-/* ---- Link hints ---- */
-.LH {
-  background: rgba(28, 28, 30, 0.88) !important;
-  border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 4px !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  padding: 2px 5px !important;
+.HUD.UI .Find {
+  height: 100%;
+}
+
+/* Flat, legible hints on both light and dark pages. */
+.LH,
+.D > .LH {
+  background: #202024;
+  border: 1px solid #52525b;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px #0004;
+  padding: 2px 4px;
+  color: #f4d68c;
   font:
-    600 11px / 14px system-ui,
-    sans-serif !important;
-  color: #ffd60a !important;
-  text-transform: uppercase !important;
+    600 11px / 14px ui-monospace,
+    monospace;
 }
 
-.MC,
-.MH {
-  color: #ffd60a !important;
-}
-.BH {
-  color: #ff453a !important;
+.LH .MC,
+.LH .MH {
+  color: #92929d;
 }
 
-/*#find*/
-/* Everything below applies inside the find-bar iframe */
+.LH .BH {
+  color: #f0a0a0;
+}
 
+/* #find */
+
+/* The frame, bar, and editable line have explicit, compatible dimensions. */
 :host,
 body {
-  background: transparent !important;
-  height: 28px !important;
+  height: 32px;
 }
 
-.r {
-  background: rgba(28, 28, 30, 0.88) !important;
-  border-radius: 8px !important;
-  box-shadow:
-    0 1px 4px rgba(0, 0, 0, 0.24),
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  height: 28px !important;
-  padding: 4px 10px !important;
-  display: flex !important;
-  align-items: center !important;
+.r,
+.r.D {
+  box-sizing: border-box;
+  height: 32px;
+  padding: 6px 10px;
+  align-items: center;
+  background: #202024;
+  border: 1px solid #3a3a40;
+  border-radius: 6px;
+  box-shadow: none;
+  color: #e4e4e7;
+  color-scheme: dark;
 }
 
-* {
-  font:
-    13px / 20px system-ui,
-    sans-serif !important;
-  color: inherit !important;
-  background: transparent !important;
-  caret-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-#s::after {
-  content: "/" !important;
-  opacity: 0.5;
-}
+#s,
+#i,
+#h,
 #c {
-  opacity: 0.55;
-  margin-left: 8px !important;
+  font:
+    13px / 18px system-ui,
+    sans-serif;
+}
+
+#i {
+  height: 18px;
+  color: inherit;
+  caret-color: #f4d68c;
+}
+
+#s,
+#c {
+  color: #a1a1aa;
+}
+
+#c {
+  margin-left: 8px;
+}
+
+/* #omni */
+
+/* Preserve Vimium C's layout calculations; customize surfaces and type. */
+body {
+  background: #202024;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #0004;
+  color: #e4e4e7;
+  color-scheme: dark;
+}
+
+body::after {
+  content: "";
+  border: 1px solid #3a3a40;
+  border-radius: 6px;
+}
+
+#bar,
+.has-dark > #bar {
+  background: #202024;
+  border-bottom: 1px solid #3a3a40;
+}
+
+#input {
+  background: #202024;
+  border-color: transparent;
+  box-shadow: none;
+  color: #e4e4e7;
+  caret-color: #f4d68c;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+}
+
+#list {
+  background: #202024;
+}
+
+.item {
+  border-color: transparent;
+}
+
+.item:hover {
+  background: #29292f;
+}
+
+.item.s {
+  background: #34343c;
+}
+
+.top {
+  color: #e4e4e7;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: #a1a1aa;
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+}
+
+.label,
+.time,
+#toolbar {
+  color: #a1a1aa;
+}
+
+match {
+  color: #f4d68c;
+}
+
+.title > match {
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #34343c;
+  color: #e4e4e7;
 }

@@ -1,5 +1,18 @@
 # See https://git-scm.com/docs/git-config
 
+[core]
+	pager = delta
+	editor = nvim
+	fsmonitor = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+	hyperlinks = true
+
 [alias]
 	co = checkout
 	br = branch
@@ -15,6 +28,16 @@
 	algorithm = histogram    # Clearer diffs on moved/edited lines
 	colorMoved = plain       # Highlight moved blocks in diffs
 	mnemonicPrefix = true    # More intuitive refs in diff output
+	tool = codediff
+
+[merge]
+	conflictstyle = diff3
+	tool = codediff
+
+[mergetool "codediff"]
+	cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
+[difftool "codediff"]
+	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff file $LOCAL $REMOTE\"
 [commit]
 	verbose = true           # Include diff comment in commit message template
 [column]

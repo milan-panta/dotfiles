@@ -64,13 +64,18 @@ map P openCopiedUrlInNewTab
 
 # --- Link Hints ---
 map f LinkHints.activate
-map F LinkHints.activateOpenInNewTab
-map ;F LinkHints.activateWithQueue
+# Open real link URLs directly, bypassing sites that intercept Ctrl+click.
+# Vimium C 2.12.2 needs action2="*//-1" to let newtab choose the click action.
+# Avoid leaving focus / simulated hover on the original link.
+map F LinkHints.activateOpenInNewTab newtab="force" action2="*//-1" focus=false autoUnhover=true
+# Open several links in background tabs; Escape finishes the queue.
+map ;F LinkHints.activateWithQueue newtab="force" action2="*//-1" focus=false autoUnhover=true
 map ;i LinkHints.activateOpenImage
 map ;I LinkHints.activateDownloadImage
 map ;d LinkHints.activateDownloadLink
 map ;h LinkHints.activateHover
 map ;H LinkHints.activateLeave
+# Focus an element / scrollable pane without clicking it (not "follow link").
 map ;f LinkHints.activateFocus
 map ;y LinkHints.activateCopyLinkUrl
 map ;o LinkHints.activateOpenVomnibar
@@ -94,7 +99,8 @@ map ` Marks.activate
 
 # --- Insert Mode Toggle (like Tridactyl) ---
 # Shift+Escape toggles insert mode on/off. Keep this binding unchanged.
-map <s-esc> enterInsertMode key="<s-esc>"
+# hideHUD=true shows a brief entry notice instead of a persistent banner.
+map <s-esc> enterInsertMode key="<s-esc>" hideHUD=true
 map <s-esc:i> reset
 
 # --- Frames ---

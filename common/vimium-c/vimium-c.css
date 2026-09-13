@@ -6,16 +6,18 @@
 
 /* #ui */
 
-/* Notifications. Leave .TEE (the clipboard helper) to Vimium C. */
+/* Compact notifications. Insert-mode duration is set by hideHUD in the mappings.
+ * Leave .TEE (the clipboard helper) to Vimium C.
+ */
 .HUD {
   bottom: 16px;
   right: 16px;
   min-width: 0;
   max-width: min(480px, calc(100% - 32px));
   height: auto;
-  padding: 6px 10px;
+  padding: 4px 8px;
   font:
-    500 12px / 18px system-ui,
+    400 11px / 16px system-ui,
     sans-serif;
 }
 

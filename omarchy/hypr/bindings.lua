@@ -53,9 +53,9 @@ end)
 hl.unbind("SUPER + SHIFT + C")
 o.bind("SUPER + SHIFT + X", "Codex (yolo mode)", "omarchy-launch-tui codex --dangerously-bypass-approvals-and-sandbox")
 
--- Launch Gemini TUI without approvals or sandboxing
+-- Launch AGYx TUI
 hl.unbind("SUPER + SHIFT + G")
-o.bind("SUPER + SHIFT + G", "Gemini (yolo mode)", "omarchy-launch-tui agy --dangerously-skip-permissions")
+o.bind("SUPER + SHIFT + G", "AGYx", { launch = "gtk-launch AGYx" })
 
 -- Launch the installed Google Calendar app
 hl.unbind("SUPER + CTRL + ALT + D")

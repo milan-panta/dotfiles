@@ -44,9 +44,10 @@ return {
     },
     words = { enabled = true },
     image = {
-      enabled = true,
-      doc = { inline = true, float = true },
-      math = { enabled = vim.fn.executable("tectonic") == 1 or vim.fn.executable("pdflatex") == 1 },
+      -- Foot cannot display Kitty graphics; also disable the floating fallback.
+      enabled = false,
+      doc = { enabled = false, inline = false, float = false },
+      math = { enabled = false },
     },
     lazygit = { enabled = true },
     gitbrowse = { enabled = true },

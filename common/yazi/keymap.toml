@@ -1,0 +1,5 @@
+# Match the tmux shortcut so Alt+y also closes Yazi.
+[[mgr.prepend_keymap]]
+on = "<A-y>"
+run = "quit"
+desc = "Close Yazi"

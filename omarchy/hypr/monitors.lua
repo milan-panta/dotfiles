@@ -15,5 +15,12 @@ hl.env("STEAM_FORCE_DESKTOPUI_SCALING", tostring(external_4k_scale))
 hl.monitor({ output = "", mode = "preferred", position = "0x0", scale = 2 })
 hl.monitor({ output = "eDP-1", mode = "preferred", position = "1920x0", scale = 1.5 })
 
--- Treat the external display as the main desktop by placing workspace 1 there.
-hl.workspace_rule({ workspace = "1", monitor = "DP-3", default = true })
+-- Stable workspace ranges, matched to the LG itself rather than its dock port.
+for workspace = 1, 10 do
+  hl.workspace_rule({
+    workspace = tostring(workspace),
+    monitor = workspace <= 5 and "desc:LG Electronics LG ULTRAFINE 208NTFADU731" or "eDP-1",
+    default = workspace == 1 or workspace == 6,
+    persistent = true,
+  })
+end

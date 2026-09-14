@@ -2,6 +2,10 @@
 -- replace Omarchy's defaults.
 
 hl.config({
+  cursor = {
+    -- Prevent cursor flashes when changing window focus with the keyboard.
+    no_warps = true,
+  },
   input = {
     kb_options = "caps:escape,altwin:swap_alt_win",
     follow_mouse = 2,

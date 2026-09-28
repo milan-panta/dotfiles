@@ -35,7 +35,9 @@ return {
     indent = { enabled = true, animate = { enabled = false }, scope = { enabled = false } },
     input = { enabled = true },
     notifier = { enabled = true, timeout = 3000 },
-    quickfile = { enabled = true },
+    -- Haskell/C++ highlight queries take ~0.5s to compile; show regex syntax
+    -- first and let nvim-treesitter.lua upgrade to treesitter after the draw.
+    quickfile = { enabled = true, exclude = { "latex", "haskell", "cpp" } },
     select = { enabled = true },
     statuscolumn = {
       left = { "sign" },
@@ -175,26 +177,40 @@ return {
     Snacks.toggle({
       name = "Inlay Hints",
       get = function()
-        return vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+        return vim.lsp.inlay_hint.is_enabled()
       end,
       set = function(state)
         vim.lsp.inlay_hint.enable(state)
       end,
     }):map("<leader>uh")
     Snacks.toggle.indent():map("<leader>ug")
+    Snacks.toggle({
+      name = "Git Signs",
+      get = function()
+        return package.loaded.gitsigns and require("gitsigns.config").config.signcolumn or false
+      end,
+      set = function(state)
+        require("gitsigns").toggle_signs(state)
+      end,
+    }):map("<leader>uG")
+    Snacks.toggle({
+      name = "Git Deleted Lines",
+      get = function()
+        return package.loaded.gitsigns and require("gitsigns.config").config.show_deleted or false
+      end,
+      set = function(state)
+        require("gitsigns").toggle_deleted(state)
+      end,
+    }):map("<leader>ur")
     Snacks.toggle.dim():map("<leader>uD")
+    -- Global state: Neovim enables/refreshes lenses for every attached client.
     Snacks.toggle({
       name = "CodeLens",
       get = function()
-        return vim.g.codelens_enabled == true
+        return vim.lsp.codelens.is_enabled()
       end,
       set = function(state)
-        vim.g.codelens_enabled = state
-        if state then
-          vim.lsp.codelens.enable(true, { bufnr = 0 })
-        else
-          vim.lsp.codelens.enable(false, { bufnr = 0 })
-        end
+        vim.lsp.codelens.enable(state)
       end,
     }):map("<leader>uc")
   end,

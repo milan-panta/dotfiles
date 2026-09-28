@@ -7,6 +7,7 @@ return {
   dependencies = { { "nvim-mini/mini.icons", opts = {} } },
   init = function()
     vim.api.nvim_create_autocmd("BufWinEnter", {
+      group = vim.api.nvim_create_augroup("oil_open_dirs", { clear = true }),
       nested = true,
       callback = function(args)
         local path = vim.api.nvim_buf_get_name(args.buf)

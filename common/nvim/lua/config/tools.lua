@@ -102,23 +102,34 @@ M.servers = {
   -- rust-analyzer: handled by rustaceanvim
 }
 
+-- Externally managed servers: never passed to Mason's install/enable lists.
+local ghcup_bin = vim.fn.expand("~/.ghcup/bin")
+M.system_servers = {
+  hls = {
+    cmd = { ghcup_bin .. "/haskell-language-server-wrapper", "--lsp" },
+    -- Keep HLS and its child processes on the course's GHCup toolchain,
+    -- even when Mason has prepended its own bin directory to Neovim's PATH.
+    cmd_env = { PATH = ghcup_bin .. ":" .. (vim.env.PATH or "") },
+  },
+}
+
 M.formatters_by_ft = {
+  bzl = { "buildifier" },
   c = { "clang_format" },
   cpp = { "clang_format" },
-  go = { "gofumpt", "goimports" },
-  rust = { "rustfmt" },
-  bzl = { "buildifier" },
-  lua = { "stylua" },
-  python = { "ruff_fix", "ruff_format" },
-  tex = { "latexindent" },
-  markdown = { "prettier" },
-  html = { "biome" },
   css = { "biome" },
+  go = { "gofumpt", "goimports" },
+  html = { "biome" },
   javascript = { "biome" },
   javascriptreact = { "biome" },
+  json = { "biome" },
+  lua = { "stylua" },
+  markdown = { "prettier" },
+  python = { "ruff_fix", "ruff_format" },
+  rust = { "rustfmt" },
+  tex = { "latexindent" },
   typescript = { "biome" },
   typescriptreact = { "biome" },
-  json = { "biome" },
 }
 
 M.linters_by_ft = {
@@ -133,17 +144,17 @@ M.mason_dap_adapters = {
 }
 
 M.ensure_installed = {
-  "stylua",
-  "clang-format",
-  "buildifier",
-  "prettier",
   "biome",
-  "latexindent",
-  "ruff",
+  "buildifier",
+  "clang-format",
   "delve",
   "gofumpt",
   "goimports",
   "golangci-lint",
+  "latexindent",
+  "prettier",
+  "ruff",
+  "stylua",
 }
 
 M.treesitter_parsers = {
@@ -151,13 +162,13 @@ M.treesitter_parsers = {
   "c",
   "cmake",
   "cpp",
-  "starlark",
   "css",
   "gitignore",
   "go",
   "gomod",
   "gosum",
   "gowork",
+  "haskell",
   "html",
   "javascript",
   "json",
@@ -171,6 +182,7 @@ M.treesitter_parsers = {
   "regex",
   "ron",
   "rust",
+  "starlark",
   "toml",
   "tsx",
   "typescript",

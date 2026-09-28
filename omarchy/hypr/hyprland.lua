@@ -29,3 +29,12 @@ require("default.hypr.toggles")
 -- Steam window sizing (overrides Omarchy's default 1100x700 on 4K)
 o.window({ class = "steam", title = "Steam" }, { center = true, size = { 1600, 1000 } })
 o.window({ class = "steam", title = "Friends List" }, { size = { 500, 900 } })
+
+-- Webcam mirror (~/.local/bin/mirror): float at 16:9 so there are no black bars
+o.window({ class = "^mirror$" }, {
+  tag = "-default-opacity",
+  opacity = "1 1",
+  float = true,
+  center = true,
+  size = { "(monitor_h*16/15)", "(monitor_h*3/5)" },
+})

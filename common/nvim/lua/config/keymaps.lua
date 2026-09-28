@@ -98,6 +98,9 @@ local function RunFile(args, mode)
     cmd = args ~= "" and ("cargo run" .. release_flag .. " -- " .. args) or ("cargo run" .. release_flag)
   elseif filetype == "go" then
     cmd = string.format("go run %s %s", escaped_file, args)
+  elseif filetype == "haskell" or filetype == "lhaskell" then
+    local ghci = vim.fn.shellescape(vim.fn.expand("~/.ghcup/bin/ghci"))
+    cmd = string.format("%s %s", ghci, escaped_file)
   elseif filetype == "javascript" then
     cmd = string.format("node %s %s", escaped_file, args)
   elseif filetype == "typescript" then
@@ -134,20 +137,24 @@ map("n", "<leader>rr", function()
   RunFile()
 end, { silent = true, desc = "Run file" })
 
-map("n", "<leader>ra", function()
+local function RunFileWithArgs(mode)
+  if vim.bo.filetype == "haskell" or vim.bo.filetype == "lhaskell" then
+    RunFile()
+    return
+  end
   vim.ui.input({ prompt = "Args: " }, function(input)
     if input ~= nil then
-      RunFile(input)
+      RunFile(input, mode)
     end
   end)
+end
+
+map("n", "<leader>ra", function()
+  RunFileWithArgs()
 end, { silent = true, desc = "Run file (args)" })
 
 map("n", "<leader>ro", function()
-  vim.ui.input({ prompt = "Args: " }, function(input)
-    if input ~= nil then
-      RunFile(input, "release")
-    end
-  end)
+  RunFileWithArgs("release")
 end, { silent = true, desc = "Run file optimized (args)" })
 
 local function run_build_cmd(cmd)

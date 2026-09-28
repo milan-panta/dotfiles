@@ -34,13 +34,25 @@ return {
       vim.lsp.config(name, opts)
     end
 
-    -- Auto-install and auto-enable only our explicit server list
+    -- Enable only our explicit server list; Mason's bin dir is on PATH, and
+    -- servers that aren't installed yet are skipped until their binary exists.
     -- Copilot is installed but NOT auto-enabled (toggled via <leader>ui)
     local server_names = tools.get_server_names()
-    require("mason-lspconfig").setup({
-      ensure_installed = vim.list_extend(vim.deepcopy(server_names), { "copilot" }),
-      automatic_enable = server_names,
-    })
+    vim.lsp.enable(server_names)
+
+    -- ensure_installed loads Mason's whole package registry (~50ms), so run
+    -- it after the first buffer is drawn instead of while opening it.
+    vim.schedule(function()
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.list_extend(vim.deepcopy(server_names), { "copilot" }),
+        automatic_enable = false,
+      })
+    end)
+
+    for name, opts in pairs(tools.system_servers) do
+      vim.lsp.config(name, opts)
+      vim.lsp.enable(name)
+    end
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp_attach_keymaps", { clear = true }),
@@ -49,8 +61,6 @@ return {
           mode = mode or "n"
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
-
-        vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         -- Keep semantic tokens for clangd (much better than treesitter for C++).
@@ -88,20 +98,6 @@ return {
         map("g.", vim.lsp.buf.code_action, "Code Action")
         map("g.", vim.lsp.buf.code_action, "Code Action", "x")
         map("<leader>cc", vim.lsp.codelens.run, "Run Codelens")
-
-        if client and client:supports_method("textDocument/codeLens") then
-          vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
-            buf = event.buf,
-            callback = function()
-              if vim.g.codelens_enabled == true then
-                vim.lsp.codelens.enable(true, { bufnr = event.buf })
-              end
-            end,
-          })
-          if vim.g.codelens_enabled == true then
-            vim.lsp.codelens.enable(true, { bufnr = event.buf })
-          end
-        end
       end,
     })
 

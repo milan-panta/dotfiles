@@ -1,6 +1,8 @@
 return {
   "lervag/vimtex",
-  -- VimTeX handles filetype loading itself and needs to be available at startup.
+  -- Don't lazy-load (per VimTeX docs): sioyek's inverse search runs a fresh
+  -- `nvim --headless -c VimtexInverseSearch ...`, which needs the command at
+  -- startup. Eager loading costs ~1.5ms; the heavy parts are autoloaded.
   lazy = false,
   init = function()
     vim.g.vimtex_view_method = "sioyek"
@@ -13,22 +15,20 @@ return {
       'Package siunitx Warning: Detected the "physics" package:',
       "Package hyperref Warning: Token not allowed in a PDF string",
     }
-    if vim.fn.executable("latexmk") == 1 then
-      vim.g.vimtex_compiler_method = "latexmk"
-      vim.g.vimtex_compiler_latexmk = {
-        options = {
-          "-verbose",
-          "-file-line-error",
-          "-synctex=1",
-          "-interaction=nonstopmode",
-          "--shell-escape",
-        },
-      }
-    elseif vim.fn.executable("tectonic") == 1 then
-      vim.g.vimtex_compiler_method = "tectonic"
-    else
-      vim.notify("VimTeX: install latexmk or tectonic to enable compilation", vim.log.levels.WARN)
+    -- Resolved per document (when a .tex file opens), not at every startup.
+    -- VimTeX warns by itself if the chosen compiler isn't installed.
+    vim.g.vimtex_compiler_method = function()
+      return vim.fn.executable("latexmk") == 1 and "latexmk" or "tectonic"
     end
+    vim.g.vimtex_compiler_latexmk = {
+      options = {
+        "-verbose",
+        "-file-line-error",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "--shell-escape",
+      },
+    }
   end,
   config = function()
     local pending = {}

@@ -49,9 +49,8 @@ o.bind("SUPER + T", "Toggle window floating/tiling", function()
   hl.dispatch(hl.dsp.window.center())
 end)
 
--- Launch Codex TUI without approvals or sandboxing
-hl.unbind("SUPER + SHIFT + C")
-o.bind("SUPER + SHIFT + X", "Codex (yolo mode)", "omarchy-launch-tui codex --dangerously-bypass-approvals-and-sandbox")
+-- Launch Claude Code in auto permission mode (same as the cx alias)
+o.bind("SUPER + SHIFT + X", "Claude Code (auto mode)", "omarchy-launch-tui claude --permission-mode auto")
 
 -- Launch AGYx TUI
 hl.unbind("SUPER + SHIFT + G")
@@ -59,6 +58,7 @@ o.bind("SUPER + SHIFT + G", "AGYx", { launch = "gtk-launch AGYx" })
 
 -- Launch the installed Google Calendar app
 hl.unbind("SUPER + CTRL + ALT + D")
+hl.unbind("SUPER + SHIFT + C")
 o.bind("SUPER + SHIFT + C", "Calendar", { launch = "gtk-launch Calendar" })
 
 -- Restore tmux binding disabled with the preinstalled application bindings

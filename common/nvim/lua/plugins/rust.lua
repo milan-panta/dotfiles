@@ -31,10 +31,10 @@ return {
           map("<leader>ce", function() vim.cmd.RustLsp("explainError") end, "Explain Error")
           map("<leader>cE", function() vim.cmd.RustLsp("renderDiagnostic") end, "Render Diagnostic")
           map("<leader>cm", function() vim.cmd.RustLsp("expandMacro") end, "Expand Macro")
-          map("<leader>cp", function() vim.cmd.RustLsp("parentModule") end, "Parent Module")
+          map("<leader>cP", function() vim.cmd.RustLsp("parentModule") end, "Parent Module")
           map("<leader>co", function() vim.cmd.RustLsp("openDocs") end, "Open docs.rs")
           map("<leader>cC", function() vim.cmd.RustLsp("openCargo") end, "Open Cargo.toml")
-          map("<leader>dr", function() vim.cmd.RustLsp("debuggables") end, "Debuggables")
+          map("<leader>dR", function() vim.cmd.RustLsp("debuggables") end, "Debuggables")
           map("<leader>st", function() vim.cmd.RustLsp("testables") end, "Testables")
           map("K", function() vim.cmd.RustLsp({ "hover", "actions" }) end, "Hover Actions")
           -- stylua: ignore end

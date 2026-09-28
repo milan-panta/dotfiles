@@ -24,23 +24,44 @@ return {
       end
     end)
 
+    -- Compiling a highlight query blocks the UI (~500ms for Haskell, ~300ms
+    -- for C++, because their grammars are huge). Neovim caches compiled
+    -- queries per session, so only the first buffer of each language pays.
+    -- Defer that first compile so the file is drawn (with regex syntax)
+    -- before the stall, instead of delaying startup.
+    local compiled = {}
+    local function start_highlighting(buf, lang)
+      local function start()
+        if not vim.api.nvim_buf_is_valid(buf) then
+          return
+        end
+        local ok, hl_query = pcall(vim.treesitter.query.get, lang, "highlights")
+        compiled[lang] = true
+        if ok and hl_query then
+          vim.treesitter.start(buf, lang)
+        end
+      end
+      if compiled[lang] then
+        start()
+      else
+        vim.defer_fn(start, 20)
+      end
+    end
+
     vim.api.nvim_create_autocmd("FileType", {
       group = vim.api.nvim_create_augroup("treesitter_features", { clear = true }),
-      callback = function()
-        local filetype = vim.bo.filetype
+      callback = function(event)
+        local filetype = vim.bo[event.buf].filetype
         local lang = vim.treesitter.language.get_lang(filetype)
         if not lang then
           return
         end
 
-        local ok, hl_query = pcall(vim.treesitter.query.get, lang, "highlights")
-        if ok and hl_query then
-          vim.treesitter.start()
-        end
+        start_highlighting(event.buf, lang)
 
-        local ok2, indent_query = pcall(vim.treesitter.query.get, lang, "indents")
-        if ok2 and indent_query then
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        -- Compile indentation queries only when indentation is requested.
+        if #vim.treesitter.query.get_files(lang, "indents") > 0 then
+          vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
       end,
     })

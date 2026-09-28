@@ -22,9 +22,13 @@ return {
 
     local function has_textobjects(buf)
       local ft = vim.bo[buf].filetype
+      if ft == "" or ft == "snacks_picker_preview" then
+        return false
+      end
       local lang = vim.treesitter.language.get_lang(ft) or ft
-      local ok = pcall(vim.treesitter.query.get, lang, "textobjects")
-      return ok
+      -- Checking availability must not compile every query while opening a
+      -- file. The textobject plugin loads the query when a mapping is used.
+      return #vim.treesitter.query.get_files(lang, "textobjects") > 0
     end
 
     local function attach(buf)

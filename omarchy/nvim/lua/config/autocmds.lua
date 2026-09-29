@@ -1,0 +1,192 @@
+local function augroup(name)
+  return vim.api.nvim_create_augroup("config_" .. name, { clear = true })
+end
+
+-- Shared scratchpad: external edits win, including over unsaved buffer edits.
+vim.api.nvim_create_autocmd("FileChangedShell", {
+  group = augroup("external_edits"),
+  callback = function()
+    vim.v.fcs_choice = vim.v.fcs_reason == "deleted" and "ask" or "reload"
+  end,
+})
+
+-- Save before handing a file off to another buffer (for example, an AI terminal).
+-- Neovim's 'autoread' file watcher can then reload external edits without a conflict.
+vim.api.nvim_create_autocmd("BufLeave", {
+  group = augroup("autosave_on_leave"),
+  nested = true, -- allow checktime to trigger FileChangedShell
+  callback = function(event)
+    local buf = event.buf
+
+    if vim.bo[buf].modified
+      and vim.bo[buf].modifiable
+      and vim.bo[buf].buftype == ""
+      and vim.api.nvim_buf_get_name(buf) ~= ""
+    then
+      vim.api.nvim_buf_call(buf, function()
+        -- Accept pending external edits before autosave can overwrite them.
+        vim.cmd("checktime " .. buf)
+        vim.cmd("silent update")
+      end)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  callback = function()
+    vim.hl.hl_op()
+  end,
+})
+
+-- equalize splits across all tabs when terminal is resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup("resize_splits"),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd.tabnext(current_tab)
+  end,
+})
+
+-- jump to last cursor position when reopening a file (mark " stores the position)
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("last_loc"),
+  callback = function(event)
+    local exclude = { "gitcommit" }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].config_last_loc then
+      return
+    end
+    vim.b[buf].config_last_loc = true -- guard against re-triggering on the same buffer
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
+-- map q to close transient/info buffers and hide them from buffer list
+vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
+  group = augroup("close_with_q"),
+  callback = function(event)
+    local patterns = {
+      "ClangdAST",
+      "ClangdTypeHierarchy",
+      "checkhealth",
+      "git",
+      "gitsigns-blame",
+      "help",
+      "lspinfo",
+      "neotest-output",
+      "neotest-output-panel",
+      "neotest-summary",
+      "notify",
+      "qf",
+      "startuptime",
+      "terminal",
+    }
+    local ft = vim.bo[event.buf].filetype
+    if vim.tbl_contains(patterns, ft) then
+      vim.bo[event.buf].buflisted = false
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(event.buf) then
+          vim.keymap.set("n", "q", function()
+            vim.cmd.close()
+            if not ft:match("neotest") and ft ~= "terminal" then -- neotest/terminal manage own
+              pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+            end
+          end, { buffer = event.buf, silent = true, desc = "Quit buffer" })
+        end
+      end)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = augroup("term_close_q"),
+  callback = function(ev)
+    vim.keymap.set("n", "q", "<cmd>close<CR>", {
+      buffer = ev.buf,
+      silent = true,
+      nowait = true,
+    })
+  end,
+})
+
+-- hide man pages from buffer list so :bnext/:bprev skip them
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("man_unlisted"),
+  pattern = { "man" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("wrap"),
+  pattern = { "text", "plaintex", "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("spellcheck"),
+  pattern = { "markdown", "text", "gitcommit" },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("json_conceal"),
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0 -- don't hide quotes in JSON
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("snacks_dashboard"),
+  pattern = { "snacks_dashboard" },
+  callback = function()
+    vim.opt_local.ruler = false
+    vim.opt_local.showcmd = false
+  end,
+})
+
+-- Use C headers for the pantadiw course repo; retain C++ elsewhere.
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("h_as_cpp"),
+  pattern = "*.h",
+  callback = function(event)
+    local path = vim.fs.normalize(vim.api.nvim_buf_get_name(event.buf))
+    local course_root = vim.fn.expand("~/Documents/School/369/pantadiw/")
+    vim.bo[event.buf].filetype = path:sub(1, #course_root) == course_root and "c" or "cpp"
+  end,
+})
+
+-- strip trailing whitespace on save for C/C++ files
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("trim_whitespace_cpp"),
+  pattern = { "*.c", "*.cpp", "*.cc", "*.h", "*.hpp" },
+  callback = function()
+    local view = vim.fn.winsaveview()
+    vim.cmd([[silent! %s/\s\+$//e]])
+    vim.fn.winrestview(view)
+  end,
+})
+
+-- auto-create parent directories when saving to a new path
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = augroup("auto_create_dir"),
+  callback = function(event)
+    if event.match:match("^%w%w+:[\\/][\\/]") then -- skip plugin URLs (oil://, fugitive://, etc.)
+      return
+    end
+    local file = vim.uv.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fs.dirname(file), "p")
+  end,
+})

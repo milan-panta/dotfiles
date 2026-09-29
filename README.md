@@ -7,24 +7,23 @@ Modular dotfiles for **macOS** and **Omarchy** (Arch Linux / Hyprland).
 ```text
 dotfiles/
 ├── common/             # Shared across both macOS and Omarchy
-│   ├── nvim/           # Neovim configuration
 │   ├── yazi/           # Yazi file manager
 │   ├── lazygit/        # Lazygit
 │   ├── mpv/            # MPV video player
 │   ├── gh-dash/        # GitHub CLI dashboard
 │   ├── tridactyl/      # Firefox Tridactyl bindings
-│   ├── vimium-c/       # Browser Vimium-C profiles
+│   ├── vimium-c/       # Vimium C key mappings (mac + linux) and CSS
 │   └── home/           # Files symlinked to $HOME (e.g. .ideavimrc)
 │
 ├── mac/                # macOS-specific configurations
-│   ├── alacritty/      # Alacritty (Command keys, macOS font sizes)
 │   ├── btop/           # btop with Apple GPU & gruvbox
 │   ├── ghostty/        # Ghostty with macOS Command user-keys
 │   ├── git/            # macOS Git settings (delta, codediff)
+│   ├── nvim/           # Neovim (gruvbox, pbcopy clipboard, lldb-dap)
 │   ├── starship.toml   # Custom multi-language Starship prompt
 │   ├── tmux/           # Tmux (Cmd user-keys, pbcopy, gruvbox)
-│   ├── yabai/          # macOS tiling window manager
-│   ├── skhd/           # macOS hotkey daemon
+│   ├── rift/           # Rift tiling window manager (virtual workspaces, bsp)
+│   ├── skhd/           # macOS hotkey daemon (app launchers + rift-cli bindings)
 │   └── home/           # macOS shell files (.zshrc, .zprofile)
 │
 ├── omarchy/            # Omarchy-specific configurations
@@ -33,9 +32,11 @@ dotfiles/
 │   ├── ghostty/        # Ghostty (epoll backend, Omarchy dynamic theme)
 │   ├── git/            # Omarchy Git settings (Delta pager, gh helper, codediff)
 │   ├── hypr/           # Hyprland (window manager, keybindings, monitors)
+│   ├── nvim/           # Neovim (Omarchy themes, Wayland/OSC 52 clipboard, gdb)
 │   ├── starship.toml   # Omarchy prompt
 │   └── tmux/           # Tmux (Alt keys, Omarchy theme, move-pane.sh)
 │
+├── macos-defaults.sh   # macOS system prefs (key repeat, Dock autohide)
 └── sync.sh             # Zero-dependency symlink sync script
 ```
 

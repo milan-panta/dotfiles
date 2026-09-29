@@ -38,6 +38,7 @@ Add a language:
 - latexmk or tectonic (optional, for VimTeX compilation and rendered math)
 
 This configuration targets Linux and integrates with Omarchy when available.
+The macOS counterpart lives in `mac/nvim`.
 
 ## Haskell
 

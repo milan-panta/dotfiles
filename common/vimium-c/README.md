@@ -1,7 +1,9 @@
 # Vimium C
 
-In Vimium C's extension options, paste `vimium-c.txt` into **Custom key mappings**
-and `vimium-c.css` into **Custom CSS for Vimium C UI**, then save. Reload an
+In Vimium C's extension options, paste the key mappings for your platform into
+**Custom key mappings**: `vimium-c-mac.txt` on macOS, `vimium-c-linux.txt` on
+Linux / Omarchy. Paste `vimium-c.css` (shared) into **Custom CSS for Vimium C UI**,
+then save. Reload an
 existing webpage to check the changes. These files are paste-in configuration;
 editing them here does not update the running extension automatically.
 
@@ -20,7 +22,7 @@ Release Shift before typing hint labels: modifier keys can change hint behavior.
 | --- | --- |
 | `f` | Click a link, button, or other interactive element. |
 | `F` | Open a link in a background tab, keeping this page active. |
-| `;F` | Keep choosing links to open in background tabs; Escape finishes. |
+| `;F` | Keep choosing links to open in background tabs; Escape finishes. (macOS: also Ctrl+F) |
 | `;f` | Focus an element without clicking it; also select where scrolling goes. |
 | `gi` | Focus a text input; Tab cycles through inputs. |
 | `;h` / `;H` | Hover / leave an element, useful for hover menus. |
@@ -63,7 +65,24 @@ finished tabs. For long pages, use `/` to jump to a phrase and `ma` to save your
 place before exploring elsewhere.
 
 This profile starts with `unmapAll`, so generic Vimium cheat sheets may list
-shortcuts that are not enabled here. Ctrl shortcuts remain available to Chromium.
+shortcuts that are not enabled here.
+
+## macOS vs Linux
+
+The two mapping files are identical apart from the modifier keys, because the
+browser and the window manager claim different modifiers on each platform:
+
+| | macOS | Linux / Omarchy |
+| --- | --- | --- |
+| Browser shortcuts | Cmd (Cmd+F finds, Cmd+D bookmarks) | Ctrl |
+| Window manager | Option (skhd/yabai: Option+h/j/k/l, a/s/d/f, …) | Super (Hyprland) |
+| Free for Vimium C | Ctrl | Alt |
+| Half-page scroll | Ctrl+D / Ctrl+U | Alt+J / Alt+K |
+| Pin / mute tab | Ctrl+P / Ctrl+M, or `gp` / `gm` | `gp` / `gm` |
+| Link queue | Ctrl+F, or `;F` | `;F` |
+
+On macOS, never map `<a-…>` keys: skhd consumes Option chords before Chrome sees
+them. On Linux, keep Ctrl free for Chromium.
 
 Upstream references: [command list](https://github.com/gdh1995/vimium-c/wiki/List-of-all-commands),
 [link actions](https://github.com/gdh1995/vimium-c/blob/master/content/link_actions.ts),

@@ -1,8 +1,19 @@
+local function nav(direction)
+  return function()
+    vim.schedule(function()
+      vim.cmd("TmuxNavigate" .. direction)
+    end)
+  end
+end
+
 return {
   "folke/sidekick.nvim",
   opts = {
     cli = {
       tools = {
+        claude = {
+          cmd = { "claude", "--dangerously-skip-permissions" },
+        },
         codex = {
           cmd = { "codex", "--yolo" },
         },
@@ -12,11 +23,14 @@ return {
         },
       },
       win = {
+        -- Sidekick's own nav actions send <C-h>/<C-l> to the CLI when the
+        -- window is at Neovim's edge; route through tmux-navigator instead so
+        -- the edge moves to the neighbouring tmux pane.
         keys = {
-          nav_left = { "<M-h>", "nav_left", expr = true, desc = "navigate to the left window" },
-          nav_down = { "<M-j>", "nav_down", expr = true, desc = "navigate to the below window" },
-          nav_up = { "<M-k>", "nav_up", expr = true, desc = "navigate to the above window" },
-          nav_right = { "<M-l>", "nav_right", expr = true, desc = "navigate to the right window" },
+          nav_left = { "<M-h>", nav("Left"), expr = false, desc = "navigate to the left window/pane" },
+          nav_down = { "<M-j>", nav("Down"), expr = false, desc = "navigate to the below window/pane" },
+          nav_up = { "<M-k>", nav("Up"), expr = false, desc = "navigate to the above window/pane" },
+          nav_right = { "<M-l>", nav("Right"), expr = false, desc = "navigate to the right window/pane" },
         },
         split = {
           width = 0,

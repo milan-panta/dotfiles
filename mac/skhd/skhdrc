@@ -2,127 +2,93 @@
 rcmd - return : open -na Ghostty
 rcmd - k : open -a Ghostty
 rcmd - j : open -a "Google Chrome"
-rcmd - p : pgrep -x mpv > /dev/null \
-          && yabai -m window --focus $(yabai -m query --windows | jq -r '.[] | select(.app == "mpv") | .id' | head -n 1) \
-          || /opt/homebrew/bin/mpv --idle
-rcmd - v : open -a "Visual Studio Code"
+rcmd - p : ~/.config/skhd/scripts/focus-mpv.sh
 shift + lcmd - j : open -na "Google Chrome"
 rcmd - b : open -a Messages
 rcmd - l : open -a Claude
-rcmd - c : open -a ~/Applications/Calendar.app
-rcmd - n : open -a Notion
+rcmd - c : open -a /Applications/Calendar.app
 rcmd - s : open -a Spotify
 rcmd - d : open -a Discord
-rcmd - z : open -a Zed
 rcmd - m : open -a Mail
-rcmd - t : open -a Things3
 rcmd - o : open -a OBS
 
 # open things in the terminal
 lcmd + ctrl - t : ~/.config/skhd/scripts/launch-tui.sh btop
 lcmd + ctrl - m : ~/.config/skhd/scripts/launch-tui.sh spotify_player
 
-# restart yabai hotkey
-ctrl + alt + cmd - r : yabai --restart-service
+# ---------- Window management (rift) ----------
+# Rift's native [keys] can't tell left/right modifiers apart, so bindings live
+# here and call rift-cli. Workspace ids are 0-based. Float toggle (lalt - t)
+# is in ~/.config/rift/config.toml: only Rift's own binding can center it.
 
-# toggle yabai tiling on current space (bsp <-> float)
-ctrl + alt + cmd - t : [ "$(yabai -m query --spaces --space | jq -r '.type')" = "bsp" ] \
-                      && yabai -m space --layout float \
-                      || yabai -m space --layout bsp
+# restart rift
+ctrl + alt + cmd - r : rift service restart
+
+# toggle tiling on the current workspace (bsp <-> float)
+ctrl + alt + cmd - t : ~/.config/skhd/scripts/toggle-layout.sh
 
 # focus window
-lalt - h : yabai -m window --focus west
-lalt - k : yabai -m window --focus north
-lalt - l : yabai -m window --focus east
-lalt - j : yabai -m window --focus south
+lalt - h : rift-cli execute window focus left
+lalt - k : rift-cli execute window focus up
+lalt - l : rift-cli execute window focus right
+lalt - j : rift-cli execute window focus down
 
-# rotate layout clockwise
-lalt - r : yabai -m space --rotate 270
-
-# flip along y-axis
-lalt - y : yabai -m space --mirror y-axis
-
-# flip along x-axis
-lalt - x : yabai -m space --mirror x-axis
-
-# toggle window float
-lalt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
-
-# toggle sticky (pip)
-shift + lalt - p : yabai -m window --toggle sticky
+# flip the focused split (closest rift equivalent of yabai's rotate)
+lalt - r : rift-cli execute layout toggle-orientation
 
 # maximize window
-lalt - m : yabai -m window --toggle zoom-fullscreen
+lalt - m : rift-cli execute window toggle-fullscreen
 
-# balance out tree of windows (resize to occupy same area)
-lalt - e : yabai -m space --balance
+# Fast focus workspaces
+lalt - 1 : rift-cli execute workspace switch 0
+lalt - 2 : rift-cli execute workspace switch 1
+lalt - 3 : rift-cli execute workspace switch 2
+lalt - 4 : rift-cli execute workspace switch 3
+lalt - 5 : rift-cli execute workspace switch 4
+lalt - 6 : rift-cli execute workspace switch 5
+lalt - 7 : rift-cli execute workspace switch 6
+lalt - 8 : rift-cli execute workspace switch 7
+lalt - 9 : rift-cli execute workspace switch 8
 
-# Fast focus spaces
-lalt - 1 : yabai -m space --focus 1
-lalt - 2 : yabai -m space --focus 2
-lalt - 3 : yabai -m space --focus 3
-lalt - 4 : yabai -m space --focus 4
-lalt - 5 : yabai -m space --focus 5
-lalt - 6 : yabai -m space --focus 6
-lalt - 7 : yabai -m space --focus 7
-lalt - 8 : yabai -m space --focus 8
-lalt - 9 : yabai -m space --focus 9
-
-# Move window to space and focus space
-lalt + shift - 1 : yabai -m window --space 1 --focus
-lalt + shift - 2 : yabai -m window --space 2 --focus
-lalt + shift - 3 : yabai -m window --space 3 --focus
-lalt + shift - 4 : yabai -m window --space 4 --focus
-lalt + shift - 5 : yabai -m window --space 5 --focus
-lalt + shift - 6 : yabai -m window --space 6 --focus
-lalt + shift - 7 : yabai -m window --space 7 --focus
-lalt + shift - 8 : yabai -m window --space 8 --focus
-lalt + shift - 9 : yabai -m window --space 9 --focus
+# Move window to workspace and focus workspace
+lalt + shift - 1 : rift-cli execute workspace move-window --follow 0
+lalt + shift - 2 : rift-cli execute workspace move-window --follow 1
+lalt + shift - 3 : rift-cli execute workspace move-window --follow 2
+lalt + shift - 4 : rift-cli execute workspace move-window --follow 3
+lalt + shift - 5 : rift-cli execute workspace move-window --follow 4
+lalt + shift - 6 : rift-cli execute workspace move-window --follow 5
+lalt + shift - 7 : rift-cli execute workspace move-window --follow 6
+lalt + shift - 8 : rift-cli execute workspace move-window --follow 7
+lalt + shift - 9 : rift-cli execute workspace move-window --follow 8
 
 # focus monitor
-lcmd + shift - l  : yabai -m display --focus prev
-lcmd + shift - h  : yabai -m display --focus next
+lcmd + shift - l : rift-cli execute display focus --direction right
+lcmd + shift - h : rift-cli execute display focus --direction left
 
 # send window to monitor and follow focus
-ctrl + lcmd - l  : yabai -m window --display prev; yabai -m display --focus prev
-ctrl + lcmd - h  : yabai -m window --display next; yabai -m display --focus next
-
-# window oapcity
-alt + ctrl - t : yabai -m window --opacity 0.60
-alt + ctrl - o : yabai -m window --opacity 1.0
+ctrl + lcmd - l : rift-cli execute display move-window --direction right; rift-cli execute display focus --direction right
+ctrl + lcmd - h : rift-cli execute display move-window --direction left; rift-cli execute display focus --direction left
 
 # swap windows
-shift + lalt - j : yabai -m window --swap south
-shift + lalt - k : yabai -m window --swap north
-shift + lalt - h : yabai -m window --swap west
-shift + lalt - l : yabai -m window --swap east
-
-# swap windows and split
-ctrl + lalt - j : yabai -m window --warp south
-ctrl + lalt - k : yabai -m window --warp north
-ctrl + lalt - h : yabai -m window --warp west
-ctrl + lalt - l : yabai -m window --warp east
-
-# move window
-shift + lalt - a : yabai -m window --move rel:-20:0
-shift + lalt - s : yabai -m window --move rel:0:20
-shift + lalt - w : yabai -m window --move rel:0:-20
-shift + lalt - d : yabai -m window --move rel:20:0
+shift + lalt - j : rift-cli execute layout move-node down
+shift + lalt - k : rift-cli execute layout move-node up
+shift + lalt - h : rift-cli execute layout move-node left
+shift + lalt - l : rift-cli execute layout move-node right
 
 # increase window size
-ralt - left : yabai -m window --resize left:-20:0
-ralt - down : yabai -m window --resize bottom:0:20
-ralt - up : yabai -m window --resize top:0:-20
-ralt - right : yabai -m window --resize right:20:0
+ralt - left : rift-cli execute window resize-grow --orientation horizontal
+ralt - right : rift-cli execute window resize-grow --orientation horizontal
+ralt - up : rift-cli execute window resize-grow --orientation vertical
+ralt - down : rift-cli execute window resize-grow --orientation vertical
 
 # decrease window size
-rcmd - left : yabai -m window --resize left:20:0
-rcmd - down : yabai -m window --resize bottom:0:-20
-rcmd - up : yabai -m window --resize top:0:20
-rcmd - right : yabai -m window --resize right:-20:0
+rcmd - left : rift-cli execute window resize-shrink --orientation horizontal
+rcmd - right : rift-cli execute window resize-shrink --orientation horizontal
+rcmd - up : rift-cli execute window resize-shrink --orientation vertical
+rcmd - down : rift-cli execute window resize-shrink --orientation vertical
 
 # resize windows
-lalt - a : yabai -m window --resize right:-20:0 2> /dev/null || yabai -m window --resize left:-20:0 2> /dev/null
-lalt - s : yabai -m window --resize bottom:0:20 2> /dev/null || yabai -m window --resize top:0:20 2> /dev/null
-lalt - d : yabai -m window --resize bottom:0:-20 2> /dev/null || yabai -m window --resize top:0:-20 2> /dev/null
-lalt - f : yabai -m window --resize right:20:0 2> /dev/null || yabai -m window --resize left:20:0 2> /dev/null
+lalt - a : rift-cli execute window resize-shrink --orientation horizontal
+lalt - f : rift-cli execute window resize-grow --orientation horizontal
+lalt - s : rift-cli execute window resize-grow --orientation vertical
+lalt - d : rift-cli execute window resize-shrink --orientation vertical

@@ -1,0 +1,62 @@
+return {
+  "saghen/blink.cmp",
+  version = "1.*",
+  event = { "InsertEnter", "CmdlineEnter" },
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+  },
+
+  opts = {
+    fuzzy = { implementation = "prefer_rust_with_warning" },
+    keymap = {
+      preset = "super-tab",
+      ["<C-b>"] = { "scroll_documentation_up", "scroll_signature_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "scroll_signature_down", "fallback" },
+    },
+
+    appearance = {
+      nerd_font_variant = "mono",
+    },
+
+    cmdline = {
+      keymap = { preset = "inherit" },
+      completion = { menu = { auto_show = true } },
+    },
+
+    completion = {
+      menu = { auto_show = true, max_height = 20 },
+      list = { max_items = 50 },
+      documentation = { auto_show = true, auto_show_delay_ms = 50 },
+      ghost_text = { enabled = false },
+      accept = { auto_brackets = { enabled = true } },
+    },
+
+    signature = {
+      enabled = true,
+      window = { show_documentation = true, scrollbar = true },
+    },
+
+    sources = {
+      default = { "filemention", "lsp", "path", "snippets", "buffer" },
+      providers = {
+        filemention = {
+          name = "filemention",
+          module = "filemention.sources.blink",
+        },
+        lsp = {
+          transform_items = function(_, items)
+            -- Filter out Text (1) and Reference (18) from markdown files (likely marksman headers)
+            if vim.bo.filetype == "markdown" then
+              local kind = require("blink.cmp.types").CompletionItemKind
+              return vim.tbl_filter(function(item)
+                return item.kind ~= kind.Text and item.kind ~= kind.Reference
+              end, items)
+            end
+            return items
+          end,
+        },
+      },
+    },
+  },
+  opts_extend = { "sources.default" },
+}

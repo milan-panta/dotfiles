@@ -1,5 +1,11 @@
 # ---------- PATH ----------
 export PATH="$HOME/.local/bin:$PATH"
+# Neovim nightly managed by bob (`bob update nightly`)
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+# Rust: Homebrew's rustup is keg-only; cargo-installed binaries go in ~/.cargo/bin
+export PATH="$HOME/.cargo/bin:$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
+# Haskell: GHC, cabal, and HLS selected in GHCup
+export PATH="$HOME/.ghcup/bin:$PATH"
 
 # ---------- Completions (must precede autocomplete) ----------
 FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
@@ -68,6 +74,7 @@ alias n="nvim"
 alias pl="NVIM_APPNAME=PureLazy nvim"
 alias epath='tr ":" "\n" <<< "$PATH"'
 alias lg="lazygit"
+alias cx="claude --dangerously-skip-permissions"
 alias l="yazi"
 alias ls="eza -lh --group-directories-first --icons=auto"
 alias lt="eza --tree --level=2 --long --icons --git"

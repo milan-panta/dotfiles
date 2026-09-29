@@ -52,6 +52,7 @@ keybind = command+k=text:\x1b[107;9~
 keybind = command+l=text:\x1b[108;9~
 keybind = command+t=text:\x1b[116;9~
 keybind = command+w=text:\x1b[119;9~
+keybind = command+y=text:\x1b[121;9~
 keybind = command+semicolon=text:\x1b[59;9~
 keybind = command+backspace=text:\x15
 keybind = option+backspace=text:\x17

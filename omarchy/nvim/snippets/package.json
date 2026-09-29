@@ -1,0 +1,34 @@
+{
+  "name": "snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "tex"
+        ],
+        "path": "tex.json"
+      },
+      {
+        "language": [
+          "cpp"
+        ],
+        "path": "cpp.json"
+      },
+      {
+        "language": [
+          "c"
+        ],
+        "path": "c.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "typescript",
+          "javascriptreact",
+          "typescriptreact"
+        ],
+        "path": "js.json"
+      }
+    ]
+  }
+}

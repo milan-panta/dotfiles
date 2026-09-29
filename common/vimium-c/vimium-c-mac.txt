@@ -1,0 +1,121 @@
+# Vimium C — macOS
+# Paste into "Custom key mappings" in Vimium C's options.
+# Chrome's own shortcuts live on Cmd (find, print, bookmark, tabs, clipboard),
+# so Ctrl is free for Vimium C. Option is reserved for skhd/yabai
+# (Option+h/j/k/l focus windows, Option+a/s/d/f resize, etc.): never map <a-*>.
+# Letter sequences below apply in normal mode, not while typing in a field.
+unmapAll
+
+# Release the negative-count prefix before mapping "-" to zoom out.
+unmap -
+
+# --- Navigation (Scrolling) ---
+map j scrollDown
+map k scrollUp
+map h scrollLeft
+map l scrollRight
+# Half-page scrolling; leave d for the video speed controller and u for restoreTab.
+map <c-d> scrollPageDown
+map <c-u> scrollPageUp
+map gg scrollToTop
+map G scrollToBottom
+
+# --- Tabs ---
+map t Vomnibar.activateInNewTab
+map b Vomnibar.activateTabs
+map u restoreTab
+map K previousTab
+map J nextTab
+map D removeTab
+map g0 firstTab
+map g$ lastTab
+map <backspace> visitPreviousTab
+map <c-p> togglePinTab
+map <c-m> toggleMuteTab
+# Same as on Linux, so muscle memory carries across machines.
+map gp togglePinTab
+map gm toggleMuteTab
+map W moveTabToNextWindow
+map << moveTabLeft
+map >> moveTabRight
+map gX closeOtherTabs
+
+# --- History ---
+map H goBack
+map L goForward
+
+# --- URL Navigation ---
+map gu goUp
+map gU goToRoot
+map [[ goPrevious
+map ]] goNext
+
+# --- Vomnibar & URLs ---
+map o Vomnibar.activate
+map O Vomnibar.activateInNewTab
+map T Vomnibar.activateTabs
+map ge Vomnibar.activateEditUrl
+map gE Vomnibar.activateEditUrlInNewTab
+map B Vomnibar.activateBookmarksInNewTab
+
+# --- Clipboard / Yank ---
+map yy copyCurrentUrl
+map yt copyCurrentTitle
+map yw copyWindowInfo
+map p openCopiedUrlInCurrentTab
+map P openCopiedUrlInNewTab
+
+# --- Link Hints ---
+map f LinkHints.activate
+# Open real link URLs directly, bypassing sites that intercept Ctrl+click.
+# Vimium C 2.12.2 needs action2="*//-1" to let newtab choose the click action.
+# Avoid leaving focus / simulated hover on the original link.
+map F LinkHints.activateOpenInNewTab newtab="force" action2="*//-1" focus=false autoUnhover=true
+# Open several links in background tabs; Escape finishes the queue.
+# Ctrl+F is free here because Chrome's find is Cmd+F; ;F matches Linux.
+map <c-f> LinkHints.activateWithQueue newtab="force" action2="*//-1" focus=false autoUnhover=true
+map ;F LinkHints.activateWithQueue newtab="force" action2="*//-1" focus=false autoUnhover=true
+map ;i LinkHints.activateOpenImage
+map ;I LinkHints.activateDownloadImage
+map ;d LinkHints.activateDownloadLink
+map ;h LinkHints.activateHover
+map ;H LinkHints.activateLeave
+# Focus an element / scrollable pane without clicking it (not "follow link").
+map ;f LinkHints.activateFocus
+map ;y LinkHints.activateCopyLinkUrl
+map ;o LinkHints.activateOpenVomnibar
+map ;s LinkHints.activateSearchLinkText
+map ;e LinkHints.activateEdit
+map ;v LinkHints.activateSelect
+
+# --- Search / Find ---
+map / enterFindMode
+map n performFind
+map N performBackwardsFind
+map * searchAs
+
+# --- Zoom ---
+map - zoomOut
+map = zoomIn
+
+# --- Marks ---
+map m Marks.activateCreate
+map ` Marks.activate
+
+# --- Insert Mode Toggle (like Tridactyl) ---
+# Shift+Escape toggles insert mode on/off. Keep this binding unchanged.
+# hideHUD=true shows a brief entry notice instead of a persistent banner.
+map <s-esc> enterInsertMode key="<s-esc>" hideHUD=true
+map <s-esc:i> reset
+
+# --- Frames ---
+map gf nextFrame
+map gF mainFrame
+
+# --- Inputs & Misc ---
+map gi focusInput
+map r reload
+map R reload hard
+map gs toggleViewSource
+map gr toggleReaderMode
+map ? showHelp

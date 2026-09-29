@@ -1,0 +1,115 @@
+# Rift tiling window manager (replaces yabai).
+# Hotkeys live in ~/.config/skhd/skhdrc and call `rift-cli`, so left/right
+# modifiers stay distinct (Rift's own [keys] can't tell them apart).
+# Unset options use Rift's defaults: /opt/homebrew/opt/rift/share/rift/rift.default.toml
+
+[settings]
+animate = false
+# Manage every macOS Space without pressing an activation key first.
+default_disable = false
+mouse_follows_focus = false
+mouse_hides_on_focus = false
+focus_follows_mouse = false
+hot_reload = true
+# Launchers shouldn't pull you to another workspace when they open.
+auto_focus_blacklist = ["com.raycast.macos"]
+
+[settings.layout]
+mode = "bsp"
+window_insertion_point = "next_to_selection"
+
+[settings.layout.gaps.outer]
+top = 0.0
+left = 0.0
+bottom = 0.0
+right = 0.0
+
+[settings.layout.gaps.inner]
+horizontal = 0.0
+vertical = 0.0
+
+# Hold fn and drag to move a window. Drop in a window's center to swap with it,
+# or near its edge to split next to it (yabai's mouse warp).
+[settings.drag_drop]
+enabled = true
+modifier = "fn"
+action1 = "move"
+drop_action = "swap"
+
+[virtual_workspaces]
+default_workspace_count = 9
+workspace_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+default_workspace = 0
+
+# Floating apps (yabai's manage=off rules).
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.calculator"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.archiveutility"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.systempreferences"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.DigitalColorMeter"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.QuickTimePlayerX"
+title_substring = "Movie Recording"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.FaceTime"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.mobilephone"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.ScreenContinuity"  # iPhone Mirroring
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_name = "mpv"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_name = "main"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_name = "Flow"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_name = "Numi"
+floating = true
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.raycast.macos"
+manage = false
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.apple.controlcenter"
+manage = false
+
+# TUI popups from skhd/scripts/launch-tui.sh (Ghostty with a fixed title).
+[[virtual_workspaces.app_rules]]
+app_id = "com.mitchellh.ghostty"
+title_substring = "tui-popup"
+floating = true
+position = { x = 0.5, y = 0.5 }
+size = { w = 1536.0, h = 792.0 }
+
+# Every other hotkey is in skhd. Keep this table: removing it brings back Rift's
+# bundled keymap (Alt+H/J/K/L, Alt+Z, ...).
+[keys]
+# Float: starts centered at half the screen (yabai's `--grid 4:4:1:1:2:2`).
+# Bound here because rift-cli's toggle-float can't center or size a window.
+"Alt + T" = { toggle_window_floating = { center = true, size = { w = 1280.0, h = 660.0 } } }

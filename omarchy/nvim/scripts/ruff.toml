@@ -1,0 +1,2 @@
+line-length = 120
+extend-exclude = ["fixtures"]  # fixture files are test input; their exact text matters

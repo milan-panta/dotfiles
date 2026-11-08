@@ -1,36 +1,29 @@
+local function git()
+  return require("config.git")
+end
+
 return {
   "esmuellert/codediff.nvim",
   dependencies = { "MunifTanjim/nui.nvim" },
   cmd = "CodeDiff",
+  -- stylua: ignore
   keys = {
-    { "<leader>gd", "<cmd>CodeDiff<cr>", desc = "Changes Explorer" },
-    {
-      "<leader>gD",
-      function()
-        vim.ui.input({ prompt = "Revision: " }, function(input)
-          if input then
-            vim.cmd("CodeDiff " .. input)
-          end
-        end)
-      end,
-      desc = "Changes Explorer vs Revision",
-    },
-    { "<leader>gp", "<cmd>CodeDiff main...<cr>", desc = "PR Changes (vs main)" },
-    { "<leader>gh", "<cmd>CodeDiff history<cr>", desc = "Repo History" },
-    { "<leader>gH", "<cmd>CodeDiff history %<cr>", desc = "File History" },
-    { "<leader>gc", "<cmd>CodeDiff history --base WORKING<cr>", desc = "Repo History (diff vs working)" },
-    { "<leader>gC", "<cmd>CodeDiff history --base WORKING %<cr>", desc = "File History (diff vs working)" },
-    { "<leader>gf", "<cmd>CodeDiff file HEAD<cr>", desc = "Diff File vs HEAD" },
-    {
-      "<leader>gF",
-      function()
-        vim.ui.input({ prompt = "Revision(s): " }, function(input)
-          if input then
-            vim.cmd("CodeDiff file " .. input)
-          end
-        end)
-      end,
-      desc = "Diff File vs Revision",
+    { "<leader>gd", "<cmd>CodeDiff<cr>", desc = "Diff My Changes" },
+    { "<leader>gD", function() git().diff_against() end, desc = "Diff Against Branch…" },
+    { "<leader>gp", function() git().branch_changes() end, desc = "Diff This Branch (what a PR would contain)" },
+    { "<leader>gi", function() git().incoming() end, desc = "Incoming Commits (fetch first)" },
+    { "<leader>gh", "<cmd>CodeDiff history %<cr>", desc = "History of This File" },
+    { "<leader>gH", "<cmd>CodeDiff history<cr>", desc = "History of the Repo" },
+    { "<leader>gm", function() git().conflicts() end, desc = "Resolve Merge Conflicts" },
+  },
+  opts = {
+    keymaps = {
+      view = {
+        -- <leader>b is a prefix of the build keys and would wait; gc is the comment operator.
+        toggle_explorer = "<leader>e",
+        focus_explorer = false,
+        toggle_compact = "gz",
+      },
     },
   },
 }

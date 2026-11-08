@@ -107,7 +107,7 @@ local ghcup_bin = vim.fn.expand("~/.ghcup/bin")
 M.system_servers = {
   hls = {
     cmd = { ghcup_bin .. "/haskell-language-server-wrapper", "--lsp" },
-    -- Keep HLS and its child processes on the course's GHCup toolchain,
+    -- Keep HLS and its child processes on the GHC selected in GHCup,
     -- even when Mason has prepended its own bin directory to Neovim's PATH.
     cmd_env = { PATH = ghcup_bin .. ":" .. (vim.env.PATH or "") },
   },
@@ -134,6 +134,7 @@ M.formatters_by_ft = {
 
 M.linters_by_ft = {
   go = { "golangcilint" },
+  python = { "ruff" }, -- reads the project's [tool.ruff] settings
 }
 
 -- DAP adapters managed by Mason. GDB is provided by the Linux system and
@@ -147,6 +148,7 @@ M.ensure_installed = {
   "biome",
   "buildifier",
   "clang-format",
+  "debugpy", -- also via mason-nvim-dap, but that only runs once nvim-dap loads
   "delve",
   "gofumpt",
   "goimports",

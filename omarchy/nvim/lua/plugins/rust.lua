@@ -12,7 +12,8 @@ return {
         -- debuggables and using GDB as the underlying DAP process.
         adapter = {
           type = "executable",
-          command = "gdb",
+          -- rust-gdb loads the printers that make Vec, String and Option readable.
+          command = vim.fn.executable("rust-gdb") == 1 and "rust-gdb" or "gdb",
           args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
           name = "gdb",
         },
@@ -24,7 +25,7 @@ return {
         on_attach = function(_, bufnr)
           -- stylua: ignore start
           local map = function(keys, cmd, desc)
-            vim.keymap.set("n", keys, cmd, { buffer = bufnr, desc = "Rust: " .. desc })
+            vim.keymap.set("n", keys, cmd, { buf = bufnr, desc = "Rust: " .. desc })
           end
 
           map("<leader>cR", function() vim.cmd.RustLsp("runnables") end, "Runnables")
@@ -34,9 +35,9 @@ return {
           map("<leader>cP", function() vim.cmd.RustLsp("parentModule") end, "Parent Module")
           map("<leader>co", function() vim.cmd.RustLsp("openDocs") end, "Open docs.rs")
           map("<leader>cC", function() vim.cmd.RustLsp("openCargo") end, "Open Cargo.toml")
-          map("<leader>dR", function() vim.cmd.RustLsp("debuggables") end, "Debuggables")
+          map("<leader>dD", function() vim.cmd.RustLsp("debuggables") end, "Debuggables")
           map("<leader>st", function() vim.cmd.RustLsp("testables") end, "Testables")
-          map("K", function() vim.cmd.RustLsp({ "hover", "actions" }) end, "Hover Actions")
+          map("K", function() require("config.debug").hover_or(function() vim.cmd.RustLsp({ "hover", "actions" }) end) end, "Hover Actions, or Value While Debugging")
           -- stylua: ignore end
         end,
         default_settings = {

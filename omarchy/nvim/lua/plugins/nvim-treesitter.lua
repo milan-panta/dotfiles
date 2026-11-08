@@ -4,7 +4,7 @@ return {
   build = ":TSUpdate",
   event = { "BufReadPre", "BufNewFile" },
   lazy = vim.fn.argc(-1) == 0, -- Load early when opening a file from cmdline
-  cmd = { "TSUpdate", "TSInstall", "TSInstallInfo" },
+  cmd = { "TSUpdate", "TSInstall" },
   config = function()
     local tools = require("config.tools")
     local ts = require("nvim-treesitter")
@@ -48,6 +48,10 @@ return {
       end
     end
 
+    -- Treesitter indent guesses wrong whenever the tree has ERROR nodes, i.e.
+    -- constantly while typing. Python's built-in regex indent is more reliable.
+    local builtin_indent = { python = true }
+
     vim.api.nvim_create_autocmd("FileType", {
       group = vim.api.nvim_create_augroup("treesitter_features", { clear = true }),
       callback = function(event)
@@ -60,7 +64,7 @@ return {
         start_highlighting(event.buf, lang)
 
         -- Compile indentation queries only when indentation is requested.
-        if #vim.treesitter.query.get_files(lang, "indents") > 0 then
+        if not builtin_indent[lang] and #vim.treesitter.query.get_files(lang, "indents") > 0 then
           vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
       end,

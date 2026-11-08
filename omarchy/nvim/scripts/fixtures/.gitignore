@@ -1,0 +1,10 @@
+# Built by ../setup-fixtures.sh
+*/.git/
+.venv/
+build/
+target/
+large/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+go/fixture

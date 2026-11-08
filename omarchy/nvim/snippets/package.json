@@ -22,6 +22,12 @@
       },
       {
         "language": [
+          "python"
+        ],
+        "path": "python.json"
+      },
+      {
+        "language": [
           "javascript",
           "typescript",
           "javascriptreact",

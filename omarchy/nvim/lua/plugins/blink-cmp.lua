@@ -24,9 +24,9 @@ return {
     },
 
     completion = {
-      menu = { auto_show = true, max_height = 20 },
+      menu = { auto_show = true, max_height = 20, border = "none" },
       list = { max_items = 50 },
-      documentation = { auto_show = true, auto_show_delay_ms = 50 },
+      documentation = { auto_show = true, auto_show_delay_ms = 50, window = { border = "padded" } },
       ghost_text = { enabled = false },
       accept = { auto_brackets = { enabled = true } },
     },

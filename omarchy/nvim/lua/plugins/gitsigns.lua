@@ -1,8 +1,10 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = { "BufReadPost", "BufNewFile" },
+  -- After the first screen is drawn, so opening a file doesn't wait for it.
+  event = "VeryLazy",
   opts = {
-    signcolumn = false,
+    -- Thin bars in the space the statuscolumn already keeps for git (snacks.lua).
+    signcolumn = true,
     signs = {
       add = { text = "▎" },
       change = { text = "▎" },
@@ -22,7 +24,7 @@ return {
       local gs = package.loaded.gitsigns
 
       local function map(mode, l, r, desc)
-        vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc, silent = true })
+        vim.keymap.set(mode, l, r, { buf = buffer, desc = desc, silent = true })
       end
 
       -- stylua: ignore start
@@ -45,10 +47,11 @@ return {
       map({ "n", "x" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
       map({ "n", "x" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
       map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
-      map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
+      -- stage_hunk on a staged hunk unstages it (undo_stage_hunk is deprecated).
+      map({ "n", "x" }, "<leader>hu", ":Gitsigns stage_hunk<CR>", "Unstage Hunk")
       map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
       map("n", "<leader>hp", gs.preview_hunk_inline, "Preview Hunk Inline")
-      map("n", "<leader>ub", function() gs.blame() end, "Blame Buffer")
+      map("n", "<leader>gB", function() gs.blame() end, "Blame Whole File")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
     end,
   },

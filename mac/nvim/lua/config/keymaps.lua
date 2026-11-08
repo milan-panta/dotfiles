@@ -58,8 +58,7 @@ map("n", "<M-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<M-Right>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<M-Left>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
-local runner_pane_id = nil
-local build_pane_id = nil
+local output_pane_id = nil
 local cpu_count = tostring(#vim.uv.cpu_info())
 
 local function tmux_pane_exists(pane_id)
@@ -68,6 +67,36 @@ local function tmux_pane_exists(pane_id)
   end
   local result = vim.system({ "tmux", "display-message", "-p", "-t", pane_id, "#{pane_dead}" }):wait()
   return result.code == 0 and result.stdout and vim.trim(result.stdout) == "0"
+end
+
+-- Run cmd in a tmux pane split to the right of Neovim. The pane is reused (interrupting whatever
+-- it was running) until closed, even after being moved to another window.
+local function run_in_pane(cmd)
+  if not vim.env.TMUX then
+    vim.cmd("botright vsplit")
+    vim.cmd.terminal(cmd)
+    vim.cmd.startinsert()
+    return
+  end
+
+  if tmux_pane_exists(output_pane_id) then
+    vim.system({ "tmux", "send-keys", "-t", output_pane_id, "C-c" }):wait()
+    vim.system({ "tmux", "send-keys", "-t", output_pane_id, cmd, "Enter" })
+    return
+  end
+
+  local split = { "tmux", "split-window", "-h", "-d", "-l", "40%", "-P", "-F", "#{pane_id}", "-c", vim.fn.getcwd() }
+  if vim.env.TMUX_PANE then
+    vim.list_extend(split, { "-t", vim.env.TMUX_PANE })
+  end
+  local result = vim.system(split):wait()
+  if result.code ~= 0 or not result.stdout or result.stdout == "" then
+    vim.notify("Failed to create tmux pane", vim.log.levels.ERROR)
+    return
+  end
+
+  output_pane_id = vim.trim(result.stdout)
+  vim.system({ "tmux", "send-keys", "-t", output_pane_id, cmd, "Enter" })
 end
 
 local function RunFile(args, mode)
@@ -110,27 +139,7 @@ local function RunFile(args, mode)
     return
   end
 
-  if not vim.env.TMUX then
-    vim.cmd.split()
-    vim.cmd.terminal(cmd)
-    vim.cmd.startinsert()
-    return
-  end
-
-  if tmux_pane_exists(runner_pane_id) then
-    vim.system({ "tmux", "send-keys", "-t", runner_pane_id, "C-c" }):wait()
-    vim.system({ "tmux", "send-keys", "-t", runner_pane_id, cmd, "Enter" })
-    return
-  end
-
-  local result = vim.system({ "tmux", "new-window", "-d", "-P", "-F", "#{pane_id}" }):wait()
-  if result.code ~= 0 or not result.stdout or result.stdout == "" then
-    vim.notify("Failed to create tmux window", vim.log.levels.ERROR)
-    return
-  end
-
-  runner_pane_id = result.stdout:gsub("%s+", "")
-  vim.system({ "tmux", "send-keys", "-t", runner_pane_id, cmd, "Enter" })
+  run_in_pane(cmd)
 end
 
 map("n", "<leader>rr", function()
@@ -157,28 +166,9 @@ map("n", "<leader>ro", function()
   RunFileWithArgs("release")
 end, { silent = true, desc = "Run file optimized (args)" })
 
-local function run_build_cmd(cmd)
-  if vim.env.TMUX then
-    if tmux_pane_exists(build_pane_id) then
-      vim.system({ "tmux", "send-keys", "-t", build_pane_id, "C-c" }):wait()
-      vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
-      return
-    end
-    local result = vim.system({ "tmux", "new-window", "-d", "-P", "-F", "#{pane_id}" }):wait()
-    if result.code == 0 and result.stdout and result.stdout ~= "" then
-      build_pane_id = result.stdout:gsub("%s+", "")
-      vim.system({ "tmux", "send-keys", "-t", build_pane_id, cmd, "Enter" })
-    end
-  else
-    vim.cmd.split()
-    vim.cmd.terminal(cmd)
-    vim.cmd.startinsert()
-  end
-end
-
 -- Build System Keymaps
 map("n", "<leader>bn", function()
-  run_build_cmd("ninja -C build")
+  run_in_pane("ninja -C build")
 end, { desc = "Ninja build" })
 
 map("n", "<leader>bp", function()
@@ -188,7 +178,7 @@ map("n", "<leader>bp", function()
     return
   end
   vim.notify("Building with " .. name, vim.log.levels.INFO)
-  run_build_cmd(cmd)
+  run_in_pane(cmd)
 end, { desc = "Build project (auto)" })
 
 -- Copy file:line to system clipboard
@@ -214,14 +204,14 @@ end, { desc = "Copy file:line range" })
 
 -- CMake build
 map("n", "<leader>bc", function()
-  run_build_cmd("cmake --build build -j" .. cpu_count)
+  run_in_pane("cmake --build build -j" .. cpu_count)
 end, { silent = true, desc = "CMake build" })
 
 -- Bazel build
 map("n", "<leader>bb", function()
-  run_build_cmd("bazel build //...")
+  run_in_pane("bazel build //...")
 end, { silent = true, desc = "Bazel Build All" })
 
 map("n", "<leader>bt", function()
-  run_build_cmd("bazel test //...")
+  run_in_pane("bazel test //...")
 end, { silent = true, desc = "Bazel Test All" })

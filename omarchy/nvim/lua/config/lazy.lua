@@ -39,8 +39,7 @@ require("lazy").setup({
     rtp = {
       disabled_plugins = {
         "gzip",
-        "matchit",
-        "matchparen",
+        "matchit", -- 3.7 ms to source; loaded after startup instead (autocmds.lua)
         "netrwPlugin",
         "tarPlugin",
         "rplugin",

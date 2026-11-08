@@ -18,7 +18,8 @@ vim.api.nvim_create_autocmd("BufLeave", {
   callback = function(event)
     local buf = event.buf
 
-    if vim.bo[buf].modified
+    if
+      vim.bo[buf].modified
       and vim.bo[buf].modifiable
       and vim.bo[buf].buftype == ""
       and vim.api.nvim_buf_get_name(buf) ~= ""
@@ -93,11 +94,12 @@ vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
       vim.schedule(function()
         if vim.api.nvim_buf_is_valid(event.buf) then
           vim.keymap.set("n", "q", function()
-            vim.cmd.close()
-            if not ft:match("neotest") and ft ~= "terminal" then -- neotest/terminal manage own
+            -- The last window can't close (E444); deleting the buffer shows the previous one.
+            local closed = pcall(vim.cmd.close)
+            if not ft:match("neotest") and ft ~= "terminal" or not closed then -- neotest/terminal manage own
               pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
             end
-          end, { buffer = event.buf, silent = true, desc = "Quit buffer" })
+          end, { buf = event.buf, silent = true, desc = "Quit buffer" })
         end
       end)
     end
@@ -108,7 +110,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   group = augroup("term_close_q"),
   callback = function(ev)
     vim.keymap.set("n", "q", "<cmd>close<CR>", {
-      buffer = ev.buf,
+      buf = ev.buf,
       silent = true,
       nowait = true,
     })
@@ -176,6 +178,33 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     local view = vim.fn.winsaveview()
     vim.cmd([[silent! %s/\s\+$//e]])
     vim.fn.winrestview(view)
+  end,
+})
+
+-- matchit costs 3.7 ms to source, so load it once the first screen is drawn.
+vim.api.nvim_create_autocmd("User", {
+  group = augroup("matchit"),
+  pattern = "VeryLazy",
+  once = true,
+  callback = function()
+    vim.cmd.packadd("matchit")
+  end,
+})
+
+-- Matchparen's search stalls Neovim on huge lines. Snacks runs :NoMatchParen for a big
+-- file, which turns it off everywhere, so turn it back on when focus moves to another
+-- buffer. Only BufEnter: FileType also fires for hidden buffers, with them made current.
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = augroup("matchparen_bigfile"),
+  callback = function()
+    if vim.fn.exists(":DoMatchParen") ~= 2 then
+      return
+    end
+    local on = #vim.api.nvim_get_autocmds({ group = "matchparen", event = "CursorMoved" }) > 0
+    local want = vim.bo.filetype ~= "bigfile"
+    if on ~= want then
+      vim.cmd(want and "DoMatchParen" or "NoMatchParen")
+    end
   end,
 })
 

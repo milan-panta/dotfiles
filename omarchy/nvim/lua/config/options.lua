@@ -11,7 +11,7 @@ opt.scrolloff = 8
 opt.wrap = false
 opt.fillchars:append({ eob = " " }) -- hide ~ after end of buffer
 opt.mousescroll = "ver:1,hor:4"
-opt.colorcolumn = "80"
+opt.colorcolumn = "120" -- ruff and stylua line length
 
 opt.autoread = true
 opt.swapfile = false
@@ -20,6 +20,7 @@ opt.undofile = true
 opt.undolevels = 1000
 opt.undoreload = 10000
 opt.confirm = true
+opt.exrc = true -- load a project's .nvim.lua, after a one-time :trust prompt
 
 opt.splitright = true
 opt.splitbelow = true
@@ -32,6 +33,13 @@ opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.smartindent = true
+
+-- Built-in Python indent: one level inside brackets (ruff/black style, not 2)
+vim.g.python_indent = {
+  open_paren = "shiftwidth()",
+  continue = "shiftwidth()",
+  closed_paren_align_last_line = false,
+}
 
 opt.ignorecase = true
 opt.smartcase = true
@@ -55,6 +63,10 @@ opt.diffopt:append("indent-heuristic")
 
 opt.timeout = true
 opt.timeoutlen = 200
+
+-- One border style for floats you read (hover, signature, diagnostics, pickers, inputs).
+-- The completion menu stays flat, like the built-in popup menu (blink-cmp.lua).
+opt.winborder = "rounded"
 
 opt.pumheight = 10
 opt.completeopt = "menu,menuone,noselect"

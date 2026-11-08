@@ -1,7 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
   branch = "main",
-  event = { "BufReadPost", "BufNewFile" },
+  -- After the first screen is drawn, so opening a file doesn't wait for it.
+  event = "VeryLazy",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
     require("nvim-treesitter-textobjects").setup({
@@ -42,8 +43,6 @@ return {
         ["ia"] = { query = "@parameter.inner", desc = "inner parameter" },
         ["ai"] = { query = "@conditional.outer", desc = "outer conditional" },
         ["ii"] = { query = "@conditional.inner", desc = "inner conditional" },
-        ["al"] = { query = "@loop.outer", desc = "outer loop" },
-        ["il"] = { query = "@loop.inner", desc = "inner loop" },
         ["af"] = { query = "@call.outer", desc = "outer call" },
         ["if"] = { query = "@call.inner", desc = "inner call" },
         ["am"] = { query = "@function.outer", desc = "outer function" },
@@ -57,26 +56,22 @@ return {
         ["aR"] = { query = "@return.outer", desc = "outer return" },
         ["iR"] = { query = "@return.inner", desc = "inner return" },
         ["a/"] = { query = "@comment.outer", desc = "outer comment" },
-        ["an"] = { query = "@number.inner", desc = "number" },
-        ["in"] = { query = "@number.inner", desc = "number" },
       }
       for key, mapping in pairs(select_maps) do
         vim.keymap.set({ "x", "o" }, key, function()
           select.select_textobject(mapping.query, "textobjects")
-        end, { buffer = buf, desc = mapping.desc, silent = true })
+        end, { buf = buf, desc = mapping.desc, silent = true })
       end
 
       local swap = require("nvim-treesitter-textobjects.swap")
       vim.keymap.set("n", "<leader>Ca", function()
         swap.swap_next("@parameter.inner")
-      end, { buffer = buf, desc = "Swap parameter with next" })
+      end, { buf = buf, desc = "Swap parameter with next" })
       vim.keymap.set("n", "<leader>CA", function()
         swap.swap_previous("@parameter.inner")
-      end, { buffer = buf, desc = "Swap parameter with previous" })
+      end, { buf = buf, desc = "Swap parameter with previous" })
 
       local move = require("nvim-treesitter-textobjects.move")
-      -- [c/]c conflicts with vim's diff navigation, skip in diff buffers
-      local in_diff = vim.wo.diff
       local move_maps = {
         { "]m", "goto_next_start", "@function.outer", "Next function start" },
         { "]M", "goto_next_end", "@function.outer", "Next function end" },
@@ -106,11 +101,15 @@ return {
         { "[/", "goto_previous_start", "@comment.outer", "Prev comment" },
       }
       for _, m in ipairs(move_maps) do
-        if not (in_diff and m.skip_diff) then
-          vim.keymap.set({ "n", "x", "o" }, m[1], function()
-            move[m[2]](m[3], "textobjects")
-          end, { buffer = buf, desc = m[4], silent = true })
-        end
+        vim.keymap.set({ "n", "x", "o" }, m[1], function()
+          -- [c/]c keep Vim's change navigation while the window is in diff mode,
+          -- checked at the keypress because a window can enter diff mode later.
+          if m.skip_diff and vim.wo.diff then
+            vim.cmd.normal({ vim.v.count1 .. m[1], bang = true })
+            return
+          end
+          move[m[2]](m[3], "textobjects")
+        end, { buf = buf, desc = m[4], silent = true })
       end
     end
 
@@ -129,11 +128,16 @@ return {
 
     -- make ; , also repeat treesitter motions
     local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
-    vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-    vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
-    vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
-    vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
-    vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
-    vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+    vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next, { desc = "Repeat last move" })
+    vim.keymap.set(
+      { "n", "x", "o" },
+      ",",
+      ts_repeat_move.repeat_last_move_previous,
+      { desc = "Repeat last move backward" }
+    )
+    vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true, desc = "Find char" })
+    vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true, desc = "Find char backward" })
+    vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true, desc = "Till char" })
+    vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true, desc = "Till char backward" })
   end,
 }

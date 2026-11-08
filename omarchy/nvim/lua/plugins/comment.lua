@@ -2,7 +2,8 @@ return {
   {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-    event = { "BufReadPost", "BufNewFile" },
+    -- After the first screen is drawn, so opening a file doesn't wait for it.
+    event = "VeryLazy",
     opts = function()
       return {
         -- treesitter-aware comment style (handles JSX, Vue, etc.)

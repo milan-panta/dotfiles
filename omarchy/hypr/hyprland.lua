@@ -38,3 +38,6 @@ o.window({ class = "^mirror$" }, {
   center = true,
   size = { "(monitor_h*16/15)", "(monitor_h*3/5)" },
 })
+
+-- qalc calculator (Super+Ctrl+Q): float centered, portrait like a calculator app
+o.window({ class = "^org.omarchy.qalc$" }, { float = true, center = true, size = { 380, 600 } })

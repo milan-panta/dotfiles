@@ -1,29 +1,22 @@
 #!/usr/bin/env bash
-# Move current tmux pane to target window by index (clamped to highest window index)
+# Move the current pane to window N (prefix m, then N). You follow the pane.
+#   - Window N exists: the pane joins it, side by side.
+#   - No window N: the pane becomes a new window, numbered one past the highest.
 
-target="$1"
+target=$1
+[[ $target =~ ^[0-9]+$ ]] || exit 0
 
-# Ensure target is an integer
-if ! [[ "$target" =~ ^[0-9]+$ ]]; then
-  exit 0
-fi
+read -r pane curr_win panes < <(tmux display-message -p '#{pane_id} #{window_index} #{window_panes}')
+max_win=$(tmux list-windows -F '#{window_index}' | sort -n | tail -1)
 
-curr_win=$(tmux display-message -p "#{window_index}")
-max_win=$(tmux list-windows -F "#{window_index}" | sort -n | tail -1)
-
-# Clamp to the last window if greater than max window index
-if [ "$target" -gt "$max_win" ]; then
-  target="$max_win"
-fi
-
-if [ "$target" -lt 1 ]; then
-  target=1
-fi
-
-if [ "$target" -eq "$curr_win" ]; then
+if ((target == curr_win)); then
   tmux display-message "Pane is already in window $target"
-  exit 0
+elif tmux list-windows -F '#{window_index}' | grep -qx "$target"; then
+  # By pane id: if this was the window's last pane, the windows after it renumber.
+  tmux join-pane -h -s "$pane" -t ":$target" \; select-window -t "$pane"
+elif ((panes == 1)); then
+  # Already alone in its window: just move that window to the end.
+  ((curr_win == max_win)) || tmux move-window -t ":$((max_win + 1))"
+else
+  tmux break-pane -t ":$((max_win + 1))"
 fi
-
-# Join side-by-side (-h) into target window
-tmux join-pane -h -t ":$target"

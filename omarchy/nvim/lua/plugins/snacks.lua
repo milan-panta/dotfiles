@@ -5,6 +5,8 @@ return {
   lazy = false,
   opts = {
     bigfile = { enabled = true },
+    -- <leader>e uses it; oil keeps opening directories.
+    explorer = { enabled = true, replace_netrw = false },
     dashboard = {
       preset = {
         -- stylua: ignore start
@@ -16,7 +18,7 @@ return {
           { icon = "󰠮 ", key = "n", desc = "Notes", action = ":lua Snacks.picker.files({cwd = vim.fs.normalize('~/Documents/Notes/Private')})" },
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.picker.files({cwd = vim.fs.normalize('~/.config')})" },
           { icon = " ", key = "s", desc = "Restore Session", action = function() require("persistence").load() end },
-          { icon = "󰒲 ", key = "l", desc = "Lazy", action = function() require("lazy").show() end, enabled = package.loaded.lazy ~= nil },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
         -- stylua: ignore end
@@ -52,6 +54,7 @@ return {
       math = { enabled = false },
     },
     lazygit = { enabled = true },
+    gh = { enabled = true },
     gitbrowse = { enabled = true },
     picker = {
       enabled = true,
@@ -101,7 +104,7 @@ return {
     -- stylua: ignore start
     { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+    { "<leader>qb", function() Snacks.bufdelete() end, desc = "Close Buffer" },
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 
     { "<leader><leader>", function() Snacks.picker.files() end, desc = "Find Files" },
@@ -111,13 +114,12 @@ return {
     { "<leader>fc", function() Snacks.picker.files({cwd = vim.fs.normalize('~/.config')}) end, desc = "Find Config File" },
 
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    { "<leader>gG", function() Snacks.lazygit({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Lazygit (current file)" },
-    { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
-    { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
-    { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log" },
-    { "<leader>gL", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
-    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-    { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Changed Files" },
+    { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Stashes" },
+    { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Blame This Line" },
+    { "<leader>go", function() Snacks.gitbrowse() end, desc = "Open on GitHub", mode = { "n", "x" } },
+    { "<leader>gP", function() require("config.git").pull_requests() end, desc = "Pull Requests" },
+    { "<leader>gw", function() require("config.git").worktrees() end, desc = "Worktrees (switch or start an offshoot)" },
 
     { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },

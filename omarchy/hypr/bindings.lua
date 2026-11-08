@@ -49,8 +49,8 @@ o.bind("SUPER + T", "Toggle window floating/tiling", function()
   hl.dispatch(hl.dsp.window.center())
 end)
 
--- Launch Claude Code in auto permission mode (same as the cx alias)
-o.bind("SUPER + SHIFT + X", "Claude Code (auto mode)", "omarchy-launch-tui claude --permission-mode auto")
+-- Launch Claude Code (full access comes from permissions.defaultMode in ~/.claude/settings.json)
+o.bind("SUPER + SHIFT + X", "Claude Code", "omarchy-launch-tui claude")
 
 -- Launch AGYx TUI
 hl.unbind("SUPER + SHIFT + G")
@@ -80,3 +80,15 @@ o.bind("SUPER + SHIFT + S", "Screenshot", "omarchy-capture-screenshot")
 o.bind("XF86NotificationCenter", "Previous track", "omarchy-shell media previous", { locked = true })
 o.bind("XF86PickupPhone", "Play/pause", "omarchy-shell media playPause", { locked = true })
 o.bind("XF86HangupPhone", "Next track", "omarchy-shell media next", { locked = true })
+
+-- Replace omacalc with qalc, Qalculate!'s terminal calculator (full
+-- expressions, units, currencies). Focuses the open window if there is one.
+hl.unbind("SUPER + CTRL + Q")
+hl.unbind("XF86Calculator")
+o.bind("SUPER + CTRL + Q", "Calculator", "omarchy-launch-or-focus-tui qalc")
+o.bind("XF86Calculator", "Calculator", "omarchy-launch-or-focus-tui qalc")
+
+-- Other monitor, without choosing a direction: go there, or take the window along.
+-- Same go/take pattern as SUPER + N and SUPER + SHIFT + N.
+o.bind("SUPER + semicolon", "Focus other monitor", hl.dsp.focus({ monitor = "+1" }))
+o.bind("SUPER + SHIFT + semicolon", "Move window to other monitor", hl.dsp.window.move({ monitor = "+1" }))

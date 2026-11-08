@@ -4,6 +4,7 @@
 	pager = delta
 	editor = nvim
 	fsmonitor = true
+	untrackedCache = true # with fsmonitor, status skips rescanning for untracked files
 
 [interactive]
 	diffFilter = delta --color-only
@@ -35,9 +36,9 @@
 	tool = codediff
 
 [mergetool "codediff"]
-	cmd = nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\"
+	cmd = nvim \"$MERGED\" -c \"CodeDiff --exit-on-close merge \\\"$MERGED\\\"\"
 [difftool "codediff"]
-	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff file $LOCAL $REMOTE\"
+	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff --exit-on-close file $LOCAL $REMOTE\"
 [commit]
 	verbose = true           # Include diff comment in commit message template
 [column]

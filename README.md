@@ -28,6 +28,7 @@ dotfiles/
 │
 ├── omarchy/            # Omarchy-specific configurations
 │   ├── alacritty/      # Alacritty (Omarchy dynamic theme)
+│   ├── bash/           # Fast bash startup: in-process prompt, cached mise/zoxide init (from ~/.bashrc)
 │   ├── btop/           # btop (Omarchy dynamic theme)
 │   ├── ghostty/        # Ghostty (epoll backend, Omarchy dynamic theme)
 │   ├── git/            # Omarchy Git settings (Delta pager, gh helper, codediff)

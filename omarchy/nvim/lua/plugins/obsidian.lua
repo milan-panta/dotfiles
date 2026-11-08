@@ -40,7 +40,7 @@ return {
           { "v", "<leader>oL", "link", "Link selection" },
           { "v", "<leader>ox", "extract_note", "Extract to note" },
         }) do
-          vim.keymap.set(km[1], km[2], "<cmd>Obsidian " .. km[3] .. "<cr>", { buffer = buf, desc = km[4] })
+          vim.keymap.set(km[1], km[2], "<cmd>Obsidian " .. km[3] .. "<cr>", { buf = buf, desc = km[4] })
         end
       end,
     })
@@ -73,7 +73,7 @@ return {
           -- Daily note IDs are dates, so use the note's date when available.
           if note and note.id and note.id:match("^%d%d%d%d%-%d%d%-%d%d$") then
             local year, month, day = note.id:match("^(%d%d%d%d)%-(%d%d)%-(%d%d)$")
-            local timestamp = os.time({ year = tonumber(year), month = tonumber(month), day = tonumber(day), hour = 12 })
+            local timestamp = os.time({ year = year, month = month, day = day, hour = 12 })
             return require("obsidian.util").format_date(timestamp, format)
           end
 

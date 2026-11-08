@@ -1,6 +1,8 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  -- After the first screen is drawn: opening a file doesn't wait for LSP setup (blink.cmp
+  -- loads with it for its capabilities). vim.lsp.enable() attaches to buffers already open.
+  event = "VeryLazy",
   dependencies = {
     { "mason-org/mason.nvim", config = true },
     "mason-org/mason-lspconfig.nvim",
@@ -8,7 +10,6 @@ return {
   config = function()
     local tools = require("config.tools")
     vim.diagnostic.config(tools.diagnostic_config)
-    vim.diagnostic.enable(false)
 
     -- Shared capabilities for all LSP servers
     vim.lsp.config("*", {
@@ -59,7 +60,7 @@ return {
       callback = function(event)
         local map = function(keys, func, desc, mode)
           mode = mode or "n"
-          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          vim.keymap.set(mode, keys, func, { buf = event.buf, desc = "LSP: " .. desc })
         end
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -69,15 +70,9 @@ return {
           vim.lsp.semantic_tokens.enable(false, { bufnr = event.buf, client_id = client.id })
         end
 
-        -- Remove Nvim 0.11+ defaults (using Snacks.picker instead)
-        pcall(vim.keymap.del, "n", "grn", { buffer = event.buf })
-        pcall(vim.keymap.del, { "n", "x" }, "gra", { buffer = event.buf })
-        pcall(vim.keymap.del, "n", "grr", { buffer = event.buf })
-        pcall(vim.keymap.del, "n", "gri", { buffer = event.buf })
-        pcall(vim.keymap.del, "n", "gO", { buffer = event.buf })
-        pcall(vim.keymap.del, "i", "<C-S>", { buffer = event.buf })
-
-        map("K", vim.lsp.buf.hover, "Hover Documentation")
+        map("K", function()
+          require("config.debug").hover_or(vim.lsp.buf.hover)
+        end, "Hover Documentation, or Value While Debugging")
         map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
 
         map("[d", function()

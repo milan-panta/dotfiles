@@ -1,6 +1,7 @@
 return {
   "nvim-mini/mini.hipatterns",
-  event = { "BufReadPost", "BufNewFile" },
+  -- After the first screen is drawn, so opening a file doesn't wait for it.
+  event = "VeryLazy",
   opts = function()
     local hi = require("mini.hipatterns")
     return {

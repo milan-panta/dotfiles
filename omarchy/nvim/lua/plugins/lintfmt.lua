@@ -1,6 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
+    dependencies = "mason-org/mason.nvim", -- puts the formatters on PATH
     event = "BufWritePre",
     cmd = { "ConformInfo" },
     keys = {
@@ -57,7 +58,9 @@ return {
 
   {
     "mfussenegger/nvim-lint",
-    event = { "BufReadPost", "BufNewFile" },
+    dependencies = "mason-org/mason.nvim", -- puts the linters on PATH
+    -- After the first screen is drawn; the file that was already open is linted on load.
+    event = "VeryLazy",
     config = function()
       local tools = require("config.tools")
       local lint = require("lint")
@@ -71,6 +74,9 @@ return {
           end
         end,
       })
+      if vim.bo.modifiable and vim.bo.buftype == "" then
+        lint.try_lint()
+      end
     end,
   },
 }

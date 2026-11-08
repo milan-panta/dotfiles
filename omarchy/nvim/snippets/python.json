@@ -1,0 +1,100 @@
+{
+    "fastin": {
+        "prefix": "fastin",
+        "description": "Read all of stdin as tokens (huge inputs; not for interactive problems)",
+        "body": [
+            "# Reads all of stdin at once: fastest for huge inputs, but replaces input()/ints() and hangs on interactive problems.",
+            "_tokens = iter(sys.stdin.buffer.read().split())",
+            "",
+            "",
+            "def token():",
+            "    return next(_tokens).decode()",
+            "",
+            "",
+            "def num():",
+            "    return int(next(_tokens))"
+        ]
+    },
+    "interactive": {
+        "prefix": "interactive",
+        "description": "Query/answer helpers for interactive problems",
+        "body": [
+            "# Interactive: flush every line you print and read replies with input(); never read all of stdin.",
+            "def ask(*args):",
+            "    print(\"?\", *args, flush=True)",
+            "    return int(input())",
+            "",
+            "",
+            "def answer(*args):",
+            "    print(\"!\", *args, flush=True)"
+        ]
+    },
+    "deeprec": {
+        "prefix": "deeprec",
+        "description": "Run the testcase loop with a raised recursion limit and a large thread stack",
+        "body": [
+            "# Replaces the loop at the bottom. CPython 3.12+ only needs the raised limit; PyPy also needs the big stack.",
+            "# @cache stops at ~3,300 levels on CPython 3.12/3.13 whatever the limit: memoize deeper recursion in a dict.",
+            "import threading",
+            "",
+            "",
+            "def main():",
+            "    t = 1",
+            "    # t = int(input())",
+            "    for _ in range(t):",
+            "        solve()",
+            "",
+            "",
+            "sys.setrecursionlimit(10**6)",
+            "threading.stack_size(1 << 27)",
+            "threading.Thread(target=main).start()"
+        ]
+    },
+    "bootstrap": {
+        "prefix": "bootstrap",
+        "description": "Decorator that runs generator-based recursion on the heap",
+        "body": [
+            "from types import GeneratorType",
+            "",
+            "",
+            "# Recursion without a deep call stack (fast on PyPy). Inside a decorated function, recurse with",
+            "# `yield f(...)` and end every path with `yield value` (or a bare `yield`), e.g.",
+            "#   @bootstrap",
+            "#   def dfs(u, p):",
+            "#       for v in g[u]:",
+            "#           if v != p:",
+            "#               yield dfs(v, u)",
+            "#       yield",
+            "def bootstrap(f):",
+            "    stack = []",
+            "",
+            "    def wrapped(*args, **kwargs):",
+            "        if stack:",
+            "            return f(*args, **kwargs)",
+            "        to = f(*args, **kwargs)",
+            "        while True:",
+            "            if type(to) is GeneratorType:",
+            "                stack.append(to)",
+            "                to = next(to)",
+            "            else:",
+            "                stack.pop()",
+            "                if not stack:",
+            "                    break",
+            "                to = stack[-1].send(to)",
+            "        return to",
+            "",
+            "    return wrapped"
+        ]
+    },
+    "antihash": {
+        "prefix": "antihash",
+        "description": "Random salt against anti-hash tests on dict/set/Counter int keys",
+        "body": [
+            "import random",
+            "",
+            "# Codeforces hacks pick int keys that all collide in dict/set/Counter (int hashes aren't randomized),",
+            "# turning O(1) lookups into O(n). Store x ^ SALT instead of x; xor again to recover x.",
+            "SALT = random.getrandbits(62)"
+        ]
+    }
+}

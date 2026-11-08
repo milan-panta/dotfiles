@@ -34,7 +34,7 @@ return {
         end
 
         local map = function(keys, cmd, desc)
-          vim.keymap.set("n", keys, cmd, { buffer = event.buf, desc = "C/C++: " .. desc })
+          vim.keymap.set("n", keys, cmd, { buf = event.buf, desc = "C/C++: " .. desc })
         end
 
         map("<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", "Switch Source/Header")

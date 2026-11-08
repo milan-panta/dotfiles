@@ -69,7 +69,7 @@ The groups: `a` AI, `b` build, `c` code, `d` debug, `f` find, `g` git, `h` hunk,
 │   └── remote_clipboard.lua  # clipboard over OSC 52 (SSH, tmux)
 ├── lua/plugins/              # one file per feature; its keys are in its spec
 ├── snippets/, templates/     # snippets and competitive-programming templates
-└── scripts/                  # end-to-end checks for this config (see the last section)
+└── scripts/                  # square.sh, the dashboard's color square
 ```
 
 To find a key: `<leader>sk` searches all of them. `:verbose nmap <key>` shows the file that defines it.
@@ -189,25 +189,3 @@ which stays open after it ends. To install it again, take
   scroll modules are off on purpose, and `gc`/`gcc` overlap by Neovim's design.
 - `:Lazy` shows plugins, `:Mason` the installed tools, `:checkhealth vim.lsp` the attached servers.
 - `<leader>n` shows past notifications. `:verbose nmap <key>` shows where a key is defined.
-
-## Checking the config itself
-
-`scripts/` holds end-to-end checks. Each one starts Neovim in a private tmux server with
-a temporary state directory, sends real keys and mouse clicks, and reads the result
-back, so your sessions and projects are never touched.
-
-1. Build the fixture projects once: `scripts/setup-fixtures.sh` (git repos, a Python venv,
-   a C++ build, large files). Set `$NVIM_FIXTURES` to keep them elsewhere.
-2. Run everything: `scripts/test-all.sh` (about 60 minutes). Run one suite with
-   `python3 scripts/test-debug.py`, or matching checks with `python3 scripts/test-debug.py cpp`.
-
-| Suite | Covers |
-|---|---|
-| `test-neotest.py` | Tests and the gutter |
-| `test-workflow.py` | Each language (LSP, completion, format, lint, run) and other workflows |
-| `test-debug.py` | The debugger, per language |
-| `test-git.py` | Git workflows, on throwaway repos with their own origin |
-| `metrics.py` | Startup time, errors and `:checkhealth` counts |
-
-Lint (both tools come with Mason, in `stdpath("data")/mason/bin`): `stylua --check .` for Lua,
-`ruff check scripts && ruff format --check scripts` for Python.

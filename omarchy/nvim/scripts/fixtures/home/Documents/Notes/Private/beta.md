@@ -1,3 +1,0 @@
-# Beta
-
-Back to [[alpha]].
